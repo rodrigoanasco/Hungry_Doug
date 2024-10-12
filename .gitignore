@@ -1,0 +1,10 @@
+# Ignore all .class files (compiled Java files)
+*.class
+
+# Ignore Word files
+*.doc
+*.docx
+
+# Ignore PowerPoint files
+*.ppt
+*.pptx
