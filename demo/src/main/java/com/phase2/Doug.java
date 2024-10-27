@@ -21,7 +21,19 @@ public class Doug {
         return score;
     }
 
-    
+    public int getPositionX(){
+        return positionX;
+    }
 
+    public int getPositionY(){
+        return positionY;
+    }
 
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
 }
