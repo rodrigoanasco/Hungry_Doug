@@ -8,7 +8,6 @@ import java.awt.Graphics;
  * @param y the y position the objects appears in
  * @param id the type of object the object should be treated as
 */
-
 public class Chocolate extends Punishment {
     public Chocolate(int x, int y){
     super(x,y, PunishmentType.CHOCOLATE, 20);
