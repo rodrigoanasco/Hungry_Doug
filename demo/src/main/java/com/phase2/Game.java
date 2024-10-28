@@ -1,11 +1,14 @@
 package com.phase2;
 
-
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+/**
+ * The Game class manages the main game loop and window.
+ * It initializes the game components, handles input, and manages the game's continuous execution.
+ */
 public class Game extends Canvas implements Runnable {
 
     public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9; // sets window size
@@ -15,30 +18,36 @@ public class Game extends Canvas implements Runnable {
 
     private Handler handler;
 
+    /**
+     * Constructor for the Game class.
+     * Initializes the handler and sets up the game window.
+     */
     public Game() {
 
         handler = new Handler();
 
         this.addKeyListener(new KeyInput(handler)); // recieves keyboard input
-        // this.addKeyListener(new KeyInput()); // recieves keyboard input
-
 
         new Window(WIDTH, HEIGHT, "Doug Game", this);
 
         // used for testing only
-        // handler.addObject(new Player(100, 100, ID.PLAYER));
         handler.addObject(new Doug(200, 200, ID.DOUG));
         //
 
     }
 
-    // single thread
+    /**
+     * Starts the game in a new thread.
+     */
     public synchronized void start() {
         thread = new Thread(this);
         thread.start();
         running = true;
     }
 
+    /**
+     * Stops the game thread safely.
+     */
     public synchronized void stop () {
         try {
                 thread.join();
@@ -48,7 +57,10 @@ public class Game extends Canvas implements Runnable {
         }
     }
 
-    // game loop, creates continuous gameplay
+    /**
+     * The main game loop that handles game updates and rendering.
+     * Continuously runs while the game is active.
+     */
     public void run() {
         long lastTime = System.nanoTime();
         double amountOfTicks = 60.0;
@@ -77,10 +89,18 @@ public class Game extends Canvas implements Runnable {
         stop();
     }
 
+    /**
+     * Updates the game state for each game tick.
+     */
     private void tick(){
         handler.tick();
     }
 
+    /**
+     * Renders the game graphics.
+     * 
+     * @param g the Graphics object used for drawing the game components
+     */
     private void render(){
         BufferStrategy  bs = this.getBufferStrategy();
         if (bs == null) {
@@ -90,8 +110,10 @@ public class Game extends Canvas implements Runnable {
 
         Graphics g = bs.getDrawGraphics();
 
+        // for testing, can change this
         g. setColor(Color.BLACK);
         g.fillRect(0, 0, WIDTH, HEIGHT);
+        //
 
         handler.render(g);
 

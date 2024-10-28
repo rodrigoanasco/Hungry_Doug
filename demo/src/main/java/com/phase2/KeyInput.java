@@ -3,14 +3,27 @@ package com.phase2;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * The KeyInput class handles keyboard input and updates the game objects accordingly.
+ */
 public class KeyInput extends KeyAdapter{
 
     private Handler handler;
 
+    /**
+     * Constructor for KeyInput.
+     * 
+     * @param handler the Handler object responsible for managing game objects
+     */
     public KeyInput(Handler handler){
         this.handler = handler;
     }
 
+    /**
+     * Handles key press events and updates the game objects' positions.
+     * 
+     * @param e the KeyEvent triggered when a key is pressed
+     */
     public void keyPressed(KeyEvent e){
 
         int key = e.getKeyCode();
@@ -38,8 +51,12 @@ public class KeyInput extends KeyAdapter{
 
     }
 
+    /**
+     * Handles key release events (currently not used).
+     * 
+     * @param e the KeyEvent triggered when a key is released
+     */
     public void keyReleased(KeyEvent e){
  
-
     }
 }
