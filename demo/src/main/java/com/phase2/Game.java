@@ -26,7 +26,7 @@ public class Game extends Canvas implements Runnable {
         new Window(WIDTH, HEIGHT, "Doug Game", this);
 
         // used for testing only
-        handler.addObject(new Player(100, 100, ID.PLAYER));
+        // handler.addObject(new Player(100, 100, ID.PLAYER));
         handler.addObject(new Doug(200, 200, ID.DOUG));
         //
 

@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 public class Wall extends Obstacle {
     public Wall(int x, int y) {
-        super(x, y, ID.OBSTAClE, ObstacleType.WALL);
+        super(x, y, ObstacleType.WALL);
     }
 
     @Override

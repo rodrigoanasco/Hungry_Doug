@@ -4,9 +4,8 @@ public abstract class Obstacle extends GameObject {
     protected ObstacleType type;
 
 
-    public Obstacle(int x, int y, ID id, ObstacleType type){
-        super(x,y,id);
-
+    public Obstacle(int x, int y, ObstacleType type){
+        super(x, y, ID.OBSTAClE);
         this.type = type;
     }
 

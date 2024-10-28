@@ -1,17 +1,17 @@
 package com.phase2;
 
 // Punishment.java
-public abstract class Punishment extends GameObject{
+public abstract class MovingEnemy extends GameObject{
     protected int penaltyPoints;
-    protected PunishmentType type;
+    protected EnemyType type;
 
-    public Punishment(int x, int y, PunishmentType type, int penaltyPoints) {
+    public MovingEnemy(int x, int y, EnemyType type, int penaltyPoints) {
         super(x, y, ID.ENEMY);
         this.type = type;
         this.penaltyPoints = penaltyPoints;
     }
 
-    public PunishmentType getType() {
+    public EnemyType getType() {
         return type;
     }
 
@@ -22,4 +22,3 @@ public abstract class Punishment extends GameObject{
     // Abstract method to apply penalty
     public abstract void applyPenalty(Doug doug);
 }
-
