@@ -7,9 +7,7 @@ public class Onion extends Punishment {
     public Onion(int x, int y) {
         super(x,y, PunishmentType.ONION, 10);
     }
-    public void tick() {
-
-    }
+    
     /**
      * What the object should do on each tick
      */

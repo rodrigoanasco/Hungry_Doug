@@ -14,22 +14,16 @@ public class Chocolate extends Punishment {
     super(x,y, PunishmentType.CHOCOLATE, 20);
 
     }
-<<<<<<< HEAD
-=======
     /**
      * What the object should do on each tick
      */
->>>>>>> enemy
     public void tick() {
 
 
     }
-<<<<<<< HEAD
-=======
     /**
      * How the object should look like
      */
->>>>>>> enemy
     public void render(Graphics g) {
 
 
