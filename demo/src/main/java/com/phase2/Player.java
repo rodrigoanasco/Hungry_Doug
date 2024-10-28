@@ -3,16 +3,12 @@ package com.phase2;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Doug extends GameObject{
+public class Player extends GameObject {
 
-    protected int health;
-    protected int score;
 
-    public Doug(int x, int y, ID id){
+    public Player(int x, int y, ID id){
         super(x,y,id);
 
-        this.health = 100;
-        this.score = 0;
         // used for testing only
         velX = 1;
         velY = 1;
@@ -29,24 +25,11 @@ public class Doug extends GameObject{
     public void render(Graphics g){
 
         // used for testing only
-        g.setColor(Color.GREEN);
+        g.setColor(Color.WHITE);
         g.fillRect(x, y, 32, 32);
         //
+
     }
 
-    public int getScore(){
-        return score;
-    }
 
-    public void setScore(int score){
-        this.score = score;
-    }
-
-    public int getHealth(){
-        return health;
-    }
-
-    public void setHealth(int health){
-        this.health = health;
-    }
 }

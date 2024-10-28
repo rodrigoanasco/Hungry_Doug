@@ -3,14 +3,14 @@ package com.phase2;
 // Punishment.java
 public abstract class Punishment {
     protected int penaltyPoints;
-    protected String type;
+    protected PunishmentType type;
 
-    public Punishment(String type, int penaltyPoints) {
+    public Punishment(PunishmentType type, int penaltyPoints) {
         this.type = type;
         this.penaltyPoints = penaltyPoints;
     }
 
-    public String getType() {
+    public PunishmentType getType() {
         return type;
     }
 

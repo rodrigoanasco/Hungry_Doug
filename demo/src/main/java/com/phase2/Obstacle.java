@@ -1,26 +1,17 @@
 package com.phase2;
 
-public abstract class Obstacle {
-    protected String type;
-    private int positionX;
-    private int positionY;
+public abstract class Obstacle extends GameObject {
+    protected ObstacleType type;
 
-    public Obstacle(String type, int positionX, int positionY) {
+
+    public Obstacle(int x, int y, ID id, ObstacleType type){
+        super(x,y,id);
+
         this.type = type;
-        this.positionX = positionX;
-        this.positionY = positionY;
     }
 
-    public String getType() {
+    public ObstacleType getType() {
         return type;
-    }
-
-    public int getPositionX() {
-        return positionX;
-    }
-
-    public int getPositionY() {
-        return positionY;
     }
 
     // Abstract method to block movement

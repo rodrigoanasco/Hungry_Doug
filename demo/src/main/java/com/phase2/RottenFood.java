@@ -2,7 +2,7 @@ package com.phase2;
 
 public class RottenFood extends Punishment{
     public RottenFood(){
-        super("Rotten_Food", 10);
+        super(PunishmentType.ROTTEN_FOOD, 10);
     }
 
     @Override
