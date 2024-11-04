@@ -28,19 +28,20 @@ public class Doug extends GameObject{
         this.health = 100;
         this.score = 0;
         // used for testing only
-        velX = 1;
-        velY = 1;
+        velX = 0;
+        velY = 0;
         //
     }
 
     /**
      * Updates Doug's state for each tick of the game loop.
      */
+    @Override
     public void tick(){
         // used for testing only
         // moves +1 in x and y direction each tick of the game
-        // x += velX;
-        // y += velY;
+        x += velX;
+        y += velY;
         //
     }
 
@@ -50,6 +51,7 @@ public class Doug extends GameObject{
      *
      * @param g The Graphics object used to render Doug.
      */
+    @Override
     public void render(Graphics g){
 
         // used for testing only
