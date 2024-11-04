@@ -1,6 +1,7 @@
 package com.phase2;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 /**
  * The GameObject class is an abstract class representing all objects in the game.
@@ -33,13 +34,16 @@ public abstract class GameObject {
      */
     public abstract void tick();
 
-
     /**
      * Abstract method to render the game object.
      * 
      * @param g the Graphics object used for rendering
      */
     public abstract void render(Graphics g);
+
+    //TODO docs
+    // collision detector
+    public abstract Rectangle getBounds();
 
     // getters and setters for position and velocity
     public void setX(int x){

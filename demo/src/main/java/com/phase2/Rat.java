@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 import java.io.IOException;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 
 /**
@@ -24,10 +25,12 @@ public class Rat extends MovingEnemy {
 
     private boolean moving = false;
 
-    private static final double SCALE_FACTOR = 2.0;
+    private static final double SCALE_FACTOR = 1.25;
 
-    public Rat(int x, int y, int penaltyPoints) {
-        super(x,y,EnemyType.RAT, penaltyPoints);
+    private double speed = 1.5;
+
+    public Rat(int x, int y) {
+        super(x,y,EnemyType.RAT, Health.HEALTH);
         
         try {
             // Load the idle and walk sprite sheets
@@ -50,8 +53,12 @@ public class Rat extends MovingEnemy {
         }
 
         // Initially, the rat is not moving
-        velX = 0;
-        velY = 0;
+        velX = 1;
+        velY = 1;
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(x,y,32,32);
     }
 
     /**
@@ -59,6 +66,13 @@ public class Rat extends MovingEnemy {
      */
     @Override
     public void tick() {
+        x += velX;
+        y += velY;
+
+        // TODO account for borders
+        // atttribute for horizontal/vertical movement
+        if(y < 0 || y >= Game.HEIGHT - 100) velY *= -1;
+        if(x < 0 || x >= Game.WIDTH - 100) velX *= -1;
 
     }
     

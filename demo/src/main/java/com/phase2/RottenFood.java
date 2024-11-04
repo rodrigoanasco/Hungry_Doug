@@ -1,6 +1,7 @@
 package com.phase2;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public class RottenFood extends Punishment{
     public RottenFood(int x, int y){
@@ -9,7 +10,12 @@ public class RottenFood extends Punishment{
 
     @Override
     public void applyPenalty(Doug doug){
-        doug.setHealth(doug.getHealth() - penaltyPoints);
+        // doug.setHealth(doug.getHealth() - penaltyPoints);
+    }
+
+    // TODO 32 change to whatever size of rotten food
+    public Rectangle getBounds() {
+        return new Rectangle(x,y,32,32);
     }
 
     @Override

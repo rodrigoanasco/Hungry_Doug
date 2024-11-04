@@ -7,6 +7,7 @@ package com.phase2;
 public abstract class Reward extends GameObject{
     protected int rewardAmount;
     protected RewardType type;
+    protected boolean collected = false; // Track if reward has been collected
 
     /**
      * Constructor for a Reward.
@@ -16,7 +17,7 @@ public abstract class Reward extends GameObject{
      * @param type the type of reward (RewardType)
      * @param rewardPoints the reward awarded to the player
      */
-    public Reward(int x, int y,RewardType type,int rewardAmount) {
+    public Reward(int x, int y, RewardType type,int rewardAmount) {
         super(x, y, ID.REWARD);
         this.type = type;
         this.rewardAmount = rewardAmount;
@@ -39,6 +40,15 @@ public abstract class Reward extends GameObject{
         return rewardAmount;
     }
 
+    public boolean isCollected() {
+        return collected;
+    }
+
+    public void setCollected(boolean collected) {
+        this.collected = collected;
+    }
+
+// maybe not needed
     /**
      * method to apply the reward to the player character (Doug).
      * 

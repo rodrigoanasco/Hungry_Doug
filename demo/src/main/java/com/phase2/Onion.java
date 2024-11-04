@@ -1,6 +1,7 @@
 package com.phase2;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 
 public class Onion extends Punishment {
@@ -8,6 +9,11 @@ public class Onion extends Punishment {
         super(x,y, PunishmentType.ONION, 10);
     }
     
+    // TODO 32 gets replaced with whatever the size of onion 
+    public Rectangle getBounds() {
+        return new Rectangle(x,y,32,32);
+    }
+
     /**
      * What the object should do on each tick
      */
