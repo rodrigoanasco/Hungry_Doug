@@ -11,7 +11,7 @@ import java.awt.image.BufferStrategy;
  */
 public class Game extends Canvas implements Runnable {
 
-    public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9; // sets window size
+    public static final int WIDTH = 1024, HEIGHT = 768; // sets window size
 
     private Thread thread; 
     private boolean running = false;

@@ -48,15 +48,18 @@ public class KeyInput extends KeyAdapter{
                     up = true;
                     down = false; // Ensure down is not active
                     tempObject.setVelY(-5); // Move up
-                } else if (key == KeyEvent.VK_S) {
+                } 
+                else if (key == KeyEvent.VK_S) {
                     down = true;
                     up = false; // Ensure up is not active
                     tempObject.setVelY(5); // Move down
-                } else if (key == KeyEvent.VK_A) {
+                } 
+                else if (key == KeyEvent.VK_A) {
                     left = true;
                     right = false; // Ensure right is not active
                     tempObject.setVelX(-5); // Move left
-                } else if (key == KeyEvent.VK_D) {
+                } 
+                else if (key == KeyEvent.VK_D) {
                     right = true;
                     left = false; // Ensure left is not active
                     tempObject.setVelX(5); // Move right
@@ -78,7 +81,8 @@ public class KeyInput extends KeyAdapter{
                     up = false;
                     if (down) {
                         tempObject.setVelY(5); // Continue moving down if down is still pressed
-                    } else {
+                    } 
+                    else {
                         tempObject.setVelY(0); // Stop vertical movement
                     }
                 }
@@ -86,7 +90,8 @@ public class KeyInput extends KeyAdapter{
                     down = false;
                     if (up) {
                         tempObject.setVelY(-5); // Continue moving up if up is still pressed
-                    } else {
+                    } 
+                    else {
                         tempObject.setVelY(0); // Stop vertical movement
                     }
                 }
@@ -94,7 +99,8 @@ public class KeyInput extends KeyAdapter{
                     left = false;
                     if (right) {
                         tempObject.setVelX(5); // Continue moving right if right is still pressed
-                    } else {
+                    } 
+                    else {
                         tempObject.setVelX(0); // Stop horizontal movement
                     }
                 }
@@ -102,7 +108,8 @@ public class KeyInput extends KeyAdapter{
                     right = false;
                     if (left) {
                         tempObject.setVelX(-5); // Continue moving left if left is still pressed
-                    } else {
+                    } 
+                    else {
                         tempObject.setVelX(0); // Stop horizontal movement
                     }
                 }
