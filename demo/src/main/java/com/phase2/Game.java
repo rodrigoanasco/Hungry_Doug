@@ -155,22 +155,34 @@ public class Game extends Canvas implements Runnable {
     int bushWidth = 30;
     int bushHeight = 30;
 
-    // Manually place bushes in each corner
-    g2d.drawImage(bushImage, 0, 0, bushWidth, bushHeight, null); // Top-left
-    g2d.drawImage(bushImage, WIDTH - bushWidth, 0, bushWidth, bushHeight, null); // Top-right
-    g2d.drawImage(bushImage, 0, HEIGHT - bushHeight, bushWidth, bushHeight, null); // Bottom-left
-    g2d.drawImage(bushImage, WIDTH - bushWidth, HEIGHT - bushHeight, bushWidth, bushHeight, null); // Bottom-right
+    // Adjust WIDTH and HEIGHT to be multiples of bushWidth and bushHeight
+    int adjustedWidth = (WIDTH / bushWidth) * bushWidth;
+    int adjustedHeight = (HEIGHT / bushHeight) * bushHeight;
 
-    // Manually place bushes along top and bottom borders (excluding corners)
-    for (int x = bushWidth; x < WIDTH - bushWidth; x += bushWidth) {
+    // Manually place bushes in each corner
+    g2d.drawImage(bushImage, 0, 0, bushWidth, bushHeight, null); // Top-left corner
+    g2d.drawImage(bushImage, adjustedWidth - bushWidth, 0, bushWidth, bushHeight, null); // Top-right corner
+    g2d.drawImage(bushImage, 0, adjustedHeight - bushHeight, bushWidth, bushHeight, null); // Bottom-left corner
+    g2d.drawImage(bushImage, adjustedWidth - bushWidth, adjustedHeight - bushHeight, bushWidth, bushHeight, null); // Bottom-right corner
+
+    // Manually place bushes along the top border, excluding the corners
+    for (int x = bushWidth; x < adjustedWidth - bushWidth; x += bushWidth) {
         g2d.drawImage(bushImage, x, 0, bushWidth, bushHeight, null); // Top border
-        g2d.drawImage(bushImage, x, HEIGHT - bushHeight, bushWidth, bushHeight, null); // Bottom border
     }
 
-    // Manually place bushes along left and right borders (excluding corners)
-    for (int y = bushHeight; y < HEIGHT - bushHeight; y += bushHeight) {
+    // Manually place bushes along the bottom border, excluding the corners
+    for (int x = bushWidth; x < adjustedWidth; x += bushWidth) {
+        g2d.drawImage(bushImage, x, adjustedHeight - bushHeight, bushWidth, bushHeight, null); // Bottom border
+    }
+
+    // Manually place bushes along the left border, excluding the corners
+    for (int y = bushHeight; y < adjustedHeight - bushHeight; y += bushHeight) {
         g2d.drawImage(bushImage, 0, y, bushWidth, bushHeight, null); // Left border
-        g2d.drawImage(bushImage, WIDTH - bushWidth, y, bushWidth, bushHeight, null); // Right border
+    }
+
+    // Manually place bushes along the right border, excluding the corners
+    for (int y = bushHeight; y < adjustedHeight - bushHeight; y += bushHeight) {
+        g2d.drawImage(bushImage, adjustedWidth - bushWidth, y, bushWidth, bushHeight, null); // Right border
     }
 
     // Render game objects
