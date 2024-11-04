@@ -14,7 +14,8 @@ public class Steak extends Reward {
     public Steak(int x, int y,RewardType rewardType) {
         super(x,y, RewardType.STEAK, 1);
         try {
-            steakSprite = ImageIO.read(getClass().getResource("/Steak.png"));;
+            steakSprite = ImageIO.read(getClass().getResource("/Steak.png"));
+            steakSprite = steakSprite.getScaledInstance(OBJECT_SIZE[0], OBJECT_SIZE[1], Image.SCALE_DEFAULT);
         } catch (IOException e) {
             e.printStackTrace();
         }

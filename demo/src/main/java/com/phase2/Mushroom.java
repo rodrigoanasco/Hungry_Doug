@@ -15,7 +15,7 @@ public class Mushroom extends Reward {
         super(x,y, RewardType.APPLE, 1);
         try {
             mushroomSprite = ImageIO.read(getClass().getResource("/Mushroom.png"));;
-            mushroomSprite = mushroomSprite.getScaledInstance(32, 32, Image.SCALE_DEFAULT);
+            mushroomSprite = mushroomSprite.getScaledInstance(OBJECT_SIZE[0], OBJECT_SIZE[1], Image.SCALE_DEFAULT);
         } catch (IOException e) {
             e.printStackTrace();
         }
