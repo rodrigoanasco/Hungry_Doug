@@ -32,6 +32,7 @@ public class Game extends Canvas implements Runnable {
 
         // used for testing only
         handler.addObject(new Doug(200, 200, ID.DOUG));
+        handler.addObject(new Apple(100, 100, RewardType.APPLE));
         //
 
     }
