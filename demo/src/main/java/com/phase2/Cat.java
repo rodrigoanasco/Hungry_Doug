@@ -1,6 +1,7 @@
 package com.phase2;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 /**
  * Class for the moving enemy type Cat
@@ -11,9 +12,13 @@ import java.awt.Graphics;
 public class Cat extends MovingEnemy {
     
     // TODO make penalty points equal to number of points Doug has
-    public Cat(int x, int y, int penaltyPoints) {
-        super(x,y, EnemyType.CAT, penaltyPoints);
+    public Cat(int x, int y) {
+        super(x,y, EnemyType.CAT, Health.HEALTH);
 
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(x,y,32,32);
     }
 
     /**

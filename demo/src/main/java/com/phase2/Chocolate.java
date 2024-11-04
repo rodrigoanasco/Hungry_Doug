@@ -1,6 +1,7 @@
 package com.phase2;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 /**
  * Class for the non-moving enemy type Chocolate
@@ -13,6 +14,13 @@ public class Chocolate extends Punishment {
     super(x,y, PunishmentType.CHOCOLATE, 20);
 
     }
+
+    // TODO adjust size of rectangle
+    public Rectangle getBounds() {
+        // 32 gets replaced with whatever the size of chocolate is
+        return new Rectangle(x,y,32,32);
+    }
+
     /**
      * What the object should do on each tick
      */

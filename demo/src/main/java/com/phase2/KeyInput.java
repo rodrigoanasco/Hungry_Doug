@@ -66,6 +66,9 @@ public class KeyInput extends KeyAdapter{
                 }
             }
         }
+
+        // close game on esc
+        if(key == KeyEvent.VK_ESCAPE) System.exit(1);
     }
 
     @Override

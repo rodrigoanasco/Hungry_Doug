@@ -1,6 +1,7 @@
 package com.phase2;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public class Wall extends Obstacle {
     public Wall(int x, int y) {
@@ -16,6 +17,11 @@ public class Wall extends Obstacle {
             return true;
         }
         return false;
+    }
+
+    // TODO 32 chanegs to dimensions of wall
+    public Rectangle getBounds() {
+        return new Rectangle(x,y,32,32);
     }
 
     public void tick(){

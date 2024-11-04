@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import java.io.IOException;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 
 /**
@@ -15,6 +16,8 @@ import java.awt.geom.AffineTransform;
  * (ticked) within the game.
  */
 public class Doug extends GameObject{
+
+    Handler handler;
 
     protected int health;
     protected int score;
@@ -40,8 +43,10 @@ public class Doug extends GameObject{
      * @param y  The initial y-coordinate of Doug's position.
      * @param id The ID that identifies this GameObject as Doug.
      */
-    public Doug(int x, int y, ID id){
+    public Doug(int x, int y, ID id, Handler handler){
         super(x,y,id);
+
+        this.handler = handler;
 
         this.health = 100;
         this.score = 0;
@@ -74,6 +79,10 @@ public class Doug extends GameObject{
         velY = 0;
         //
     }
+    
+    public Rectangle getBounds() {
+        return new Rectangle(x,y,48,48);
+    }
 
     /**
      * Updates Doug's state for each tick of the game loop.
@@ -92,32 +101,93 @@ public class Doug extends GameObject{
         // Determine if Doug is moving
         moving = (velX != 0 || velY != 0);
 
-    // Update facing direction based on velocity
-    if (velX > 0) {
-        facingRight = true;
-    } 
-    else if (velX < 0) {
-        facingRight = false;
-    }
-
-    // Check if the moving state has changed
-    if (moving != wasMoving) {
-        // Reset frame to avoid out-of-bounds issues when changing states
-        currentFrame = 0;
-    }
-
-    // Update animation frame every few ticks
-    frameCount++;
-    if (frameCount >= frameDelay) {
-        frameCount = 0;
-        if (moving) {
-            currentFrame = (currentFrame + 1) % walkSprites.length; // Cycle through walk frames
+        // Update facing direction based on velocity
+        if (velX > 0) {
+            facingRight = true;
         } 
-        else {
-            currentFrame = (currentFrame + 1) % idleSprites.length; // Cycle through idle frames
+        else if (velX < 0) {
+            facingRight = false;
+        }
+
+        // Check if the moving state has changed
+        if (moving != wasMoving) {
+            // Reset frame to avoid out-of-bounds issues when changing states
+            currentFrame = 0;
+        }
+
+        // Update animation frame every few ticks
+        frameCount++;
+        if (frameCount >= frameDelay) {
+            frameCount = 0;
+            if (moving) {
+                currentFrame = (currentFrame + 1) % walkSprites.length; // Cycle through walk frames
+            } 
+            else {
+                currentFrame = (currentFrame + 1) % idleSprites.length; // Cycle through idle frames
+            }
+        }
+
+        // Doug can't move out oof bounds
+        x = Game.clamp(x,0,Game.WIDTH - 100);
+        y = Game.clamp(y,0,Game.HEIGHT - 100);
+
+       collision(); 
+
+    }
+
+    // private void collision() {
+    //     for(int i = 0; i < handler.objects.size(); i++){
+    //         GameObject temp = handler.objects.get(i);
+    //         if(temp.getId() == ID.ENEMY){
+    //             if(getBounds().intersects(temp.getBounds())){
+    //                 // colision code
+    //                  Health.HEALTH = 0;
+    //             }
+    //         }
+    //     }
+    // }
+
+    private void collision() {
+        for (int i = 0; i < handler.objects.size(); i++) {
+            GameObject temp = handler.objects.get(i);
+            
+            if (getBounds().intersects(temp.getBounds())) {
+                switch (temp.getId()) {
+                    case ENEMY:
+                        // Collision behavior for enemy
+                        if (temp instanceof MovingEnemy || temp instanceof Punishment) {
+                            // Cast temp to access getPenaltyPoints()
+                            int penaltyPoints = temp instanceof MovingEnemy 
+                                ? ((MovingEnemy) temp).getPenaltyPoints() 
+                                : ((Punishment) temp).getPenaltyPoints();
+            
+                            Health.HEALTH -= penaltyPoints;
+                        }
+                        break;
+                        
+                    case REWARD:
+                        // Collision behavior for reward
+                        if (temp instanceof Reward) {
+                            // int rewardAmount = ((Reward) temp).getRewardAmount();
+                            // Score.SCORE += rewardAmount;
+                            Health.HEALTH -= 50;
+
+                            System.out.println("rward");
+                        }
+                        break;
+                        
+                    // case OBSTACLE:
+                    //     // Collision behavior for obstacles
+                    //     break;
+    
+                    // Add more cases as needed for other object types
+                    default:
+                        // Default behavior, if any
+                        break;
+                }
+            }
         }
     }
-}
 
     /**
      * Renders Doug on the screen as a green rectangle at his current position.
@@ -210,4 +280,5 @@ public class Doug extends GameObject{
     public void setHealth(int health){
         this.health = health;
     }
+
 }
