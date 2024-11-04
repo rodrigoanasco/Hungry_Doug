@@ -14,7 +14,8 @@ public class Bone extends Reward {
     public Bone(int x, int y,RewardType rewardType) {
         super(x,y, RewardType.BONE, 1);
         try {
-            boneSprite = ImageIO.read(getClass().getResource("/Bone.png"));;
+            boneSprite = ImageIO.read(getClass().getResource("/Bone.png"));
+            boneSprite = boneSprite.getScaledInstance(OBJECT_SIZE[0], OBJECT_SIZE[1], Image.SCALE_DEFAULT);
         } catch (IOException e) {
             e.printStackTrace();
         }

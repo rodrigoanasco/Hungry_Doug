@@ -12,6 +12,7 @@ public abstract class GameObject {
     protected int x, y; // sets initial spawn x, y coordinates
     protected ID id;
     protected int velX, velY; // controls speed in x, y direction
+    public static final int OBJECT_SIZE[] = {32,32};
 
 
     /**

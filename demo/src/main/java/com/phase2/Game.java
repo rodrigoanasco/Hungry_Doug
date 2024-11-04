@@ -53,15 +53,11 @@ public class Game extends Canvas implements Runnable {
         new Window(WIDTH, HEIGHT, "Doug Game", this);
 
         // Used for testing only
-<<<<<<< HEAD
         handler.addObject(new Doug(200, 200, ID.DOUG));
         handler.addObject(new Apple(BLOCK_SIZE[0], BLOCK_SIZE[1], RewardType.APPLE));
         handler.addObject(new Bone(BLOCK_SIZE[0], 2*BLOCK_SIZE[1], RewardType.BONE));
         handler.addObject(new Steak(BLOCK_SIZE[0], 3*BLOCK_SIZE[1], RewardType.STEAK));
         handler.addObject(new Mushroom(BLOCK_SIZE[0], 4*BLOCK_SIZE[1], RewardType.MUSHROOM));
-=======
-        handler.addObject(new Doug(100, HEIGHT - 200, ID.DOUG));
->>>>>>> 2192457d79c000e4d5be68140c3677512b7cd43a
         //
 
         handler.addObject(new Rat(WIDTH - 200, HEIGHT - 150, 5)); // Penalty points set to 5
