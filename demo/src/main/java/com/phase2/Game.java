@@ -3,6 +3,7 @@ package com.phase2;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
 // For the background
@@ -25,6 +26,9 @@ public class Game extends Canvas implements Runnable {
 
     // BufferedImage for the background
     private BufferedImage background;
+    private BufferedImage bushImage; 
+
+    // private static final double BUSH_SCALE_FACTOR = 0.025;
 
     /**
      * Constructor for the Game class.
@@ -39,6 +43,7 @@ public class Game extends Canvas implements Runnable {
         // Load the background image
         try {
             background = ImageIO.read(getClass().getResource("/grassback.png"));
+            bushImage = ImageIO.read(getClass().getResource("/bush.png"));
         } 
         catch (IOException e) {
             e.printStackTrace();
@@ -47,8 +52,10 @@ public class Game extends Canvas implements Runnable {
         new Window(WIDTH, HEIGHT, "Doug Game", this);
 
         // Used for testing only
-        handler.addObject(new Doug(200, 200, ID.DOUG));
+        handler.addObject(new Doug(100, HEIGHT - 200, ID.DOUG));
         //
+
+        handler.addObject(new Rat(WIDTH - 200, HEIGHT - 150, 5)); // Penalty points set to 5
 
     }
 
@@ -126,6 +133,7 @@ public class Game extends Canvas implements Runnable {
         }
 
         Graphics g = bs.getDrawGraphics();
+        Graphics2D g2d = (Graphics2D) g;
 
     if (background != null) {
         // Draw the background such that it covers the entire canvas
@@ -138,8 +146,30 @@ public class Game extends Canvas implements Runnable {
         g.fillRect(0, 0, WIDTH, HEIGHT);
     }
 
+    // Bush dimensions
+    int bushWidth = 30;
+    int bushHeight = 30;
+
+    // Manually place bushes in each corner
+    g2d.drawImage(bushImage, 0, 0, bushWidth, bushHeight, null); // Top-left
+    g2d.drawImage(bushImage, WIDTH - bushWidth, 0, bushWidth, bushHeight, null); // Top-right
+    g2d.drawImage(bushImage, 0, HEIGHT - bushHeight, bushWidth, bushHeight, null); // Bottom-left
+    g2d.drawImage(bushImage, WIDTH - bushWidth, HEIGHT - bushHeight, bushWidth, bushHeight, null); // Bottom-right
+
+    // Manually place bushes along top and bottom borders (excluding corners)
+    for (int x = bushWidth; x < WIDTH - bushWidth; x += bushWidth) {
+        g2d.drawImage(bushImage, x, 0, bushWidth, bushHeight, null); // Top border
+        g2d.drawImage(bushImage, x, HEIGHT - bushHeight, bushWidth, bushHeight, null); // Bottom border
+    }
+
+    // Manually place bushes along left and right borders (excluding corners)
+    for (int y = bushHeight; y < HEIGHT - bushHeight; y += bushHeight) {
+        g2d.drawImage(bushImage, 0, y, bushWidth, bushHeight, null); // Left border
+        g2d.drawImage(bushImage, WIDTH - bushWidth, y, bushWidth, bushHeight, null); // Right border
+    }
+
     // Render game objects
-    handler.render(g);
+    handler.render(g2d);
 
     g.dispose();
     bs.show();
