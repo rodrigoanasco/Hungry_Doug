@@ -174,6 +174,25 @@ public class Doug extends GameObject{
         this.score = score;
     }
 
+    /**
+     * Add to Doug's score.
+     *
+     * @param score The score value to add for Doug.
+     */
+    public void addScore(int score){
+        this.score += score;
+    }
+
+    /**
+     * Subtract to Doug's score.
+     *
+     * @param score The score value to subtract for Doug.
+     */
+    public void subScore(int score){
+        this.score -= score;
+    }
+
+
      /**
      * Gets Doug's current health level.
      *

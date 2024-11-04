@@ -30,7 +30,5 @@ public class Steak extends Reward {
     public void render(Graphics g) {
         g.drawImage(steakSprite, x, y, null);
     }
-    public void applyReward(Doug doug) {
 
-    }
 }

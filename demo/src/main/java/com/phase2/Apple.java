@@ -30,7 +30,5 @@ public class Apple extends Reward {
     public void render(Graphics g) {
         g.drawImage(appleSprite, x, y, null);
     }
-    public void applyReward(Doug doug) {
 
-    }
 }
