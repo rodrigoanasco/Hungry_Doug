@@ -5,18 +5,26 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+// For the background
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.IOException;
+
 /**
  * The Game class manages the main game loop and window.
  * It initializes the game components, handles input, and manages the game's continuous execution.
  */
 public class Game extends Canvas implements Runnable {
 
-    public static final int WIDTH = 1024, HEIGHT = 768; // sets window size
+    public static final int WIDTH = 1300, HEIGHT = 750; // sets window size
 
     private Thread thread; 
     private boolean running = false;
 
     private Handler handler;
+
+    // BufferedImage for the background
+    private BufferedImage background;
 
     /**
      * Constructor for the Game class.
@@ -26,11 +34,19 @@ public class Game extends Canvas implements Runnable {
 
         handler = new Handler();
 
-        this.addKeyListener(new KeyInput(handler)); // recieves keyboard input
+        this.addKeyListener(new KeyInput(handler)); // Recieves keyboard input
+
+        // Load the background image
+        try {
+            background = ImageIO.read(getClass().getResource("/grassback.png"));
+        } 
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 
         new Window(WIDTH, HEIGHT, "Doug Game", this);
 
-        // used for testing only
+        // Used for testing only
         handler.addObject(new Doug(200, 200, ID.DOUG));
         handler.addObject(new Apple(100, 100, RewardType.APPLE));
         //
@@ -53,7 +69,8 @@ public class Game extends Canvas implements Runnable {
         try {
                 thread.join();
                 running = false;
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
                 e.printStackTrace();
         }
     }
@@ -111,16 +128,23 @@ public class Game extends Canvas implements Runnable {
 
         Graphics g = bs.getDrawGraphics();
 
-        // for testing, can change this
-        g. setColor(Color.BLACK);
+    if (background != null) {
+        // Draw the background such that it covers the entire canvas
+        g.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
+    } 
+    else {
+        // Testing purposes
+        // INCASE BACKGROUND DOES NOT LOAD
+        g.setColor(Color.GREEN);
         g.fillRect(0, 0, WIDTH, HEIGHT);
-        //
-
-        handler.render(g);
-
-        g.dispose(); 
-        bs.show();
     }
+
+    // Render game objects
+    handler.render(g);
+
+    g.dispose();
+    bs.show();
+}
 
     public static void main(String[] args) {
         new Game();
