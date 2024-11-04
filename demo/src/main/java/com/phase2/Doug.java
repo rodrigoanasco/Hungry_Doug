@@ -1,8 +1,13 @@
 package com.phase2;
 
-import java.awt.Color;
+// import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.IOException;
 
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 
 /**
  * Represents the main character, Doug, in the game.
@@ -13,6 +18,19 @@ public class Doug extends GameObject{
 
     protected int health;
     protected int score;
+
+    private BufferedImage[] idleSprites;
+    private BufferedImage[] walkSprites;
+    private int currentFrame = 0;
+    private int frameDelay = 5; // Controls the animation speed
+    private int frameCount = 0;
+
+    private boolean moving = false;
+    private boolean facingRight = true; // Default to facing right
+
+    private double speed = 1.5;
+
+    private static final double SCALE_FACTOR = 1.2; // Scale Doug to be bigger/smaller
 
     /**
      * Initializes Doug's position, ID, health, and score.
@@ -27,22 +45,79 @@ public class Doug extends GameObject{
 
         this.health = 100;
         this.score = 0;
-        // used for testing only
-        velX = 1;
-        velY = 1;
+
+        try {
+            // Gets sprite images from resources folder
+            BufferedImage idleSheet = ImageIO.read(getClass().getResource("/Idle.png"));
+            BufferedImage walkSheet = ImageIO.read(getClass().getResource("/Walk.png"));
+
+            // Extract frames for idle animation (assuming 4 frames, each 48x48)
+            idleSprites = new BufferedImage[4];
+            for (int i = 0; i < 4; i++) {
+                idleSprites[i] = idleSheet.getSubimage(i * 48, 0, 48, 48);
+            }
+
+            // Extract frames for walk animation (assuming 6 frames, each 48x48)
+            walkSprites = new BufferedImage[6];
+            for (int i = 0; i < 6; i++) {
+                walkSprites[i] = walkSheet.getSubimage(i * 48, 0, 48, 48);
+            }
+        } 
+        // If not print an error
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    
+
+        // Used for testing only
+        velX = 0;
+        velY = 0;
         //
     }
 
     /**
      * Updates Doug's state for each tick of the game loop.
      */
+    @Override
     public void tick(){
-        // used for testing only
-        // moves +1 in x and y direction each tick of the game
-        // x += velX;
-        // y += velY;
+
+        boolean wasMoving = moving;
+
+        // Used for testing only
+        // Moves + in x and y direction each tick of the game
+        x += velX/speed;
+        y += velY/speed;
         //
+
+        // Determine if Doug is moving
+        moving = (velX != 0 || velY != 0);
+
+    // Update facing direction based on velocity
+    if (velX > 0) {
+        facingRight = true;
+    } 
+    else if (velX < 0) {
+        facingRight = false;
     }
+
+    // Check if the moving state has changed
+    if (moving != wasMoving) {
+        // Reset frame to avoid out-of-bounds issues when changing states
+        currentFrame = 0;
+    }
+
+    // Update animation frame every few ticks
+    frameCount++;
+    if (frameCount >= frameDelay) {
+        frameCount = 0;
+        if (moving) {
+            currentFrame = (currentFrame + 1) % walkSprites.length; // Cycle through walk frames
+        } 
+        else {
+            currentFrame = (currentFrame + 1) % idleSprites.length; // Cycle through idle frames
+        }
+    }
+}
 
     /**
      * Renders Doug on the screen as a green rectangle at his current position.
@@ -50,12 +125,35 @@ public class Doug extends GameObject{
      *
      * @param g The Graphics object used to render Doug.
      */
+    @Override
     public void render(Graphics g){
 
         // used for testing only
-        g.setColor(Color.GREEN);
-        g.fillRect(x, y, 32, 32);
+        //g.setColor(Color.GREEN);
+        //g.fillRect(x, y, 32, 32);
         //
+
+    Graphics2D g2d = (Graphics2D) g;
+
+    // Determine which sprite image to draw for Doug (Idle or Walking)
+    BufferedImage spriteToDraw = moving ? walkSprites[currentFrame] : idleSprites[currentFrame];
+
+    // Scale Doug according to SCALE_FACTOR
+    int scaledWidth = (int) (spriteToDraw.getWidth() * SCALE_FACTOR);
+    int scaledHeight = (int) (spriteToDraw.getHeight() * SCALE_FACTOR);
+
+    if (facingRight) {
+        // Draw normally if facing right
+        g2d.drawImage(spriteToDraw, x, y, scaledWidth, scaledHeight, null);
+    } 
+    else {
+        // Flip horizontally if facing left
+        AffineTransform transform = new AffineTransform();
+        transform.translate(x + scaledWidth, y); // Move to the correct position
+        transform.scale(-SCALE_FACTOR, SCALE_FACTOR); // Flip horizontally
+        g2d.drawImage(spriteToDraw, transform, null);
+    }
+
     }
 
     /**
@@ -75,6 +173,25 @@ public class Doug extends GameObject{
     public void setScore(int score){
         this.score = score;
     }
+
+    /**
+     * Add to Doug's score.
+     *
+     * @param score The score value to add for Doug.
+     */
+    public void addScore(int score){
+        this.score += score;
+    }
+
+    /**
+     * Subtract to Doug's score.
+     *
+     * @param score The score value to subtract for Doug.
+     */
+    public void subScore(int score){
+        this.score -= score;
+    }
+
 
      /**
      * Gets Doug's current health level.

@@ -3,7 +3,13 @@ package com.phase2;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
+
+// For the background
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.IOException;
 
 /**
  * The Game class manages the main game loop and window.
@@ -11,12 +17,19 @@ import java.awt.image.BufferStrategy;
  */
 public class Game extends Canvas implements Runnable {
 
-    public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9; // sets window size
+    public static final int WIDTH = 1300, HEIGHT = 750; // sets window size
+    public static final int BLOCK_SIZE[] = {50,50};
 
     private Thread thread; 
     private boolean running = false;
 
     private Handler handler;
+
+    // BufferedImage for the background
+    private BufferedImage background;
+    private BufferedImage bushImage; 
+
+    // private static final double BUSH_SCALE_FACTOR = 0.025;
 
     /**
      * Constructor for the Game class.
@@ -26,13 +39,28 @@ public class Game extends Canvas implements Runnable {
 
         handler = new Handler();
 
-        this.addKeyListener(new KeyInput(handler)); // recieves keyboard input
+        this.addKeyListener(new KeyInput(handler)); // Recieves keyboard input
+
+        // Load the background image
+        try {
+            background = ImageIO.read(getClass().getResource("/grassback.png"));
+            bushImage = ImageIO.read(getClass().getResource("/bush.png"));
+        } 
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 
         new Window(WIDTH, HEIGHT, "Doug Game", this);
 
-        // used for testing only
+        // Used for testing only
         handler.addObject(new Doug(200, 200, ID.DOUG));
+        handler.addObject(new Apple(BLOCK_SIZE[0], BLOCK_SIZE[1], RewardType.APPLE));
+        handler.addObject(new Bone(BLOCK_SIZE[0], 2*BLOCK_SIZE[1], RewardType.BONE));
+        handler.addObject(new Steak(BLOCK_SIZE[0], 3*BLOCK_SIZE[1], RewardType.STEAK));
+        handler.addObject(new Mushroom(BLOCK_SIZE[0], 4*BLOCK_SIZE[1], RewardType.MUSHROOM));
         //
+
+        handler.addObject(new Rat(WIDTH - 200, HEIGHT - 150, 5)); // Penalty points set to 5
 
     }
 
@@ -52,7 +80,8 @@ public class Game extends Canvas implements Runnable {
         try {
                 thread.join();
                 running = false;
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
                 e.printStackTrace();
         }
     }
@@ -109,17 +138,70 @@ public class Game extends Canvas implements Runnable {
         }
 
         Graphics g = bs.getDrawGraphics();
+        Graphics2D g2d = (Graphics2D) g;
 
-        // for testing, can change this
-        g. setColor(Color.BLACK);
+    if (background != null) {
+        // Draw the background such that it covers the entire canvas
+        g.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
+    } 
+    else {
+        // Testing purposes
+        // INCASE BACKGROUND DOES NOT LOAD
+        g.setColor(Color.GREEN);
         g.fillRect(0, 0, WIDTH, HEIGHT);
-        //
-
-        handler.render(g);
-
-        g.dispose(); 
-        bs.show();
     }
+
+    // Bush dimensions
+    int bushWidth = 30;
+    int bushHeight = 30;
+
+    // Manually place bushes in each corner
+    g2d.drawImage(bushImage, 0, 0, bushWidth, bushHeight, null); // Top-left corner
+    g2d.drawImage(bushImage, WIDTH - bushWidth - 10, 0, bushWidth, bushHeight, null); // Top-right corner with slight offset
+    g2d.drawImage(bushImage, 0, HEIGHT - bushHeight - 35, bushWidth, bushHeight, null); // Bottom-left corner with offset
+    g2d.drawImage(bushImage, WIDTH - bushWidth - 15, HEIGHT - bushHeight - 35, bushWidth, bushHeight, null); // Bottom-right corner with offset
+
+    // Manually place bushes along the top border, excluding the corners
+    for (int x = bushWidth; x <= WIDTH - bushWidth; x += bushWidth) {
+        g2d.drawImage(bushImage, x, 0, bushWidth, bushHeight, null); // Top border
+    }
+
+    // Manually place bushes along the bottom border, excluding the corners
+    for (int x = bushWidth; x <= WIDTH - bushWidth - 15; x += bushWidth) {
+        g2d.drawImage(bushImage, x, HEIGHT - bushHeight - 35, bushWidth, bushHeight, null); // Bottom border with offset
+    }
+
+    // Manually place bushes along the left border, excluding the corners
+    for (int y = bushHeight; y <= HEIGHT - bushHeight; y += bushHeight) {
+        g2d.drawImage(bushImage, 0, y, bushWidth, bushHeight, null); // Left border
+    }
+
+    // Manually place bushes along the right border, excluding the corners
+    for (int y = bushHeight; y <= HEIGHT - bushHeight - 35; y += bushHeight) {
+        g2d.drawImage(bushImage, WIDTH - bushWidth - 15, y, bushWidth, bushHeight, null); // Right border with offset
+    }
+
+    int[][] mazeBushCoordinates = {
+        {90, HEIGHT - bushHeight - 35}, {90, HEIGHT - bushHeight * 2 - 35}, {90, HEIGHT - bushHeight * 3 - 35}, 
+        {90, HEIGHT - bushHeight * 4 - 35}, {90, HEIGHT - bushHeight * 5 - 35}, {120, HEIGHT - bushHeight * 5 - 35},
+        {150, HEIGHT - bushHeight * 5 - 35}, {180, HEIGHT - bushHeight * 5 - 35}, {210, HEIGHT - bushHeight * 5 - 35},
+        {240, HEIGHT - bushHeight * 5 - 35},{270, HEIGHT - bushHeight * 5 - 35},{300, HEIGHT - bushHeight * 5 - 35},
+        {90, HEIGHT - bushHeight * 9 - 35},{90, HEIGHT - bushHeight * 10 - 35},{90, HEIGHT - bushHeight * 11 - 35},
+        {90, HEIGHT - bushHeight * 12 - 35}, {120, HEIGHT - bushHeight * 12 - 35}, {150, HEIGHT - bushHeight * 12 - 35},
+        {180, HEIGHT - bushHeight * 12 - 35}, {120, HEIGHT - bushHeight * 9 - 35}, {150, HEIGHT - bushHeight * 9 - 35},
+        {180, HEIGHT - bushHeight * 9 - 35}
+    };
+
+    for (int[] coord : mazeBushCoordinates) {
+        g2d.drawImage(bushImage, coord[0], coord[1], 30, 30, null);
+    }
+
+    // Render game objects
+    handler.render(g2d);
+
+    g.dispose();
+    bs.show();
+}
 
     public static void main(String[] args) {
         new Game();

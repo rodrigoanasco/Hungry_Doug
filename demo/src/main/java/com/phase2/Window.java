@@ -28,7 +28,7 @@ public class Window extends Canvas {
     frame.setMinimumSize(new Dimension(width, height));
 
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setResizable(false);
+    frame.setResizable(false); // make window resizable
     frame.setLocationRelativeTo(null);
 
     // Adds the game instance to the frame and makes it visible

@@ -11,3 +11,4 @@
 
 # Ignore mvn build files
 demo\target
+demo\.vscode
