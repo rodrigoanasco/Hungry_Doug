@@ -7,12 +7,12 @@ import javax.imageio.ImageIO;
 import java.awt.Graphics;
 
 
-public class Mushroom extends Reward {
+public class Mushroom extends FlashingReward {
 
     private Image mushroomSprite;
 
-    public Mushroom(int x, int y,RewardType rewardType) {
-        super(x,y, RewardType.APPLE, 1);
+    public Mushroom(int x, int y,FlashingRewardType rewardType,int rewardAmount) {
+        super(x,y, FlashingRewardType.MUSHROOM, 1);
         try {
             mushroomSprite = ImageIO.read(getClass().getResource("/Mushroom.png"));;
             mushroomSprite = mushroomSprite.getScaledInstance(OBJECT_SIZE[0], OBJECT_SIZE[1], Image.SCALE_DEFAULT);
