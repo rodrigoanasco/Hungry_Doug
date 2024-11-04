@@ -7,7 +7,6 @@
     <artifactId>game</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <!-- Properties for Java version -->
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
@@ -16,17 +15,15 @@
 
     <build>
         <resources>
-            <!-- Include resources from src/main/resources -->
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>**/*.png</include> <!-- Include all PNG images -->
+                    <include>**/*.png</include> 
                 </includes>
             </resource>
         </resources>
 
         <plugins>
-            <!-- Maven Compiler Plugin to compile the project -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -37,7 +34,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Exec Maven Plugin to run the main class directly -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -47,7 +43,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Maven Jar Plugin to create an executable JAR -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
