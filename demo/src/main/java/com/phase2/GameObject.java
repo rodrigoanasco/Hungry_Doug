@@ -23,8 +23,8 @@ public abstract class GameObject {
      * @param id the type of the object (ID)
      */
     public GameObject(int x, int y, ID id){
-        this.x = x;
-        this.y = y;
+        this.x = x-(OBJECT_SIZE[0]/2);
+        this.y = y-(OBJECT_SIZE[1]/2);
         this.id = id; 
     }
     
