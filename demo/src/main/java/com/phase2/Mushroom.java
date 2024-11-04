@@ -30,7 +30,4 @@ public class Mushroom extends Reward {
     public void render(Graphics g) {
         g.drawImage(mushroomSprite, x, y, null);
     }
-    public void applyReward(Doug doug) {
-
-    }
 }

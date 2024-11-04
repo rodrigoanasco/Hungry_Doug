@@ -41,10 +41,12 @@ public abstract class Reward extends GameObject{
     }
 
     /**
-     * Abstract method to apply the reward to the player character (Doug).
+     * method to apply the reward to the player character (Doug).
      * 
      * @param doug the player character
      */
-    public abstract void applyReward(Doug doug);
+    public void applyReward(Doug doug) {
+        doug.addScore(rewardAmount);
+    }
 }
 
