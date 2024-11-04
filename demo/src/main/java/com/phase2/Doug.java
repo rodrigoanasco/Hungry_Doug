@@ -6,8 +6,8 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 
-import java.awt.Graphics2D; // Import for Graphics2D
-import java.awt.geom.AffineTransform; // Import for AffineTransform
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 
 /**
  * Represents the main character, Doug, in the game.
@@ -28,6 +28,8 @@ public class Doug extends GameObject{
     private boolean moving = false;
     private boolean facingRight = true; // Default to facing right
 
+    private static final double SCALE_FACTOR = 2.0; // Scale Doug to be bigger/smaller
+
     /**
      * Initializes Doug's position, ID, health, and score.
      * Sets default velocity for testing purposes.
@@ -43,6 +45,7 @@ public class Doug extends GameObject{
         this.score = 0;
 
         try {
+            // Gets sprite images from resources folder
             BufferedImage idleSheet = ImageIO.read(getClass().getResource("/Idle.png"));
             BufferedImage walkSheet = ImageIO.read(getClass().getResource("/Walk.png"));
 
@@ -57,11 +60,14 @@ public class Doug extends GameObject{
             for (int i = 0; i < 6; i++) {
                 walkSprites[i] = walkSheet.getSubimage(i * 48, 0, 48, 48);
             }
-        } catch (IOException e) {
+        } 
+        // If not print an error
+        catch (IOException e) {
             e.printStackTrace();
         }
+    
 
-        // used for testing only
+        // Used for testing only
         velX = 0;
         velY = 0;
         //
@@ -75,8 +81,8 @@ public class Doug extends GameObject{
 
         boolean wasMoving = moving;
 
-        // used for testing only
-        // moves +1 in x and y direction each tick of the game
+        // Used for testing only
+        // Moves + in x and y direction each tick of the game
         x += velX;
         y += velY;
         //
@@ -84,7 +90,7 @@ public class Doug extends GameObject{
         // Determine if Doug is moving
         moving = (velX != 0 || velY != 0);
 
-       // Update facing direction based on velocity
+    // Update facing direction based on velocity
     if (velX > 0) {
         facingRight = true;
     } 
@@ -104,7 +110,8 @@ public class Doug extends GameObject{
         frameCount = 0;
         if (moving) {
             currentFrame = (currentFrame + 1) % walkSprites.length; // Cycle through walk frames
-        } else {
+        } 
+        else {
             currentFrame = (currentFrame + 1) % idleSprites.length; // Cycle through idle frames
         }
     }
@@ -126,17 +133,22 @@ public class Doug extends GameObject{
 
     Graphics2D g2d = (Graphics2D) g;
 
+    // Determine which sprite image to draw for Doug (Idle or Walking)
     BufferedImage spriteToDraw = moving ? walkSprites[currentFrame] : idleSprites[currentFrame];
+
+    // Scale Doug according to SCALE_FACTOR
+    int scaledWidth = (int) (spriteToDraw.getWidth() * SCALE_FACTOR);
+    int scaledHeight = (int) (spriteToDraw.getHeight() * SCALE_FACTOR);
 
     if (facingRight) {
         // Draw normally if facing right
-        g2d.drawImage(spriteToDraw, x, y, null);
+        g2d.drawImage(spriteToDraw, x, y, scaledWidth, scaledHeight, null);
     } 
     else {
         // Flip horizontally if facing left
         AffineTransform transform = new AffineTransform();
-        transform.translate(x + spriteToDraw.getWidth(), y); // Move to the correct position
-        transform.scale(-1, 1); // Flip horizontally
+        transform.translate(x + scaledWidth, y); // Move to the correct position
+        transform.scale(-SCALE_FACTOR, SCALE_FACTOR); // Flip horizontally
         g2d.drawImage(spriteToDraw, transform, null);
     }
 
