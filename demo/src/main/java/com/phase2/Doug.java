@@ -28,7 +28,9 @@ public class Doug extends GameObject{
     private boolean moving = false;
     private boolean facingRight = true; // Default to facing right
 
-    private static final double SCALE_FACTOR = 2.0; // Scale Doug to be bigger/smaller
+    private double speed = 1.5;
+
+    private static final double SCALE_FACTOR = 1.2; // Scale Doug to be bigger/smaller
 
     /**
      * Initializes Doug's position, ID, health, and score.
@@ -83,8 +85,8 @@ public class Doug extends GameObject{
 
         // Used for testing only
         // Moves + in x and y direction each tick of the game
-        x += velX;
-        y += velY;
+        x += velX/speed;
+        y += velY/speed;
         //
 
         // Determine if Doug is moving

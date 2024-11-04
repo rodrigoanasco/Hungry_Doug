@@ -24,7 +24,9 @@ public class Rat extends MovingEnemy {
 
     private boolean moving = false;
 
-    private static final double SCALE_FACTOR = 2.0;
+    private static final double SCALE_FACTOR = 1.25;
+
+    private double speed = 1.5;
 
     public Rat(int x, int y, int penaltyPoints) {
         super(x,y,EnemyType.RAT, penaltyPoints);
