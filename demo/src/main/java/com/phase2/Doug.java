@@ -132,20 +132,7 @@ public class Doug extends GameObject{
         y = Game.clamp(y,0,Game.HEIGHT - 100);
 
        collision(); 
-
     }
-
-    // private void collision() {
-    //     for(int i = 0; i < handler.objects.size(); i++){
-    //         GameObject temp = handler.objects.get(i);
-    //         if(temp.getId() == ID.ENEMY){
-    //             if(getBounds().intersects(temp.getBounds())){
-    //                 // colision code
-    //                  Health.HEALTH = 0;
-    //             }
-    //         }
-    //     }
-    // }
 
     private void collision() {
         for (int i = 0; i < handler.objects.size(); i++) {
@@ -168,11 +155,12 @@ public class Doug extends GameObject{
                     case REWARD:
                         // Collision behavior for reward
                         if (temp instanceof Reward) {
-                            // int rewardAmount = ((Reward) temp).getRewardAmount();
-                            // Score.SCORE += rewardAmount;
-                            Health.HEALTH -= 50;
-
-                            System.out.println("rward");
+                            Reward reward = (Reward) temp;
+                            if (!reward.isCollected()) {
+                                int rewardAmount = reward.getRewardAmount();
+                                Score.SCORE += rewardAmount;
+                                reward.setCollected(true); // Mark as collected
+                            }
                         }
                         break;
                         

@@ -13,7 +13,7 @@ public class Apple extends Reward {
     private Image appleSprite;
 
     public Apple(int x, int y,RewardType rewardType) {
-        super(x,y, RewardType.APPLE, 1);
+        super(x,y, RewardType.APPLE, 10);
         try {
             appleSprite = ImageIO.read(getClass().getResource("/Apple.png"));
             appleSprite = appleSprite.getScaledInstance(OBJECT_SIZE[0], OBJECT_SIZE[1], Image.SCALE_DEFAULT);
@@ -29,10 +29,6 @@ public class Apple extends Reward {
     }
 
     public void tick() {
-        //to be implemented: checks if colliding with doug
-        x += velX;
-        y += velY;
-
         // TODO account for borders
         // atttribute for horizontal/vertical movement
         if(y < 0 || y >= Game.HEIGHT - 100) velY *= -1;
