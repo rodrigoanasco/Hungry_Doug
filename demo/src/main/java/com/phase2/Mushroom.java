@@ -16,14 +16,14 @@ public class Mushroom extends Reward {
         super(x,y, RewardType.MUSHROOM, rewardAmount);
         try {
             mushroomSprite = ImageIO.read(getClass().getResource("/Mushroom.png"));;
-            mushroomSprite = mushroomSprite.getScaledInstance(OBJECT_SIZE[0], OBJECT_SIZE[1], Image.SCALE_DEFAULT);
+            mushroomSprite = mushroomSprite.getScaledInstance(OBJECT_SIZE[0]+16, OBJECT_SIZE[1]+16, Image.SCALE_DEFAULT);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     
     public Rectangle getBounds() {
-        return new Rectangle(x,y,OBJECT_SIZE[0]-16,OBJECT_SIZE[1]-16);
+        return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
     }
 
     public void tick() {
@@ -32,8 +32,9 @@ public class Mushroom extends Reward {
     }
 
     public void render(Graphics g) {
+        // renderHitBox(g,OBJECT_SIZE[0],OBJECT_SIZE[1]);
         if (!collected) {
-            g.drawImage(mushroomSprite, x, y, null);
+            g.drawImage(mushroomSprite, x-8, y-8, null);
         }
     }
 }

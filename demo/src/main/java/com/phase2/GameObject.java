@@ -1,5 +1,6 @@
 package com.phase2;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
@@ -14,6 +15,7 @@ public abstract class GameObject {
     protected ID id;
     protected int velX, velY; // controls speed in x, y direction
     protected int OBJECT_SIZE[] = {32,32}; //size of image
+    protected int HITBOX[] = {OBJECT_SIZE[0]-16,OBJECT_SIZE[1]-16};
 
 
     /**
@@ -24,8 +26,8 @@ public abstract class GameObject {
      * @param id the type of the object (ID)
      */
     public GameObject(int x, int y, ID id){
-        this.x = x-(OBJECT_SIZE[0]/2);
-        this.y = y-(OBJECT_SIZE[1]/2);
+        this.x = x;
+        this.y = y;
         this.id = id; 
     }
     
@@ -40,6 +42,17 @@ public abstract class GameObject {
      * @param g the Graphics object used for rendering
      */
     public abstract void render(Graphics g);
+
+
+    /**
+     * render hitbox for testing
+     * @param g the Graphics object used for rendering
+     */
+    public void renderHitBox(Graphics g, int width, int height) {
+
+        g.setColor(Color.GREEN);
+        g.drawRect(x, y, width, height);
+    }
 
     //TODO docs
     // collision detector

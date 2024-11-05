@@ -46,6 +46,7 @@ public class Doug extends GameObject{
     public Doug(int x, int y, ID id, Handler handler){
         super(x,y,id);
 
+
         this.handler = handler;
 
         this.health = 100;
@@ -81,7 +82,7 @@ public class Doug extends GameObject{
     }
     
     public Rectangle getBounds() {
-        return new Rectangle(x,y,48-16,48-16);
+        return new Rectangle(x,y,48,48);
     }
 
     /**
@@ -187,10 +188,10 @@ public class Doug extends GameObject{
     public void render(Graphics g){
 
         // used for testing only
-        //g.setColor(Color.GREEN);
-        //g.fillRect(x, y, 32, 32);
+        // g.setColor(Color.GREEN);
+        // g.fillRect(x, y, 48, 48);
         //
-
+        // renderHitBox(g,48,48);
     Graphics2D g2d = (Graphics2D) g;
 
     // Determine which sprite image to draw for Doug (Idle or Walking)
@@ -202,12 +203,12 @@ public class Doug extends GameObject{
 
     if (facingRight) {
         // Draw normally if facing right
-        g2d.drawImage(spriteToDraw, x, y, scaledWidth, scaledHeight, null);
+        g2d.drawImage(spriteToDraw, x, y-16, scaledWidth, scaledHeight, null);
     } 
     else {
         // Flip horizontally if facing left
         AffineTransform transform = new AffineTransform();
-        transform.translate(x + scaledWidth, y); // Move to the correct position
+        transform.translate(x + scaledWidth, y-16); // Move to the correct position
         transform.scale(-SCALE_FACTOR, SCALE_FACTOR); // Flip horizontally
         g2d.drawImage(spriteToDraw, transform, null);
     }
