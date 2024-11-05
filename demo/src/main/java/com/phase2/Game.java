@@ -7,6 +7,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
@@ -19,7 +21,7 @@ public class Game extends Canvas implements Runnable {
     public static final int WIDTH = 1300, HEIGHT = 750; // sets window size
     public static final int BLOCK_SIZE[] = {50,50};
 
-    public static final int GRID_SIZE = 100;
+    public static final int GRID_SIZE = 1000;
 
     private Thread thread; 
     private boolean running = false;
@@ -36,6 +38,33 @@ public class Game extends Canvas implements Runnable {
     private BufferedImage background;
     private BufferedImage bushImage; 
 
+    // Define grid as a map of cells containing game objects
+    public static HashMap<String, ArrayList<GameObject>> grid = new HashMap<>();
+
+    public static int getCellIndex(int coordinate) {
+        return coordinate / GRID_SIZE;
+    }
+
+    // Method to add an object to the grid
+    public static void addToGrid(GameObject object) {
+        int cellX = getCellIndex(object.getX());
+        int cellY = getCellIndex(object.getY());
+        String key = cellX + "," + cellY;
+
+        grid.putIfAbsent(key, new ArrayList<>());
+        grid.get(key).add(object);
+    }
+
+    // Method to remove an object from the grid
+    public static void removeFromGrid(GameObject object) {
+        int cellX = getCellIndex(object.getX());
+        int cellY = getCellIndex(object.getY());
+        String key = cellX + "," + cellY;
+
+        if (grid.containsKey(key)) {
+            grid.get(key).remove(object);
+        }
+    }
     // private static final double BUSH_SCALE_FACTOR = 0.025;
 
     /**
@@ -190,50 +219,71 @@ public class Game extends Canvas implements Runnable {
         }
 
         // Adding bushes as obstacles
-int bushWidth = 30;
-int bushHeight = 30;
-
-// Adding bushes in each corner
-handler.addObject(new Bush(0, 0)); // Top-left corner
-handler.addObject(new Bush(Game.WIDTH - bushWidth - 10, 0)); // Top-right corner with slight offset
-handler.addObject(new Bush(0, Game.HEIGHT - bushHeight - 35)); // Bottom-left corner with offset
-handler.addObject(new Bush(Game.WIDTH - bushWidth - 15, Game.HEIGHT - bushHeight - 35)); // Bottom-right corner
-
-// Adding bushes along the top border, excluding the corners
-for (int x = bushWidth; x <= Game.WIDTH - bushWidth; x += bushWidth) {
-    handler.addObject(new Bush(x, 0));
-}
-
-// Adding bushes along the bottom border, excluding the corners
-for (int x = bushWidth; x <= Game.WIDTH - bushWidth - 15; x += bushWidth) {
-    handler.addObject(new Bush(x, Game.HEIGHT - bushHeight - 35));
-}
-
-// Adding bushes along the left border, excluding the corners
-for (int y = bushHeight; y <= Game.HEIGHT - bushHeight; y += bushHeight) {
-    handler.addObject(new Bush(0, y));
-}
-
-// Adding bushes along the right border, excluding the corners
-for (int y = bushHeight; y <= Game.HEIGHT - bushHeight - 35; y += bushHeight) {
-    handler.addObject(new Bush(Game.WIDTH - bushWidth - 15, y));
-}
-
-// Adding maze bushes from maze coordinates
-int[][] mazeBushCoordinates = {
-    {90, HEIGHT - bushHeight - 35}, {90, HEIGHT - bushHeight * 2 - 35}, {90, HEIGHT - bushHeight * 3 - 35}, 
+        int bushWidth = 30;
+        int bushHeight = 30;
+        
+        // Adding bushes in each corner
+        Bush bushTopLeft = new Bush(0, 0);
+        handler.addObject(bushTopLeft);
+        addToGrid(bushTopLeft);
+        
+        Bush bushTopRight = new Bush(Game.WIDTH - bushWidth - 10, 0);
+        handler.addObject(bushTopRight);
+        addToGrid(bushTopRight);
+        
+        Bush bushBottomLeft = new Bush(0, Game.HEIGHT - bushHeight - 35);
+        handler.addObject(bushBottomLeft);
+        addToGrid(bushBottomLeft);
+        
+        Bush bushBottomRight = new Bush(Game.WIDTH - bushWidth - 15, Game.HEIGHT - bushHeight - 35);
+        handler.addObject(bushBottomRight);
+        addToGrid(bushBottomRight);
+        
+        // Adding bushes along the top border, excluding the corners
+        for (int x = bushWidth; x <= Game.WIDTH - bushWidth; x += bushWidth) {
+            Bush bush = new Bush(x, 0);
+            handler.addObject(bush);
+            addToGrid(bush);
+        }
+        
+        // Adding bushes along the bottom border, excluding the corners
+        for (int x = bushWidth; x <= Game.WIDTH - bushWidth - 15; x += bushWidth) {
+            Bush bush = new Bush(x, Game.HEIGHT - bushHeight - 35);
+            handler.addObject(bush);
+            addToGrid(bush);
+        }
+        
+        // Adding bushes along the left border, excluding the corners
+        for (int y = bushHeight; y <= Game.HEIGHT - bushHeight; y += bushHeight) {
+            Bush bush = new Bush(0, y);
+            handler.addObject(bush);
+            addToGrid(bush);
+        }
+        
+        // Adding bushes along the right border, excluding the corners
+        for (int y = bushHeight; y <= Game.HEIGHT - bushHeight - 35; y += bushHeight) {
+            Bush bush = new Bush(Game.WIDTH - bushWidth - 15, y);
+            handler.addObject(bush);
+            addToGrid(bush);
+        }
+        
+        // Adding maze bushes from maze coordinates
+        int[][] mazeBushCoordinates = {
+            {90, HEIGHT - bushHeight - 35}, {90, HEIGHT - bushHeight * 2 - 35}, {90, HEIGHT - bushHeight * 3 - 35}, 
             {90, HEIGHT - bushHeight * 4 - 35}, {90, HEIGHT - bushHeight * 5 - 35}, {120, HEIGHT - bushHeight * 5 - 35},
             {150, HEIGHT - bushHeight * 5 - 35}, {180, HEIGHT - bushHeight * 5 - 35}, {210, HEIGHT - bushHeight * 5 - 35},
-            {240, HEIGHT - bushHeight * 5 - 35},{270, HEIGHT - bushHeight * 5 - 35},{300, HEIGHT - bushHeight * 5 - 35},
-            {90, HEIGHT - bushHeight * 9 - 35},{90, HEIGHT - bushHeight * 10 - 35},{90, HEIGHT - bushHeight * 11 - 35},
+            {240, HEIGHT - bushHeight * 5 - 35}, {270, HEIGHT - bushHeight * 5 - 35}, {300, HEIGHT - bushHeight * 5 - 35},
+            {90, HEIGHT - bushHeight * 9 - 35}, {90, HEIGHT - bushHeight * 10 - 35}, {90, HEIGHT - bushHeight * 11 - 35},
             {90, HEIGHT - bushHeight * 12 - 35}, {120, HEIGHT - bushHeight * 12 - 35}, {150, HEIGHT - bushHeight * 12 - 35},
             {180, HEIGHT - bushHeight * 12 - 35}, {120, HEIGHT - bushHeight * 9 - 35}, {150, HEIGHT - bushHeight * 9 - 35},
             {180, HEIGHT - bushHeight * 9 - 35}
-};
-
-for (int[] coord : mazeBushCoordinates) {
-    handler.addObject(new Bush(coord[0], coord[1]));
-}
+        };
+        
+        for (int[] coord : mazeBushCoordinates) {
+            Bush bush = new Bush(coord[0], coord[1]);
+            handler.addObject(bush);
+            addToGrid(bush);
+        }
 
 
         if(paused){

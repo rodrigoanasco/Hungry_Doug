@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.IOException;
-
+import java.util.ArrayList;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
@@ -136,62 +136,70 @@ public class Doug extends GameObject{
     }
 
     private void collision() {
-        // Define a "look-ahead" area of interest around Doug
-        int lookAheadRange = 100; // Tune this value based on the desired range
-        Rectangle areaOfInterest = new Rectangle(x - lookAheadRange, y - lookAheadRange, lookAheadRange * 2 + getBounds().width, lookAheadRange * 2 + getBounds().height);
-    
-        for (int i = 0; i < handler.objects.size(); i++) {
-            GameObject temp = handler.objects.get(i);
-    
-            // Only proceed if the object is within Doug's area of interest
-            if (areaOfInterest.intersects(temp.getBounds())) {
-                if (getBounds().intersects(temp.getBounds())) {
-                    switch (temp.getId()) {
-                        case ENEMY:
-                            // Collision behavior for enemy
-                            if (temp instanceof MovingEnemy || temp instanceof Punishment) {
-                                // Cast temp to access getPenaltyPoints()
-                                int penaltyPoints = temp instanceof MovingEnemy
-                                    ? ((MovingEnemy) temp).getPenaltyPoints()
-                                    : ((Punishment) temp).getPenaltyPoints();
-    
-                                Health.HEALTH -= penaltyPoints;
-                            }
-                            break;
-    
-                        case REWARD:
-                            // Collision behavior for reward
-                            if (temp instanceof Reward) {
-                                Reward reward = (Reward) temp;
-                                if (!reward.isCollected()) {
-                                    int rewardAmount = reward.getRewardAmount();
-                                    Score.SCORE += rewardAmount;
-                                    reward.setCollected(true); // Mark as collected
+    // Calculate Doug's current grid cell
+    int cellX = Game.getCellIndex(x);
+    int cellY = Game.getCellIndex(y);
+
+    // Loop through nearby cells (-1, 0, +1) for both x and y
+    for (int i = -1; i <= 1; i++) {
+        for (int j = -1; j <= 1; j++) {
+            String key = (cellX + i) + "," + (cellY + j);
+            
+            // Get all objects in the current cell
+            if (Game.grid.containsKey(key)) {
+                ArrayList<GameObject> objectsInCell = Game.grid.get(key);
+
+                // Check collision with each object in this cell
+                for (GameObject temp : objectsInCell) {
+                    if (getBounds().intersects(temp.getBounds())) {
+                        switch (temp.getId()) {
+                            case ENEMY:
+                                // Collision behavior for enemy
+                                if (temp instanceof MovingEnemy || temp instanceof Punishment) {
+                                    // Cast temp to access getPenaltyPoints()
+                                    int penaltyPoints = temp instanceof MovingEnemy
+                                        ? ((MovingEnemy) temp).getPenaltyPoints()
+                                        : ((Punishment) temp).getPenaltyPoints();
+
+                                    Health.HEALTH -= penaltyPoints;
                                 }
-                            }
-                            break;
-    
-                        case OBSTAClE:
-                            // Collision behavior for obstacles
-                            if (temp instanceof Obstacle && ((Obstacle) temp).blockMovement(this)) {
-                                // Prevent movement into obstacle
-                                x -= velX / speed;
-                                y -= velY / speed;
-                                velX = 0; // Stop Doug's velocity
-                                velY = 0;
-                            }
-                            break;
-    
-                        // Add more cases as needed for other object types
-                        default:
-                            // Default behavior, if any
-                            break;
+                                break;
+
+                            case REWARD:
+                                // Collision behavior for reward
+                                if (temp instanceof Reward) {
+                                    Reward reward = (Reward) temp;
+                                    if (!reward.isCollected()) {
+                                        int rewardAmount = reward.getRewardAmount();
+                                        Score.SCORE += rewardAmount;
+                                        reward.setCollected(true); // Mark as collected
+                                    }
+                                }
+                                break;
+
+                            case OBSTAClE:
+                                // Collision behavior for obstacles
+                                if (temp instanceof Obstacle && ((Obstacle) temp).blockMovement(this)) {
+                                    // Prevent movement into obstacle
+                                    x -= velX / speed;
+                                    y -= velY / speed;
+                                    velX = 0; // Stop Doug's velocity
+                                    velY = 0;
+                                }
+                                break;
+
+                            // Add more cases as needed for other object types
+                            default:
+                                // Default behavior, if any
+                                break;
+                        }
                     }
                 }
             }
         }
     }
-    
+}
+
 
     /**
      * Renders Doug on the screen as a green rectangle at his current position.
