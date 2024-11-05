@@ -91,7 +91,7 @@ public class Rat extends MovingEnemy {
         int scaledHeight = (int) (spriteToDraw.getHeight() * SCALE_FACTOR);
 
         // Draw the sprite at the rat's current position
-        g2d.drawImage(spriteToDraw, x, y, scaledWidth, scaledHeight, null);
+        g2d.drawImage(spriteToDraw, x, y-16, scaledWidth, scaledHeight, null);
 
         // Update frame for animation
         frameCount++;
