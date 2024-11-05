@@ -27,7 +27,7 @@ public class Game extends Canvas implements Runnable {
     private boolean gameOver = false; //Game over tracker
 
     // TODO random for testing only
-    // private Random r;
+    private Random r;
     private Handler handler;
 
     private Doug doug;
@@ -81,24 +81,37 @@ public class Game extends Canvas implements Runnable {
         handler.addObject(doug);
 
         // handler.addObject(new Doug(200, 200, ID.DOUG, handler));
-        handler.addObject(new Apple(BLOCK_SIZE[0], BLOCK_SIZE[1]));
-        handler.addObject(new Bone(BLOCK_SIZE[0], 2*BLOCK_SIZE[1]));
-        handler.addObject(new Bone(2*BLOCK_SIZE[0], 2*BLOCK_SIZE[1]));
-        handler.addObject(new Steak(BLOCK_SIZE[0], 3*BLOCK_SIZE[1]));
-        handler.addObject(new Mushroom(BLOCK_SIZE[0], 4*BLOCK_SIZE[1]));
-        handler.addObject(new Exit(BLOCK_SIZE[0], 5*BLOCK_SIZE[1]));
-    
-        Random r = new Random();
+        // handler.addObject(new Apple(BLOCK_SIZE[0], BLOCK_SIZE[1]));
+        // handler.addObject(new Bone(BLOCK_SIZE[0], 2*BLOCK_SIZE[1]));
+        // handler.addObject(new Bone(2*BLOCK_SIZE[0], 2*BLOCK_SIZE[1]));
+        // handler.addObject(new Steak(BLOCK_SIZE[0], 3*BLOCK_SIZE[1]));
+        // handler.addObject(new Mushroom(BLOCK_SIZE[0], 4*BLOCK_SIZE[1]));
+        // handler.addObject(new Exit(BLOCK_SIZE[0], 5*BLOCK_SIZE[1]));
 
-        // Generate 20 rats with random positions within specified bounds
-        // TODO if multiple levels, create attribute for # of rats
-        for (int i = 0; i < 10; i++) {
-            int randomX = r.nextInt(Game.WIDTH - 200); // X coordinate within game width minus margin
-            int randomY = r.nextInt(Game.HEIGHT - 150); // Y coordinate within game height minus margin
-            handler.addObject(new Rat(randomX, randomY));
-        }
+        generateRandomObjects(10, Rat.class, handler);
+        generateRandomObjects(10, Bone.class, handler);
+        generateRandomObjects(5, Apple.class, handler);
+        generateRandomObjects(5, Steak.class, handler);
+        generateRandomObjects(5, Mushroom.class, handler);
+
     }
 
+    public void generateRandomObjects(int count, Class<? extends GameObject> objectType, Handler handler) {
+        r = new Random();
+        
+        for (int i = 0; i < count; i++) {
+            int randomX = r.nextInt(Game.WIDTH - 200); // X coordinate within game width minus margin
+            int randomY = r.nextInt(Game.HEIGHT - 150); // Y coordinate within game height minus margin
+            
+            try {
+                // Use reflection to create a new instance of the object type
+                GameObject obj = objectType.getConstructor(int.class, int.class).newInstance(randomX, randomY);
+                handler.addObject(obj);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
      /**
      * Starts or resumes the game from the main menu.
      */
@@ -198,12 +211,9 @@ public class Game extends Canvas implements Runnable {
         handler.tick();
         health.tick();
         score.tick();
+        checkGameOver();
         }
 
-        /* if(Doug.getHealth() <= 0){
-            gameOver = true;
-        } */
-        
     }
 
     /**
@@ -283,7 +293,7 @@ public class Game extends Canvas implements Runnable {
         } 
         else if(gameWon){
             winningScreen.render(g);
-        } else if(gameOver){
+        } else if(checkGameOver()){
             gameOverScreen.render(g);
         } else{
             handler.render(g2d); // Render the actual game
@@ -325,6 +335,16 @@ public class Game extends Canvas implements Runnable {
         score.resetScore();
         initializeGameObjects(); */
     } 
+
+    private boolean checkGameOver() {
+        if (Health.HEALTH <= 0) {
+            gameOver = true;
+            return true;
+            // test
+            // System.out.println("game over");
+        }
+        else{return false;}
+    }
 
     public static void main(String[] args) {
         new Game();
