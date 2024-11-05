@@ -13,6 +13,7 @@ public class Bone extends Reward {
 
     public Bone(int x, int y) {
         super(x,y, RewardType.BONE, 15);
+        Score.boneTotal++;
         try {
             boneSprite = ImageIO.read(getClass().getResource("/Bone.png"));
             boneSprite = boneSprite.getScaledInstance(OBJECT_SIZE[0], OBJECT_SIZE[1], Image.SCALE_DEFAULT);
@@ -22,7 +23,7 @@ public class Bone extends Reward {
     }
     
     public Rectangle getBounds() {
-        return new Rectangle(x,y,10,OBJECT_SIZE[1]);
+        return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
     }
 
     public void tick() {

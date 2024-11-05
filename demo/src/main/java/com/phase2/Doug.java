@@ -161,13 +161,14 @@ public class Doug extends GameObject{
                                 int rewardAmount = reward.getRewardAmount();
                                 Score.SCORE += rewardAmount;
                                 reward.setCollected(true); // Mark as collected
+                                if (reward.getType() == RewardType.BONE) Score.boneScore++;
                             }
                         }
                         break;
                     
                     case EXIT:
                         if (temp instanceof Exit) {
-                            if (Score.getScore() >= 30) {
+                            if (Score.boneScore >= Score.boneTotal) {
                                 System.out.println("Exit Screen to be Made");
                             }
                         }

@@ -1,6 +1,5 @@
 package com.phase2;
 
-import java.awt.Rectangle;
 
 /**
  * The Reward class represents a type of object that applies a specific reward to the player.
