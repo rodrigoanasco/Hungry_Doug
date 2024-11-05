@@ -7,5 +7,6 @@ public enum ID {
     ENEMY(), 
     DOUG(), 
     OBSTAClE(), 
-    REWARD(); 
+    REWARD(),
+    EXIT();
 }
