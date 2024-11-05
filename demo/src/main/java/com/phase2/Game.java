@@ -93,6 +93,7 @@ public class Game extends Canvas implements Runnable {
         generateRandomObjects(5, Apple.class, handler);
         generateRandomObjects(5, Steak.class, handler);
         generateRandomObjects(5, Mushroom.class, handler);
+        handler.addObject(new Exit(BLOCK_SIZE[0], 5*BLOCK_SIZE[1]));
 
     }
 
