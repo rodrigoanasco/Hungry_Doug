@@ -5,12 +5,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
-
-// For the background
 import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
 import java.io.IOException;
-import java.util.Random;
+
+import javax.imageio.ImageIO;
 
 /**
  * The Game class manages the main game loop and window.
@@ -24,12 +22,14 @@ public class Game extends Canvas implements Runnable {
 
     private Thread thread; 
     private boolean running = false;
+    private boolean paused = true; //Game starts in the menu (paused)
 
     // TODO random for testing only
     // private Random r;
     private Handler handler;
     private Health health;
     private Score score;
+    private MainMenu mainMenu; //Menu instance
 
     // BufferedImage for the background
     private BufferedImage background;
@@ -48,7 +48,8 @@ public class Game extends Canvas implements Runnable {
 
 
         handler = new Handler();
-
+        mainMenu = new MainMenu(this); //Initialize Main Menu
+        
         this.addKeyListener(new KeyInput(handler)); // Recieves keyboard input
 
         // Load the background image
@@ -80,6 +81,21 @@ public class Game extends Canvas implements Runnable {
         // handler.addObject(new Rat(r.nextInt(WIDTH - 200, HEIGHT - 150, 5))); // Penalty points set to 5
         handler.addObject(new Rat(WIDTH - 200, HEIGHT - 150)); // Penalty points set to 5
 
+    }
+
+
+     /**
+     * Starts or resumes the game from the main menu.
+     */
+    public synchronized void startGame() {
+        paused = false; // Start or resume the game
+    }
+
+    /**
+     * Toggles the game's paused state, returning to the main menu if paused.
+     */
+    public void togglePause() {
+        paused = !paused;
     }
 
     /**
@@ -121,7 +137,7 @@ public class Game extends Canvas implements Runnable {
             delta += (now - lastTime) / ns;
             lastTime = now;
             while (delta >= 1) {
-                tick();
+                if (!paused) tick();
                 delta--;    
             }
             if (running) {
@@ -219,14 +235,22 @@ public class Game extends Canvas implements Runnable {
         }
 
 
-
+        if(paused){
+            mainMenu.render(g); //Render the main menu if paused
+        } else {
+            handler.render(g2d); // Render the actual game
+            health.render(g2d);
+            score.render(g2d);
+            g.dispose();
+            bs.show();
+        }
         // Render game objects
-        handler.render(g2d);
+        //handler.render(g2d);
 
         // health bar render
-        health.render(g2d);
+        //health.render(g2d);
 
-        score.render(g2d);
+        //score.render(g2d);
 
         g.dispose();
         bs.show();

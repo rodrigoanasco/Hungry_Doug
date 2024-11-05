@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 public class KeyInput extends KeyAdapter{
 
     private Handler handler;
+    private Game game;
     private boolean up = false, down = false, left = false, right = false;
 
     /**
@@ -68,7 +69,7 @@ public class KeyInput extends KeyAdapter{
         }
 
         // close game on esc
-        if(key == KeyEvent.VK_ESCAPE) System.exit(1);
+        if(key == KeyEvent.VK_ESCAPE) game.togglePause();
     }
 
     @Override
