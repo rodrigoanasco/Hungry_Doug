@@ -111,6 +111,75 @@ public class Game extends Canvas implements Runnable {
         // handler.addObject(new Rat(r.nextInt(WIDTH - 200, HEIGHT - 150, 5))); // Penalty points set to 5
         handler.addObject(new Rat(WIDTH - 200, HEIGHT - 150)); // Penalty points set to 5
 
+        
+        // Adding bushes as obstacles
+        int bushWidth = 30;
+        int bushHeight = 30;
+        
+        // Adding bushes in each corner
+        Bush bushTopLeft = new Bush(0, 0);
+        handler.addObject(bushTopLeft);
+        addToGrid(bushTopLeft);
+        
+        Bush bushTopRight = new Bush(Game.WIDTH - bushWidth - 10, 0);
+        handler.addObject(bushTopRight);
+        addToGrid(bushTopRight);
+        
+        Bush bushBottomLeft = new Bush(0, Game.HEIGHT - bushHeight - 35);
+        handler.addObject(bushBottomLeft);
+        addToGrid(bushBottomLeft);
+        
+        Bush bushBottomRight = new Bush(Game.WIDTH - bushWidth - 15, Game.HEIGHT - bushHeight - 35);
+        handler.addObject(bushBottomRight);
+        addToGrid(bushBottomRight);
+        
+        // Adding bushes along the top border, excluding the corners
+        for (int x = bushWidth; x <= Game.WIDTH - bushWidth; x += bushWidth) {
+            Bush bush = new Bush(x, 0);
+            handler.addObject(bush);
+            addToGrid(bush);
+        }
+        
+        // Adding bushes along the bottom border, excluding the corners
+        for (int x = bushWidth; x <= Game.WIDTH - bushWidth - 15; x += bushWidth) {
+            Bush bush = new Bush(x, Game.HEIGHT - bushHeight - 35);
+            handler.addObject(bush);
+            addToGrid(bush);
+        }
+        
+        // Adding bushes along the left border, excluding the corners
+        for (int y = bushHeight; y <= Game.HEIGHT - bushHeight; y += bushHeight) {
+            Bush bush = new Bush(0, y);
+            handler.addObject(bush);
+            addToGrid(bush);
+        }
+        
+        // Adding bushes along the right border, excluding the corners
+        for (int y = bushHeight; y <= Game.HEIGHT - bushHeight - 35; y += bushHeight) {
+            Bush bush = new Bush(Game.WIDTH - bushWidth - 15, y);
+            handler.addObject(bush);
+            addToGrid(bush);
+        }
+        
+        // Adding maze bushes from maze coordinates
+        int[][] mazeBushCoordinates = {
+            {90, HEIGHT - bushHeight - 35}, {90, HEIGHT - bushHeight * 2 - 35}, {90, HEIGHT - bushHeight * 3 - 35}, 
+            {90, HEIGHT - bushHeight * 4 - 35}, {90, HEIGHT - bushHeight * 5 - 35}, {120, HEIGHT - bushHeight * 5 - 35},
+            {150, HEIGHT - bushHeight * 5 - 35}, {180, HEIGHT - bushHeight * 5 - 35}, {210, HEIGHT - bushHeight * 5 - 35},
+            {240, HEIGHT - bushHeight * 5 - 35}, {270, HEIGHT - bushHeight * 5 - 35}, {300, HEIGHT - bushHeight * 5 - 35},
+            {90, HEIGHT - bushHeight * 9 - 35}, {90, HEIGHT - bushHeight * 10 - 35}, {90, HEIGHT - bushHeight * 11 - 35},
+            {90, HEIGHT - bushHeight * 12 - 35}, {120, HEIGHT - bushHeight * 12 - 35}, {150, HEIGHT - bushHeight * 12 - 35},
+            {180, HEIGHT - bushHeight * 12 - 35}, {120, HEIGHT - bushHeight * 9 - 35}, {150, HEIGHT - bushHeight * 9 - 35},
+            {180, HEIGHT - bushHeight * 9 - 35}
+        };
+        
+        for (int[] coord : mazeBushCoordinates) {
+            Bush bush = new Bush(coord[0], coord[1]);
+            handler.addObject(bush);
+            addToGrid(bush);
+        }
+
+         
     }
 
 
@@ -217,7 +286,7 @@ public class Game extends Canvas implements Runnable {
             g.setColor(Color.GREEN);
             g.fillRect(0, 0, WIDTH, HEIGHT);
         }
-
+        /* 
         // Adding bushes as obstacles
         int bushWidth = 30;
         int bushHeight = 30;
@@ -285,7 +354,7 @@ public class Game extends Canvas implements Runnable {
             addToGrid(bush);
         }
 
-
+         */
         if(paused){
             mainMenu.render(g); //Render the main menu if paused
         } else {

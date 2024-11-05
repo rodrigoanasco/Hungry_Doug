@@ -141,16 +141,18 @@ public class Doug extends GameObject{
     int cellY = Game.getCellIndex(y);
 
     // Loop through nearby cells (-1, 0, +1) for both x and y
-    for (int i = -1; i <= 1; i++) {
-        for (int j = -1; j <= 1; j++) {
-            String key = (cellX + i) + "," + (cellY + j);
+    // for (int i = -1; i <= 1; i++) {
+    //     for (int j = -1; j <= 1; j++) {
+    //         String key = (cellX + i) + "," + (cellY + j);
             
-            // Get all objects in the current cell
-            if (Game.grid.containsKey(key)) {
-                ArrayList<GameObject> objectsInCell = Game.grid.get(key);
+    //         // Get all objects in the current cell
+    //         if (Game.grid.containsKey(key)) {
+    //             ArrayList<GameObject> objectsInCell = Game.grid.get(key);
 
                 // Check collision with each object in this cell
-                for (GameObject temp : objectsInCell) {
+                //for (GameObject temp : objectsInCell) {
+                for (int i =0; i< handler.objects.size(); i++) {
+                    GameObject temp = handler.objects.get(i);
                     if (getBounds().intersects(temp.getBounds())) {
                         switch (temp.getId()) {
                             case ENEMY:
@@ -179,12 +181,15 @@ public class Doug extends GameObject{
 
                             case OBSTAClE:
                                 // Collision behavior for obstacles
-                                if (temp instanceof Obstacle && ((Obstacle) temp).blockMovement(this)) {
+                                if (temp instanceof Bush) {
+                                    Bush wall = (Bush) temp;
+
                                     // Prevent movement into obstacle
                                     x -= velX / speed;
                                     y -= velY / speed;
                                     velX = 0; // Stop Doug's velocity
                                     velY = 0;
+
                                 }
                                 break;
 
@@ -195,10 +200,11 @@ public class Doug extends GameObject{
                         }
                     }
                 }
+                
             }
-        }
-    }
-}
+//         }
+//     }
+// }
 
 
     /**

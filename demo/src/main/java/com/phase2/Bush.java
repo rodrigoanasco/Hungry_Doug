@@ -14,7 +14,7 @@ public class Bush extends Obstacle {
 
     public Bush(int x, int y) {
         super(x, y, ID.OBSTAClE);
-
+        hitBox = new Rectangle(x, y, WIDTH, HEIGHT);
         try {
             bushImage = ImageIO.read(getClass().getResource("/bush.png"));
         } catch (IOException e) {
@@ -36,7 +36,7 @@ public class Bush extends Obstacle {
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x, y, WIDTH, HEIGHT);
+        return hitBox;
     }
 
     @Override
