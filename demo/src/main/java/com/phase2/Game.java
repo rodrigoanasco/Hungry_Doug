@@ -55,7 +55,7 @@ public class Game extends Canvas implements Runnable {
             background = ImageIO.read(getClass().getResource("/grassback.png"));
             bushImage = ImageIO.read(getClass().getResource("/bush.png"));
         } 
-        catch (IOException e) {
+        catch (IOException e) { 
             e.printStackTrace();
         }
 
@@ -65,13 +65,11 @@ public class Game extends Canvas implements Runnable {
         score = new Score();
 
         // Used for testing only
-        // TODO if multiple levels, create attribute for # of rewards
-
-        handler.addObject(new Doug(200, 200, ID.DOUG, handler ));
+        handler.addObject(new Doug(200, 200, ID.DOUG, handler));
         handler.addObject(new Apple(BLOCK_SIZE[0], BLOCK_SIZE[1], RewardType.APPLE));
-        handler.addObject(new Bone(BLOCK_SIZE[0], 2*BLOCK_SIZE[1], RewardType.BONE));
-        handler.addObject(new Steak(BLOCK_SIZE[0], 3*BLOCK_SIZE[1], RewardType.STEAK));
-        handler.addObject(new Mushroom(BLOCK_SIZE[0], 4*BLOCK_SIZE[1], RewardType.MUSHROOM));
+        handler.addObject(new Bone(BLOCK_SIZE[0], 2*BLOCK_SIZE[1], RewardType.BONE,1));
+        handler.addObject(new Steak(BLOCK_SIZE[0], 3*BLOCK_SIZE[1], RewardType.STEAK,5));
+        handler.addObject(new Mushroom(BLOCK_SIZE[0], 4*BLOCK_SIZE[1], RewardType.MUSHROOM,5));
         //
 
         // TODO for random movement testing only 

@@ -12,8 +12,8 @@ public class Mushroom extends Reward {
 
     private Image mushroomSprite;
 
-    public Mushroom(int x, int y,RewardType rewardType) {
-        super(x,y, RewardType.APPLE, 1);
+    public Mushroom(int x, int y,RewardType rewardType,int rewardAmount) {
+        super(x,y, RewardType.MUSHROOM, 1);
         try {
             mushroomSprite = ImageIO.read(getClass().getResource("/Mushroom.png"));;
             mushroomSprite = mushroomSprite.getScaledInstance(OBJECT_SIZE[0], OBJECT_SIZE[1], Image.SCALE_DEFAULT);
@@ -32,6 +32,8 @@ public class Mushroom extends Reward {
     }
 
     public void render(Graphics g) {
-        g.drawImage(mushroomSprite, x, y, null);
+        if (!collected) {
+            g.drawImage(mushroomSprite, x, y, null);
+        }
     }
 }
