@@ -42,6 +42,7 @@ public class Game extends Canvas implements Runnable {
     private BufferedImage background;
     private BufferedImage bushImage; 
 
+
     // private static final double BUSH_SCALE_FACTOR = 0.025;
 
     /**
