@@ -89,122 +89,148 @@ public class Doug extends GameObject{
      * Updates Doug's state for each tick of the game loop.
      */
     @Override
-    public void tick(){
-
+    public void tick() {
         boolean wasMoving = moving;
 
-        // Used for testing only
-        // Moves + in x and y direction each tick of the game
-        x += velX/speed;
-        y += velY/speed;
-        //
+        // Predict new positions based on velocity
+        int predictedX = x + (int) (velX / speed);
+        int predictedY = y + (int) (velY / speed);
+
+        // Handle collision before updating position
+        collision(predictedX, predictedY);
 
         // Determine if Doug is moving
         moving = (velX != 0 || velY != 0);
 
         // Update facing direction based on velocity
         if (velX > 0) {
-            facingRight = true;
-        } 
-        else if (velX < 0) {
-            facingRight = false;
+           facingRight = true;
+        } else if (velX < 0) {
+           facingRight = false;
         }
 
-        // Check if the moving state has changed
+        // Reset frame if movement state changes
         if (moving != wasMoving) {
-            // Reset frame to avoid out-of-bounds issues when changing states
-            currentFrame = 0;
+           currentFrame = 0;
         }
 
-        // Update animation frame every few ticks
+        // Update animation frame
         frameCount++;
         if (frameCount >= frameDelay) {
-            frameCount = 0;
-            if (moving) {
-                currentFrame = (currentFrame + 1) % walkSprites.length; // Cycle through walk frames
-            } 
-            else {
-                currentFrame = (currentFrame + 1) % idleSprites.length; // Cycle through idle frames
-            }
+          frameCount = 0;
+         currentFrame = (currentFrame + 1) % (moving ? walkSprites.length : idleSprites.length);
         }
 
-        // Doug can't move out oof bounds
-        x = Game.clamp(x,0,Game.WIDTH -75);
-        y = Game.clamp(y,0,Game.HEIGHT - 30);
-
-       collision(); 
+        // Clamp Doug's position to keep him within the screen bounds
+        x = Game.clamp(x, 0, Game.WIDTH - 75);
+        y = Game.clamp(y, 0, Game.HEIGHT - 30);
     }
 
-    private void collision() {
-    // Calculate Doug's current grid cell
-    int cellX = Game.getCellIndex(x);
-    int cellY = Game.getCellIndex(y);
 
-    // Loop through nearby cells (-1, 0, +1) for both x and y
-    // for (int i = -1; i <= 1; i++) {
-    //     for (int j = -1; j <= 1; j++) {
-    //         String key = (cellX + i) + "," + (cellY + j);
-            
-    //         // Get all objects in the current cell
-    //         if (Game.grid.containsKey(key)) {
-    //             ArrayList<GameObject> objectsInCell = Game.grid.get(key);
 
-                // Check collision with each object in this cell
-                //for (GameObject temp : objectsInCell) {
-                for (int i =0; i< handler.objects.size(); i++) {
-                    GameObject temp = handler.objects.get(i);
-                    if (getBounds().intersects(temp.getBounds())) {
-                        switch (temp.getId()) {
-                            case ENEMY:
-                                // Collision behavior for enemy
-                                if (temp instanceof MovingEnemy || temp instanceof Punishment) {
-                                    // Cast temp to access getPenaltyPoints()
-                                    int penaltyPoints = temp instanceof MovingEnemy
-                                        ? ((MovingEnemy) temp).getPenaltyPoints()
-                                        : ((Punishment) temp).getPenaltyPoints();
-
-                                    Health.HEALTH -= penaltyPoints;
-                                }
-                                break;
-
-                            case REWARD:
-                                // Collision behavior for reward
-                                if (temp instanceof Reward) {
-                                    Reward reward = (Reward) temp;
-                                    if (!reward.isCollected()) {
-                                        int rewardAmount = reward.getRewardAmount();
-                                        Score.SCORE += rewardAmount;
-                                        reward.setCollected(true); // Mark as collected
-                                    }
-                                }
-                                break;
-
-                            case OBSTAClE:
-                                // Collision behavior for obstacles
-                                if (temp instanceof Bush) {
-                                    Bush wall = (Bush) temp;
-
-                                    // Prevent movement into obstacle
-                                    x -= velX / speed;
-                                    y -= velY / speed;
-                                    velX = 0; // Stop Doug's velocity
-                                    velY = 0;
-
-                                }
-                                break;
-
-                            // Add more cases as needed for other object types
-                            default:
-                                // Default behavior, if any
-                                break;
+    private void collision(int predictedX, int predictedY) {
+        boolean canMoveX = true;
+        boolean canMoveY = true;
+    
+        // Check for collisions in the X direction
+        Rectangle predictedBoundsX = new Rectangle(predictedX, y, getBounds().width, getBounds().height);
+        for (GameObject temp : handler.objects) {
+            if (temp.getBounds().intersects(predictedBoundsX)) {
+                switch (temp.getId()) {
+                    case ENEMY:
+                        // Collision behavior for enemy
+                        if (temp instanceof MovingEnemy || temp instanceof Punishment) {
+                            int penaltyPoints = temp instanceof MovingEnemy
+                                    ? ((MovingEnemy) temp).getPenaltyPoints()
+                                    : ((Punishment) temp).getPenaltyPoints();
+    
+                            Health.HEALTH -= penaltyPoints;
                         }
-                    }
+                        break;
+    
+                    case REWARD:
+                        // Collision behavior for reward
+                        if (temp instanceof Reward) {
+                            Reward reward = (Reward) temp;
+                            if (!reward.isCollected()) {
+                                int rewardAmount = reward.getRewardAmount();
+                                Score.SCORE += rewardAmount;
+                                reward.setCollected(true); // Mark as collected
+                            }
+                        }
+                        break;
+    
+                    case OBSTAClE:
+                        // Collision behavior for obstacles
+                        if (temp instanceof Obstacle) {
+                            canMoveX = false; // Prevent movement in x direction if collision occurs
+                        }
+                        break;
+    
+                    default:
+                        // Default behavior for other object types
+                        break;
                 }
-                
             }
-//         }
-//     }
-// }
+        }
+    
+        // Check for collisions in the Y direction
+        Rectangle predictedBoundsY = new Rectangle(x, predictedY, getBounds().width, getBounds().height);
+        for (GameObject temp : handler.objects) {
+            if (temp.getBounds().intersects(predictedBoundsY)) {
+                switch (temp.getId()) {
+                    case ENEMY:
+                        // Collision behavior for enemy
+                        if (temp instanceof MovingEnemy || temp instanceof Punishment) {
+                            int penaltyPoints = temp instanceof MovingEnemy
+                                    ? ((MovingEnemy) temp).getPenaltyPoints()
+                                    : ((Punishment) temp).getPenaltyPoints();
+    
+                            Health.HEALTH -= penaltyPoints;
+                        }
+                        break;
+    
+                    case REWARD:
+                        // Collision behavior for reward
+                        if (temp instanceof Reward) {
+                            Reward reward = (Reward) temp;
+                            if (!reward.isCollected()) {
+                                int rewardAmount = reward.getRewardAmount();
+                                Score.SCORE += rewardAmount;
+                                reward.setCollected(true); // Mark as collected
+                            }
+                        }
+                        break;
+    
+                    case OBSTAClE:
+                        // Collision behavior for obstacles
+                        if (temp instanceof Obstacle) {
+                            canMoveY = false; // Prevent movement in y direction if collision occurs
+                        }
+                        break;
+    
+                    default:
+                        // Default behavior for other object types
+                        break;
+                }
+            }
+        }
+    
+        // Update position if no collision is predicted in the x direction
+        if (canMoveX) {
+            x += velX / speed; // Only update x if no collision in the x direction
+        } else {
+            velX = 0; // Stop horizontal movement
+        }
+    
+        // Update position if no collision is predicted in the y direction
+        if (canMoveY) {
+            y += velY / speed; // Only update y if no collision in the y direction
+        } else {
+            velY = 0; // Stop vertical movement
+        }
+    }
+    
 
 
     /**
