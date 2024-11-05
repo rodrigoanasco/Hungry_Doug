@@ -16,6 +16,7 @@ public abstract class GameObject {
     protected int velX, velY; // controls speed in x, y direction
     protected int OBJECT_SIZE[] = {32,32}; //size of image
     protected int HITBOX[] = {OBJECT_SIZE[0]-16,OBJECT_SIZE[1]-16};
+    protected Rectangle hitBox;
 
 
     /**
@@ -28,7 +29,8 @@ public abstract class GameObject {
     public GameObject(int x, int y, ID id){
         this.x = x;
         this.y = y;
-        this.id = id; 
+        this.id = id;
+        //hitBox = new Rectangle(x,y); 
     }
     
     /**
@@ -59,6 +61,7 @@ public abstract class GameObject {
     //TODO docs
     // collision detector
     public abstract Rectangle getBounds();
+
 
     // getters and setters for position and velocity
     public void setX(int x){
