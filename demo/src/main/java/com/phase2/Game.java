@@ -66,7 +66,20 @@ public class Game extends Canvas implements Runnable {
         score = new Score();
 
         // Used for testing only
-        handler.addObject(new Doug(200, 200, ID.DOUG, handler));
+
+        // Doug doug = new Doug(200, 200, ID.DOUG, handler);
+        // handler.addObject(doug);
+        // handler.setDoug(doug);
+
+        // Create or get the single instance of Doug
+        Doug doug = Doug.getInstance(200, 200, ID.DOUG, handler);
+
+        // Add Doug to the handler
+        handler.addObject(doug);
+
+
+        // handler.addObject(new Doug(200, 200, ID.DOUG, handler));
+
         handler.addObject(new Apple(BLOCK_SIZE[0], BLOCK_SIZE[1]));
         handler.addObject(new Bone(BLOCK_SIZE[0], 2*BLOCK_SIZE[1]));
         handler.addObject(new Steak(BLOCK_SIZE[0], 3*BLOCK_SIZE[1]));

@@ -9,6 +9,9 @@ import java.util.LinkedList;
  */
 public class Handler {
 
+    //testing
+    // private Doug doug;
+
     private Boolean debug = false;
     // list of all objects in game (Doug, enemies, food, etc)
     LinkedList<GameObject> objects = new LinkedList<GameObject >();
@@ -59,4 +62,13 @@ public class Handler {
     public void setDebug(Boolean d) {
         this.debug = d;
     }
+
+    // testign
+    // public void setDoug(Doug doug) {
+    //     this.doug = doug;
+    // }
+
+    // public Doug getDoug() {
+    //     return doug;
+    // }
 }
