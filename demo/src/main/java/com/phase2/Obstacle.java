@@ -5,6 +5,7 @@ package com.phase2;
  * It is an abstract class requiring subclasses to define the specific blocking behavior.
  */
 public abstract class Obstacle extends GameObject {
+    
     protected ObstacleType type;
 
     /**

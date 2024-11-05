@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Score {
+    
     public static int SCORE = 0;
 
     public void tick() {
@@ -14,5 +15,9 @@ public class Score {
         // testing only
         g.setColor(Color.BLACK);
         g.drawString("SCORE: " + SCORE, 25, 75); // Adjust the position
+    }
+
+    public static int getScore() {
+        return SCORE;
     }
 }

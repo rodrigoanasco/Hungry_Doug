@@ -4,17 +4,19 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+
 import java.awt.Graphics;
 
-public class Mushroom extends Reward {
 
-    private Image mushroomSprite;
+public class Exit extends GameObject {
 
-    public Mushroom(int x, int y) {
-        super(x,y, RewardType.MUSHROOM, 10);
+    private Image sprite;
+
+    public Exit(int x, int y) {
+        super(x,y, ID.EXIT);
         try {
-            mushroomSprite = ImageIO.read(getClass().getResource("/Mushroom.png"));;
-            mushroomSprite = mushroomSprite.getScaledInstance(OBJECT_SIZE[0]+16, OBJECT_SIZE[1]+16, Image.SCALE_DEFAULT);
+            sprite = ImageIO.read(getClass().getResource("/Apple.png"));
+            sprite = sprite.getScaledInstance(OBJECT_SIZE[0], OBJECT_SIZE[1], Image.SCALE_DEFAULT);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -22,16 +24,18 @@ public class Mushroom extends Reward {
     
     public Rectangle getBounds() {
         return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
+
     }
 
     public void tick() {
-        //to be implemented: checks if colliding with doug
+
     }
 
     public void render(Graphics g) {
         // renderHitBox(g,OBJECT_SIZE[0],OBJECT_SIZE[1]);
-        if (!collected) {
-            g.drawImage(mushroomSprite, x-8, y-8, null);
+            if (Score.getScore() >= 30) {
+                g.drawImage(sprite, x, y, null);
         }
     }
+
 }

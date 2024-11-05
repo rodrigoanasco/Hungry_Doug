@@ -2,13 +2,13 @@ package com.phase2;
 
 // import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 /**
  * Represents the main character, Doug, in the game.
@@ -19,8 +19,11 @@ public class Doug extends GameObject{
 
     Handler handler;
 
-    protected int health;
-    protected int score;
+    //testing
+    private static Doug instance;
+
+    // protected int health;
+    // protected int score;
 
     private BufferedImage[] idleSprites;
     private BufferedImage[] walkSprites;
@@ -35,6 +38,8 @@ public class Doug extends GameObject{
 
     private static final double SCALE_FACTOR = 1.2; // Scale Doug to be bigger/smaller
 
+    int health = 100;
+    int score = 0;
     /**
      * Initializes Doug's position, ID, health, and score.
      * Sets default velocity for testing purposes.
@@ -80,9 +85,29 @@ public class Doug extends GameObject{
         velY = 0;
         //
     }
+
+    //testing
+    // Public method to get the single instance of Doug
+     public static Doug getInstance(int x, int y, ID id, Handler handler) {
+        if (instance == null) {
+            instance = new Doug(x, y, id, handler);
+        }
+        return instance;
+    }
+
+        // Overloaded method to get the instance without parameters after initialization
+        public static Doug getInstance() {
+            if (instance == null) {
+                throw new IllegalStateException("Doug has not been initialized. Call getInstance(x, y, id, handler) first.");
+            }
+            return instance;
+        }
+
+    //
     
     public Rectangle getBounds() {
-        return new Rectangle(x,y,48,48);
+        int offset = 5;
+        return new Rectangle(x + offset,y + offset,48 - (2* offset),48 - (2*offset));
     }
 
     /**
@@ -159,6 +184,20 @@ public class Doug extends GameObject{
                             }
                         }
                         break;
+                    
+                    case EXIT:
+                        if (temp instanceof Exit) {
+                            if (Score.getScore() >= 30) {
+                                Game gameinstance = handler.getGameInstance();
+                                if(gameinstance != null){
+                                    gameinstance.setGameWon(true);
+                                }
+                            }
+                        }
+                        break;
+                    // case OBSTACLE:
+                    //     // Collision behavior for obstacles
+                    //     break;
     
                     case OBSTAClE:
                         // Collision behavior for obstacles
@@ -270,59 +309,59 @@ public class Doug extends GameObject{
 
     }
 
-    /**
-     * Gets Doug's current score.
-     *
-     * @return The score Doug has accumulated.
-     */
+    // /**
+    //  * Gets Doug's current score.
+    //  *
+    //  * @return The score Doug has accumulated.
+    //  */
     public int getScore(){
         return score;
     }
 
-    /**
-     * Sets Doug's score.
-     *
-     * @param score The score value to set for Doug.
-     */
+    // /**
+    //  * Sets Doug's score.
+    //  *
+    //  * @param score The score value to set for Doug.
+    //  */
     public void setScore(int score){
         this.score = score;
     }
 
-    /**
-     * Add to Doug's score.
-     *
-     * @param score The score value to add for Doug.
-     */
-    public void addScore(int score){
-        this.score += score;
-    }
+    // /**
+    //  * Add to Doug's score.
+    //  *
+    //  * @param score The score value to add for Doug.
+    //  */
+    // public void addScore(int score){
+    //     this.score += score;
+    // }
 
-    /**
-     * Subtract to Doug's score.
-     *
-     * @param score The score value to subtract for Doug.
-     */
-    public void subScore(int score){
-        this.score -= score;
-    }
+    // /**
+    //  * Subtract to Doug's score.
+    //  *
+    //  * @param score The score value to subtract for Doug.
+    //  */
+    // public void subScore(int score){
+    //     this.score -= score;
+    // }
 
 
-     /**
-     * Gets Doug's current health level.
-     *
-     * @return The health level of Doug.
-     */
+    //  /**
+    //  * Gets Doug's current health level.
+    //  *
+    //  * @return The health level of Doug.
+    //  */
     public int getHealth(){
-        return health;
+         return health;
     }
 
-    /**
-     * Sets Doug's health level.
-     *
-     * @param health The health value to set for Doug.
-     */
-    public void setHealth(int health){
-        this.health = health;
-    }
+    // /**
+    //  * Sets Doug's health level.
+    //  *
+    //  * @param health The health value to set for Doug.
+    //  */
+    // public void setHealth(int health){
+    //     this.health = health;
+    // }
 
 }

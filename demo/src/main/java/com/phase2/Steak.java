@@ -4,15 +4,13 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-
 import java.awt.Graphics;
-
 
 public class Steak extends Reward {
 
     private Image steakSprite;
 
-    public Steak(int x, int y,RewardType rewardType) {
+    public Steak(int x, int y) {
         super(x,y, RewardType.STEAK, 20);
         try {
             steakSprite = ImageIO.read(getClass().getResource("/Steak.png"));
@@ -28,7 +26,6 @@ public class Steak extends Reward {
 
     public void tick() {
         //to be implemented: checks if colliding with doug
-
     }
 
     public void render(Graphics g) {

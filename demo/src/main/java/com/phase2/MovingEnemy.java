@@ -5,6 +5,9 @@ package com.phase2;
  * It is an abstract class that requires subclasses to define the specific penalty behavior.
  */
 public abstract class MovingEnemy extends GameObject{
+    
+    Handler handler;
+
     protected int penaltyPoints;
     protected EnemyType type;
 
@@ -43,12 +46,8 @@ public abstract class MovingEnemy extends GameObject{
     public void tick() {
         x = Game.clamp(x,0,Game.WIDTH - 30);
         y = Game.clamp(y,0,Game.HEIGHT - 30);
+
+
     }
 
-    /**
-     * Abstract method to apply a penalty to the player character (Doug).
-     * 
-     * @param doug the player character
-     */
-    public abstract void applyPenalty(Doug doug);
 }

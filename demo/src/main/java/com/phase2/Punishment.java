@@ -40,11 +40,5 @@ public abstract class Punishment extends GameObject{
         return penaltyPoints;
     }
 
-    /**
-     * Abstract method to apply the punishment to the player character (Doug).
-     * 
-     * @param doug the player character
-     */
-    public abstract void applyPenalty(Doug doug);
 }
 

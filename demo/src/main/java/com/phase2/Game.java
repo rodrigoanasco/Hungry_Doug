@@ -26,6 +26,8 @@ public class Game extends Canvas implements Runnable {
     private Thread thread; 
     private boolean running = false;
     private boolean paused = true; //Game starts in the menu (paused)
+    private boolean gameWon = false; // Tracker to check if the game is won
+    private boolean gameOver = false; //Game over tracker
 
     // TODO random for testing only
     // private Random r;
@@ -33,6 +35,8 @@ public class Game extends Canvas implements Runnable {
     private Health health;
     private Score score;
     private MainMenu mainMenu; //Menu instance
+    private WinningScreen winningScreen; //Tracking the winning screen
+    private GameOverScreen gameOverScreen;
 
     // BufferedImage for the background
     private BufferedImage background;
@@ -72,14 +76,16 @@ public class Game extends Canvas implements Runnable {
      * Initializes the handler and sets up the game window.
      */
     public Game() {
-
+        
     // TODO if multiple levels, create attribute for numbers of enemies/rewards to generate
     // then pass to a main class?
 
 
-        handler = new Handler();
+        handler = new Handler(this);
         mainMenu = new MainMenu(this); //Initialize Main Menu
-        
+        winningScreen = new WinningScreen(this); // Initialize the winning screen
+        gameOverScreen = new GameOverScreen(this);
+
         this.addKeyListener(new KeyInput(handler)); // Recieves keyboard input
 
         // Load the background image
@@ -97,11 +103,25 @@ public class Game extends Canvas implements Runnable {
         score = new Score();
 
         // Used for testing only
-        handler.addObject(new Doug(200, 200, ID.DOUG, handler));
-        handler.addObject(new Apple(BLOCK_SIZE[0], BLOCK_SIZE[1], RewardType.APPLE));
-        handler.addObject(new Bone(BLOCK_SIZE[0], 2*BLOCK_SIZE[1], RewardType.BONE));
-        handler.addObject(new Steak(BLOCK_SIZE[0], 3*BLOCK_SIZE[1], RewardType.STEAK));
-        handler.addObject(new Mushroom(BLOCK_SIZE[0], 4*BLOCK_SIZE[1], RewardType.MUSHROOM));
+
+        // Doug doug = new Doug(200, 200, ID.DOUG, handler);
+        // handler.addObject(doug);
+        // handler.setDoug(doug);
+
+        // Create or get the single instance of Doug
+        Doug doug = Doug.getInstance(200, 200, ID.DOUG, handler);
+
+        // Add Doug to the handler
+        handler.addObject(doug);
+
+
+        // handler.addObject(new Doug(200, 200, ID.DOUG, handler));
+
+        handler.addObject(new Apple(BLOCK_SIZE[0], BLOCK_SIZE[1]));
+        handler.addObject(new Bone(BLOCK_SIZE[0], 2*BLOCK_SIZE[1]));
+        handler.addObject(new Steak(BLOCK_SIZE[0], 3*BLOCK_SIZE[1]));
+        handler.addObject(new Mushroom(BLOCK_SIZE[0], 4*BLOCK_SIZE[1]));
+        handler.addObject(new Exit(BLOCK_SIZE[0], 5*BLOCK_SIZE[1]));
         //
 
         // TODO for random movement testing only 
@@ -168,9 +188,47 @@ public class Game extends Canvas implements Runnable {
             {150, HEIGHT - bushHeight * 5 - 35}, {180, HEIGHT - bushHeight * 5 - 35}, {210, HEIGHT - bushHeight * 5 - 35},
             {240, HEIGHT - bushHeight * 5 - 35}, {270, HEIGHT - bushHeight * 5 - 35}, {300, HEIGHT - bushHeight * 5 - 35},
             {90, HEIGHT - bushHeight * 9 - 35}, {90, HEIGHT - bushHeight * 10 - 35}, {90, HEIGHT - bushHeight * 11 - 35},
-            {90, HEIGHT - bushHeight * 12 - 35}, {120, HEIGHT - bushHeight * 12 - 35}, {150, HEIGHT - bushHeight * 12 - 35},
-            {180, HEIGHT - bushHeight * 12 - 35}, {120, HEIGHT - bushHeight * 9 - 35}, {150, HEIGHT - bushHeight * 9 - 35},
-            {180, HEIGHT - bushHeight * 9 - 35}
+
+            // little box on right
+            {90, HEIGHT - bushHeight * 13 - 35}, {120, HEIGHT - bushHeight * 13 - 35}, {150, HEIGHT - bushHeight * 13 - 35},
+            {180, HEIGHT - bushHeight * 13 - 35}, {120, HEIGHT - bushHeight * 9 - 35}, {150, HEIGHT - bushHeight * 9 - 35},
+            {180, HEIGHT - bushHeight * 9 - 35}, {90, HEIGHT - bushHeight * 12 - 35},
+
+            {210, HEIGHT - bushHeight * 9 - 35}, {240, HEIGHT - bushHeight * 9 - 35}, {270, HEIGHT - bushHeight * 9 - 35},
+            {300, HEIGHT - bushHeight * 9 - 35},{330, HEIGHT - bushHeight * 9 - 35}, {360, HEIGHT - bushHeight * 9 - 35},
+            {390, HEIGHT - bushHeight * 9 - 35}, {420, HEIGHT - bushHeight * 9 - 35}, {510, HEIGHT - bushHeight * 9 - 35},
+            {540, HEIGHT - bushHeight * 9 - 35}, {570, HEIGHT - bushHeight * 9 - 35}, {600, HEIGHT - bushHeight * 9 - 35},
+            {630, HEIGHT - bushHeight * 9 - 35}, {660, HEIGHT - bushHeight * 9 - 35}, {690, HEIGHT - bushHeight * 9 - 35},
+            {690, HEIGHT - bushHeight * 8 - 35}, {690, HEIGHT - bushHeight * 7 - 35}, {690, HEIGHT - bushHeight * 6 - 35},
+            {690, HEIGHT - bushHeight * 5 - 35}, {720, HEIGHT - bushHeight * 9 - 35}, {750, HEIGHT - bushHeight * 9 - 35},
+            {780, HEIGHT - bushHeight * 9 - 35}, {810, HEIGHT - bushHeight * 9 - 35}, {840, HEIGHT - bushHeight * 9 - 35},
+            {870, HEIGHT - bushHeight * 9 - 35}, {870, HEIGHT - bushHeight * 10 - 35},{870, HEIGHT - bushHeight * 11 - 35},
+            {870, HEIGHT - bushHeight * 12 - 35}, {870, HEIGHT - bushHeight * 13 - 35}, {870, HEIGHT - bushHeight * 14 - 35},
+            {870, HEIGHT - bushHeight * 15 - 35}, {870, HEIGHT - bushHeight * 16 - 35}, {870, HEIGHT - bushHeight * 17 - 35},
+            {870, HEIGHT - bushHeight * 18 - 35}, {870, HEIGHT - bushHeight * 19 - 35}, {840, HEIGHT - bushHeight * 19 - 35},
+            {810, HEIGHT - bushHeight * 19 - 35}, {780, HEIGHT - bushHeight * 19 - 35}, {750, HEIGHT - bushHeight * 19 - 35},
+            {720, HEIGHT - bushHeight * 19 - 35}, {690, HEIGHT - bushHeight * 19 - 35},
+            {990, HEIGHT - bushHeight * 19 - 35}, {1020, HEIGHT - bushHeight * 19 - 35}, {1050, HEIGHT - bushHeight * 19 - 35},
+            {1080, HEIGHT - bushHeight * 19 - 35}, {1110, HEIGHT - bushHeight * 19 - 35}, {1140, HEIGHT - bushHeight * 19 - 35},
+            {990, HEIGHT - bushHeight * 18 - 35}, {990, HEIGHT - bushHeight * 17 - 35}, {990, HEIGHT - bushHeight * 16 - 35},
+            {990, HEIGHT - bushHeight * 15 - 35}, {1140, HEIGHT - bushHeight * 18 - 35}, {1140, HEIGHT - bushHeight * 17 - 35},
+            {1140, HEIGHT - bushHeight * 16 - 35}, {1140, HEIGHT - bushHeight * 15 - 35}, {1140, HEIGHT - bushHeight * 11 - 35},
+            {1140, HEIGHT - bushHeight * 10 - 35}, {1140, HEIGHT - bushHeight * 9 - 35}, {1140, HEIGHT - bushHeight * 8 - 35},
+            {1140, HEIGHT - bushHeight * 7 - 35}, {1140, HEIGHT - bushHeight * 6 - 35}, {990, HEIGHT - bushHeight * 11 - 35},
+            {990, HEIGHT - bushHeight * 10 - 35}, {990, HEIGHT - bushHeight * 9 - 35}, {990, HEIGHT - bushHeight * 8 - 35},
+            {990, HEIGHT - bushHeight * 7 - 35}, {990, HEIGHT - bushHeight * 6 - 35}, {1020, HEIGHT - bushHeight * 6 - 35},
+            {1050, HEIGHT - bushHeight * 6 - 35}, {1080, HEIGHT - bushHeight * 6 - 35}, {1110, HEIGHT - bushHeight * 6 - 35},
+            {1170, HEIGHT - bushHeight * 6 - 35}, {1200, HEIGHT - bushHeight * 6 - 35}, {1230, HEIGHT - bushHeight * 6 - 35},
+
+
+
+            {210, HEIGHT - bushHeight * 13 - 35}, {240, HEIGHT - bushHeight * 13 - 35}, {270, HEIGHT - bushHeight * 13 - 35},
+            {270, HEIGHT - bushHeight * 14 - 35}, {270, HEIGHT - bushHeight * 14 - 35}, {270, HEIGHT - bushHeight * 15 - 35},
+            {270, HEIGHT - bushHeight * 16 - 35}, {270, HEIGHT - bushHeight * 17 - 35}, {270, HEIGHT - bushHeight * 18 - 35},
+            {270, HEIGHT - bushHeight * 19 - 35}, {300, HEIGHT - bushHeight * 19 - 35}, {330, HEIGHT - bushHeight * 19 - 35},
+            {360, HEIGHT - bushHeight * 19 - 35}, {390, HEIGHT - bushHeight * 19 - 35}, {420, HEIGHT - bushHeight * 19 - 35},
+            {450, HEIGHT - bushHeight * 19 - 35}, {480, HEIGHT - bushHeight * 19 - 35}, {510, HEIGHT - bushHeight * 19 - 35},
+            {600, HEIGHT - bushHeight * 19 - 35}, {630, HEIGHT - bushHeight * 19 - 35}, {660, HEIGHT - bushHeight * 19 - 35}
         };
         
         for (int[] coord : mazeBushCoordinates) {
@@ -195,6 +253,28 @@ public class Game extends Canvas implements Runnable {
      */
     public void togglePause() {
         paused = !paused;
+    }
+
+    /**
+     * Changes the game state to "win"
+     */
+    public void setGameWon(boolean gameWon){
+        this.gameWon = gameWon;
+    }
+
+    public boolean isGameWon(){
+        return gameWon;
+    }
+
+    private void initializeGameObjects(){
+        //handler.clearObjects();
+        handler.addObject(new Doug(200, 200, ID.DOUG, handler));
+        handler.addObject(new Apple(BLOCK_SIZE[0], BLOCK_SIZE[1]));
+        handler.addObject(new Bone(BLOCK_SIZE[0], 2*BLOCK_SIZE[1]));
+        handler.addObject(new Steak(BLOCK_SIZE[0], 3*BLOCK_SIZE[1]));
+        handler.addObject(new Mushroom(BLOCK_SIZE[0], 4*BLOCK_SIZE[1]));
+        handler.addObject(new Exit(BLOCK_SIZE[0], 5*BLOCK_SIZE[1]));
+        
     }
 
     /**
@@ -256,9 +336,16 @@ public class Game extends Canvas implements Runnable {
      * Updates the game state for each game tick.
      */
     private void tick(){
+        if(!gameOver){
         handler.tick();
         health.tick();
         score.tick();
+        }
+
+        /* if(Doug.getHealth() <= 0){
+            gameOver = true;
+        } */
+        
     }
 
     /**
@@ -357,7 +444,12 @@ public class Game extends Canvas implements Runnable {
          */
         if(paused){
             mainMenu.render(g); //Render the main menu if paused
-        } else {
+        } 
+        else if(gameWon){
+            winningScreen.render(g);
+        } else if(gameOver){
+            gameOverScreen.render(g);
+        } else{
             handler.render(g2d); // Render the actual game
             health.render(g2d);
             score.render(g2d);
@@ -390,6 +482,13 @@ public class Game extends Canvas implements Runnable {
     public void debugMode(Boolean debug) {
         handler.setDebug(debug);
     }
+
+    public void resetGame(){
+        /* gameOver = false;
+        health.resetHealt();
+        score.resetScore();
+        initializeGameObjects(); */
+    } 
 
     public static void main(String[] args) {
         new Game();

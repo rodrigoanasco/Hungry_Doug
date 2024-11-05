@@ -1,10 +1,13 @@
 package com.phase2;
 
+import java.awt.Rectangle;
+
 /**
  * The Reward class represents a type of object that applies a specific reward to the player.
  * It is an abstract class requiring subclasses to define the specific reward behavior.
  */
 public abstract class Reward extends GameObject{
+
     protected int rewardAmount;
     protected RewardType type;
     protected boolean collected = false; // Track if reward has been collected
@@ -48,14 +51,10 @@ public abstract class Reward extends GameObject{
         this.collected = collected;
     }
 
-// maybe not needed
-    /**
-     * method to apply the reward to the player character (Doug).
-     * 
-     * @param doug the player character
-     */
-    public void applyReward(Doug doug) {
-        doug.addScore(rewardAmount);
-    }
+    // public Rectangle getBounds() {
+    //     return new Rectangle(x,y,30,30);
+
+    // }
+
 }
 

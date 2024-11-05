@@ -1,8 +1,10 @@
+com\phase2\WinningScreen.class
 com\phase2\Window.class
 com\phase2\Doug.class
 com\phase2\Onion.class
 com\phase2\Reward.class
 com\phase2\Steak.class
+com\phase2\GameOverScreen.class
 com\phase2\Score.class
 com\phase2\Handler.class
 com\phase2\Rat.class
@@ -26,6 +28,7 @@ com\phase2\GameObject.class
 com\phase2\ID.class
 com\phase2\MainMenu.class
 com\phase2\Bone.class
+com\phase2\Exit.class
 com\phase2\Game.class
 com\phase2\CharacterFactory.class
 com\phase2\KeyInput.class
