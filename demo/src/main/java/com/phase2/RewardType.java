@@ -7,4 +7,5 @@ public enum RewardType {
     APPLE(), 
     BONE(), 
     STEAK(),
+    MUSHROOM();
 }

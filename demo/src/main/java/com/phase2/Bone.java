@@ -32,7 +32,9 @@ public class Bone extends Reward {
     }
 
     public void render(Graphics g) {
-        g.drawImage(boneSprite, x, y, null);
+        if (!collected) {
+            g.drawImage(boneSprite, x, y, null);
+        }
     }
 
 }

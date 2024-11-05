@@ -36,7 +36,9 @@ public class Apple extends Reward {
     }
 
     public void render(Graphics g) {
-        g.drawImage(appleSprite, x, y, null);
+        if (!collected) {
+            g.drawImage(appleSprite, x, y, null);
+        }
     }
 
 }
