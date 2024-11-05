@@ -14,8 +14,8 @@ public abstract class Obstacle extends GameObject {
      * @param y the y-coordinate of the obstacle
      * @param type the type of obstacle (ObstacleType)
      */
-    public Obstacle(int x, int y, ObstacleType type){
-        super(x, y, ID.OBSTAClE);
+    public Obstacle(int x, int y, ID id){
+        super(x, y, id);
         this.type = type;
     }
 
