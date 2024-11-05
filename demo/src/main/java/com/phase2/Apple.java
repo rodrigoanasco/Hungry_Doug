@@ -12,8 +12,8 @@ public class Apple extends Reward {
 
     private Image appleSprite;
 
-    public Apple(int x, int y,RewardType rewardType,int rewardAmount) {
-        super(x,y, RewardType.APPLE, rewardAmount);
+    public Apple(int x, int y,RewardType rewardType) {
+        super(x,y, RewardType.APPLE, 10);
         try {
             appleSprite = ImageIO.read(getClass().getResource("/Apple.png"));
             appleSprite = appleSprite.getScaledInstance(OBJECT_SIZE[0], OBJECT_SIZE[1], Image.SCALE_DEFAULT);
