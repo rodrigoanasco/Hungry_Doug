@@ -13,7 +13,7 @@ public class Steak extends Reward {
     private Image steakSprite;
 
     public Steak(int x, int y,RewardType rewardType,int rewardAmount) {
-        super(x,y, RewardType.STEAK, 1);
+        super(x,y, RewardType.STEAK, rewardAmount);
         try {
             steakSprite = ImageIO.read(getClass().getResource("/Steak.png"));
             steakSprite = steakSprite.getScaledInstance(OBJECT_SIZE[0], OBJECT_SIZE[1], Image.SCALE_DEFAULT);
@@ -23,7 +23,7 @@ public class Steak extends Reward {
     }
     
     public Rectangle getBounds() {
-        return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
+        return new Rectangle(x,y,OBJECT_SIZE[0]-16,OBJECT_SIZE[1]-16);
     }
 
     public void tick() {
