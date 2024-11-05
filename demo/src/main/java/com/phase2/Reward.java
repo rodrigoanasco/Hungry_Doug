@@ -42,10 +42,20 @@ public abstract class Reward extends GameObject{
         return rewardAmount;
     }
 
+    /**
+     * Determines if the reward has already been collected.
+     * 
+     * @return true if the reward has been collected, false otherwise.
+     */
     public boolean isCollected() {
         return collected;
     }
 
+    /**
+     * Sets the collected status of the reward.
+     * 
+     * @param collected True if the reward has been collected, false otherwise.
+     */
     public void setCollected(boolean collected) {
         this.collected = collected;
     }

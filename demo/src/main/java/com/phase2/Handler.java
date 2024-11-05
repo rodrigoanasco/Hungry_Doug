@@ -9,14 +9,17 @@ import java.util.LinkedList;
  */
 public class Handler {
 
-    //testing
-    // private Doug doug;
-
     private Boolean debug = false;
     private Game game; //A reference to the Game Instance
+
     // list of all objects in game (Doug, enemies, food, etc)
     LinkedList<GameObject> objects = new LinkedList<GameObject >();
     
+    /**
+     * Constructs a Handler with a reference to the main game instance.
+     * 
+     * @param game The main game instance.
+     */
     public Handler(Game game){
         this.game = game;
     }
@@ -31,9 +34,15 @@ public class Handler {
         }
     }
 
+    /**
+     * Returns the main game instance associated with this handler.
+     * 
+     * @return The main Game instance.
+     */
     public Game getGameInstance(){
         return game;
     }
+
     /**
      * Renders all game objects.
      * 
@@ -65,10 +74,14 @@ public class Handler {
         this.objects.remove(object); 
     }
 
-
+    /**
+     * Enables or disables debug mode.
+     * When debug mode is enabled, hitboxes of game objects are rendered.
+     * 
+     * @param d True to enable debug mode, false to disable.
+     */
     public void setDebug(Boolean d) {
         this.debug = d;
     }
-
     
 }

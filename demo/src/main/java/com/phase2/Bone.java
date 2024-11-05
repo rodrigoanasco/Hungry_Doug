@@ -22,6 +22,11 @@ public class Bone extends Reward {
         }
     }
     
+    /**
+     * Gets the bounding rectangle of Doug for collision detection.
+     * 
+     * @return A Rectangle representing Doug's bounds.
+     */
     public Rectangle getBounds() {
         return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
     }

@@ -53,7 +53,6 @@ public class Game extends Canvas implements Runnable {
         
     // TODO if multiple levels, create attribute for numbers of enemies/rewards to generate
     // then pass to a main class?
-
         handler = new Handler(this);
         mainMenu = new MainMenu(this); //Initialize Main Menu
         winningScreen = new WinningScreen(this); // Initialize the winning screen
@@ -80,22 +79,21 @@ public class Game extends Canvas implements Runnable {
         // Add Doug to the handler
         handler.addObject(doug);
 
-        // handler.addObject(new Doug(200, 200, ID.DOUG, handler));
-        // handler.addObject(new Apple(BLOCK_SIZE[0], BLOCK_SIZE[1]));
-        // handler.addObject(new Bone(BLOCK_SIZE[0], 2*BLOCK_SIZE[1]));
-        // handler.addObject(new Bone(2*BLOCK_SIZE[0], 2*BLOCK_SIZE[1]));
-        // handler.addObject(new Steak(BLOCK_SIZE[0], 3*BLOCK_SIZE[1]));
-        // handler.addObject(new Mushroom(BLOCK_SIZE[0], 4*BLOCK_SIZE[1]));
-        // handler.addObject(new Exit(BLOCK_SIZE[0], 5*BLOCK_SIZE[1]));
-
         generateRandomObjects(10, Rat.class, handler);
         generateRandomObjects(10, Bone.class, handler);
         generateRandomObjects(5, Apple.class, handler);
         generateRandomObjects(5, Steak.class, handler);
         generateRandomObjects(5, Mushroom.class, handler);
-
     }
 
+    /**
+ * Generates a specified number of random game objects of a given type and adds them to the handler.
+ * The objects are placed at random positions within the game window.
+ * 
+ * @param count The number of objects to generate.
+ * @param objectType The class type of the game objects to create.
+ * @param handler The handler responsible for managing the game objects.
+ */
     public void generateRandomObjects(int count, Class<? extends GameObject> objectType, Handler handler) {
         r = new Random();
         
@@ -127,12 +125,19 @@ public class Game extends Canvas implements Runnable {
     }
 
     /**
-     * Changes the game state to "win"
+     * Sets the game state to indicate whether the game has been won.
+     * 
+     * @param gameWon True if the game has been won, false otherwise.
      */
     public void setGameWon(boolean gameWon){
         this.gameWon = gameWon;
     }
 
+    /**
+     * Checks if the game has been won.
+     * 
+     * @return True if the game is won, false otherwise.
+     */
     public boolean isGameWon(){
         return gameWon;
     }
@@ -272,16 +277,6 @@ public class Game extends Canvas implements Runnable {
             g2d.drawImage(bushImage, WIDTH - bushWidth - 15, y, bushWidth, bushHeight, null); // Right border with offset
         }
 
-        // int[][] mazeBushCoordinates = {
-        //     {90, HEIGHT - bushHeight - 35}, {90, HEIGHT - bushHeight * 2 - 35}, {90, HEIGHT - bushHeight * 3 - 35}, 
-        //     {90, HEIGHT - bushHeight * 4 - 35}, {90, HEIGHT - bushHeight * 5 - 35}, {120, HEIGHT - bushHeight * 5 - 35},
-        //     {150, HEIGHT - bushHeight * 5 - 35}, {180, HEIGHT - bushHeight * 5 - 35}, {210, HEIGHT - bushHeight * 5 - 35},
-        //     {240, HEIGHT - bushHeight * 5 - 35},{270, HEIGHT - bushHeight * 5 - 35},{300, HEIGHT - bushHeight * 5 - 35},
-        //     {90, HEIGHT - bushHeight * 9 - 35},{90, HEIGHT - bushHeight * 10 - 35},{90, HEIGHT - bushHeight * 11 - 35},
-        //     {90, HEIGHT - bushHeight * 12 - 35}, {120, HEIGHT - bushHeight * 12 - 35}, {150, HEIGHT - bushHeight * 12 - 35},
-        //     {180, HEIGHT - bushHeight * 12 - 35}, {120, HEIGHT - bushHeight * 9 - 35}, {150, HEIGHT - bushHeight * 9 - 35},
-        //     {180, HEIGHT - bushHeight * 9 - 35}
-        // };
         int[][] mazeBushCoordinates = {
             {90, HEIGHT - bushHeight - 35}, {90, HEIGHT - bushHeight * 2 - 35}, {90, HEIGHT - bushHeight * 3 - 35}, 
             {90, HEIGHT - bushHeight * 4 - 35}, {90, HEIGHT - bushHeight * 5 - 35}, {120, HEIGHT - bushHeight * 5 - 35},
@@ -333,7 +328,6 @@ public class Game extends Canvas implements Runnable {
             g2d.drawImage(bushImage, coord[0], coord[1], 30, 30, null);
         }
 
-
         if(paused){
             mainMenu.render(g); //Render the main menu if paused
         } 
@@ -348,20 +342,19 @@ public class Game extends Canvas implements Runnable {
             g.dispose();
             bs.show();
         }
-        // Render game objects
-        //handler.render(g2d);
-
-        // health bar render
-        //health.render(g2d);
-
-        //score.render(g2d);
 
         g.dispose();
         bs.show();
     }
 
-    // TODO javadoc
-    // prevents out of bounds movement
+    /**
+     * Clamps a variable to ensure it stays within the specified bounds.
+     * 
+     * @param var The variable to clamp.
+     * @param min The minimum value.
+     * @param max The maximum value.
+     * @return The clamped value.
+     */
     public static int clamp(int var, int min, int max){
         if (var >= max)
             return var = max;
@@ -371,10 +364,18 @@ public class Game extends Canvas implements Runnable {
             return var;
     }
 
+    /**
+     * Enables or disables debug mode for the game.
+     * 
+     * @param debug True to enable debug mode, false to disable it.
+     */
     public void debugMode(Boolean debug) {
         handler.setDebug(debug);
     }
 
+    /**
+     * Resets the game to its initial state, including health, score, and game objects.
+     */
     public void resetGame(){
         /* gameOver = false;
         health.resetHealt();
@@ -382,6 +383,11 @@ public class Game extends Canvas implements Runnable {
         initializeGameObjects(); */
     } 
 
+    /**
+     * Checks if the game is over based on the player's health.
+     * 
+     * @return True if the game is over (health is zero or below), false otherwise.
+     */
     private boolean checkGameOver() {
         if (Health.HEALTH <= 0) {
             gameOver = true;
@@ -391,8 +397,6 @@ public class Game extends Canvas implements Runnable {
         }
         else{return false;}
     }
-
-    
 
     public static void main(String[] args) {
         new Game();

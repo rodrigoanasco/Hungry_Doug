@@ -39,7 +39,9 @@ public class MainMenu implements KeyListener {
     }
 
     /**
-     * Renders the main menu with selectable buttons and instructions to press "Enter."
+     * Renders the main menu with selectable buttons.
+     * 
+     * @param g The Graphics object used for rendering.
      */
     private void renderMenu(Graphics g) {
         g.setColor(Color.BLACK);
@@ -63,7 +65,9 @@ public class MainMenu implements KeyListener {
     }
 
     /**
-     * Renders the instructions screen.
+     * Renders the instructions screen with gameplay instructions.
+     * 
+     * @param g The Graphics object used for rendering.
      */
     private void renderInstructions(Graphics g) {
         g.setColor(Color.BLACK);
@@ -84,7 +88,12 @@ public class MainMenu implements KeyListener {
     }
 
     /**
-     * Renders individual buttons, highlighting the selected button.
+     * Renders an individual button with optional highlighting if selected.
+     * 
+     * @param g The Graphics object used for rendering.
+     * @param text The text to display on the button.
+     * @param button The rectangle representing the button's position and size.
+     * @param selected True if the button is currently selected, false otherwise.
      */
     private void renderButton(Graphics g, String text, Rectangle button, boolean selected) {
         g.setColor(selected ? Color.YELLOW : Color.WHITE); // Highlight selected button

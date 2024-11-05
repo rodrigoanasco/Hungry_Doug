@@ -1,6 +1,5 @@
 package com.phase2;
 
-// import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -19,11 +18,7 @@ public class Doug extends GameObject{
 
     Handler handler;
 
-    //testing
     private static Doug instance;
-
-    // protected int health;
-    // protected int score;
 
     private BufferedImage[] idleSprites;
     private BufferedImage[] walkSprites;
@@ -38,8 +33,6 @@ public class Doug extends GameObject{
 
     private static final double SCALE_FACTOR = 1.2; // Scale Doug to be bigger/smaller
 
-    int health = 100;
-    int score = 0;
     /**
      * Initializes Doug's position, ID, health, and score.
      * Sets default velocity for testing purposes.
@@ -50,12 +43,7 @@ public class Doug extends GameObject{
      */
     public Doug(int x, int y, ID id, Handler handler){
         super(x,y,id);
-
-
         this.handler = handler;
-
-        this.health = 100;
-        this.score = 0;
 
         try {
             // Gets sprite images from resources folder
@@ -79,15 +67,22 @@ public class Doug extends GameObject{
             e.printStackTrace();
         }
     
-
         // Used for testing only
         velX = 0;
         velY = 0;
         //
     }
 
-    //testing
-    // Public method to get the single instance of Doug
+    /**
+     * Returns the singleton instance of Doug, initializing it if necessary.
+     * This method is used to create Doug with specific initial parameters.
+     * 
+     * @param x The initial x-coordinate of Doug's position.
+     * @param y The initial y-coordinate of Doug's position.
+     * @param id The ID that identifies this GameObject as Doug.
+     * @param handler The handler that manages game objects.
+     * @return The singleton instance of Doug.
+     */
      public static Doug getInstance(int x, int y, ID id, Handler handler) {
         if (instance == null) {
             instance = new Doug(x, y, id, handler);
@@ -95,16 +90,25 @@ public class Doug extends GameObject{
         return instance;
     }
 
-        // Overloaded method to get the instance without parameters after initialization
-        public static Doug getInstance() {
-            if (instance == null) {
-                throw new IllegalStateException("Doug has not been initialized. Call getInstance(x, y, id, handler) first.");
-            }
-            return instance;
+    /**
+     * Returns the singleton instance of Doug. 
+     * If Doug has not been initialized, an exception is thrown.
+     * 
+     * @return The singleton instance of Doug.
+     * @throws IllegalStateException If Doug has not been initialized.
+     */
+    public static Doug getInstance() {
+        if (instance == null) {
+            throw new IllegalStateException("Doug has not been initialized. Call getInstance(x, y, id, handler) first.");
         }
-
-    //
+        return instance;
+    }
     
+    /**
+     * Gets the bounding rectangle of Doug for collision detection.
+     * 
+     * @return A Rectangle representing Doug's bounds.
+     */
     public Rectangle getBounds() {
         return new Rectangle(x,y,48,48);
     }
@@ -112,7 +116,6 @@ public class Doug extends GameObject{
     /**
      * Updates Doug's state for each tick of the game loop.
      */
-    @Override
     public void tick(){
 
         boolean wasMoving = moving;
@@ -159,6 +162,10 @@ public class Doug extends GameObject{
        collision(); 
     }
 
+    /**
+     * Handles collision detection for Doug. 
+     * Checks for interactions with other game objects and updates health, score, or game state accordingly.
+     */
     private void collision() {
         for (int i = 0; i < handler.objects.size(); i++) {
             GameObject temp = handler.objects.get(i);
@@ -223,87 +230,27 @@ public class Doug extends GameObject{
     @Override
     public void render(Graphics g){
 
-        // used for testing only
-        // g.setColor(Color.GREEN);
-        // g.fillRect(x, y, 48, 48);
-        //
-        // renderHitBox(g,48,48);
-    Graphics2D g2d = (Graphics2D) g;
+        Graphics2D g2d = (Graphics2D) g;
 
-    // Determine which sprite image to draw for Doug (Idle or Walking)
-    BufferedImage spriteToDraw = moving ? walkSprites[currentFrame] : idleSprites[currentFrame];
+        // Determine which sprite image to draw for Doug (Idle or Walking)
+        BufferedImage spriteToDraw = moving ? walkSprites[currentFrame] : idleSprites[currentFrame];
 
-    // Scale Doug according to SCALE_FACTOR
-    int scaledWidth = (int) (spriteToDraw.getWidth() * SCALE_FACTOR);
-    int scaledHeight = (int) (spriteToDraw.getHeight() * SCALE_FACTOR);
+        // Scale Doug according to SCALE_FACTOR
+        int scaledWidth = (int) (spriteToDraw.getWidth() * SCALE_FACTOR);
+        int scaledHeight = (int) (spriteToDraw.getHeight() * SCALE_FACTOR);
 
-    if (facingRight) {
-        // Draw normally if facing right
-        g2d.drawImage(spriteToDraw, x, y-16, scaledWidth, scaledHeight, null);
-    } 
-    else {
-        // Flip horizontally if facing left
-        AffineTransform transform = new AffineTransform();
-        transform.translate(x + scaledWidth, y-16); // Move to the correct position
-        transform.scale(-SCALE_FACTOR, SCALE_FACTOR); // Flip horizontally
-        g2d.drawImage(spriteToDraw, transform, null);
-    }
+        if (facingRight) {
+            // Draw normally if facing right
+            g2d.drawImage(spriteToDraw, x, y-16, scaledWidth, scaledHeight, null);
+        } 
+        else {
+            // Flip horizontally if facing left
+            AffineTransform transform = new AffineTransform();
+            transform.translate(x + scaledWidth, y-16); // Move to the correct position
+            transform.scale(-SCALE_FACTOR, SCALE_FACTOR); // Flip horizontally
+            g2d.drawImage(spriteToDraw, transform, null);
+        }
 
     }
-
-    // /**
-    //  * Gets Doug's current score.
-    //  *
-    //  * @return The score Doug has accumulated.
-    //  */
-    public int getScore(){
-        return score;
-    }
-
-    // /**
-    //  * Sets Doug's score.
-    //  *
-    //  * @param score The score value to set for Doug.
-    //  */
-    public void setScore(int score){
-        this.score = score;
-    }
-
-    // /**
-    //  * Add to Doug's score.
-    //  *
-    //  * @param score The score value to add for Doug.
-    //  */
-    // public void addScore(int score){
-    //     this.score += score;
-    // }
-
-    // /**
-    //  * Subtract to Doug's score.
-    //  *
-    //  * @param score The score value to subtract for Doug.
-    //  */
-    // public void subScore(int score){
-    //     this.score -= score;
-    // }
-
-
-    //  /**
-    //  * Gets Doug's current health level.
-    //  *
-    //  * @return The health level of Doug.
-    //  */
-    public int getHealth(){
-         return health;
-    }
-
-    // /**
-    //  * Sets Doug's health level.
-    //  *
-    //  * @param health The health value to set for Doug.
-    //  */
-    // public void setHealth(int health){
-    //     this.health = health;
-    // }
 
 }

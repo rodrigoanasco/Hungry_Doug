@@ -46,8 +46,6 @@ public abstract class MovingEnemy extends GameObject{
     public void tick() {
         x = Game.clamp(x,0,Game.WIDTH - 30);
         y = Game.clamp(y,0,Game.HEIGHT - 30);
-
-
     }
 
 }

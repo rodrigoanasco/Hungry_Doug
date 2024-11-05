@@ -21,16 +21,18 @@ public class Apple extends Reward {
         }
     }
     
+    /**
+     * Gets the bounding rectangle of Doug for collision detection.
+     * 
+     * @return A Rectangle representing Doug's bounds.
+     */
     public Rectangle getBounds() {
         return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
 
     }
 
     public void tick() {
-        // TODO account for borders
-        // atttribute for horizontal/vertical movement
-        if(y < 0 || y >= Game.HEIGHT - 100) velY *= -1;
-        if(x < 0 || x >= Game.WIDTH - 100) velX *= -1;
+
     }
 
     public void render(Graphics g) {

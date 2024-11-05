@@ -10,13 +10,17 @@ import java.awt.Rectangle;
  * @param id the type of object the object should be treated as
 */
 public class Cat extends MovingEnemy {
-    
-    // TODO make penalty points equal to number of points Doug has
+    //TODO Cat hasn't been utilized yet
+
     public Cat(int x, int y) {
         super(x,y, EnemyType.CAT, Health.HEALTH);
-
     }
 
+    /**
+     * Gets the bounding rectangle of Doug for collision detection.
+     * 
+     * @return A Rectangle representing Doug's bounds.
+     */
     public Rectangle getBounds() {
         return new Rectangle(x,y,32,32);
     }
