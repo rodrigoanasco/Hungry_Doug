@@ -128,8 +128,8 @@ public class Doug extends GameObject{
         }
 
         // Doug can't move out oof bounds
-        x = Game.clamp(x,0,Game.WIDTH - 100);
-        y = Game.clamp(y,0,Game.HEIGHT - 100);
+        x = Game.clamp(x,0,Game.WIDTH -75);
+        y = Game.clamp(y,0,Game.HEIGHT - 30);
 
        collision(); 
     }

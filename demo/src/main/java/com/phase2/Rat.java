@@ -67,7 +67,7 @@ public class Rat extends MovingEnemy {
     @Override
     public void tick() {
         x += velX;
-        y += velY;
+        // y += velY;
 
         // TODO account for borders
         // atttribute for horizontal/vertical movement

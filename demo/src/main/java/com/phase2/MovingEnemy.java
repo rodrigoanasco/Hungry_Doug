@@ -40,6 +40,11 @@ public abstract class MovingEnemy extends GameObject{
         return penaltyPoints;
     }
 
+    public void tick() {
+        x = Game.clamp(x,0,Game.WIDTH - 30);
+        y = Game.clamp(y,0,Game.HEIGHT - 30);
+    }
+
     /**
      * Abstract method to apply a penalty to the player character (Doug).
      * 

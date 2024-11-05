@@ -67,9 +67,9 @@ public class Game extends Canvas implements Runnable {
         // Used for testing only
         handler.addObject(new Doug(200, 200, ID.DOUG, handler));
         handler.addObject(new Apple(BLOCK_SIZE[0], BLOCK_SIZE[1], RewardType.APPLE));
-        handler.addObject(new Bone(BLOCK_SIZE[0], 2*BLOCK_SIZE[1], RewardType.BONE,1));
-        handler.addObject(new Steak(BLOCK_SIZE[0], 3*BLOCK_SIZE[1], RewardType.STEAK,5));
-        handler.addObject(new Mushroom(BLOCK_SIZE[0], 4*BLOCK_SIZE[1], RewardType.MUSHROOM,5));
+        handler.addObject(new Bone(BLOCK_SIZE[0], 2*BLOCK_SIZE[1], RewardType.BONE));
+        handler.addObject(new Steak(BLOCK_SIZE[0], 3*BLOCK_SIZE[1], RewardType.STEAK));
+        handler.addObject(new Mushroom(BLOCK_SIZE[0], 4*BLOCK_SIZE[1], RewardType.MUSHROOM));
         //
 
         // TODO for random movement testing only 
@@ -188,7 +188,7 @@ public class Game extends Canvas implements Runnable {
 
         // Manually place bushes along the bottom border, excluding the corners
         for (int x = bushWidth; x <= WIDTH - bushWidth - 15; x += bushWidth) {
-            g2d.drawImage(bushImage, x, HEIGHT - bushHeight - 35, bushWidth, bushHeight, null); // Bottom border with offset
+            g2d.drawImage(bushImage, x, HEIGHT - bushHeight - 25, bushWidth, bushHeight, null); // Bottom border with offset
         }
 
         // Manually place bushes along the left border, excluding the corners
