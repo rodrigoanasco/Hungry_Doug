@@ -23,6 +23,7 @@ public class Rat extends MovingEnemy {
     private int frameCount = 0;
 
     private boolean moving = false;
+    private boolean facingRight = true;
 
     private static final double SCALE_FACTOR = 1.25;
 
@@ -72,6 +73,7 @@ public class Rat extends MovingEnemy {
             // Simple movement logic: move horizontally or vertically toward Doug
             if (x != doug.getX()) {
                 velX = (x < doug.getX()) ? 1 : -1;
+                facingRight = (x < doug.getX()) ? true : false;
                 velY = 0; // Only move horizontally
             } else if (y != doug.getY()) {
                 velX = 0;
@@ -104,7 +106,18 @@ public class Rat extends MovingEnemy {
         int scaledHeight = (int) (spriteToDraw.getHeight() * SCALE_FACTOR);
 
         // Draw the sprite at the rat's current position
-        g2d.drawImage(spriteToDraw, x, y-16, scaledWidth, scaledHeight, null);
+        if (facingRight) {
+            // Draw normally if facing right
+            g2d.drawImage(spriteToDraw, x, y-16, scaledWidth, scaledHeight, null);
+        } 
+        else {
+            // Flip horizontally if facing left
+            AffineTransform transform = new AffineTransform();
+            transform.translate(x + scaledWidth, y-16); // Move to the correct position
+            transform.scale(-SCALE_FACTOR, SCALE_FACTOR); // Flip horizontally
+            g2d.drawImage(spriteToDraw, transform, null);
+        }
+        //g2d.drawImage(spriteToDraw, x, y-16, scaledWidth, scaledHeight, null);
 
         // Update frame for animation
         frameCount++;
