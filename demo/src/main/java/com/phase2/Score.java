@@ -15,4 +15,8 @@ public class Score {
         g.setColor(Color.BLACK);
         g.drawString("SCORE: " + SCORE, 25, 75); // Adjust the position
     }
+
+    public static int getScore() {
+        return SCORE;
+    }
 }
