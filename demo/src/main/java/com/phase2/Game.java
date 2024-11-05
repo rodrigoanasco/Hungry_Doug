@@ -20,6 +20,7 @@ public class Game extends Canvas implements Runnable {
 
     public static final int WIDTH = 1300, HEIGHT = 750; // sets window size
     public static final int BLOCK_SIZE[] = {50,50};
+    private Boolean debug = false;
 
     private Thread thread; 
     private boolean running = false;
@@ -140,6 +141,7 @@ public class Game extends Canvas implements Runnable {
      * Updates the game state for each game tick.
      */
     private void tick(){
+        if (debug) handler.setDebug(true);
         handler.tick();
         health.tick();
         score.tick();
@@ -216,6 +218,8 @@ public class Game extends Canvas implements Runnable {
             g2d.drawImage(bushImage, coord[0], coord[1], 30, 30, null);
         }
 
+
+
         // Render game objects
         handler.render(g2d);
 
@@ -237,6 +241,10 @@ public class Game extends Canvas implements Runnable {
             return var = min;
         else
             return var;
+    }
+
+    public void debugMode(Boolean debug) {
+        this.debug = debug;
     }
 
     public static void main(String[] args) {

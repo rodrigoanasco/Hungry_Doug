@@ -48,8 +48,10 @@ public abstract class GameObject {
      * render hitbox for testing
      * @param g the Graphics object used for rendering
      */
-    public void renderHitBox(Graphics g, int width, int height) {
-
+    public void renderHitBox(Graphics g) {
+        Rectangle hitbox = this.getBounds();
+        int width = (int)hitbox.getWidth();
+        int height = (int)hitbox.getHeight();
         g.setColor(Color.GREEN);
         g.drawRect(x, y, width, height);
     }

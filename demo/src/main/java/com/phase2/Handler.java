@@ -9,6 +9,7 @@ import java.util.LinkedList;
  */
 public class Handler {
 
+    private Boolean debug = false;
     // list of all objects in game (Doug, enemies, food, etc)
     LinkedList<GameObject> objects = new LinkedList<GameObject >();
     
@@ -31,6 +32,7 @@ public class Handler {
     public void render(Graphics g){
         for(int i = 0; i < objects.size(); i++){
             GameObject tempObject = objects.get(i); 
+            if (debug) tempObject.renderHitBox(g);
             tempObject.render(g);
         }
     }
@@ -53,5 +55,8 @@ public class Handler {
         this.objects.remove(object); 
     }
 
-  
+
+    public void setDebug(Boolean d) {
+        this.debug = d;
+    }
 }
