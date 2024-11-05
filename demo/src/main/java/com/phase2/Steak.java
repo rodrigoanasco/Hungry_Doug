@@ -32,6 +32,7 @@ public class Steak extends Reward {
     }
 
     public void render(Graphics g) {
+        // renderHitBox(g,OBJECT_SIZE[0],OBJECT_SIZE[1]);
         if (!collected) {
             g.drawImage(steakSprite, x, y, null);
         }
