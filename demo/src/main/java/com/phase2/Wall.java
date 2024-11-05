@@ -8,7 +8,6 @@ public class Wall extends Obstacle {
         super(x, y, ObstacleType.WALL);
     }
 
-    @Override
     public boolean blockMovement(Doug doug) {
         if (this.getX() == doug.getX() && 
             this.getY() == doug.getY()) {

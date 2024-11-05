@@ -19,8 +19,8 @@ public class Doug extends GameObject{
 
     Handler handler;
 
-    protected int health;
-    protected int score;
+    // protected int health;
+    // protected int score;
 
     private BufferedImage[] idleSprites;
     private BufferedImage[] walkSprites;
@@ -49,8 +49,8 @@ public class Doug extends GameObject{
 
         this.handler = handler;
 
-        this.health = 100;
-        this.score = 0;
+        // this.health = 100;
+        // this.score = 0;
 
         try {
             // Gets sprite images from resources folder
@@ -215,59 +215,59 @@ public class Doug extends GameObject{
 
     }
 
-    /**
-     * Gets Doug's current score.
-     *
-     * @return The score Doug has accumulated.
-     */
-    public int getScore(){
-        return score;
-    }
+    // /**
+    //  * Gets Doug's current score.
+    //  *
+    //  * @return The score Doug has accumulated.
+    //  */
+    // public int getScore(){
+    //     return score;
+    // }
 
-    /**
-     * Sets Doug's score.
-     *
-     * @param score The score value to set for Doug.
-     */
-    public void setScore(int score){
-        this.score = score;
-    }
+    // /**
+    //  * Sets Doug's score.
+    //  *
+    //  * @param score The score value to set for Doug.
+    //  */
+    // public void setScore(int score){
+    //     this.score = score;
+    // }
 
-    /**
-     * Add to Doug's score.
-     *
-     * @param score The score value to add for Doug.
-     */
-    public void addScore(int score){
-        this.score += score;
-    }
+    // /**
+    //  * Add to Doug's score.
+    //  *
+    //  * @param score The score value to add for Doug.
+    //  */
+    // public void addScore(int score){
+    //     this.score += score;
+    // }
 
-    /**
-     * Subtract to Doug's score.
-     *
-     * @param score The score value to subtract for Doug.
-     */
-    public void subScore(int score){
-        this.score -= score;
-    }
+    // /**
+    //  * Subtract to Doug's score.
+    //  *
+    //  * @param score The score value to subtract for Doug.
+    //  */
+    // public void subScore(int score){
+    //     this.score -= score;
+    // }
 
 
-     /**
-     * Gets Doug's current health level.
-     *
-     * @return The health level of Doug.
-     */
-    public int getHealth(){
-        return health;
-    }
+    //  /**
+    //  * Gets Doug's current health level.
+    //  *
+    //  * @return The health level of Doug.
+    //  */
+    // public int getHealth(){
+    //     return health;
+    // }
 
-    /**
-     * Sets Doug's health level.
-     *
-     * @param health The health value to set for Doug.
-     */
-    public void setHealth(int health){
-        this.health = health;
-    }
+    // /**
+    //  * Sets Doug's health level.
+    //  *
+    //  * @param health The health value to set for Doug.
+    //  */
+    // public void setHealth(int health){
+    //     this.health = health;
+    // }
 
 }

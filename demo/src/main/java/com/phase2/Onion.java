@@ -24,11 +24,7 @@ public class Onion extends Punishment {
      * How the object should look like
      */
     public void render(Graphics g) {
+        //render graphics
+    }
 
-    }
-    @Override
-    public void applyPenalty(Doug doug) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'applyPenalty'");
-    }
 }

@@ -34,10 +34,4 @@ public class Cat extends MovingEnemy {
     public void render(Graphics g) {
 
     }
-    
-    @Override
-    public void applyPenalty(Doug doug) {
-        // TODO Auto-generated method stub
-       
-    }
 }

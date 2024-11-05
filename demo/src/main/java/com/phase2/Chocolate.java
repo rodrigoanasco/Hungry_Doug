@@ -35,9 +35,5 @@ public class Chocolate extends Punishment {
 
 
     }
-    @Override
-    public void applyPenalty(Doug doug) {
-        // TODO Auto-generated method stub
-    }
 
 }
