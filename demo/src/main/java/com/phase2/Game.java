@@ -7,6 +7,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -19,6 +21,8 @@ public class Game extends Canvas implements Runnable {
 
     public static final int WIDTH = 1300, HEIGHT = 750; // sets window size
     public static final int BLOCK_SIZE[] = {50,50};
+
+    public static final int GRID_SIZE = 1000;
 
     private Thread thread; 
     private boolean running = false;
@@ -42,7 +46,33 @@ public class Game extends Canvas implements Runnable {
     private BufferedImage background;
     private BufferedImage bushImage; 
 
+    // Define grid as a map of cells containing game objects
+    public static HashMap<String, ArrayList<GameObject>> grid = new HashMap<>();
 
+    public static int getCellIndex(int coordinate) {
+        return coordinate / GRID_SIZE;
+    }
+
+    // Method to add an object to the grid
+    public static void addToGrid(GameObject object) {
+        int cellX = getCellIndex(object.getX());
+        int cellY = getCellIndex(object.getY());
+        String key = cellX + "," + cellY;
+
+        grid.putIfAbsent(key, new ArrayList<>());
+        grid.get(key).add(object);
+    }
+
+    // Method to remove an object from the grid
+    public static void removeFromGrid(GameObject object) {
+        int cellX = getCellIndex(object.getX());
+        int cellY = getCellIndex(object.getY());
+        String key = cellX + "," + cellY;
+
+        if (grid.containsKey(key)) {
+            grid.get(key).remove(object);
+        }
+    }
     // private static final double BUSH_SCALE_FACTOR = 0.025;
 
     /**
@@ -95,6 +125,113 @@ public class Game extends Canvas implements Runnable {
         generateRandomObjects(5, Mushroom.class, handler);
         handler.addObject(new Exit(BLOCK_SIZE[0], 5*BLOCK_SIZE[1]));
 
+        
+        // Adding bushes as obstacles
+        int bushWidth = 30;
+        int bushHeight = 30;
+        
+        // Adding bushes in each corner
+        Bush bushTopLeft = new Bush(0, 0);
+        handler.addObject(bushTopLeft);
+        addToGrid(bushTopLeft);
+        
+        Bush bushTopRight = new Bush(Game.WIDTH - bushWidth - 10, 0);
+        handler.addObject(bushTopRight);
+        addToGrid(bushTopRight);
+        
+        Bush bushBottomLeft = new Bush(0, Game.HEIGHT - bushHeight - 35);
+        handler.addObject(bushBottomLeft);
+        addToGrid(bushBottomLeft);
+        
+        Bush bushBottomRight = new Bush(Game.WIDTH - bushWidth - 15, Game.HEIGHT - bushHeight - 35);
+        handler.addObject(bushBottomRight);
+        addToGrid(bushBottomRight);
+        
+        // Adding bushes along the top border, excluding the corners
+        for (int x = bushWidth; x <= Game.WIDTH - bushWidth; x += bushWidth) {
+            Bush bush = new Bush(x, 0);
+            handler.addObject(bush);
+            addToGrid(bush);
+        }
+        
+        // Adding bushes along the bottom border, excluding the corners
+        for (int x = bushWidth; x <= Game.WIDTH - bushWidth - 15; x += bushWidth) {
+            Bush bush = new Bush(x, Game.HEIGHT - bushHeight - 35);
+            handler.addObject(bush);
+            addToGrid(bush);
+        }
+        
+        // Adding bushes along the left border, excluding the corners
+        for (int y = bushHeight; y <= Game.HEIGHT - bushHeight; y += bushHeight) {
+            Bush bush = new Bush(0, y);
+            handler.addObject(bush);
+            addToGrid(bush);
+        }
+        
+        // Adding bushes along the right border, excluding the corners
+        for (int y = bushHeight; y <= Game.HEIGHT - bushHeight - 35; y += bushHeight) {
+            Bush bush = new Bush(Game.WIDTH - bushWidth - 15, y);
+            handler.addObject(bush);
+            addToGrid(bush);
+        }
+        
+        // Adding maze bushes from maze coordinates
+        int[][] mazeBushCoordinates = {
+            {90, HEIGHT - bushHeight - 35}, {90, HEIGHT - bushHeight * 2 - 35}, {90, HEIGHT - bushHeight * 3 - 35}, 
+            {90, HEIGHT - bushHeight * 4 - 35}, {90, HEIGHT - bushHeight * 5 - 35}, {120, HEIGHT - bushHeight * 5 - 35},
+            {150, HEIGHT - bushHeight * 5 - 35}, {180, HEIGHT - bushHeight * 5 - 35}, {210, HEIGHT - bushHeight * 5 - 35},
+            {240, HEIGHT - bushHeight * 5 - 35}, {270, HEIGHT - bushHeight * 5 - 35}, {300, HEIGHT - bushHeight * 5 - 35},
+            {90, HEIGHT - bushHeight * 9 - 35}, {90, HEIGHT - bushHeight * 10 - 35}, {90, HEIGHT - bushHeight * 11 - 35},
+
+            // little box on right
+            {90, HEIGHT - bushHeight * 13 - 35}, {120, HEIGHT - bushHeight * 13 - 35}, {150, HEIGHT - bushHeight * 13 - 35},
+            {180, HEIGHT - bushHeight * 13 - 35}, {120, HEIGHT - bushHeight * 9 - 35}, {150, HEIGHT - bushHeight * 9 - 35},
+            {180, HEIGHT - bushHeight * 9 - 35}, {90, HEIGHT - bushHeight * 12 - 35},
+
+            {210, HEIGHT - bushHeight * 9 - 35}, {240, HEIGHT - bushHeight * 9 - 35}, {270, HEIGHT - bushHeight * 9 - 35},
+            {300, HEIGHT - bushHeight * 9 - 35},{330, HEIGHT - bushHeight * 9 - 35}, {360, HEIGHT - bushHeight * 9 - 35},
+            {390, HEIGHT - bushHeight * 9 - 35}, {420, HEIGHT - bushHeight * 9 - 35}, {510, HEIGHT - bushHeight * 9 - 35},
+            {540, HEIGHT - bushHeight * 9 - 35}, {570, HEIGHT - bushHeight * 9 - 35}, {600, HEIGHT - bushHeight * 9 - 35},
+            {630, HEIGHT - bushHeight * 9 - 35}, {660, HEIGHT - bushHeight * 9 - 35}, {690, HEIGHT - bushHeight * 9 - 35},
+            {690, HEIGHT - bushHeight * 8 - 35}, {690, HEIGHT - bushHeight * 7 - 35}, {690, HEIGHT - bushHeight * 6 - 35},
+            {690, HEIGHT - bushHeight * 5 - 35}, {720, HEIGHT - bushHeight * 9 - 35}, {750, HEIGHT - bushHeight * 9 - 35},
+            {780, HEIGHT - bushHeight * 9 - 35}, {810, HEIGHT - bushHeight * 9 - 35}, {840, HEIGHT - bushHeight * 9 - 35},
+            {870, HEIGHT - bushHeight * 9 - 35}, {870, HEIGHT - bushHeight * 10 - 35},{870, HEIGHT - bushHeight * 11 - 35},
+            {870, HEIGHT - bushHeight * 12 - 35}, {870, HEIGHT - bushHeight * 13 - 35}, {870, HEIGHT - bushHeight * 14 - 35},
+            {870, HEIGHT - bushHeight * 15 - 35}, {870, HEIGHT - bushHeight * 16 - 35}, {870, HEIGHT - bushHeight * 17 - 35},
+            {870, HEIGHT - bushHeight * 18 - 35}, {870, HEIGHT - bushHeight * 19 - 35}, {840, HEIGHT - bushHeight * 19 - 35},
+            {810, HEIGHT - bushHeight * 19 - 35}, {780, HEIGHT - bushHeight * 19 - 35}, {750, HEIGHT - bushHeight * 19 - 35},
+            {720, HEIGHT - bushHeight * 19 - 35}, {690, HEIGHT - bushHeight * 19 - 35},
+            {990, HEIGHT - bushHeight * 19 - 35}, {1020, HEIGHT - bushHeight * 19 - 35}, {1050, HEIGHT - bushHeight * 19 - 35},
+            {1080, HEIGHT - bushHeight * 19 - 35}, {1110, HEIGHT - bushHeight * 19 - 35}, {1140, HEIGHT - bushHeight * 19 - 35},
+            {990, HEIGHT - bushHeight * 18 - 35}, {990, HEIGHT - bushHeight * 17 - 35}, {990, HEIGHT - bushHeight * 16 - 35},
+            {990, HEIGHT - bushHeight * 15 - 35}, {1140, HEIGHT - bushHeight * 18 - 35}, {1140, HEIGHT - bushHeight * 17 - 35},
+            {1140, HEIGHT - bushHeight * 16 - 35}, {1140, HEIGHT - bushHeight * 15 - 35}, {1140, HEIGHT - bushHeight * 11 - 35},
+            {1140, HEIGHT - bushHeight * 10 - 35}, {1140, HEIGHT - bushHeight * 9 - 35}, {1140, HEIGHT - bushHeight * 8 - 35},
+            {1140, HEIGHT - bushHeight * 7 - 35}, {1140, HEIGHT - bushHeight * 6 - 35}, {990, HEIGHT - bushHeight * 11 - 35},
+            {990, HEIGHT - bushHeight * 10 - 35}, {990, HEIGHT - bushHeight * 9 - 35}, {990, HEIGHT - bushHeight * 8 - 35},
+            {990, HEIGHT - bushHeight * 7 - 35}, {990, HEIGHT - bushHeight * 6 - 35}, {1020, HEIGHT - bushHeight * 6 - 35},
+            {1050, HEIGHT - bushHeight * 6 - 35}, {1080, HEIGHT - bushHeight * 6 - 35}, {1110, HEIGHT - bushHeight * 6 - 35},
+            {1170, HEIGHT - bushHeight * 6 - 35}, {1200, HEIGHT - bushHeight * 6 - 35}, {1230, HEIGHT - bushHeight * 6 - 35},
+
+
+
+            {210, HEIGHT - bushHeight * 13 - 35}, {240, HEIGHT - bushHeight * 13 - 35}, {270, HEIGHT - bushHeight * 13 - 35},
+            {270, HEIGHT - bushHeight * 14 - 35}, {270, HEIGHT - bushHeight * 14 - 35}, {270, HEIGHT - bushHeight * 15 - 35},
+            {270, HEIGHT - bushHeight * 16 - 35}, {270, HEIGHT - bushHeight * 17 - 35}, {270, HEIGHT - bushHeight * 18 - 35},
+            {270, HEIGHT - bushHeight * 19 - 35}, {300, HEIGHT - bushHeight * 19 - 35}, {330, HEIGHT - bushHeight * 19 - 35},
+            {360, HEIGHT - bushHeight * 19 - 35}, {390, HEIGHT - bushHeight * 19 - 35}, {420, HEIGHT - bushHeight * 19 - 35},
+            {450, HEIGHT - bushHeight * 19 - 35}, {480, HEIGHT - bushHeight * 19 - 35}, {510, HEIGHT - bushHeight * 19 - 35},
+            {600, HEIGHT - bushHeight * 19 - 35}, {630, HEIGHT - bushHeight * 19 - 35}, {660, HEIGHT - bushHeight * 19 - 35}
+        };
+        
+        for (int[] coord : mazeBushCoordinates) {
+            Bush bush = new Bush(coord[0], coord[1]);
+            handler.addObject(bush);
+            addToGrid(bush);
+        }
+
+         
     }
 
     public void generateRandomObjects(int count, Class<? extends GameObject> objectType, Handler handler) {
@@ -242,36 +379,57 @@ public class Game extends Canvas implements Runnable {
             g.setColor(Color.GREEN);
             g.fillRect(0, 0, WIDTH, HEIGHT);
         }
-
-        // Bush dimensions
+        /* 
+        // Adding bushes as obstacles
         int bushWidth = 30;
         int bushHeight = 30;
-
-        // Manually place bushes in each corner
-        g2d.drawImage(bushImage, 0, 0, bushWidth, bushHeight, null); // Top-left corner
-        g2d.drawImage(bushImage, WIDTH - bushWidth - 10, 0, bushWidth, bushHeight, null); // Top-right corner with slight offset
-        g2d.drawImage(bushImage, 0, HEIGHT - bushHeight - 35, bushWidth, bushHeight, null); // Bottom-left corner with offset
-        g2d.drawImage(bushImage, WIDTH - bushWidth - 15, HEIGHT - bushHeight - 35, bushWidth, bushHeight, null); // Bottom-right corner with offset
-
-        // Manually place bushes along the top border, excluding the corners
-        for (int x = bushWidth; x <= WIDTH - bushWidth; x += bushWidth) {
-            g2d.drawImage(bushImage, x, 0, bushWidth, bushHeight, null); // Top border
+        
+        // Adding bushes in each corner
+        Bush bushTopLeft = new Bush(0, 0);
+        handler.addObject(bushTopLeft);
+        addToGrid(bushTopLeft);
+        
+        Bush bushTopRight = new Bush(Game.WIDTH - bushWidth - 10, 0);
+        handler.addObject(bushTopRight);
+        addToGrid(bushTopRight);
+        
+        Bush bushBottomLeft = new Bush(0, Game.HEIGHT - bushHeight - 35);
+        handler.addObject(bushBottomLeft);
+        addToGrid(bushBottomLeft);
+        
+        Bush bushBottomRight = new Bush(Game.WIDTH - bushWidth - 15, Game.HEIGHT - bushHeight - 35);
+        handler.addObject(bushBottomRight);
+        addToGrid(bushBottomRight);
+        
+        // Adding bushes along the top border, excluding the corners
+        for (int x = bushWidth; x <= Game.WIDTH - bushWidth; x += bushWidth) {
+            Bush bush = new Bush(x, 0);
+            handler.addObject(bush);
+            addToGrid(bush);
         }
-
-        // Manually place bushes along the bottom border, excluding the corners
-        for (int x = bushWidth; x <= WIDTH - bushWidth - 15; x += bushWidth) {
-            g2d.drawImage(bushImage, x, HEIGHT - bushHeight - 25, bushWidth, bushHeight, null); // Bottom border with offset
+        
+        // Adding bushes along the bottom border, excluding the corners
+        for (int x = bushWidth; x <= Game.WIDTH - bushWidth - 15; x += bushWidth) {
+            Bush bush = new Bush(x, Game.HEIGHT - bushHeight - 35);
+            handler.addObject(bush);
+            addToGrid(bush);
         }
-
-        // Manually place bushes along the left border, excluding the corners
-        for (int y = bushHeight; y <= HEIGHT - bushHeight; y += bushHeight) {
-            g2d.drawImage(bushImage, 0, y, bushWidth, bushHeight, null); // Left border
+        
+        // Adding bushes along the left border, excluding the corners
+        for (int y = bushHeight; y <= Game.HEIGHT - bushHeight; y += bushHeight) {
+            Bush bush = new Bush(0, y);
+            handler.addObject(bush);
+            addToGrid(bush);
         }
-
-        // Manually place bushes along the right border, excluding the corners
-        for (int y = bushHeight; y <= HEIGHT - bushHeight - 35; y += bushHeight) {
-            g2d.drawImage(bushImage, WIDTH - bushWidth - 15, y, bushWidth, bushHeight, null); // Right border with offset
+        
+        // Adding bushes along the right border, excluding the corners
+        for (int y = bushHeight; y <= Game.HEIGHT - bushHeight - 35; y += bushHeight) {
+            Bush bush = new Bush(Game.WIDTH - bushWidth - 15, y);
+            handler.addObject(bush);
+            addToGrid(bush);
         }
+        
+        // Adding maze bushes from maze coordinates
 
         // int[][] mazeBushCoordinates = {
         //     {90, HEIGHT - bushHeight - 35}, {90, HEIGHT - bushHeight * 2 - 35}, {90, HEIGHT - bushHeight * 3 - 35}, 
@@ -289,52 +447,18 @@ public class Game extends Canvas implements Runnable {
             {150, HEIGHT - bushHeight * 5 - 35}, {180, HEIGHT - bushHeight * 5 - 35}, {210, HEIGHT - bushHeight * 5 - 35},
             {240, HEIGHT - bushHeight * 5 - 35}, {270, HEIGHT - bushHeight * 5 - 35}, {300, HEIGHT - bushHeight * 5 - 35},
             {90, HEIGHT - bushHeight * 9 - 35}, {90, HEIGHT - bushHeight * 10 - 35}, {90, HEIGHT - bushHeight * 11 - 35},
-    
-            // little box on right
-            {90, HEIGHT - bushHeight * 13 - 35}, {120, HEIGHT - bushHeight * 13 - 35}, {150, HEIGHT - bushHeight * 13 - 35},
-            {180, HEIGHT - bushHeight * 13 - 35}, {120, HEIGHT - bushHeight * 9 - 35}, {150, HEIGHT - bushHeight * 9 - 35},
-            {180, HEIGHT - bushHeight * 9 - 35}, {90, HEIGHT - bushHeight * 12 - 35},
-    
-            {210, HEIGHT - bushHeight * 9 - 35}, {240, HEIGHT - bushHeight * 9 - 35}, {270, HEIGHT - bushHeight * 9 - 35},
-            {300, HEIGHT - bushHeight * 9 - 35},{330, HEIGHT - bushHeight * 9 - 35}, {360, HEIGHT - bushHeight * 9 - 35},
-            {390, HEIGHT - bushHeight * 9 - 35}, {420, HEIGHT - bushHeight * 9 - 35}, {510, HEIGHT - bushHeight * 9 - 35},
-            {540, HEIGHT - bushHeight * 9 - 35}, {570, HEIGHT - bushHeight * 9 - 35}, {600, HEIGHT - bushHeight * 9 - 35},
-            {630, HEIGHT - bushHeight * 9 - 35}, {660, HEIGHT - bushHeight * 9 - 35}, {690, HEIGHT - bushHeight * 9 - 35},
-            {690, HEIGHT - bushHeight * 8 - 35}, {690, HEIGHT - bushHeight * 7 - 35}, {690, HEIGHT - bushHeight * 6 - 35},
-            {690, HEIGHT - bushHeight * 5 - 35}, {720, HEIGHT - bushHeight * 9 - 35}, {750, HEIGHT - bushHeight * 9 - 35},
-            {780, HEIGHT - bushHeight * 9 - 35}, {810, HEIGHT - bushHeight * 9 - 35}, {840, HEIGHT - bushHeight * 9 - 35},
-            {870, HEIGHT - bushHeight * 9 - 35}, {870, HEIGHT - bushHeight * 10 - 35},{870, HEIGHT - bushHeight * 11 - 35},
-            {870, HEIGHT - bushHeight * 12 - 35}, {870, HEIGHT - bushHeight * 13 - 35}, {870, HEIGHT - bushHeight * 14 - 35},
-            {870, HEIGHT - bushHeight * 15 - 35}, {870, HEIGHT - bushHeight * 16 - 35}, {870, HEIGHT - bushHeight * 17 - 35},
-            {870, HEIGHT - bushHeight * 18 - 35}, {870, HEIGHT - bushHeight * 19 - 35}, {840, HEIGHT - bushHeight * 19 - 35},
-            {810, HEIGHT - bushHeight * 19 - 35}, {780, HEIGHT - bushHeight * 19 - 35}, {750, HEIGHT - bushHeight * 19 - 35},
-            {720, HEIGHT - bushHeight * 19 - 35}, {690, HEIGHT - bushHeight * 19 - 35},
-            {990, HEIGHT - bushHeight * 19 - 35}, {1020, HEIGHT - bushHeight * 19 - 35}, {1050, HEIGHT - bushHeight * 19 - 35},
-            {1080, HEIGHT - bushHeight * 19 - 35}, {1110, HEIGHT - bushHeight * 19 - 35}, {1140, HEIGHT - bushHeight * 19 - 35},
-            {990, HEIGHT - bushHeight * 18 - 35}, {990, HEIGHT - bushHeight * 17 - 35}, {990, HEIGHT - bushHeight * 16 - 35},
-            {990, HEIGHT - bushHeight * 15 - 35}, {1140, HEIGHT - bushHeight * 18 - 35}, {1140, HEIGHT - bushHeight * 17 - 35},
-            {1140, HEIGHT - bushHeight * 16 - 35}, {1140, HEIGHT - bushHeight * 15 - 35}, {1140, HEIGHT - bushHeight * 11 - 35},
-            {1140, HEIGHT - bushHeight * 10 - 35}, {1140, HEIGHT - bushHeight * 9 - 35}, {1140, HEIGHT - bushHeight * 8 - 35},
-            {1140, HEIGHT - bushHeight * 7 - 35}, {1140, HEIGHT - bushHeight * 6 - 35}, {990, HEIGHT - bushHeight * 11 - 35},
-            {990, HEIGHT - bushHeight * 10 - 35}, {990, HEIGHT - bushHeight * 9 - 35}, {990, HEIGHT - bushHeight * 8 - 35},
-            {990, HEIGHT - bushHeight * 7 - 35}, {990, HEIGHT - bushHeight * 6 - 35}, {1020, HEIGHT - bushHeight * 6 - 35},
-            {1050, HEIGHT - bushHeight * 6 - 35}, {1080, HEIGHT - bushHeight * 6 - 35}, {1110, HEIGHT - bushHeight * 6 - 35},
-            {1170, HEIGHT - bushHeight * 6 - 35}, {1200, HEIGHT - bushHeight * 6 - 35}, {1230, HEIGHT - bushHeight * 6 - 35},
-    
-            {210, HEIGHT - bushHeight * 13 - 35}, {240, HEIGHT - bushHeight * 13 - 35}, {270, HEIGHT - bushHeight * 13 - 35},
-            {270, HEIGHT - bushHeight * 14 - 35}, {270, HEIGHT - bushHeight * 14 - 35}, {270, HEIGHT - bushHeight * 15 - 35},
-            {270, HEIGHT - bushHeight * 16 - 35}, {270, HEIGHT - bushHeight * 17 - 35}, {270, HEIGHT - bushHeight * 18 - 35},
-            {270, HEIGHT - bushHeight * 19 - 35}, {300, HEIGHT - bushHeight * 19 - 35}, {330, HEIGHT - bushHeight * 19 - 35},
-            {360, HEIGHT - bushHeight * 19 - 35}, {390, HEIGHT - bushHeight * 19 - 35}, {420, HEIGHT - bushHeight * 19 - 35},
-            {450, HEIGHT - bushHeight * 19 - 35}, {480, HEIGHT - bushHeight * 19 - 35}, {510, HEIGHT - bushHeight * 19 - 35},
-            {600, HEIGHT - bushHeight * 19 - 35}, {630, HEIGHT - bushHeight * 19 - 35}, {660, HEIGHT - bushHeight * 19 - 35}
+            {90, HEIGHT - bushHeight * 12 - 35}, {120, HEIGHT - bushHeight * 12 - 35}, {150, HEIGHT - bushHeight * 12 - 35},
+            {180, HEIGHT - bushHeight * 12 - 35}, {120, HEIGHT - bushHeight * 9 - 35}, {150, HEIGHT - bushHeight * 9 - 35},
+            {180, HEIGHT - bushHeight * 9 - 35}
         };
-
+        
         for (int[] coord : mazeBushCoordinates) {
-            g2d.drawImage(bushImage, coord[0], coord[1], 30, 30, null);
+            Bush bush = new Bush(coord[0], coord[1]);
+            handler.addObject(bush);
+            addToGrid(bush);
         }
 
-
+         */
         if(paused){
             mainMenu.render(g); //Render the main menu if paused
         } 
