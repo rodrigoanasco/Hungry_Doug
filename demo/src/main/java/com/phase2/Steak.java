@@ -14,7 +14,7 @@ public class Steak extends Reward {
     private int lifetime;
     private int spawntime;
     private int deathtime;
-    private Boolean isAlive = false;
+    private Boolean isAlive = true;
     Random r;
 
     public Steak(int x, int y) {
@@ -35,27 +35,31 @@ public class Steak extends Reward {
         return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
     }
 
+    public void setAlive(Boolean b) {
+        this.isAlive = b;
+    }
+
     public void tick() {
         //to be implemented: checks if colliding with doug
         //System.out.println(this.lifetime);
         if (this.lifetime < this.spawntime*60 || this.lifetime > this.deathtime*60) {
-            this.isAlive = false;
+            this.collected = true;
             lifetime++;
         }
         else {
-            if (!collected) {
+            if (isAlive) {
                 lifetime++;
-                this.isAlive =true;
+                this.collected =false;
             }
             else {
-                this.isAlive = false;
+                this.collected = true;
             }
         }
     }
     
     public void render(Graphics g) {
         // renderHitBox(g,OBJECT_SIZE[0],OBJECT_SIZE[1]);
-        if (this.isAlive) {
+        if (!this.collected) {
             g.drawImage(steakSprite, x, y, null);
             g.setColor(Color.BLACK);
             g.drawString(""+((this.deathtime)-this.lifetime/60), x, y);

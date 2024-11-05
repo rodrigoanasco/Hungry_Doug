@@ -186,6 +186,7 @@ public class Doug extends GameObject{
                                 Score.SCORE += rewardAmount;
                                 reward.setCollected(true); // Mark as collected
                                 if (reward.getType() == RewardType.BONE) Score.boneScore++;
+                                if (reward.getType() == RewardType.STEAK) ((Steak)reward).setAlive(false);
                             }
                         }
                         break;
