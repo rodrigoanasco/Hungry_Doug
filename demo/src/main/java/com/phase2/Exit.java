@@ -15,7 +15,7 @@ public class Exit extends GameObject {
     public Exit(int x, int y) {
         super(x,y, ID.EXIT);
         try {
-            sprite = ImageIO.read(getClass().getResource("/Apple.png"));
+            sprite = ImageIO.read(getClass().getResource("/Exit.png"));
             sprite = sprite.getScaledInstance(OBJECT_SIZE[0], OBJECT_SIZE[1], Image.SCALE_DEFAULT);
         } catch (IOException e) {
             e.printStackTrace();
@@ -33,7 +33,7 @@ public class Exit extends GameObject {
 
     public void render(Graphics g) {
         // renderHitBox(g,OBJECT_SIZE[0],OBJECT_SIZE[1]);
-            if (Score.getScore() >= 30) {
+            if (Score.boneScore >= Score.boneTotal) {
                 g.drawImage(sprite, x, y, null);
         }
     }

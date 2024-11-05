@@ -22,7 +22,7 @@ public class Apple extends Reward {
     }
     
     public Rectangle getBounds() {
-        return new Rectangle(x,y,OBJECT_SIZE[0] - 10,OBJECT_SIZE[1] - 10);
+        return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
 
     }
 

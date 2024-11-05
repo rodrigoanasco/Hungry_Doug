@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -30,10 +31,13 @@ public class Game extends Canvas implements Runnable {
     private boolean gameOver = false; //Game over tracker
 
     // TODO random for testing only
-    // private Random r;
+    private Random r;
     private Handler handler;
+
+    private Doug doug;
     private Health health;
     private Score score;
+
     private MainMenu mainMenu; //Menu instance
     private WinningScreen winningScreen; //Tracking the winning screen
     private GameOverScreen gameOverScreen;
@@ -80,7 +84,6 @@ public class Game extends Canvas implements Runnable {
     // TODO if multiple levels, create attribute for numbers of enemies/rewards to generate
     // then pass to a main class?
 
-
         handler = new Handler(this);
         mainMenu = new MainMenu(this); //Initialize Main Menu
         winningScreen = new WinningScreen(this); // Initialize the winning screen
@@ -102,34 +105,25 @@ public class Game extends Canvas implements Runnable {
         health = new Health(); 
         score = new Score();
 
-        // Used for testing only
-
-        // Doug doug = new Doug(200, 200, ID.DOUG, handler);
-        // handler.addObject(doug);
-        // handler.setDoug(doug);
-
         // Create or get the single instance of Doug
-        Doug doug = Doug.getInstance(200, 200, ID.DOUG, handler);
-
+        doug = Doug.getInstance(200, 200, ID.DOUG, handler);
         // Add Doug to the handler
         handler.addObject(doug);
 
-
         // handler.addObject(new Doug(200, 200, ID.DOUG, handler));
+        // handler.addObject(new Apple(BLOCK_SIZE[0], BLOCK_SIZE[1]));
+        // handler.addObject(new Bone(BLOCK_SIZE[0], 2*BLOCK_SIZE[1]));
+        // handler.addObject(new Bone(2*BLOCK_SIZE[0], 2*BLOCK_SIZE[1]));
+        // handler.addObject(new Steak(BLOCK_SIZE[0], 3*BLOCK_SIZE[1]));
+        // handler.addObject(new Mushroom(BLOCK_SIZE[0], 4*BLOCK_SIZE[1]));
+        // handler.addObject(new Exit(BLOCK_SIZE[0], 5*BLOCK_SIZE[1]));
 
-        handler.addObject(new Apple(BLOCK_SIZE[0], BLOCK_SIZE[1]));
-        handler.addObject(new Bone(BLOCK_SIZE[0], 2*BLOCK_SIZE[1]));
-        handler.addObject(new Steak(BLOCK_SIZE[0], 3*BLOCK_SIZE[1]));
-        handler.addObject(new Mushroom(BLOCK_SIZE[0], 4*BLOCK_SIZE[1]));
+        generateRandomObjects(10, Rat.class, handler);
+        generateRandomObjects(10, Bone.class, handler);
+        generateRandomObjects(5, Apple.class, handler);
+        generateRandomObjects(5, Steak.class, handler);
+        generateRandomObjects(5, Mushroom.class, handler);
         handler.addObject(new Exit(BLOCK_SIZE[0], 5*BLOCK_SIZE[1]));
-        //
-
-        // TODO for random movement testing only 
-        // r = new Random();
-        // TODO if multiple levels, create attribute for # of rats
-        // for(int i = 0; i < 20; i++)
-        // handler.addObject(new Rat(r.nextInt(WIDTH - 200, HEIGHT - 150, 5))); // Penalty points set to 5
-        handler.addObject(new Rat(WIDTH - 200, HEIGHT - 150)); // Penalty points set to 5
 
         
         // Adding bushes as obstacles
@@ -240,7 +234,22 @@ public class Game extends Canvas implements Runnable {
          
     }
 
-
+    public void generateRandomObjects(int count, Class<? extends GameObject> objectType, Handler handler) {
+        r = new Random();
+        
+        for (int i = 0; i < count; i++) {
+            int randomX = r.nextInt(Game.WIDTH - 200); // X coordinate within game width minus margin
+            int randomY = r.nextInt(Game.HEIGHT - 150); // Y coordinate within game height minus margin
+            
+            try {
+                // Use reflection to create a new instance of the object type
+                GameObject obj = objectType.getConstructor(int.class, int.class).newInstance(randomX, randomY);
+                handler.addObject(obj);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
      /**
      * Starts or resumes the game from the main menu.
      */
@@ -266,16 +275,16 @@ public class Game extends Canvas implements Runnable {
         return gameWon;
     }
 
-    private void initializeGameObjects(){
-        //handler.clearObjects();
-        handler.addObject(new Doug(200, 200, ID.DOUG, handler));
-        handler.addObject(new Apple(BLOCK_SIZE[0], BLOCK_SIZE[1]));
-        handler.addObject(new Bone(BLOCK_SIZE[0], 2*BLOCK_SIZE[1]));
-        handler.addObject(new Steak(BLOCK_SIZE[0], 3*BLOCK_SIZE[1]));
-        handler.addObject(new Mushroom(BLOCK_SIZE[0], 4*BLOCK_SIZE[1]));
-        handler.addObject(new Exit(BLOCK_SIZE[0], 5*BLOCK_SIZE[1]));
+    // private void initializeGameObjects(){
+    //     //handler.clearObjects();
+    //     handler.addObject(new Doug(200, 200, ID.DOUG, handler));
+    //     handler.addObject(new Apple(BLOCK_SIZE[0], BLOCK_SIZE[1]));
+    //     handler.addObject(new Bone(BLOCK_SIZE[0], 2*BLOCK_SIZE[1]));
+    //     handler.addObject(new Steak(BLOCK_SIZE[0], 3*BLOCK_SIZE[1]));
+    //     handler.addObject(new Mushroom(BLOCK_SIZE[0], 4*BLOCK_SIZE[1]));
+    //     handler.addObject(new Exit(BLOCK_SIZE[0], 5*BLOCK_SIZE[1]));
         
-    }
+    // }
 
     /**
      * Starts the game in a new thread.
@@ -340,12 +349,9 @@ public class Game extends Canvas implements Runnable {
         handler.tick();
         health.tick();
         score.tick();
+        checkGameOver();
         }
 
-        /* if(Doug.getHealth() <= 0){
-            gameOver = true;
-        } */
-        
     }
 
     /**
@@ -424,6 +430,17 @@ public class Game extends Canvas implements Runnable {
         }
         
         // Adding maze bushes from maze coordinates
+
+        // int[][] mazeBushCoordinates = {
+        //     {90, HEIGHT - bushHeight - 35}, {90, HEIGHT - bushHeight * 2 - 35}, {90, HEIGHT - bushHeight * 3 - 35}, 
+        //     {90, HEIGHT - bushHeight * 4 - 35}, {90, HEIGHT - bushHeight * 5 - 35}, {120, HEIGHT - bushHeight * 5 - 35},
+        //     {150, HEIGHT - bushHeight * 5 - 35}, {180, HEIGHT - bushHeight * 5 - 35}, {210, HEIGHT - bushHeight * 5 - 35},
+        //     {240, HEIGHT - bushHeight * 5 - 35},{270, HEIGHT - bushHeight * 5 - 35},{300, HEIGHT - bushHeight * 5 - 35},
+        //     {90, HEIGHT - bushHeight * 9 - 35},{90, HEIGHT - bushHeight * 10 - 35},{90, HEIGHT - bushHeight * 11 - 35},
+        //     {90, HEIGHT - bushHeight * 12 - 35}, {120, HEIGHT - bushHeight * 12 - 35}, {150, HEIGHT - bushHeight * 12 - 35},
+        //     {180, HEIGHT - bushHeight * 12 - 35}, {120, HEIGHT - bushHeight * 9 - 35}, {150, HEIGHT - bushHeight * 9 - 35},
+        //     {180, HEIGHT - bushHeight * 9 - 35}
+        // };
         int[][] mazeBushCoordinates = {
             {90, HEIGHT - bushHeight - 35}, {90, HEIGHT - bushHeight * 2 - 35}, {90, HEIGHT - bushHeight * 3 - 35}, 
             {90, HEIGHT - bushHeight * 4 - 35}, {90, HEIGHT - bushHeight * 5 - 35}, {120, HEIGHT - bushHeight * 5 - 35},
@@ -447,7 +464,7 @@ public class Game extends Canvas implements Runnable {
         } 
         else if(gameWon){
             winningScreen.render(g);
-        } else if(gameOver){
+        } else if(checkGameOver()){
             gameOverScreen.render(g);
         } else{
             handler.render(g2d); // Render the actual game
@@ -489,6 +506,18 @@ public class Game extends Canvas implements Runnable {
         score.resetScore();
         initializeGameObjects(); */
     } 
+
+    private boolean checkGameOver() {
+        if (Health.HEALTH <= 0) {
+            gameOver = true;
+            return true;
+            // test
+            // System.out.println("game over");
+        }
+        else{return false;}
+    }
+
+    
 
     public static void main(String[] args) {
         new Game();
