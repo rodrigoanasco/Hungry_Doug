@@ -8,3 +8,7 @@
 # Ignore PowerPoint files
 *.ppt
 *.pptx
+
+# Ignore mvn build files
+demo\target
+demo\.vscode
