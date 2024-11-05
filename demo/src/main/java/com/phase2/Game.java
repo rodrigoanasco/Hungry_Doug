@@ -22,6 +22,8 @@ public class Game extends Canvas implements Runnable {
     private Thread thread; 
     private boolean running = false;
     private boolean paused = true; //Game starts in the menu (paused)
+    private boolean gameWon = false; // Tracker to check if the game is won
+    private boolean gameOver = false; //Game over tracker
 
     // TODO random for testing only
     // private Random r;
@@ -29,6 +31,8 @@ public class Game extends Canvas implements Runnable {
     private Health health;
     private Score score;
     private MainMenu mainMenu; //Menu instance
+    private WinningScreen winningScreen; //Tracking the winning screen
+    private GameOverScreen gameOverScreen;
 
     // BufferedImage for the background
     private BufferedImage background;
@@ -41,14 +45,16 @@ public class Game extends Canvas implements Runnable {
      * Initializes the handler and sets up the game window.
      */
     public Game() {
-
+        
     // TODO if multiple levels, create attribute for numbers of enemies/rewards to generate
     // then pass to a main class?
 
 
-        handler = new Handler();
+        handler = new Handler(this);
         mainMenu = new MainMenu(this); //Initialize Main Menu
-        
+        winningScreen = new WinningScreen(this); // Initialize the winning screen
+        gameOverScreen = new GameOverScreen(this);
+
         this.addKeyListener(new KeyInput(handler)); // Recieves keyboard input
 
         // Load the background image
@@ -66,9 +72,23 @@ public class Game extends Canvas implements Runnable {
         score = new Score();
 
         // Used for testing only
-        handler.addObject(new Doug(200, 200, ID.DOUG, handler));
+
+        // Doug doug = new Doug(200, 200, ID.DOUG, handler);
+        // handler.addObject(doug);
+        // handler.setDoug(doug);
+
+        // Create or get the single instance of Doug
+        Doug doug = Doug.getInstance(200, 200, ID.DOUG, handler);
+
+        // Add Doug to the handler
+        handler.addObject(doug);
+
+
+        // handler.addObject(new Doug(200, 200, ID.DOUG, handler));
+
         handler.addObject(new Apple(BLOCK_SIZE[0], BLOCK_SIZE[1]));
         handler.addObject(new Bone(BLOCK_SIZE[0], 2*BLOCK_SIZE[1]));
+        handler.addObject(new Bone(2*BLOCK_SIZE[0], 2*BLOCK_SIZE[1]));
         handler.addObject(new Steak(BLOCK_SIZE[0], 3*BLOCK_SIZE[1]));
         handler.addObject(new Mushroom(BLOCK_SIZE[0], 4*BLOCK_SIZE[1]));
         handler.addObject(new Exit(BLOCK_SIZE[0], 5*BLOCK_SIZE[1]));
@@ -96,6 +116,28 @@ public class Game extends Canvas implements Runnable {
      */
     public void togglePause() {
         paused = !paused;
+    }
+
+    /**
+     * Changes the game state to "win"
+     */
+    public void setGameWon(boolean gameWon){
+        this.gameWon = gameWon;
+    }
+
+    public boolean isGameWon(){
+        return gameWon;
+    }
+
+    private void initializeGameObjects(){
+        //handler.clearObjects();
+        handler.addObject(new Doug(200, 200, ID.DOUG, handler));
+        handler.addObject(new Apple(BLOCK_SIZE[0], BLOCK_SIZE[1]));
+        handler.addObject(new Bone(BLOCK_SIZE[0], 2*BLOCK_SIZE[1]));
+        handler.addObject(new Steak(BLOCK_SIZE[0], 3*BLOCK_SIZE[1]));
+        handler.addObject(new Mushroom(BLOCK_SIZE[0], 4*BLOCK_SIZE[1]));
+        handler.addObject(new Exit(BLOCK_SIZE[0], 5*BLOCK_SIZE[1]));
+        
     }
 
     /**
@@ -157,9 +199,16 @@ public class Game extends Canvas implements Runnable {
      * Updates the game state for each game tick.
      */
     private void tick(){
+        if(!gameOver){
         handler.tick();
         health.tick();
         score.tick();
+        }
+
+        /* if(Doug.getHealth() <= 0){
+            gameOver = true;
+        } */
+        
     }
 
     /**
@@ -236,7 +285,12 @@ public class Game extends Canvas implements Runnable {
 
         if(paused){
             mainMenu.render(g); //Render the main menu if paused
-        } else {
+        } 
+        else if(gameWon){
+            winningScreen.render(g);
+        } else if(gameOver){
+            gameOverScreen.render(g);
+        } else{
             handler.render(g2d); // Render the actual game
             health.render(g2d);
             score.render(g2d);
@@ -269,6 +323,13 @@ public class Game extends Canvas implements Runnable {
     public void debugMode(Boolean debug) {
         handler.setDebug(debug);
     }
+
+    public void resetGame(){
+        /* gameOver = false;
+        health.resetHealt();
+        score.resetScore();
+        initializeGameObjects(); */
+    } 
 
     public static void main(String[] args) {
         new Game();

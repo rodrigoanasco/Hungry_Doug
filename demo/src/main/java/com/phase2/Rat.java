@@ -64,8 +64,24 @@ public class Rat extends MovingEnemy {
      * What the object should do on each tick
      */
     public void tick() {
+        
+        // Access the singleton instance of Doug
+        Doug doug = Doug.getInstance();
+
+        if (doug != null) {
+            // Simple movement logic: move horizontally or vertically toward Doug
+            if (x != doug.getX()) {
+                velX = (x < doug.getX()) ? 1 : -1;
+                velY = 0; // Only move horizontally
+            } else if (y != doug.getY()) {
+                velX = 0;
+                velY = (y < doug.getY()) ? 1 : -1; // Only move vertically
+            }
+        }
+    
+        // Update position based on velocity
         x += velX;
-        // y += velY;
+        y += velY;
 
         // TODO account for borders
         // atttribute for horizontal/vertical movement

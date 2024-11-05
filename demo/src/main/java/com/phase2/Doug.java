@@ -2,13 +2,13 @@ package com.phase2;
 
 // import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import java.io.IOException;
-
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 /**
  * Represents the main character, Doug, in the game.
@@ -18,6 +18,9 @@ import java.awt.geom.AffineTransform;
 public class Doug extends GameObject{
 
     Handler handler;
+
+    //testing
+    private static Doug instance;
 
     // protected int health;
     // protected int score;
@@ -35,6 +38,8 @@ public class Doug extends GameObject{
 
     private static final double SCALE_FACTOR = 1.2; // Scale Doug to be bigger/smaller
 
+    int health = 100;
+    int score = 0;
     /**
      * Initializes Doug's position, ID, health, and score.
      * Sets default velocity for testing purposes.
@@ -49,8 +54,8 @@ public class Doug extends GameObject{
 
         this.handler = handler;
 
-        // this.health = 100;
-        // this.score = 0;
+        this.health = 100;
+        this.score = 0;
 
         try {
             // Gets sprite images from resources folder
@@ -80,6 +85,25 @@ public class Doug extends GameObject{
         velY = 0;
         //
     }
+
+    //testing
+    // Public method to get the single instance of Doug
+     public static Doug getInstance(int x, int y, ID id, Handler handler) {
+        if (instance == null) {
+            instance = new Doug(x, y, id, handler);
+        }
+        return instance;
+    }
+
+        // Overloaded method to get the instance without parameters after initialization
+        public static Doug getInstance() {
+            if (instance == null) {
+                throw new IllegalStateException("Doug has not been initialized. Call getInstance(x, y, id, handler) first.");
+            }
+            return instance;
+        }
+
+    //
     
     public Rectangle getBounds() {
         return new Rectangle(x,y,48,48);
@@ -169,9 +193,13 @@ public class Doug extends GameObject{
                     case EXIT:
                         if (temp instanceof Exit) {
                             if (Score.boneScore >= Score.boneTotal) {
-                                System.out.println("Exit Screen to be Made");
+                                Game gameinstance = handler.getGameInstance();
+                                if(gameinstance != null){
+                                    gameinstance.setGameWon(true);
+                                }
                             }
                         }
+                        break;
                     // case OBSTACLE:
                     //     // Collision behavior for obstacles
                     //     break;
@@ -227,18 +255,18 @@ public class Doug extends GameObject{
     //  *
     //  * @return The score Doug has accumulated.
     //  */
-    // public int getScore(){
-    //     return score;
-    // }
+    public int getScore(){
+        return score;
+    }
 
     // /**
     //  * Sets Doug's score.
     //  *
     //  * @param score The score value to set for Doug.
     //  */
-    // public void setScore(int score){
-    //     this.score = score;
-    // }
+    public void setScore(int score){
+        this.score = score;
+    }
 
     // /**
     //  * Add to Doug's score.
@@ -264,9 +292,9 @@ public class Doug extends GameObject{
     //  *
     //  * @return The health level of Doug.
     //  */
-    // public int getHealth(){
-    //     return health;
-    // }
+    public int getHealth(){
+         return health;
+    }
 
     // /**
     //  * Sets Doug's health level.
