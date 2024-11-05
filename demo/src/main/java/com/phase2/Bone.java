@@ -12,7 +12,7 @@ public class Bone extends Reward {
 
     private Image boneSprite;
 
-    public Bone(int x, int y,RewardType rewardType) {
+    public Bone(int x, int y) {
         super(x,y, RewardType.BONE, 15);
         try {
             boneSprite = ImageIO.read(getClass().getResource("/Bone.png"));

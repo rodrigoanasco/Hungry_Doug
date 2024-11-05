@@ -12,7 +12,7 @@ public class Steak extends Reward {
 
     private Image steakSprite;
 
-    public Steak(int x, int y,RewardType rewardType) {
+    public Steak(int x, int y) {
         super(x,y, RewardType.STEAK, 20);
         try {
             steakSprite = ImageIO.read(getClass().getResource("/Steak.png"));

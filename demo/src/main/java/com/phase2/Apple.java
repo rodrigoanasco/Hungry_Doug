@@ -12,7 +12,7 @@ public class Apple extends Reward {
 
     private Image appleSprite;
 
-    public Apple(int x, int y,RewardType rewardType) {
+    public Apple(int x, int y) {
         super(x,y, RewardType.APPLE, 10);
         try {
             appleSprite = ImageIO.read(getClass().getResource("/Apple.png"));

@@ -12,7 +12,7 @@ public class Mushroom extends Reward {
 
     private Image mushroomSprite;
 
-    public Mushroom(int x, int y,RewardType rewardType) {
+    public Mushroom(int x, int y) {
         super(x,y, RewardType.MUSHROOM, 10);
         try {
             mushroomSprite = ImageIO.read(getClass().getResource("/Mushroom.png"));;
