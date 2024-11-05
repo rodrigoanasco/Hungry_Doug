@@ -2,13 +2,13 @@ package com.phase2;
 
 // import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import java.io.IOException;
-
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 /**
  * Represents the main character, Doug, in the game.
@@ -168,9 +168,13 @@ public class Doug extends GameObject{
                     case EXIT:
                         if (temp instanceof Exit) {
                             if (Score.getScore() >= 30) {
-                                System.out.println("Exit Screen to be Made");
+                                Game gameinstance = handler.getGameInstance();
+                                if(gameinstance != null){
+                                    gameinstance.setGameWon(true);
+                                }
                             }
                         }
+                        break;
                     // case OBSTACLE:
                     //     // Collision behavior for obstacles
                     //     break;

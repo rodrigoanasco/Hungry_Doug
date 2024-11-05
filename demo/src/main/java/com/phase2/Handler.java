@@ -10,9 +10,13 @@ import java.util.LinkedList;
 public class Handler {
 
     private Boolean debug = false;
+    private Game game; //A reference to the Game Instance
     // list of all objects in game (Doug, enemies, food, etc)
     LinkedList<GameObject> objects = new LinkedList<GameObject >();
     
+    public Handler(Game game){
+        this.game = game;
+    }
     /**
      * Updates all game objects in the game.
      * This is called for every game tick.
@@ -24,6 +28,9 @@ public class Handler {
         }
     }
 
+    public Game getGameInstance(){
+        return game;
+    }
     /**
      * Renders all game objects.
      * 
@@ -59,4 +66,6 @@ public class Handler {
     public void setDebug(Boolean d) {
         this.debug = d;
     }
+
+    
 }

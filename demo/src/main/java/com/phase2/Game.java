@@ -22,6 +22,8 @@ public class Game extends Canvas implements Runnable {
     private Thread thread; 
     private boolean running = false;
     private boolean paused = true; //Game starts in the menu (paused)
+    private boolean gameWon = false; // Tracker to check if the game is won
+    
 
     // TODO random for testing only
     // private Random r;
@@ -29,6 +31,7 @@ public class Game extends Canvas implements Runnable {
     private Health health;
     private Score score;
     private MainMenu mainMenu; //Menu instance
+    private WinningScreen winningScreen; //Tracking the winning screen
 
     // BufferedImage for the background
     private BufferedImage background;
@@ -41,13 +44,14 @@ public class Game extends Canvas implements Runnable {
      * Initializes the handler and sets up the game window.
      */
     public Game() {
-
+        
     // TODO if multiple levels, create attribute for numbers of enemies/rewards to generate
     // then pass to a main class?
 
 
-        handler = new Handler();
+        handler = new Handler(this);
         mainMenu = new MainMenu(this); //Initialize Main Menu
+        winningScreen = new WinningScreen(this); // Initialize the winning screen
         
         this.addKeyListener(new KeyInput(handler)); // Recieves keyboard input
 
@@ -96,6 +100,17 @@ public class Game extends Canvas implements Runnable {
      */
     public void togglePause() {
         paused = !paused;
+    }
+
+    /**
+     * Changes the game state to "win"
+     */
+    public void setGameWon(boolean gameWon){
+        this.gameWon = gameWon;
+    }
+
+    public boolean isGameWon(){
+        return gameWon;
     }
 
     /**
@@ -236,7 +251,10 @@ public class Game extends Canvas implements Runnable {
 
         if(paused){
             mainMenu.render(g); //Render the main menu if paused
-        } else {
+        } 
+        else if(gameWon){
+            winningScreen.render(g);
+        } else{
             handler.render(g2d); // Render the actual game
             health.render(g2d);
             score.render(g2d);
