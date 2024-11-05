@@ -71,6 +71,7 @@ public class Game extends Canvas implements Runnable {
         handler.addObject(new Bone(BLOCK_SIZE[0], 2*BLOCK_SIZE[1], RewardType.BONE));
         handler.addObject(new Steak(BLOCK_SIZE[0], 3*BLOCK_SIZE[1], RewardType.STEAK));
         handler.addObject(new Mushroom(BLOCK_SIZE[0], 4*BLOCK_SIZE[1], RewardType.MUSHROOM));
+        handler.addObject(new Exit(5*BLOCK_SIZE[0], 5*BLOCK_SIZE[1]));
         //
 
         // TODO for random movement testing only 
