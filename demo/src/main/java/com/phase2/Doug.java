@@ -164,7 +164,13 @@ public class Doug extends GameObject{
                             }
                         }
                         break;
-                        
+                    
+                    case EXIT:
+                        if (temp instanceof Exit) {
+                            if (Score.getScore() >= 30) {
+                                System.out.println("Exit Screen to be Made");
+                            }
+                        }
                     // case OBSTACLE:
                     //     // Collision behavior for obstacles
                     //     break;
