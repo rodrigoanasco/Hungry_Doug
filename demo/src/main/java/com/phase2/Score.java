@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Score {
+    
     public static int SCORE = 0;
 
     public void tick() {

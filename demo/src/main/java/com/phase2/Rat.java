@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.IOException;
-
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
@@ -27,7 +26,7 @@ public class Rat extends MovingEnemy {
 
     private static final double SCALE_FACTOR = 1.25;
 
-    private double speed = 1.5;
+    // private double speed = 1.5;
 
     public Rat(int x, int y) {
         super(x,y,EnemyType.RAT, Health.HEALTH);
@@ -64,7 +63,6 @@ public class Rat extends MovingEnemy {
     /**
      * What the object should do on each tick
      */
-    @Override
     public void tick() {
         x += velX;
         // y += velY;
@@ -77,9 +75,8 @@ public class Rat extends MovingEnemy {
     }
     
     /**
-     * How the object should look like
+     * Visually renders the object
      */
-    @Override
     public void render(Graphics g) {
 
         Graphics2D g2d = (Graphics2D) g;
@@ -101,9 +98,4 @@ public class Rat extends MovingEnemy {
         }
     }
 
-    @Override
-    public void applyPenalty(Doug doug) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'applyPenalty'");
-    }
 }

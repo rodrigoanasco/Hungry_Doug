@@ -4,9 +4,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-
 import java.awt.Graphics;
-
 
 public class Steak extends Reward {
 
@@ -28,7 +26,6 @@ public class Steak extends Reward {
 
     public void tick() {
         //to be implemented: checks if colliding with doug
-
     }
 
     public void render(Graphics g) {
