@@ -19,6 +19,9 @@ public class Doug extends GameObject{
 
     Handler handler;
 
+    //testing
+    private static Doug instance;
+
     // protected int health;
     // protected int score;
 
@@ -82,6 +85,25 @@ public class Doug extends GameObject{
         velY = 0;
         //
     }
+
+    //testing
+    // Public method to get the single instance of Doug
+     public static Doug getInstance(int x, int y, ID id, Handler handler) {
+        if (instance == null) {
+            instance = new Doug(x, y, id, handler);
+        }
+        return instance;
+    }
+
+        // Overloaded method to get the instance without parameters after initialization
+        public static Doug getInstance() {
+            if (instance == null) {
+                throw new IllegalStateException("Doug has not been initialized. Call getInstance(x, y, id, handler) first.");
+            }
+            return instance;
+        }
+
+    //
     
     public Rectangle getBounds() {
         return new Rectangle(x,y,48,48);

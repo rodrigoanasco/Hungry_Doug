@@ -9,6 +9,9 @@ import java.util.LinkedList;
  */
 public class Handler {
 
+    //testing
+    // private Doug doug;
+
     private Boolean debug = false;
     private Game game; //A reference to the Game Instance
     // list of all objects in game (Doug, enemies, food, etc)
