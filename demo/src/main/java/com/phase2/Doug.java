@@ -35,6 +35,8 @@ public class Doug extends GameObject{
 
     private static final double SCALE_FACTOR = 1.2; // Scale Doug to be bigger/smaller
 
+    int health = 100;
+    int score = 0;
     /**
      * Initializes Doug's position, ID, health, and score.
      * Sets default velocity for testing purposes.
@@ -49,8 +51,8 @@ public class Doug extends GameObject{
 
         this.handler = handler;
 
-        // this.health = 100;
-        // this.score = 0;
+        this.health = 100;
+        this.score = 0;
 
         try {
             // Gets sprite images from resources folder
@@ -230,18 +232,18 @@ public class Doug extends GameObject{
     //  *
     //  * @return The score Doug has accumulated.
     //  */
-    // public int getScore(){
-    //     return score;
-    // }
+    public int getScore(){
+        return score;
+    }
 
     // /**
     //  * Sets Doug's score.
     //  *
     //  * @param score The score value to set for Doug.
     //  */
-    // public void setScore(int score){
-    //     this.score = score;
-    // }
+    public void setScore(int score){
+        this.score = score;
+    }
 
     // /**
     //  * Add to Doug's score.
@@ -267,9 +269,9 @@ public class Doug extends GameObject{
     //  *
     //  * @return The health level of Doug.
     //  */
-    // public int getHealth(){
-    //     return health;
-    // }
+    public int getHealth(){
+         return health;
+    }
 
     // /**
     //  * Sets Doug's health level.
