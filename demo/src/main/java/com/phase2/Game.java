@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -28,8 +29,11 @@ public class Game extends Canvas implements Runnable {
     // TODO random for testing only
     // private Random r;
     private Handler handler;
+
+    private Doug doug;
     private Health health;
     private Score score;
+
     private MainMenu mainMenu; //Menu instance
     private WinningScreen winningScreen; //Tracking the winning screen
     private GameOverScreen gameOverScreen;
@@ -48,7 +52,6 @@ public class Game extends Canvas implements Runnable {
         
     // TODO if multiple levels, create attribute for numbers of enemies/rewards to generate
     // then pass to a main class?
-
 
         handler = new Handler(this);
         mainMenu = new MainMenu(this); //Initialize Main Menu
@@ -71,38 +74,29 @@ public class Game extends Canvas implements Runnable {
         health = new Health(); 
         score = new Score();
 
-        // Used for testing only
-
-        // Doug doug = new Doug(200, 200, ID.DOUG, handler);
-        // handler.addObject(doug);
-        // handler.setDoug(doug);
-
         // Create or get the single instance of Doug
-        Doug doug = Doug.getInstance(200, 200, ID.DOUG, handler);
-
+        doug = Doug.getInstance(200, 200, ID.DOUG, handler);
         // Add Doug to the handler
         handler.addObject(doug);
 
-
         // handler.addObject(new Doug(200, 200, ID.DOUG, handler));
-
         handler.addObject(new Apple(BLOCK_SIZE[0], BLOCK_SIZE[1]));
         handler.addObject(new Bone(BLOCK_SIZE[0], 2*BLOCK_SIZE[1]));
         handler.addObject(new Bone(2*BLOCK_SIZE[0], 2*BLOCK_SIZE[1]));
         handler.addObject(new Steak(BLOCK_SIZE[0], 3*BLOCK_SIZE[1]));
         handler.addObject(new Mushroom(BLOCK_SIZE[0], 4*BLOCK_SIZE[1]));
         handler.addObject(new Exit(BLOCK_SIZE[0], 5*BLOCK_SIZE[1]));
-        //
+    
+        Random r = new Random();
 
-        // TODO for random movement testing only 
-        // r = new Random();
+        // Generate 20 rats with random positions within specified bounds
         // TODO if multiple levels, create attribute for # of rats
-        // for(int i = 0; i < 20; i++)
-        // handler.addObject(new Rat(r.nextInt(WIDTH - 200, HEIGHT - 150, 5))); // Penalty points set to 5
-        handler.addObject(new Rat(WIDTH - 200, HEIGHT - 150)); // Penalty points set to 5
-
+        for (int i = 0; i < 10; i++) {
+            int randomX = r.nextInt(Game.WIDTH - 200); // X coordinate within game width minus margin
+            int randomY = r.nextInt(Game.HEIGHT - 150); // Y coordinate within game height minus margin
+            handler.addObject(new Rat(randomX, randomY));
+        }
     }
-
 
      /**
      * Starts or resumes the game from the main menu.
@@ -129,16 +123,16 @@ public class Game extends Canvas implements Runnable {
         return gameWon;
     }
 
-    private void initializeGameObjects(){
-        //handler.clearObjects();
-        handler.addObject(new Doug(200, 200, ID.DOUG, handler));
-        handler.addObject(new Apple(BLOCK_SIZE[0], BLOCK_SIZE[1]));
-        handler.addObject(new Bone(BLOCK_SIZE[0], 2*BLOCK_SIZE[1]));
-        handler.addObject(new Steak(BLOCK_SIZE[0], 3*BLOCK_SIZE[1]));
-        handler.addObject(new Mushroom(BLOCK_SIZE[0], 4*BLOCK_SIZE[1]));
-        handler.addObject(new Exit(BLOCK_SIZE[0], 5*BLOCK_SIZE[1]));
+    // private void initializeGameObjects(){
+    //     //handler.clearObjects();
+    //     handler.addObject(new Doug(200, 200, ID.DOUG, handler));
+    //     handler.addObject(new Apple(BLOCK_SIZE[0], BLOCK_SIZE[1]));
+    //     handler.addObject(new Bone(BLOCK_SIZE[0], 2*BLOCK_SIZE[1]));
+    //     handler.addObject(new Steak(BLOCK_SIZE[0], 3*BLOCK_SIZE[1]));
+    //     handler.addObject(new Mushroom(BLOCK_SIZE[0], 4*BLOCK_SIZE[1]));
+    //     handler.addObject(new Exit(BLOCK_SIZE[0], 5*BLOCK_SIZE[1]));
         
-    }
+    // }
 
     /**
      * Starts the game in a new thread.
