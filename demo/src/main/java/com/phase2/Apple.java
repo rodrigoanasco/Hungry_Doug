@@ -12,8 +12,8 @@ public class Apple extends Reward {
 
     private Image appleSprite;
 
-    public Apple(int x, int y,RewardType rewardType) {
-        super(x,y, RewardType.APPLE, 10);
+    public Apple(int x, int y,RewardType rewardType,int rewardAmount) {
+        super(x,y, RewardType.APPLE, rewardAmount);
         try {
             appleSprite = ImageIO.read(getClass().getResource("/Apple.png"));
             appleSprite = appleSprite.getScaledInstance(OBJECT_SIZE[0], OBJECT_SIZE[1], Image.SCALE_DEFAULT);
@@ -23,8 +23,7 @@ public class Apple extends Reward {
     }
     
     public Rectangle getBounds() {
-        // return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
-        return new Rectangle(x,y,32,32);
+        return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
 
     }
 
@@ -36,6 +35,7 @@ public class Apple extends Reward {
     }
 
     public void render(Graphics g) {
+        // renderHitBox(g,OBJECT_SIZE[0],OBJECT_SIZE[1]);
         if (!collected) {
             g.drawImage(appleSprite, x, y, null);
         }
