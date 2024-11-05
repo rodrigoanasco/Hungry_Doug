@@ -81,7 +81,7 @@ public class Doug extends GameObject{
     }
     
     public Rectangle getBounds() {
-        return new Rectangle(x,y,48,48);
+        return new Rectangle(x,y,48-16,48-16);
     }
 
     /**
