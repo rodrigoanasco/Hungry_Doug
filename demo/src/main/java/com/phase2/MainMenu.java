@@ -2,6 +2,7 @@ package com.phase2;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -49,14 +50,23 @@ public class MainMenu implements KeyListener {
 
         g.setFont(new Font("Arial", Font.BOLD, 50));
         g.setColor(Color.WHITE);
-        g.drawString("Doug Game", Game.WIDTH / 2 - 150, Game.HEIGHT / 3);
+
+
+        // Use FontMetrics to calculate the width of the title
+        FontMetrics metrics = g.getFontMetrics();
+        int titleWidth = metrics.stringWidth("HUNGRY DOUG");
+        int titleX = (Game.WIDTH - titleWidth) / 2; // Center horizontally
+        int titleY = Game.HEIGHT / 3; // Keep the same vertical position
+        g.drawString("HUNGRY DOUG", titleX, titleY);
+
+        // g.drawString("DOUG'S BIG ADVENTURE", Game.WIDTH / 2 - 150, Game.HEIGHT / 3);
 
         g.setFont(new Font("Arial", Font.PLAIN, 30));
 
         // Render each button with highlighting for the selected button
-        renderButton(g, "Start Game", startButton, selectedButton == 0);
-        renderButton(g, "Instructions", instructionsButton, selectedButton == 1);
-        renderButton(g, "Exit", exitButton, selectedButton == 2);
+        renderButton(g, "START", startButton, selectedButton == 0);
+        renderButton(g, "RULES", instructionsButton, selectedButton == 1);
+        renderButton(g, "EXIT", exitButton, selectedButton == 2);
 
         // Instructions for selecting options, positioned slightly above the Exit button
         g.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -75,7 +85,7 @@ public class MainMenu implements KeyListener {
 
         g.setFont(new Font("Arial", Font.BOLD, 40));
         g.setColor(Color.WHITE);
-        g.drawString("Instructions", Game.WIDTH / 2 - 100, 100);
+        g.drawString("Rules", Game.WIDTH / 2 - 100, 100);
 
         g.setFont(new Font("Arial", Font.PLAIN, 25));
         g.drawString("- Use arrow keys or WASD to navigate Doug.", 100, 200);
@@ -98,7 +108,19 @@ public class MainMenu implements KeyListener {
     private void renderButton(Graphics g, String text, Rectangle button, boolean selected) {
         g.setColor(selected ? Color.YELLOW : Color.WHITE); // Highlight selected button
         g.drawRect(button.x, button.y, button.width, button.height);
-        g.drawString(text, button.x + 20, button.y + 35);
+        
+        // g.drawString(text, button.x + 20, button.y + 35);
+
+        // Set font and center text
+        g.setFont(new Font("Arial", Font.PLAIN, 30)); // Adjust font size as needed
+        FontMetrics metrics = g.getFontMetrics();
+        int textWidth = metrics.stringWidth(text);
+        int textHeight = metrics.getHeight();
+        int textX = button.x + (button.width - textWidth) / 2; // Center horizontally
+        int textY = button.y + (button.height - textHeight) / 2 + metrics.getAscent(); // Center vertically
+
+        g.setColor(Color.WHITE);
+        g.drawString(text, textX, textY);
     }
 
     @Override

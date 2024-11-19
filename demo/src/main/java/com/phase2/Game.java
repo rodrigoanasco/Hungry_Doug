@@ -109,7 +109,7 @@ public class Game extends Canvas implements Runnable {
         // Add Doug to the handler
         handler.addObject(doug);
 
-        generateRandomObjects(10, Rat.class, handler);
+        generateRandomObjects(0, Rat.class, handler);
         generateRandomObjects(10, Bone.class, handler);
         generateRandomObjects(5, Apple.class, handler);
         generateRandomObjects(5, Steak.class, handler);
