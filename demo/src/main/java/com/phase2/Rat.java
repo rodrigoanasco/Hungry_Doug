@@ -82,13 +82,13 @@ public class Rat extends MovingEnemy {
                 if (velX != 0) {
                     //when rat is moving in the x direction
                     velX = 0;
-                    velY = (y < doug.getY()) ? 1 : -1; // Only move vertically
+                    //velY = (y < doug.getY()) ? 1 : -1; // Only move vertically
                     
                 }
                 else if (velY != 0) {
                     //when rat is moving in the y direction
                     velY = 0;
-                    velX = (x < doug.getX()) ? 1 : -1;
+                    //velX = (x < doug.getX()) ? 1 : -1;
 
                 }
                 else {
