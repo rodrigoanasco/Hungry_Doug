@@ -8,6 +8,10 @@ import java.awt.Graphics;
 import java.util.Random;
 import java.awt.Color;
 
+/**
+ * Represents a Steak reward in the game.
+ * The Steak appears for a limited time, and the player can collect it for points before it disappears.
+ */
 public class Steak extends Reward {
 
     private Image steakSprite;
@@ -17,6 +21,13 @@ public class Steak extends Reward {
     private Boolean isAlive = true;
     Random r;
 
+    /**
+     * Constructs a Steak object at the specified coordinates.
+     * Initializes the steak sprite and sets random spawn and death times.
+     * 
+     * @param x The x-coordinate of the Steak.
+     * @param y The y-coordinate of the Steak.
+     */
     public Steak(int x, int y) {
         super(x,y, RewardType.STEAK, 20);
         r = new Random();
@@ -31,32 +42,52 @@ public class Steak extends Reward {
         }
     }
     
+    /**
+     * Gets the bounding rectangle of the Steak for collision detection.
+     * 
+     * @return A Rectangle representing the bounds of the Steak.
+     */
     public Rectangle getBounds() {
         return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
     }
 
+    /**
+     * Sets the alive status of the Steak, determining if it is active and collectible.
+     * 
+     * @param b True if the Steak is alive and collectible, false otherwise.
+     */
     public void setAlive(Boolean b) {
         this.isAlive = b;
     }
 
+    /**
+     * Updates the state of the Steak.
+     * The Steak becomes collectible after its spawn time and disappears after its death time.
+     */
     public void tick() {
         //to be implemented: checks if colliding with doug
         //System.out.println(this.lifetime);
         if (this.lifetime < this.spawntime*60 || this.lifetime > this.deathtime*60) {
-            this.collected = true;
+            this.collected = true; // Steak is not collectible outside of spawn-death window
             lifetime++;
         }
         else {
             if (isAlive) {
                 lifetime++;
-                this.collected =false;
+                this.collected =false; // Steak is collectible during its active period
             }
             else {
-                this.collected = true;
+                this.collected = true; // Steak is no longer collectible if not alive
             }
         }
     }
     
+    /**
+     * Renders the Steak on the screen if it is currently collectible.
+     * Displays the remaining time until the Steak disappears.
+     * 
+     * @param g The Graphics object used to draw the Steak.
+     */
     public void render(Graphics g) {
         // renderHitBox(g,OBJECT_SIZE[0],OBJECT_SIZE[1]);
         if (!this.collected) {

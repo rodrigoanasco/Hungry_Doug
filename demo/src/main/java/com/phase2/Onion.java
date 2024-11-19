@@ -8,8 +8,12 @@ public class Onion extends Punishment {
     public Onion(int x, int y) {
         super(x,y, PunishmentType.ONION, 10);
     }
-    
-    // TODO 32 gets replaced with whatever the size of onion 
+
+    /**
+     * Gets the bounding rectangle of Doug for collision detection.
+     * 
+     * @return A Rectangle representing Doug's bounds.
+     */
     public Rectangle getBounds() {
         return new Rectangle(x,y,32,32);
     }

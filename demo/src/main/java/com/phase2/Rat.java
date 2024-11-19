@@ -57,6 +57,11 @@ public class Rat extends MovingEnemy {
         velY = 1;
     }
 
+    /**
+     * Gets the bounding rectangle of Doug for collision detection.
+     * 
+     * @return A Rectangle representing Doug's bounds.
+     */
     public Rectangle getBounds() {
         return new Rectangle(x,y,32,32);
     }
@@ -85,8 +90,7 @@ public class Rat extends MovingEnemy {
         x += velX;
         y += velY;
 
-        // TODO account for borders
-        // atttribute for horizontal/vertical movement
+        // Flips direction upon hitting game boundary
         if(y < 0 || y >= Game.HEIGHT - 100) velY *= -1;
         if(x < 0 || x >= Game.WIDTH - 100) velX *= -1;
 

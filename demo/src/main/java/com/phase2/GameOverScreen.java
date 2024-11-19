@@ -14,6 +14,12 @@ public class GameOverScreen implements KeyListener {
 
     private Game game; // Reference to the main game
 
+
+    /**
+     * Constructs a GameOverScreen that is associated with the main game.
+     * 
+     * @param game The main game instance.
+     */
     public GameOverScreen(Game game) {
         this.game = game;
         game.addKeyListener(this); // Listen for "Enter" key press
@@ -36,7 +42,9 @@ public class GameOverScreen implements KeyListener {
     }
 
     /**
-     * Handles the "Enter" key press to reset the game.
+     * Handles the "Enter" key press event to restart the game.
+     * 
+     * @param e The KeyEvent triggered by the key press.
      */
     @Override
     public void keyPressed(KeyEvent e) {
