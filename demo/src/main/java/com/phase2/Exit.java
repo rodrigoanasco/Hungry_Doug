@@ -48,7 +48,8 @@ public class Exit extends GameObject {
      * Currently, the Exit does not have any behavior to update each tick.
      */
     public void tick() {
-
+        
+        //System.out.println(Score.boneScore + " " + Score.boneTotal);
     }
 
     /**

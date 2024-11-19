@@ -222,7 +222,7 @@ public class Doug extends GameObject{
                 }
             }
         }
-    
+        
         // Check for collisions in the Y direction
         Rectangle predictedBoundsY = new Rectangle(x, predictedY, getBounds().width, getBounds().height);
         for (GameObject temp : handler.objects) {
@@ -247,6 +247,8 @@ public class Doug extends GameObject{
                                 int rewardAmount = reward.getRewardAmount();
                                 Score.SCORE += rewardAmount;
                                 reward.setCollected(true); // Mark as collected
+                                if (reward.getType() == RewardType.BONE) Score.boneScore++;
+                                if (reward.getType() == RewardType.STEAK) ((Steak)reward).setAlive(false);
                             }
                         }
                         break;

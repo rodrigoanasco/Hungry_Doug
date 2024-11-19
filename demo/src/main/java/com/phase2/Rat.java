@@ -96,6 +96,7 @@ public class Rat extends MovingEnemy {
 
     }
     
+ 
     /**
      * Visually renders the object
      */
