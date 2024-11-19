@@ -73,8 +73,25 @@ public class Rat extends MovingEnemy {
         
         // Access the singleton instance of Doug
         Doug doug = Doug.getInstance();
+        Rectangle assumedBushHitbox = new Rectangle(500, 10, 32, 500);
+        Rectangle hitbox = this.getBounds();
 
         if (doug != null) {
+            if (assumedBushHitbox.intersects(hitbox)) {
+                if (velX != 0) {
+                    //when rat is moving in the x direction
+                    velY = 1;
+                    
+                }
+                else if (velY != 0) {
+                    //when rat is moving in the y direction
+
+                }
+                else {
+                    //throw error rats should only have one vector that is not 0
+                    return;
+                }
+            }
             // Simple movement logic: move horizontally or vertically toward Doug
             if (x != doug.getX()) {
                 velX = (x < doug.getX()) ? 1 : -1;
