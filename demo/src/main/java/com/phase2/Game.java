@@ -109,11 +109,11 @@ public class Game extends Canvas implements Runnable {
         // Add Doug to the handler
         handler.addObject(doug);
 
-        generateRandomObjects(0, Rat.class, handler);
-        generateRandomObjects(10, Bone.class, handler);
-        generateRandomObjects(5, Apple.class, handler);
-        generateRandomObjects(5, Steak.class, handler);
-        generateRandomObjects(5, Mushroom.class, handler);
+        generateRandomObjects(10, Rat.class, handler,100);
+        generateRandomObjects(10, Bone.class, handler, 5);
+        generateRandomObjects(5, Apple.class, handler,5);
+        generateRandomObjects(5, Steak.class, handler, 5);
+        generateRandomObjects(5, Mushroom.class, handler,5);
         handler.addObject(new Exit(BLOCK_SIZE[0], 5*BLOCK_SIZE[1]));
 
         
@@ -233,15 +233,21 @@ public class Game extends Canvas implements Runnable {
  * @param objectType The class type of the game objects to create.
  * @param handler The handler responsible for managing the game objects.
  */
-    public void generateRandomObjects(int count, Class<? extends GameObject> objectType, Handler handler) {
+    public void generateRandomObjects(int count, Class<? extends GameObject> objectType, Handler handler, int minDistanceFromDoug) {
         r = new Random();
-        
+        Doug doug = Doug.getInstance(); // Get the singleton instance of Doug
+
         for (int i = 0; i < count; i++) {
-            int randomX = r.nextInt(Game.WIDTH - 200); // X coordinate within game width minus margin
-            int randomY = r.nextInt(Game.HEIGHT - 150); // Y coordinate within game height minus margin
-            
+            int randomX, randomY;
+    
+            // Generate positions until they are at least minDistanceFromDoug from Doug
+            do {
+                randomX = r.nextInt(Game.WIDTH - 200); // X coordinate within game width minus margin
+                randomY = r.nextInt(Game.HEIGHT - 150); // Y coordinate within game height minus margin
+            } while (distance(randomX, randomY, doug.getX(), doug.getY()) < minDistanceFromDoug);
+    
             try {
-                // Use reflection to create a new instance of the object type
+                // Create a new instance of the object type
                 GameObject obj = objectType.getConstructor(int.class, int.class).newInstance(randomX, randomY);
                 handler.addObject(obj);
             } catch (Exception e) {
@@ -249,6 +255,14 @@ public class Game extends Canvas implements Runnable {
             }
         }
     }
+
+    /**
+     * Helper method to calculate distance between two points
+     */
+    private double distance(int x1, int y1, int x2, int y2) {
+        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    }
+
      /**
      * Starts or resumes the game from the main menu.
      */
