@@ -24,6 +24,7 @@ public class Rat extends MovingEnemy {
 
     private boolean moving = false;
     private boolean facingRight = true;
+    Rectangle assumedBushHitbox = new Rectangle(500, 10, 32, 500);
 
     private static final double SCALE_FACTOR = 1.25;
 
@@ -73,27 +74,31 @@ public class Rat extends MovingEnemy {
         
         // Access the singleton instance of Doug
         Doug doug = Doug.getInstance();
-        Rectangle assumedBushHitbox = new Rectangle(500, 10, 32, 500);
+        
         Rectangle hitbox = this.getBounds();
 
         if (doug != null) {
             if (assumedBushHitbox.intersects(hitbox)) {
                 if (velX != 0) {
                     //when rat is moving in the x direction
-                    velY = 1;
+                    velX = 0;
+                    velY = (y < doug.getY()) ? 1 : -1; // Only move vertically
                     
                 }
                 else if (velY != 0) {
                     //when rat is moving in the y direction
+                    velY = 0;
+                    velX = (x < doug.getX()) ? 1 : -1;
 
                 }
                 else {
                     //throw error rats should only have one vector that is not 0
+                    System.out.println("test");
                     return;
                 }
             }
             // Simple movement logic: move horizontally or vertically toward Doug
-            if (x != doug.getX()) {
+            else if (x != doug.getX()) {
                 velX = (x < doug.getX()) ? 1 : -1;
                 facingRight = (x < doug.getX()) ? true : false;
                 velY = 0; // Only move horizontally
@@ -121,6 +126,9 @@ public class Rat extends MovingEnemy {
 
         Graphics2D g2d = (Graphics2D) g;
 
+
+        g.drawRect(500, 10, (int)assumedBushHitbox.getWidth(), (int)assumedBushHitbox.getHeight());
+        
         // Rat is moving or idle
         BufferedImage spriteToDraw = moving ? walkSprites[currentFrame] : idleSprites[currentFrame];
 
