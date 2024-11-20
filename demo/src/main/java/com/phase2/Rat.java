@@ -91,6 +91,7 @@ public class Rat extends MovingEnemy {
                 if (temp.getBounds().intersects(hitbox)) {
                     char direction = 'x';
                     if (pathfinding) {
+                        //pathfinding = true;
                         pathfinding = pathfind((Bush)temp, direction);
                     }
 
@@ -114,7 +115,7 @@ public class Rat extends MovingEnemy {
         LinkedList<Bush> bushList = new LinkedList<Bush >();
         Bush boundingBush1 = new Bush(0,0);
         Bush boundingBush2 = new Bush(0,0);;
-
+        System.out.println("hello");
         if (direction == 'y') {
             int value = (this.y-setBush.getY() > 0) ? -1 : 1 ; 
 
@@ -134,9 +135,43 @@ public class Rat extends MovingEnemy {
                         }
                     }
                 }
-                
-            
             }
+            int lastBush1 = isBushLastX(bushList, setBush, (int)(-1*setBush.getBounds().getWidth()));
+            int lastBush2 = isBushLastX(bushList, setBush, (int)(1*setBush.getBounds().getWidth()));
+            int leavePoint = 0;
+
+            if (lastBush1 < boundingBush1.getX()) {
+                lastBush1 = -1;
+            }
+            if (lastBush2 > boundingBush2.getX()) {
+                lastBush2 = -1;
+            }
+            if (lastBush1 == -1) {
+                leavePoint = lastBush2;
+                return false;
+            }
+            else if (lastBush2 == -1) {
+                leavePoint = lastBush1;
+                return false;
+            }
+            else if (lastBush2 == -1 && lastBush1 == -1) {
+                int a = isBushLastY(bushList, boundingBush2, (int)(value*setBush.getBounds().getWidth()));
+                int b = isBushLastY(bushList, boundingBush2, (int)(value*setBush.getBounds().getWidth()));
+                leavePoint = (a-b<0) ? a : b;
+            }
+            else {
+                int a = lastBush1 - this.getX();
+                int b = lastBush2 - this.getX();
+                leavePoint = (a>b) ? a : b;
+            }
+
+
+
+
+
+            
+            
+
         }
         else if (direction == 'x') {
             int value = (this.x-setBush.getX() > 0) ? -1 : 1 ; 
@@ -155,8 +190,38 @@ public class Rat extends MovingEnemy {
                         }
                     }
                 }
-            
+
             }
+            int lastBush1 = isBushLastY(bushList, setBush, (int)(-1*setBush.getBounds().getWidth()));
+            int lastBush2 = isBushLastY(bushList, setBush, (int)(1*setBush.getBounds().getWidth()));
+            int leavePoint = 0;
+
+            if (lastBush1 < boundingBush1.getY()) {
+                lastBush1 = -1;
+            }
+            if (lastBush2 > boundingBush2.getY()) {
+                lastBush2 = -1;
+            }
+            if (lastBush1 == -1) {
+                leavePoint = lastBush2;
+                return false;
+            }
+            else if (lastBush2 == -1) {
+                leavePoint = lastBush1;
+                return false;
+            }
+            else if (lastBush2 == -1 && lastBush1 == -1) {
+                int a = isBushLastY(bushList, boundingBush2, (int)(value*setBush.getBounds().getWidth()));
+                int b = isBushLastY(bushList, boundingBush2, (int)(value*setBush.getBounds().getWidth()));
+                leavePoint = (a-b<0) ? a : b;
+            }
+            else {
+                int a = lastBush1 - this.getY();
+                int b = lastBush2 - this.getY();
+                leavePoint = (a>b) ? a : b;
+            }
+
+
         }
         else {
             //error direction should be y or x
@@ -172,14 +237,29 @@ public class Rat extends MovingEnemy {
         return false;
     }
 
-    private int isBushLast(LinkedList<Bush> bushList, Bush wall, int mult) {
+    private int isBushLastX(LinkedList<Bush> bushList, Bush wall, int mult) {
         //X direction
         int nextBushPos = wall.getX() + mult;
         //boolean nextBush = false;
 
         for (Bush temp : bushList) {
             if (temp.getX()-nextBushPos < 7) {
-                nextBushPos = isBushLast(bushList, temp, mult);
+                nextBushPos = isBushLastX(bushList, temp, mult);
+                break;
+            }
+        }
+
+        return nextBushPos;
+    }
+
+    private int isBushLastY(LinkedList<Bush> bushList, Bush wall, int mult) {
+        //X direction
+        int nextBushPos = wall.getY() + mult;
+        //boolean nextBush = false;
+
+        for (Bush temp : bushList) {
+            if (temp.getY()-nextBushPos < 7) {
+                nextBushPos = isBushLastY(bushList, temp, mult);
                 break;
             }
         }
