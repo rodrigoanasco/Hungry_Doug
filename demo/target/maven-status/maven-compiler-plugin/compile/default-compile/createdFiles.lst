@@ -17,6 +17,7 @@ com\phase2\Punishment.class
 com\phase2\Cat.class
 com\phase2\Health.class
 com\phase2\RottenFood.class
+com\phase2\BackgroundMusic.class
 com\phase2\DebugBuild.class
 com\phase2\EnemyType.class
 com\phase2\PunishmentType.class

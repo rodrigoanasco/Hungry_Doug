@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import javax.sound.sampled.*;
 
 import javax.imageio.ImageIO;
 
@@ -49,6 +50,8 @@ public class Game extends Canvas implements Runnable {
     // Define grid as a map of cells containing game objects
     public static HashMap<String, ArrayList<GameObject>> grid = new HashMap<>();
 
+    private BackgroundMusic backgroundMusic;
+
     public static int getCellIndex(int coordinate) {
         return coordinate / GRID_SIZE;
     }
@@ -81,6 +84,11 @@ public class Game extends Canvas implements Runnable {
      */
     public Game() {
         
+
+        // Initialize the backgroundMusic object first
+        backgroundMusic = new BackgroundMusic();
+        backgroundMusic.play("/backgroundmusic.wav");
+
     // TODO if multiple levels, create attribute for numbers of enemies/rewards to generate
     // then pass to a main class?
         handler = new Handler(this);
@@ -318,15 +326,21 @@ public class Game extends Canvas implements Runnable {
     /**
      * Stops the game thread safely.
      */
-    public synchronized void stop () {
+    public synchronized void stop() {
         try {
-                thread.join();
-                running = false;
-        } 
-        catch (Exception e) {
-                e.printStackTrace();
+            // Stop the background music if it's playing
+            if (backgroundMusic != null) {
+                backgroundMusic.stop();
+            }
+    
+            // Join the game thread to ensure it exits cleanly
+            thread.join();
+            running = false;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
+    
 
     /**
      * The main game loop that handles game updates and rendering.
