@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-import javax.sound.sampled.*;
 
 import javax.imageio.ImageIO;
 
@@ -589,10 +588,7 @@ public class Game extends Canvas implements Runnable {
      * Resets the game to its initial state, including health, score, and game objects.
      */
     public void resetGame(){
-        /* gameOver = false;
-        health.resetHealt();
-        score.resetScore();
-        initializeGameObjects(); */
+        gameOver = false;
     } 
 
     /**
@@ -600,7 +596,7 @@ public class Game extends Canvas implements Runnable {
      * 
      * @return True if the game is over (health is zero or below), false otherwise.
      */
-    private boolean checkGameOver() {
+    public boolean checkGameOver() {
         if (Health.HEALTH <= 0) {
             gameOver = true;
             return true;

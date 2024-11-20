@@ -48,7 +48,7 @@ public class GameOverScreen implements KeyListener {
      */
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER && game.checkGameOver()) {
             game.resetGame(); // Reseting the game (doug goes back to initial position, etc...)
         }
     }
