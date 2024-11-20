@@ -229,6 +229,14 @@ public class Doug extends GameObject{
                         // Collision behavior for obstacles
                         if (temp instanceof Obstacle) {
                             canMoveX = false; // Prevent movement in x direction if collision occurs
+                        
+                        // Push Doug out of the obstacle
+                        if (velX > 0) { // Moving right
+                            x = temp.getBounds().x - getBounds().width;
+                        } else if (velX < 0) { // Moving left
+                            x = temp.getBounds().x + temp.getBounds().width;
+                        }
+                        
                         }
                         break;
     
@@ -289,6 +297,14 @@ public class Doug extends GameObject{
                         // Collision behavior for obstacles
                         if (temp instanceof Obstacle) {
                             canMoveY = false; // Prevent movement in y direction if collision occurs
+                        
+                        // Push Doug out of the obstacle
+                        if (velY > 0) { // Moving down
+                            y = temp.getBounds().y - getBounds().height;
+                        } else if (velY < 0) { // Moving up
+                            y = temp.getBounds().y + temp.getBounds().height;
+                        }
+                        
                         }
                         break;
     
