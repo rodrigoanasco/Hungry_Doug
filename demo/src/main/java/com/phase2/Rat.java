@@ -162,6 +162,8 @@ public class Rat extends MovingEnemy {
             //error direction should be y or x
             return false;
         }
+
+
         
 
 
@@ -170,11 +172,19 @@ public class Rat extends MovingEnemy {
         return false;
     }
 
-    private int findBushless(LinkedList<Bush> bushList, Bush wall, int mult, char direction) {
+    private int isBushLast(LinkedList<Bush> bushList, Bush wall, int mult) {
         //X direction
-        int v = wall.getX() + mult;
+        int nextBushPos = wall.getX() + mult;
+        //boolean nextBush = false;
 
-        return 0;
+        for (Bush temp : bushList) {
+            if (temp.getX()-nextBushPos < 7) {
+                nextBushPos = isBushLast(bushList, temp, mult);
+                break;
+            }
+        }
+
+        return nextBushPos;
     }
     
  
