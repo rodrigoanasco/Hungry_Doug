@@ -19,7 +19,7 @@ public class Rat extends MovingEnemy {
     private BufferedImage[] idleSprites;
     private BufferedImage[] walkSprites;
     private int currentFrame = 0;
-    private int frameDelay = 5; // Controls animation speed
+    private int frameDelay = 25; // Controls animation speed
     private int frameCount = 0;
 
     private boolean moving = false;
@@ -78,74 +78,21 @@ public class Rat extends MovingEnemy {
         Doug doug = Doug.getInstance();
         
         Rectangle hitbox = this.getBounds();
-        hitbox.setBounds(x, y, (int)(hitbox.getWidth()+velX), (int)hitbox.getHeight()+velY);
+        Rectangle intersection = new Rectangle();
+        hitbox.setBounds((int)(x+0.75*velX), (int)(y+0.75*velX), (int)(hitbox.getWidth()+5*velX), (int)hitbox.getHeight()+5*velY);
 
 
         for (GameObject temp : Handler.objects) {
             if (temp instanceof Obstacle) {
+                //intersection = temp.getBounds().intersection(hitbox);
                 if (temp.getBounds().intersects(hitbox)) {
-                    if (velX != 0) {
-                        //when rat is moving in the x direction
-                        x -= velX;
-        
-    
-    
-                    }
-                    else if (velY != 0) {
-                        //when rat is moving in the y direction
-                        y -= velY;
-    
-    
-                    }
-                    else {
-                        //throw error rats should only have one vector that is not 0
-                        //System.out.println("test");
-                        //return;
-                    }
-                }
+                
 
+                }
             }
-            if (x != doug.getX()) {
-                velX = (x < doug.getX()) ? 1 : -1;
-                facingRight = (x < doug.getX()) ? true : false;
-                velY = 0; // Only move horizontally
-            } else if (y != doug.getY()) {
-                velX = 0;
-                velY = (y < doug.getY()) ? 1 : -1; // Only move vertically
-            }
+
         }
-        /*if (doug != null) {
-            if (assumedBushHitbox.intersects(hitbox)) {
-                if (velX != 0) {
-                    //when rat is moving in the x direction
-                    x -= velX;
-                    // velX = 0;
-                    //velY = (y < doug.getY()) ? 1 : -1; // Only move vertically
-                    
-                }
-                else if (velY != 0) {
-                    //when rat is moving in the y direction
-                    y -= velY;
-                    // velY = 0;
-                    //velX = (x < doug.getX()) ? 1 : -1;
 
-                }
-                else {
-                    //throw error rats should only have one vector that is not 0
-                    System.out.println("test");
-                    return;
-                }
-            }
-            // Simple movement logic: move horizontally or vertically toward Doug
-            if (x != doug.getX()) {
-                velX = (x < doug.getX()) ? 1 : -1;
-                facingRight = (x < doug.getX()) ? true : false;
-                velY = 0; // Only move horizontally
-            } else if (y != doug.getY()) {
-                velX = 0;
-                velY = (y < doug.getY()) ? 1 : -1; // Only move vertically
-            }
-        }*/
     
         // Update position based on velocity
         x += velX;
@@ -156,6 +103,7 @@ public class Rat extends MovingEnemy {
         if(x < 0 || x >= Game.WIDTH - 100) velX *= -1;
 
     }
+
     
  
     /**
