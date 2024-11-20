@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
+import java.util.LinkedList;
+import java.lang.Math;
 
 /**
  * Class for the moving enemy type Rat
@@ -23,6 +25,7 @@ public class Rat extends MovingEnemy {
     private int frameCount = 0;
 
     private boolean moving = false;
+    private boolean pathfinding = false;
     private boolean facingRight = true;
     //testing Rectangle assumedBushHitbox = new Rectangle(500, 10, 32, 500);
 
@@ -78,15 +81,18 @@ public class Rat extends MovingEnemy {
         Doug doug = Doug.getInstance();
         
         Rectangle hitbox = this.getBounds();
-        Rectangle intersection = new Rectangle();
-        hitbox.setBounds((int)(x+0.75*velX), (int)(y+0.75*velX), (int)(hitbox.getWidth()+5*velX), (int)hitbox.getHeight()+5*velY);
+        //Rectangle intersection = new Rectangle();
+        //hitbox.setBounds((int)(x+0.75*velX), (int)(y+0.75*velX), (int)(hitbox.getWidth()+5*velX), (int)hitbox.getHeight()+5*velY);
 
 
         for (GameObject temp : Handler.objects) {
-            if (temp instanceof Obstacle) {
+            if (temp instanceof Bush) {
                 //intersection = temp.getBounds().intersection(hitbox);
                 if (temp.getBounds().intersects(hitbox)) {
-                
+                    char direction = 'x';
+                    if (pathfinding) {
+                        pathfinding = pathfind((Bush)temp, direction);
+                    }
 
                 }
             }
@@ -104,6 +110,72 @@ public class Rat extends MovingEnemy {
 
     }
 
+    private boolean pathfind(Bush setBush, char direction) {
+        LinkedList<Bush> bushList = new LinkedList<Bush >();
+        Bush boundingBush1 = new Bush(0,0);
+        Bush boundingBush2 = new Bush(0,0);;
+
+        if (direction == 'y') {
+            int value = (this.y-setBush.getY() > 0) ? -1 : 1 ; 
+
+
+            
+            for (GameObject temp : Handler.objects) {
+                if (temp instanceof Bush) {
+                    if (Math.abs(setBush.getX()-temp.getX()) < 10){
+                        bushList.add((Bush)temp);
+                    }
+                    if (Math.abs(setBush.getX()-(value*setBush.getBounds().getWidth())) -temp.getX() < 10) {
+                        if (this.x - temp.getX() < this.x-boundingBush1.getX() || this.x - temp.getX() > 0) {
+                            boundingBush1 = (Bush)temp;
+                        }
+                        if (this.x - temp.getX() > this.x-boundingBush1.getX() || this.x - temp.getX() < 0) {
+                            boundingBush2 = (Bush)temp;
+                        }
+                    }
+                }
+                
+            
+            }
+        }
+        else if (direction == 'x') {
+            int value = (this.x-setBush.getX() > 0) ? -1 : 1 ; 
+            
+            for (GameObject temp : Handler.objects) {
+                if (temp instanceof Bush) {
+                    if ((Math.abs(setBush.getY()-temp.getY()) < 7)){
+                        bushList.add((Bush)temp);
+                    }
+                    if (Math.abs(setBush.getY()-(value*setBush.getBounds().getHeight())) -temp.getY() < 7) {
+                        if (this.y - temp.getY() < this.y-boundingBush1.getY() || this.y - temp.getY() > 0) {
+                            boundingBush1 = (Bush)temp;
+                        }
+                        if (this.y - temp.getY() > this.y-boundingBush1.getY() || this.y - temp.getY() < 0) {
+                            boundingBush2 = (Bush)temp;
+                        }
+                    }
+                }
+            
+            }
+        }
+        else {
+            //error direction should be y or x
+            return false;
+        }
+        
+
+
+
+
+        return false;
+    }
+
+    private int findBushless(LinkedList<Bush> bushList, Bush wall, int mult, char direction) {
+        //X direction
+        int v = wall.getX() + mult;
+
+        return 0;
+    }
     
  
     /**
