@@ -180,6 +180,7 @@ public class Doug extends GameObject{
                                     : ((Punishment) temp).getPenaltyPoints();
     
                             Health.HEALTH -= penaltyPoints;
+                            SoundEffect.play("/whimper.wav");
                         }
                         break;
     
@@ -191,6 +192,10 @@ public class Doug extends GameObject{
                                 int rewardAmount = reward.getRewardAmount();
                                 Score.SCORE += rewardAmount;
                                 reward.setCollected(true); // Mark as collected
+
+                                // Play munch sound
+                                SoundEffect.play("/munch.wav");
+
                                 if (reward.getType() == RewardType.BONE) Score.boneScore++;
                                 if (reward.getType() == RewardType.STEAK) ((Steak)reward).setAlive(false);
                             }
@@ -238,6 +243,7 @@ public class Doug extends GameObject{
                                     : ((Punishment) temp).getPenaltyPoints();
     
                             Health.HEALTH -= penaltyPoints;
+                            SoundEffect.play("/whimper.wav");
                         }
                         break;
     
@@ -248,6 +254,10 @@ public class Doug extends GameObject{
                             if (!reward.isCollected()) {
                                 int rewardAmount = reward.getRewardAmount();
                                 Score.SCORE += rewardAmount;
+                                
+                                // Play munch sound
+                                SoundEffect.play("/munch.wav");
+                                
                                 reward.setCollected(true); // Mark as collected
                                 if (reward.getType() == RewardType.BONE) Score.boneScore++;
                                 if (reward.getType() == RewardType.STEAK) ((Steak)reward).setAlive(false);
