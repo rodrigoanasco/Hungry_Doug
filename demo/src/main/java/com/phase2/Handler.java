@@ -27,10 +27,10 @@ public class Handler {
      * Updates all game objects in the game.
      * This is called for every game tick.
      */
-    public void tick(){
-        for(int i = 0; i < objects.size(); i++){
-            GameObject tempObject = objects.get(i); 
-            tempObject.tick(); 
+    public synchronized void tick() {
+        for (int i = 0; i < objects.size(); i++) {
+            GameObject tempObject = objects.get(i);
+            tempObject.tick();
         }
     }
 
@@ -61,7 +61,7 @@ public class Handler {
      * 
      * @param object the GameObject to be added
      */
-    public void addObject(GameObject object){
+    public synchronized void addObject(GameObject object) {
         this.objects.add(object);
     }
 
@@ -70,8 +70,8 @@ public class Handler {
      * 
      * @param object the GameObject to be removed
      */
-    public void removeObject(GameObject object){
-        this.objects.remove(object); 
+    public synchronized void removeObject(GameObject object) {
+        this.objects.remove(object);
     }
 
     /**

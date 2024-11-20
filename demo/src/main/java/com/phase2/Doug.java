@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 
@@ -167,7 +168,8 @@ public class Doug extends GameObject{
     
         // Check for collisions in the X direction
         Rectangle predictedBoundsX = new Rectangle(predictedX, y, getBounds().width, getBounds().height);
-        for (GameObject temp : handler.objects) {
+        synchronized (handler.objects) {
+        for (GameObject temp : new LinkedList<>(handler.objects)) {
             if (temp.getBounds().intersects(predictedBoundsX)) {
                 switch (temp.getId()) {
                     case ENEMY:
@@ -222,7 +224,7 @@ public class Doug extends GameObject{
                 }
             }
         }
-        
+    }
         // Check for collisions in the Y direction
         Rectangle predictedBoundsY = new Rectangle(x, predictedY, getBounds().width, getBounds().height);
         for (GameObject temp : handler.objects) {
