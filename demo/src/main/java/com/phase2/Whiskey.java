@@ -3,11 +3,11 @@ package com.phase2;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class RottenFood extends Punishment{
+public class Whiskey extends Punishment{
     // TODO RottenFood not being used yet
 
-    public RottenFood(int x, int y){
-        super(x, y, PunishmentType.ROTTEN_FOOD, 10);
+    public Whiskey(int x, int y){
+        super(x, y, PunishmentType.WHISKEY, 10);
     }
 
     /**
