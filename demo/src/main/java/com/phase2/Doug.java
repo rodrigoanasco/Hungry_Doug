@@ -174,13 +174,21 @@ public class Doug extends GameObject{
                 switch (temp.getId()) {
                     case ENEMY:
                         // Collision behavior for enemy
-                        if (temp instanceof MovingEnemy || temp instanceof Punishment) {
-                            int penaltyPoints = temp instanceof MovingEnemy
-                                    ? ((MovingEnemy) temp).getPenaltyPoints()
-                                    : ((Punishment) temp).getPenaltyPoints();
-    
+                        if (temp instanceof MovingEnemy) {
+                            int penaltyPoints = ((MovingEnemy) temp).getPenaltyPoints();
                             Health.HEALTH -= penaltyPoints;
                             SoundEffect.play("/whimper.wav");
+                        }
+                        if (temp instanceof Punishment) {
+                            if (!((Punishment)temp).isCollected()) {
+                                int penaltyPoints = ((Punishment) temp).getPenaltyPoints();
+                            
+
+                            ((Punishment)temp).setCollected(true);
+                            Health.HEALTH -= penaltyPoints;
+                                //sound effect here
+
+                            }
                         }
                         break;
     
@@ -237,14 +245,24 @@ public class Doug extends GameObject{
                 switch (temp.getId()) {
                     case ENEMY:
                         // Collision behavior for enemy
-                        if (temp instanceof MovingEnemy || temp instanceof Punishment) {
-                            int penaltyPoints = temp instanceof MovingEnemy
-                                    ? ((MovingEnemy) temp).getPenaltyPoints()
-                                    : ((Punishment) temp).getPenaltyPoints();
-    
+                        if (temp instanceof MovingEnemy) {
+                            int penaltyPoints = ((MovingEnemy) temp).getPenaltyPoints();
                             Health.HEALTH -= penaltyPoints;
                             SoundEffect.play("/whimper.wav");
                         }
+                        if (temp instanceof Punishment) {
+                            if (!((Punishment)temp).isCollected()) {
+                                int penaltyPoints = ((Punishment) temp).getPenaltyPoints();
+                            
+
+                            ((Punishment)temp).setCollected(true);
+                            Health.HEALTH -= penaltyPoints;
+                                //sound effect here
+
+                            }
+                        }
+                        
+
                         break;
     
                     case REWARD:
