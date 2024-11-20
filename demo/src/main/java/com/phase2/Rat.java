@@ -81,13 +81,15 @@ public class Rat extends MovingEnemy {
             if (assumedBushHitbox.intersects(hitbox)) {
                 if (velX != 0) {
                     //when rat is moving in the x direction
-                    velX = 0;
+                    x -= velX;
+                    // velX = 0;
                     //velY = (y < doug.getY()) ? 1 : -1; // Only move vertically
                     
                 }
                 else if (velY != 0) {
                     //when rat is moving in the y direction
-                    velY = 0;
+                    y -= velY;
+                    // velY = 0;
                     //velX = (x < doug.getX()) ? 1 : -1;
 
                 }
@@ -98,7 +100,7 @@ public class Rat extends MovingEnemy {
                 }
             }
             // Simple movement logic: move horizontally or vertically toward Doug
-            else if (x != doug.getX()) {
+            if (x != doug.getX()) {
                 velX = (x < doug.getX()) ? 1 : -1;
                 facingRight = (x < doug.getX()) ? true : false;
                 velY = 0; // Only move horizontally
