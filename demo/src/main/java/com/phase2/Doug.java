@@ -177,7 +177,7 @@ public class Doug extends GameObject{
                         if (temp instanceof MovingEnemy) {
                             int penaltyPoints = ((MovingEnemy) temp).getPenaltyPoints();
                             Health.HEALTH -= penaltyPoints;
-                            SoundEffect.play("/whimper.wav");
+                            SoundEffect.play("/squeak.wav");
                         }
                         if (temp instanceof Punishment) {
                             if (!((Punishment)temp).isCollected()) {
@@ -186,6 +186,7 @@ public class Doug extends GameObject{
 
                             ((Punishment)temp).setCollected(true);
                             Health.HEALTH -= penaltyPoints;
+                            SoundEffect.play("/whimper.wav");
                                 //sound effect here
 
                             }
@@ -248,7 +249,7 @@ public class Doug extends GameObject{
                         if (temp instanceof MovingEnemy) {
                             int penaltyPoints = ((MovingEnemy) temp).getPenaltyPoints();
                             Health.HEALTH -= penaltyPoints;
-                            SoundEffect.play("/whimper.wav");
+                            SoundEffect.play("/squeak.wav");
                         }
                         if (temp instanceof Punishment) {
                             if (!((Punishment)temp).isCollected()) {
@@ -257,8 +258,9 @@ public class Doug extends GameObject{
 
                             ((Punishment)temp).setCollected(true);
                             Health.HEALTH -= penaltyPoints;
+                            
                                 //sound effect here
-
+                                SoundEffect.play("/whimper.wav");
                             }
                         }
                         
