@@ -57,7 +57,11 @@ public class Game extends Canvas implements Runnable {
         return coordinate / GRID_SIZE;
     }
 
-    // Method to add an object to the grid
+    /**
+     * Add an objet to the grid
+     * 
+     * @param object the object to be added
+     */
     public static void addToGrid(GameObject object) {
         int cellX = getCellIndex(object.getX());
         int cellY = getCellIndex(object.getY());
@@ -67,7 +71,11 @@ public class Game extends Canvas implements Runnable {
         grid.get(key).add(object);
     }
 
-    // Method to remove an object from the grid
+    /**
+     * Remove an object from the grid
+     * 
+     * @param object the object to be removed
+     */
     public static void removeFromGrid(GameObject object) {
         int cellX = getCellIndex(object.getX());
         int cellY = getCellIndex(object.getY());
@@ -77,7 +85,6 @@ public class Game extends Canvas implements Runnable {
             grid.get(key).remove(object);
         }
     }
-    // private static final double BUSH_SCALE_FACTOR = 0.025;
 
     /**
      * Constructor for the Game class.
@@ -85,13 +92,10 @@ public class Game extends Canvas implements Runnable {
      */
     public Game() {
         
-
         // Initialize the backgroundMusic object first
         backgroundMusic = new BackgroundMusic();
         backgroundMusic.play("/backgroundmusic.wav");
 
-    // TODO if multiple levels, create attribute for numbers of enemies/rewards to generate
-    // then pass to a main class?
         handler = new Handler(this);
         mainMenu = new MainMenu(this); //Initialize Main Menu
         winningScreen = new WinningScreen(this); // Initialize the winning screen
@@ -108,7 +112,7 @@ public class Game extends Canvas implements Runnable {
             e.printStackTrace();
         }
 
-        new Window(WIDTH, HEIGHT, "Doug Game", this);
+        new Window(WIDTH, HEIGHT, "Hungry Doug", this);
 
         health = new Health(); 
         score = new Score();
