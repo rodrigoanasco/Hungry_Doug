@@ -13,7 +13,7 @@ public class Handler {
     private Game game; //A reference to the Game Instance
 
     // list of all objects in game (Doug, enemies, food, etc)
-    LinkedList<GameObject> objects = new LinkedList<GameObject >();
+    static LinkedList<GameObject> objects = new LinkedList<GameObject >();
     
     /**
      * Constructs a Handler with a reference to the main game instance.

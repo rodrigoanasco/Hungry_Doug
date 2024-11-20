@@ -24,7 +24,7 @@ public class Rat extends MovingEnemy {
 
     private boolean moving = false;
     private boolean facingRight = true;
-    Rectangle assumedBushHitbox = new Rectangle(500, 10, 32, 500);
+    //testing Rectangle assumedBushHitbox = new Rectangle(500, 10, 32, 500);
 
     private static final double SCALE_FACTOR = 1.25;
 
@@ -49,6 +49,8 @@ public class Rat extends MovingEnemy {
             for (int i = 0; i < 4; i++) {
                 walkSprites[i] = walkSheet.getSubimage(i * 32, 0, 32, 32);
             }
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -76,8 +78,43 @@ public class Rat extends MovingEnemy {
         Doug doug = Doug.getInstance();
         
         Rectangle hitbox = this.getBounds();
+        hitbox.setBounds(x, y, (int)(hitbox.getWidth()+velX), (int)hitbox.getHeight()+velY);
 
-        if (doug != null) {
+
+        for (GameObject temp : Handler.objects) {
+            if (temp instanceof Obstacle) {
+                if (temp.getBounds().intersects(hitbox)) {
+                    if (velX != 0) {
+                        //when rat is moving in the x direction
+                        x -= velX;
+        
+    
+    
+                    }
+                    else if (velY != 0) {
+                        //when rat is moving in the y direction
+                        y -= velY;
+    
+    
+                    }
+                    else {
+                        //throw error rats should only have one vector that is not 0
+                        //System.out.println("test");
+                        //return;
+                    }
+                }
+
+            }
+            if (x != doug.getX()) {
+                velX = (x < doug.getX()) ? 1 : -1;
+                facingRight = (x < doug.getX()) ? true : false;
+                velY = 0; // Only move horizontally
+            } else if (y != doug.getY()) {
+                velX = 0;
+                velY = (y < doug.getY()) ? 1 : -1; // Only move vertically
+            }
+        }
+        /*if (doug != null) {
             if (assumedBushHitbox.intersects(hitbox)) {
                 if (velX != 0) {
                     //when rat is moving in the x direction
@@ -108,7 +145,7 @@ public class Rat extends MovingEnemy {
                 velX = 0;
                 velY = (y < doug.getY()) ? 1 : -1; // Only move vertically
             }
-        }
+        }*/
     
         // Update position based on velocity
         x += velX;
@@ -129,7 +166,7 @@ public class Rat extends MovingEnemy {
         Graphics2D g2d = (Graphics2D) g;
 
 
-        g.drawRect(500, 10, (int)assumedBushHitbox.getWidth(), (int)assumedBushHitbox.getHeight());
+        //testing g.drawRect(500, 10, (int)assumedBushHitbox.getWidth(), (int)assumedBushHitbox.getHeight());
         
         // Rat is moving or idle
         BufferedImage spriteToDraw = moving ? walkSprites[currentFrame] : idleSprites[currentFrame];

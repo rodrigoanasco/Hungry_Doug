@@ -167,7 +167,7 @@ public class Doug extends GameObject{
     
         // Check for collisions in the X direction
         Rectangle predictedBoundsX = new Rectangle(predictedX, y, getBounds().width, getBounds().height);
-        for (GameObject temp : handler.objects) {
+        for (GameObject temp : Handler.objects) {
             if (temp.getBounds().intersects(predictedBoundsX)) {
                 switch (temp.getId()) {
                     case ENEMY:
