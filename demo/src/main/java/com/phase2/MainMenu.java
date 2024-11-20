@@ -143,6 +143,9 @@ public class MainMenu implements KeyListener {
     }
 
     private void handleButtonAction() {
+        // Play the barking sound effect
+        SoundEffect.play("/bark.wav");
+        
         switch (selectedButton) {
             case 0 -> game.startGame(); // Start game
             case 1 -> inInstructions = true; // Show instructions screen
