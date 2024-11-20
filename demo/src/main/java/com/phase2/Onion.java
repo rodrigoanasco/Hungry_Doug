@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 public class Onion extends Punishment {
     
     public Onion(int x, int y) {
-        super(x,y, PunishmentType.ONION, 10);
+        super(x,y, PunishmentType.ONION, 20);
         try {
             image = ImageIO.read(getClass().getResource("/Onion.png"));;
             image = image.getScaledInstance(OBJECT_SIZE[0], OBJECT_SIZE[1], Image.SCALE_DEFAULT);

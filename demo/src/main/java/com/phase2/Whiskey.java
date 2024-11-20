@@ -1,13 +1,23 @@
 package com.phase2;
 
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Whiskey extends Punishment{
     // TODO RottenFood not being used yet
 
     public Whiskey(int x, int y){
-        super(x, y, PunishmentType.WHISKEY, 10);
+        super(x, y, PunishmentType.WHISKEY, 25);
+                    try {
+            image = ImageIO.read(getClass().getResource("/Whiskey.png"));;
+            image = image.getScaledInstance(OBJECT_SIZE[0], OBJECT_SIZE[1], Image.SCALE_DEFAULT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -20,12 +30,12 @@ public class Whiskey extends Punishment{
     }
 
     public void tick() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tick'");
+
     }
 
     public void render(Graphics g) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'render'");
+        if (!collected) {
+            g.drawImage(image, x, y, null);
+        }
     }
 }
