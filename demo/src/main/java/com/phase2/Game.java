@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-import javax.sound.sampled.*;
 
 import javax.imageio.ImageIO;
 
@@ -89,8 +88,8 @@ public class Game extends Canvas implements Runnable {
         backgroundMusic = new BackgroundMusic();
         backgroundMusic.play("/backgroundmusic.wav");
 
-    // TODO if multiple levels, create attribute for numbers of enemies/rewards to generate
-    // then pass to a main class?
+        // TODO if multiple levels, create attribute for numbers of enemies/rewards to generate
+        // then pass to a main class?
         handler = new Handler(this);
         mainMenu = new MainMenu(this); //Initialize Main Menu
         winningScreen = new WinningScreen(this); // Initialize the winning screen
@@ -335,7 +334,6 @@ public class Game extends Canvas implements Runnable {
     
             // Join the game thread to ensure it exits cleanly
             thread.join();
-            running = false;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -493,7 +491,7 @@ public class Game extends Canvas implements Runnable {
         }
 
          */
-        if(paused){
+        if((paused == true) && (gameOver == false)){
             mainMenu.render(g); //Render the main menu if paused
         } 
         else if(gameWon){
@@ -542,10 +540,8 @@ public class Game extends Canvas implements Runnable {
      * Resets the game to its initial state, including health, score, and game objects.
      */
     public void resetGame(){
-        /* gameOver = false;
-        health.resetHealt();
-        score.resetScore();
-        initializeGameObjects(); */
+        new Game();
+        stop();
     } 
 
     /**
@@ -553,9 +549,10 @@ public class Game extends Canvas implements Runnable {
      * 
      * @return True if the game is over (health is zero or below), false otherwise.
      */
-    private boolean checkGameOver() {
+    public boolean checkGameOver() {
         if (Health.HEALTH <= 0) {
             gameOver = true;
+            paused = !paused;
             return true;
             // test
             // System.out.println("game over");
