@@ -332,6 +332,7 @@ public class Game extends Canvas implements Runnable {
                 backgroundMusic.stop();
             }
     
+            running = false;
             // Join the game thread to ensure it exits cleanly
             thread.join();
         } catch (Exception e) {
@@ -357,7 +358,7 @@ public class Game extends Canvas implements Runnable {
             delta += (now - lastTime) / ns;
             lastTime = now;
             while (delta >= 1) {
-                if (!paused) tick();
+                if (!paused && !gameOver) tick();
                 delta--;    
             }
             if (running) {
@@ -540,9 +541,145 @@ public class Game extends Canvas implements Runnable {
      * Resets the game to its initial state, including health, score, and game objects.
      */
     public void resetGame(){
-        new Game();
-        stop();
+        gameOver = false;
+        paused = false;
+        gameWon = false;
+
+        health.HEALTH = 200;
+        score.SCORE = 0;
+
+        handler.clearObjects();
+        
+        initializeGameObjects();
     } 
+
+    private void initializeGameObjects() {
+        // Recreate the player (Doug)
+        doug = Doug.getInstance(200, 200, ID.DOUG, handler);
+        handler.addObject(doug);
+    
+        // Generate random enemies and items
+        generateRandomObjects(10, Rat.class, handler, 100);
+        generateRandomObjects(10, Bone.class, handler, 5);
+        generateRandomObjects(5, Apple.class, handler, 5);
+        generateRandomObjects(5, Steak.class, handler, 5);
+        generateRandomObjects(5, Mushroom.class, handler, 5);
+    
+        // Add the exit point
+        handler.addObject(new Exit(BLOCK_SIZE[0], 5 * BLOCK_SIZE[1]));
+    
+        // Add bushes and maze structures
+        addBushes();
+    }
+
+    private void addBushes() {
+        // Adding bushes as obstacles
+        int bushWidth = 30;
+        int bushHeight = 30;
+        
+        // Adding bushes in each corner
+        Bush bushTopLeft = new Bush(0, 0);
+        handler.addObject(bushTopLeft);
+        addToGrid(bushTopLeft);
+        
+        Bush bushTopRight = new Bush(Game.WIDTH - bushWidth - 10, 0);
+        handler.addObject(bushTopRight);
+        addToGrid(bushTopRight);
+        
+        Bush bushBottomLeft = new Bush(0, Game.HEIGHT - bushHeight - 35);
+        handler.addObject(bushBottomLeft);
+        addToGrid(bushBottomLeft);
+        
+        Bush bushBottomRight = new Bush(Game.WIDTH - bushWidth - 15, Game.HEIGHT - bushHeight - 35);
+        handler.addObject(bushBottomRight);
+        addToGrid(bushBottomRight);
+        
+        // Adding bushes along the top border, excluding the corners
+        for (int x = bushWidth; x <= Game.WIDTH - bushWidth; x += bushWidth) {
+            Bush bush = new Bush(x, 0);
+            handler.addObject(bush);
+            addToGrid(bush);
+        }
+        
+        // Adding bushes along the bottom border, excluding the corners
+        for (int x = bushWidth; x <= Game.WIDTH - bushWidth - 15; x += bushWidth) {
+            Bush bush = new Bush(x, Game.HEIGHT - bushHeight - 35);
+            handler.addObject(bush);
+            addToGrid(bush);
+        }
+        
+        // Adding bushes along the left border, excluding the corners
+        for (int y = bushHeight; y <= Game.HEIGHT - bushHeight; y += bushHeight) {
+            Bush bush = new Bush(0, y);
+            handler.addObject(bush);
+            addToGrid(bush);
+        }
+        
+        // Adding bushes along the right border, excluding the corners
+        for (int y = bushHeight; y <= Game.HEIGHT - bushHeight - 35; y += bushHeight) {
+            Bush bush = new Bush(Game.WIDTH - bushWidth - 15, y);
+            handler.addObject(bush);
+            addToGrid(bush);
+        }
+        
+        // Adding maze bushes from maze coordinates
+        int[][] mazeBushCoordinates = {
+            {90, HEIGHT - bushHeight - 35}, {90, HEIGHT - bushHeight * 2 - 35}, {90, HEIGHT - bushHeight * 3 - 35}, 
+            {90, HEIGHT - bushHeight * 4 - 35}, {90, HEIGHT - bushHeight * 5 - 35}, {120, HEIGHT - bushHeight * 5 - 35},
+            {150, HEIGHT - bushHeight * 5 - 35}, {180, HEIGHT - bushHeight * 5 - 35}, {210, HEIGHT - bushHeight * 5 - 35},
+            {240, HEIGHT - bushHeight * 5 - 35}, {270, HEIGHT - bushHeight * 5 - 35}, {300, HEIGHT - bushHeight * 5 - 35},
+            {90, HEIGHT - bushHeight * 9 - 35}, {90, HEIGHT - bushHeight * 10 - 35}, {90, HEIGHT - bushHeight * 11 - 35},
+
+            // little box on right
+            {90, HEIGHT - bushHeight * 13 - 35}, {120, HEIGHT - bushHeight * 13 - 35}, {150, HEIGHT - bushHeight * 13 - 35},
+            {180, HEIGHT - bushHeight * 13 - 35}, {120, HEIGHT - bushHeight * 9 - 35}, {150, HEIGHT - bushHeight * 9 - 35},
+            {180, HEIGHT - bushHeight * 9 - 35}, {90, HEIGHT - bushHeight * 12 - 35},
+
+            {210, HEIGHT - bushHeight * 9 - 35}, {240, HEIGHT - bushHeight * 9 - 35}, {270, HEIGHT - bushHeight * 9 - 35},
+            {300, HEIGHT - bushHeight * 9 - 35},{330, HEIGHT - bushHeight * 9 - 35}, {360, HEIGHT - bushHeight * 9 - 35},
+            {390, HEIGHT - bushHeight * 9 - 35}, {420, HEIGHT - bushHeight * 9 - 35}, {510, HEIGHT - bushHeight * 9 - 35},
+            {540, HEIGHT - bushHeight * 9 - 35}, {570, HEIGHT - bushHeight * 9 - 35}, {600, HEIGHT - bushHeight * 9 - 35},
+            {630, HEIGHT - bushHeight * 9 - 35}, {660, HEIGHT - bushHeight * 9 - 35}, {690, HEIGHT - bushHeight * 9 - 35},
+            {690, HEIGHT - bushHeight * 8 - 35}, {690, HEIGHT - bushHeight * 7 - 35}, {690, HEIGHT - bushHeight * 6 - 35},
+            {690, HEIGHT - bushHeight * 5 - 35}, {720, HEIGHT - bushHeight * 9 - 35}, {750, HEIGHT - bushHeight * 9 - 35},
+            {780, HEIGHT - bushHeight * 9 - 35}, {810, HEIGHT - bushHeight * 9 - 35}, {840, HEIGHT - bushHeight * 9 - 35},
+            {870, HEIGHT - bushHeight * 9 - 35}, {870, HEIGHT - bushHeight * 10 - 35},{870, HEIGHT - bushHeight * 11 - 35},
+            {870, HEIGHT - bushHeight * 12 - 35}, {870, HEIGHT - bushHeight * 13 - 35}, {870, HEIGHT - bushHeight * 14 - 35},
+            {870, HEIGHT - bushHeight * 15 - 35}, {870, HEIGHT - bushHeight * 16 - 35}, {870, HEIGHT - bushHeight * 17 - 35},
+            {870, HEIGHT - bushHeight * 18 - 35}, {870, HEIGHT - bushHeight * 19 - 35}, {840, HEIGHT - bushHeight * 19 - 35},
+            {810, HEIGHT - bushHeight * 19 - 35}, {780, HEIGHT - bushHeight * 19 - 35}, {750, HEIGHT - bushHeight * 19 - 35},
+            {720, HEIGHT - bushHeight * 19 - 35}, {690, HEIGHT - bushHeight * 19 - 35},
+            {990, HEIGHT - bushHeight * 19 - 35}, {1020, HEIGHT - bushHeight * 19 - 35}, {1050, HEIGHT - bushHeight * 19 - 35},
+            {1080, HEIGHT - bushHeight * 19 - 35}, {1110, HEIGHT - bushHeight * 19 - 35}, {1140, HEIGHT - bushHeight * 19 - 35},
+            {990, HEIGHT - bushHeight * 18 - 35}, {990, HEIGHT - bushHeight * 17 - 35}, {990, HEIGHT - bushHeight * 16 - 35},
+            {990, HEIGHT - bushHeight * 15 - 35}, {1140, HEIGHT - bushHeight * 18 - 35}, {1140, HEIGHT - bushHeight * 17 - 35},
+            {1140, HEIGHT - bushHeight * 16 - 35}, {1140, HEIGHT - bushHeight * 15 - 35}, {1140, HEIGHT - bushHeight * 11 - 35},
+            {1140, HEIGHT - bushHeight * 10 - 35}, {1140, HEIGHT - bushHeight * 9 - 35}, {1140, HEIGHT - bushHeight * 8 - 35},
+            {1140, HEIGHT - bushHeight * 7 - 35}, {1140, HEIGHT - bushHeight * 6 - 35}, {990, HEIGHT - bushHeight * 11 - 35},
+            {990, HEIGHT - bushHeight * 10 - 35}, {990, HEIGHT - bushHeight * 9 - 35}, {990, HEIGHT - bushHeight * 8 - 35},
+            {990, HEIGHT - bushHeight * 7 - 35}, {990, HEIGHT - bushHeight * 6 - 35}, {1020, HEIGHT - bushHeight * 6 - 35},
+            {1050, HEIGHT - bushHeight * 6 - 35}, {1080, HEIGHT - bushHeight * 6 - 35}, {1110, HEIGHT - bushHeight * 6 - 35},
+            {1170, HEIGHT - bushHeight * 6 - 35}, {1200, HEIGHT - bushHeight * 6 - 35}, {1230, HEIGHT - bushHeight * 6 - 35},
+
+
+
+            {210, HEIGHT - bushHeight * 13 - 35}, {240, HEIGHT - bushHeight * 13 - 35}, {270, HEIGHT - bushHeight * 13 - 35},
+            {270, HEIGHT - bushHeight * 14 - 35}, {270, HEIGHT - bushHeight * 14 - 35}, {270, HEIGHT - bushHeight * 15 - 35},
+            {270, HEIGHT - bushHeight * 16 - 35}, {270, HEIGHT - bushHeight * 17 - 35}, {270, HEIGHT - bushHeight * 18 - 35},
+            {270, HEIGHT - bushHeight * 19 - 35}, {300, HEIGHT - bushHeight * 19 - 35}, {330, HEIGHT - bushHeight * 19 - 35},
+            {360, HEIGHT - bushHeight * 19 - 35}, {390, HEIGHT - bushHeight * 19 - 35}, {420, HEIGHT - bushHeight * 19 - 35},
+            {450, HEIGHT - bushHeight * 19 - 35}, {480, HEIGHT - bushHeight * 19 - 35}, {510, HEIGHT - bushHeight * 19 - 35},
+            {600, HEIGHT - bushHeight * 19 - 35}, {630, HEIGHT - bushHeight * 19 - 35}, {660, HEIGHT - bushHeight * 19 - 35}
+        };
+        
+        for (int[] coord : mazeBushCoordinates) {
+            Bush bush = new Bush(coord[0], coord[1]);
+            handler.addObject(bush);
+            addToGrid(bush);
+        }
+    }
+    
+    
 
     /**
      * Checks if the game is over based on the player's health.
@@ -557,11 +694,13 @@ public class Game extends Canvas implements Runnable {
             // test
             // System.out.println("game over");
         }
-        else{return false;}
+        else{
+            gameOver = false;
+            return false;}
     }
 
     public static void main(String[] args) {
-        new Game();
+        Game game = new Game();
     }
 
 }

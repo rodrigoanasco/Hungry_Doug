@@ -53,6 +53,9 @@ public class GameOverScreen implements KeyListener {
         }
     }
 
+    public void removeListener(){
+        game.removeKeyListener(this);
+    }
     @Override
     public void keyReleased(KeyEvent e) {}
 
