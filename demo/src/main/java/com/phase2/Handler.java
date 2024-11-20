@@ -83,5 +83,9 @@ public class Handler {
     public void setDebug(Boolean d) {
         this.debug = d;
     }
+
+    public synchronized void clearObjects() {
+        objects.clear();
+    }    
     
 }
