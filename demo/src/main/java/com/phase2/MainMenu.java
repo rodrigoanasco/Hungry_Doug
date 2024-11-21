@@ -127,6 +127,9 @@ public class MainMenu implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if(game.isPaused() == false || game.isGameOver() == true)
+        return;
+
         int key = e.getKeyCode();
 
         if (inInstructions) {
