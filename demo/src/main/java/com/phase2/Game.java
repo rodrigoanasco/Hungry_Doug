@@ -100,7 +100,7 @@ public class Game extends Canvas implements Runnable {
         winningScreen = new WinningScreen(this); // Initialize the winning screen
         gameOverScreen = new GameOverScreen(this);
 
-        this.addKeyListener(new KeyInput(handler)); // Recieves keyboard input
+        this.addKeyListener(new KeyInput(handler, this)); // Recieves keyboard input
 
         // Load the background image
         try {
@@ -329,6 +329,21 @@ public class Game extends Canvas implements Runnable {
      */
     public void togglePause() {
         paused = !paused;
+    }
+
+
+    /**
+     * Checks if the game is in pause or not (Used for main menu)
+     */
+    public boolean isPaused(){
+        return paused;
+    }
+
+    /**
+     * Checks if the game is over or not (Used for main menu)
+     */
+    public boolean isGameOver(){
+        return gameOver;
     }
 
     /**

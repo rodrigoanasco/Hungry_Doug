@@ -17,8 +17,9 @@ public class KeyInput extends KeyAdapter{
      * 
      * @param handler the Handler object responsible for managing game objects
      */
-    public KeyInput(Handler handler){
+    public KeyInput(Handler handler, Game game){
         this.handler = handler;
+        this.game = game;
     }
 
     /**
@@ -30,6 +31,15 @@ public class KeyInput extends KeyAdapter{
     public void keyPressed(KeyEvent e){
 
         int key = e.getKeyCode();
+
+        if(key == KeyEvent.VK_ESCAPE){
+            game.togglePause();
+            return;
+        }
+
+        if(game.isPaused()){
+            return;
+        }
 
         // for testing only
         // System.out.println(key);
@@ -75,6 +85,10 @@ public class KeyInput extends KeyAdapter{
     @Override
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
+
+        if(game.isPaused()){
+            return;
+        }
 
         for (int i = 0; i < handler.objects.size(); i++) {
             GameObject tempObject = handler.objects.get(i);
