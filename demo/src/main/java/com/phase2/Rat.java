@@ -84,40 +84,28 @@ public class Rat extends MovingEnemy {
         Rectangle hitboxY = this.getBounds();
         Rectangle hitboxX = this.getBounds();
         
+        boolean movingX = true;
+        // boolean movingY = true;
         //Rectangle intersection = new Rectangle();
         //hitbox.setBounds((int)(x+0.75*velX), (int)(y+0.75*velX), (int)(hitbox.getWidth()+5*velX), (int)hitbox.getHeight()+5*velY);
 
         if (doug != null) {
         for (GameObject temp : Handler.objects) {
             if (temp instanceof Bush) {
-                
-                //intersection = temp.getBounds().intersection(hitbox);
-                // if (temp.getBounds().intersects(hitbox)) {
 
-                //     //System.out.println("hello");
-                //     stuck = true;
-                //     break;
-                //     //char a =(this.x < temp.getX()) ? 'x' : 'y';
-                //     //if (Math.abs(this.x - temp.getX()) > temp.getBounds().getWidth() && this.x - temp.getX() < 0) {
-                //     //    velX = (x < doug.getX()) ? 1 : -1;
-                //     //}
 
-                // }
-                // else {
-                //     stuck =false;
-                // }
-                // else {
-                    
-                        // boolean movingX = true;
 
-                    if (x != doug.getX()) {
+                    if (x != doug.getX() && movingX) {
                     // if (movingX) {
+                        // movingY = false;
                         if (x < doug.getX()) {
+                            
                             hitboxX.setBounds(x+((int)hitboxX.getBounds().getWidth()/2),y,(int)hitboxX.getBounds().getWidth(),(int)hitboxX.getBounds().getHeight());
 
                             if (temp.getBounds().intersects(hitboxX)) {
                                 velX =0;
-                                break;
+                                movingX = false;
+                                // movingY = true;
                             }
                             else velX=1;
 
@@ -128,14 +116,19 @@ public class Rat extends MovingEnemy {
 
                             if (temp.getBounds().intersects(hitboxX)) {
                                 velX =0;
-                                break;
+                                movingX = false;
+                                // movingY = true;
                             }
                             else velX=-1;
                         }
                         facingRight = (x < doug.getX()) ? true : false;
+                        
                         velY = 0; // Only move horizontally
             
                     } 
+                    // else {
+                    //     movingY = true;
+                    // }
                     else if (y != doug.getY()) {
                         velX = 0;
                         if (y < doug.getY()) {
@@ -158,6 +151,7 @@ public class Rat extends MovingEnemy {
                             }
                             else velY=-1;
                         }
+                        
                     }
 
                 // }
