@@ -1,4 +1,5 @@
 com\phase2\WinningScreen.class
+com\phase2\Whiskey.class
 com\phase2\Window.class
 com\phase2\Doug.class
 com\phase2\Handler.class
@@ -26,6 +27,7 @@ com\phase2\MovingEnemy.class
 com\phase2\Chocolate.class
 com\phase2\Cat.class
 com\phase2\Health.class
+com\phase2\SoundEffect.class
 com\phase2\BackgroundMusic.class
 com\phase2\DebugBuild.class
 com\phase2\Mushroom.class

@@ -62,6 +62,7 @@ public class Exit extends GameObject {
         // renderHitBox(g,OBJECT_SIZE[0],OBJECT_SIZE[1]);
             if (Score.boneScore >= Score.boneTotal) {
                 g.drawImage(sprite, x, y, null);
+                SoundEffect.play("/reward.wav");
         }
     }
 
