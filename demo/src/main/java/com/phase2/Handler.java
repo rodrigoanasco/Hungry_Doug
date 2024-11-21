@@ -1,6 +1,7 @@
 package com.phase2;
 
 import java.awt.Graphics;
+import java.util.Collections;
 import java.util.LinkedList;
 
 /**
@@ -14,6 +15,10 @@ public class Handler {
 
     // list of all objects in game (Doug, enemies, food, etc)
     LinkedList<GameObject> objects = new LinkedList<GameObject >();
+
+    // New list for obstacles only (e.g., bushes)
+    LinkedList<GameObject> obstacles = new LinkedList<GameObject>();
+
     
     /**
      * Constructs a Handler with a reference to the main game instance.
@@ -63,6 +68,11 @@ public class Handler {
      */
     public synchronized void addObject(GameObject object) {
         this.objects.add(object);
+
+        //TODO test
+        if (object.getId() == ID.OBSTACLE) {
+            this.obstacles.add(object);
+        }
     }
 
     /**
@@ -72,6 +82,11 @@ public class Handler {
      */
     public synchronized void removeObject(GameObject object) {
         this.objects.remove(object);
+
+        //TODO test
+        if (object.getId() == ID.OBSTACLE) {
+            this.obstacles.remove(object);
+        }
     }
 
     /**
@@ -87,5 +102,18 @@ public class Handler {
     public synchronized void clearObjects() {
         objects.clear();
     }    
+
+
+
+    //TODO test
+    /**
+     * Returns the list of obstacles.
+     *
+     * @return The list of obstacle objects.
+     */
+    public LinkedList<GameObject> getObstacles() {
+        return obstacles;
+    }
+
     
 }

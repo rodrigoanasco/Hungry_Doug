@@ -121,6 +121,8 @@ public class Game extends Canvas implements Runnable {
         // Add Doug to the handler
         handler.addObject(doug);
 
+
+
         // Adding bushes as obstacles
         int bushWidth = 30;
         int bushHeight = 30;
@@ -226,9 +228,9 @@ public class Game extends Canvas implements Runnable {
             addToGrid(bush);
         }
 
+        generateRandomEnemies(1, handler,100);
          
-        generateRandomObjects(0, Rat.class, handler,100);
-        generateRandomObjects(10, Bone.class, handler, 5);
+        generateRandomObjects(1, Bone.class, handler, 5);
         generateRandomObjects(5, Apple.class, handler,5);
         generateRandomObjects(5, Steak.class, handler, 5);
         generateRandomObjects(5, Mushroom.class, handler,5);
@@ -271,6 +273,36 @@ public class Game extends Canvas implements Runnable {
             }
         }
     }
+
+    /**
+     * Generates a specified number of Rat enemies at random positions in the game.
+     *
+     * @param count The number of Rat enemies to generate.
+     * @param handler The handler responsible for managing the game objects.
+     * @param minDistanceFromDoug The minimum distance the Rats should spawn from Doug.
+     */
+    public void generateRandomEnemies(int count, Handler handler, int minDistanceFromDoug) {
+        Random r = new Random();
+        Doug doug = Doug.getInstance(); // Assuming Doug is a singleton
+
+        for (int i = 0; i < count; i++) {
+            int randomX, randomY;
+
+            // Generate random positions until they are valid
+            boolean validPosition;
+            do {
+                randomX = r.nextInt(Game.WIDTH - 200); // Adjust to avoid spawning too close to edges
+                randomY = r.nextInt(Game.HEIGHT - 150);
+                validPosition = isValidPosition(randomX, randomY, minDistanceFromDoug, doug, handler);
+            } while (!validPosition);
+
+            // Create a new Rat and add it to the handler
+            Rat rat = new Rat(randomX, randomY, handler);
+            handler.addObject(rat);
+        }
+    }
+
+    
 
     /**
     * Validates whether a given position is suitable for object placement.

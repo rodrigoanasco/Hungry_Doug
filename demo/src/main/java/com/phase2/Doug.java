@@ -169,7 +169,10 @@ public class Doug extends GameObject{
         // Check for collisions in the X direction
         Rectangle predictedBoundsX = new Rectangle(predictedX, y, getBounds().width, getBounds().height);
         synchronized (handler.objects) {
-        for (GameObject temp : new LinkedList<>(handler.objects)) {
+        
+        // TODO potentially unnecessary overhead to create new linkedlist every tick
+        // for (GameObject temp : new LinkedList<>(handler.objects)) {
+        for (GameObject temp : handler.objects) {
             if (temp.getBounds().intersects(predictedBoundsX)) {
                 switch (temp.getId()) {
                     case ENEMY:
@@ -225,7 +228,7 @@ public class Doug extends GameObject{
                     //     // Collision behavior for obstacles
                     //     break;
     
-                    case OBSTAClE:
+                    case OBSTACLE:
                         // Collision behavior for obstacles
                         if (temp instanceof Obstacle) {
                             canMoveX = false; // Prevent movement in x direction if collision occurs
@@ -293,7 +296,7 @@ public class Doug extends GameObject{
                         }
                         break;
     
-                    case OBSTAClE:
+                    case OBSTACLE:
                         // Collision behavior for obstacles
                         if (temp instanceof Obstacle) {
                             canMoveY = false; // Prevent movement in y direction if collision occurs

@@ -13,7 +13,7 @@ public class Bush extends Obstacle {
     private static final int HEIGHT = 30;
 
     public Bush(int x, int y) {
-        super(x, y, ID.OBSTAClE);
+        super(x, y, ObstacleType.BUSH);
         hitBox = new Rectangle(x, y, WIDTH, HEIGHT);
         try {
             bushImage = ImageIO.read(getClass().getResource("/bush.png"));
