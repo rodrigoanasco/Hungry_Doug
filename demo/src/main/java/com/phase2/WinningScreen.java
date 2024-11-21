@@ -12,7 +12,7 @@ public class WinningScreen {
     
     private Game game;
 
-    /**
+   /**
      * Constructs a WinningScreen associated with the specified game.
      * 
      * @param game The game instance associated with this winning screen.
@@ -32,19 +32,20 @@ public class WinningScreen {
     
         g.setColor(Color.YELLOW);
         g.setFont(new Font("Arial", Font.BOLD, 70));
-        String title = "Phase 1 complete!";
-        String subtitle = "New phases coming soon...";
+        String title = "LEVEL 1 COMPLETE";
+        String subtitle = "New levels coming soon...";
         String exitPrompt = "Press 'ESC' to exit.";
     
-        // Calculate the width of each string and center them
+        // Calculate the width of the string and center it
         int titleWidth = g.getFontMetrics().stringWidth(title);
-        int subtitleWidth = g.getFontMetrics().stringWidth(subtitle);
-        int exitPromptWidth = g.getFontMetrics().stringWidth(exitPrompt);
-    
         g.drawString(title, (Game.WIDTH - titleWidth) / 2, Game.HEIGHT / 2 - 50);
+
+        g.setFont(new Font("Arial", Font.PLAIN, 30));
+        int subtitleWidth = g.getFontMetrics().stringWidth(subtitle);
         g.drawString(subtitle, (Game.WIDTH - subtitleWidth) / 2, Game.HEIGHT / 2 + 50);
     
         g.setFont(new Font("Arial", Font.PLAIN, 20));
+        int exitPromptWidth = g.getFontMetrics().stringWidth(exitPrompt);
         g.drawString(exitPrompt, (Game.WIDTH - exitPromptWidth) / 2, Game.HEIGHT / 2 + 120);
     }
     

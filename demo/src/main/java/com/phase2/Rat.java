@@ -91,13 +91,6 @@ public class Rat extends MovingEnemy {
                 if (temp.getBounds().intersects(hitbox)) {
 
 
-
-                    // char direction = 'x';
-                    // if (pathfinding) {
-                    //     //pathfinding = true;
-                    //     pathfinding = pathfind((Bush)temp, direction);
-                    // }
-
                 }
             }
             

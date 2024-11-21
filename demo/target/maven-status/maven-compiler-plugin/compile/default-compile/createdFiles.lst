@@ -17,11 +17,13 @@ com\phase2\Punishment.class
 com\phase2\Cat.class
 com\phase2\Health.class
 com\phase2\RottenFood.class
+com\phase2\BackgroundMusic.class
 com\phase2\DebugBuild.class
 com\phase2\EnemyType.class
 com\phase2\PunishmentType.class
 com\phase2\Mushroom.class
 com\phase2\Doug$1.class
+com\phase2\BonusReward.class
 com\phase2\Obstacle.class
 com\phase2\RewardType.class
 com\phase2\GameObject.class
@@ -30,5 +32,4 @@ com\phase2\MainMenu.class
 com\phase2\Bone.class
 com\phase2\Exit.class
 com\phase2\Game.class
-com\phase2\CharacterFactory.class
 com\phase2\KeyInput.class

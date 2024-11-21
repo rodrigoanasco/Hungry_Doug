@@ -1,7 +1,11 @@
 package com.phase2;
 
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 /**
  * Class for the non-moving enemy type Chocolate
@@ -10,10 +14,16 @@ import java.awt.Rectangle;
  * @param id the type of object the object should be treated as
 */
 public class Chocolate extends Punishment {
-    // TODO Chocolate hasn't been utilized yet
+
 
     public Chocolate(int x, int y){
-    super(x,y, PunishmentType.CHOCOLATE, 20);
+    super(x,y, PunishmentType.CHOCOLATE, 50);
+            try {
+            image = ImageIO.read(getClass().getResource("/Brownie.png"));;
+            image = image.getScaledInstance(OBJECT_SIZE[0], OBJECT_SIZE[1], Image.SCALE_DEFAULT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
  
@@ -37,6 +47,9 @@ public class Chocolate extends Punishment {
      * How the object should look like
      */
     public void render(Graphics g) {
+        if (!collected) {
+            g.drawImage(image, x, y, null);
+        }
 
     }
 

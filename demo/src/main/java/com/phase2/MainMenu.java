@@ -92,6 +92,8 @@ public class MainMenu implements KeyListener {
         g.drawString("- Collect treats to earn points.", 100, 250);
         g.drawString("- Avoid enemies to stay alive.", 100, 300);
         g.drawString("- Press ESC to return to the main menu at any time.", 100, 350);
+        g.drawString("- Help Doug collecting all of his bones! Then grab it's gem to escape from the maze", 100, 400);
+        g.drawString("- Make sure to pick only dog friendly food & Don't let the rats hit you!", 100, 450);
 
         g.setFont(new Font("Arial", Font.PLAIN, 20));
         g.drawString("Press ENTER to go back to the main menu.", Game.WIDTH / 2 - 150, Game.HEIGHT - 50);
@@ -143,6 +145,9 @@ public class MainMenu implements KeyListener {
     }
 
     private void handleButtonAction() {
+        // Play the barking sound effect
+        SoundEffect.play("/bark.wav");
+        
         switch (selectedButton) {
             case 0 -> game.startGame(); // Start game
             case 1 -> inInstructions = true; // Show instructions screen

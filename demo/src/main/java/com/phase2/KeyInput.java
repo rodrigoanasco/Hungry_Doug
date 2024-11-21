@@ -45,22 +45,22 @@ public class KeyInput extends KeyAdapter{
                 tempObject.setVelY(0);
 
                 // Handle directional input, only allowing one axis of movement at a time
-                if (key == KeyEvent.VK_W) {
+                if (key == KeyEvent.VK_W || key == KeyEvent.VK_UP) {
                     up = true;
                     down = false; // Ensure down is not active
                     tempObject.setVelY(-5); // Move up
                 } 
-                else if (key == KeyEvent.VK_S) {
+                else if (key == KeyEvent.VK_S || key == KeyEvent.VK_DOWN) {
                     down = true;
                     up = false; // Ensure up is not active
                     tempObject.setVelY(5); // Move down
                 } 
-                else if (key == KeyEvent.VK_A) {
+                else if (key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT) {
                     left = true;
                     right = false; // Ensure right is not active
                     tempObject.setVelX(-5); // Move left
                 } 
-                else if (key == KeyEvent.VK_D) {
+                else if (key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) {
                     right = true;
                     left = false; // Ensure left is not active
                     tempObject.setVelX(5); // Move right
@@ -81,7 +81,7 @@ public class KeyInput extends KeyAdapter{
 
             if (tempObject.getId() == ID.DOUG) {
                 // Handle key release and stop movement appropriately
-                if (key == KeyEvent.VK_W) {
+                if (key == KeyEvent.VK_W || key == KeyEvent.VK_UP) {
                     up = false;
                     if (down) {
                         tempObject.setVelY(5); // Continue moving down if down is still pressed
@@ -90,7 +90,7 @@ public class KeyInput extends KeyAdapter{
                         tempObject.setVelY(0); // Stop vertical movement
                     }
                 }
-                if (key == KeyEvent.VK_S) {
+                if (key == KeyEvent.VK_S || key == KeyEvent.VK_DOWN) {
                     down = false;
                     if (up) {
                         tempObject.setVelY(-5); // Continue moving up if up is still pressed
@@ -99,7 +99,7 @@ public class KeyInput extends KeyAdapter{
                         tempObject.setVelY(0); // Stop vertical movement
                     }
                 }
-                if (key == KeyEvent.VK_A) {
+                if (key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT) {
                     left = false;
                     if (right) {
                         tempObject.setVelX(5); // Continue moving right if right is still pressed
@@ -108,7 +108,7 @@ public class KeyInput extends KeyAdapter{
                         tempObject.setVelX(0); // Stop horizontal movement
                     }
                 }
-                if (key == KeyEvent.VK_D) {
+                if (key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) {
                     right = false;
                     if (left) {
                         tempObject.setVelX(-5); // Continue moving left if left is still pressed

@@ -1,33 +1,34 @@
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\EnemyType.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\MovingEnemy.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\WinningScreen.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\Bone.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\MainMenu.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\ObstacleType.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\PunishmentType.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\Steak.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\Reward.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\Doug.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\Handler.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\Mushroom.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\Onion.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\Bush.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\ID.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\Game.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\Cat.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\Rat.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\Exit.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\GameObject.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\Obstacle.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\DebugBuild.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\GameOverScreen.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\CharacterFactory.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\RewardType.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\Chocolate.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\KeyInput.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\Punishment.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\Score.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\RottenFood.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\Window.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\Apple.java
-C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14\demo\src\main\java\com\phase2\Health.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\GameObject.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\KeyInput.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\DebugBuild.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\BackgroundMusic.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\MovingEnemy.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\ObstacleType.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Mushroom.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\RottenFood.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Score.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Window.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Apple.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Cat.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Rat.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Bush.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\GameOverScreen.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Obstacle.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Game.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Onion.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Bone.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\MainMenu.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Exit.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Handler.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Health.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\BonusReward.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Doug.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\ID.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Chocolate.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\RewardType.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Punishment.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\EnemyType.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Steak.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\WinningScreen.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\PunishmentType.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Reward.java

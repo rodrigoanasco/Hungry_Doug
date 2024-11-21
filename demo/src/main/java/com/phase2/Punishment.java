@@ -1,4 +1,9 @@
 package com.phase2;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.awt.Graphics;
 
 /**
  * The Punishment class represents a type of enemy that applies a specific punishment to the player.
@@ -7,6 +12,9 @@ package com.phase2;
 public abstract class Punishment extends GameObject{
     protected int penaltyPoints;
     protected PunishmentType type;
+    protected Image image;
+    protected boolean collected = false; // Track if punishment has been collected
+
 
     /**
      * Constructor for a Punishment.
@@ -29,6 +37,24 @@ public abstract class Punishment extends GameObject{
      */
     public PunishmentType getType() {
         return type;
+    }
+
+    /**
+     * Determines if the punishments has already been collected.
+     * 
+     * @return true if the punishments has been collected, false otherwise.
+     */
+    public boolean isCollected() {
+        return collected;
+    }
+
+    /**
+     * Sets the collected status of the punishments.
+     * 
+     * @param collected True if the punishments has been collected, false otherwise.
+     */
+    public void setCollected(boolean collected) {
+        this.collected = collected;
     }
 
     /**
