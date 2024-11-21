@@ -89,15 +89,18 @@ public class Rat extends MovingEnemy {
             if (temp instanceof Bush) {
                 //intersection = temp.getBounds().intersection(hitbox);
                 if (temp.getBounds().intersects(hitbox)) {
-                    char direction = 'x';
-                    if (pathfinding) {
-                        //pathfinding = true;
-                        pathfinding = pathfind((Bush)temp, direction);
-                    }
+
+
+
+                    // char direction = 'x';
+                    // if (pathfinding) {
+                    //     //pathfinding = true;
+                    //     pathfinding = pathfind((Bush)temp, direction);
+                    // }
 
                 }
             }
-
+            
         }
 
     
@@ -136,6 +139,7 @@ public class Rat extends MovingEnemy {
                     }
                 }
             }
+            
             int lastBush1 = isBushLastX(bushList, setBush, (int)(-1*setBush.getBounds().getWidth()));
             int lastBush2 = isBushLastX(bushList, setBush, (int)(1*setBush.getBounds().getWidth()));
             int leavePoint = 0;
