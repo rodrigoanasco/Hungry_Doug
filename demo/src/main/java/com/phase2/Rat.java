@@ -79,21 +79,101 @@ public class Rat extends MovingEnemy {
         
         // Access the singleton instance of Doug
         Doug doug = Doug.getInstance();
+        boolean stuck = false;
         
-        Rectangle hitbox = this.getBounds();
+        Rectangle hitboxY = this.getBounds();
+        Rectangle hitboxX = this.getBounds();
+        
         //Rectangle intersection = new Rectangle();
         //hitbox.setBounds((int)(x+0.75*velX), (int)(y+0.75*velX), (int)(hitbox.getWidth()+5*velX), (int)hitbox.getHeight()+5*velY);
 
-
+        if (doug != null) {
         for (GameObject temp : Handler.objects) {
             if (temp instanceof Bush) {
+                
                 //intersection = temp.getBounds().intersection(hitbox);
-                if (temp.getBounds().intersects(hitbox)) {
+                // if (temp.getBounds().intersects(hitbox)) {
 
+                //     //System.out.println("hello");
+                //     stuck = true;
+                //     break;
+                //     //char a =(this.x < temp.getX()) ? 'x' : 'y';
+                //     //if (Math.abs(this.x - temp.getX()) > temp.getBounds().getWidth() && this.x - temp.getX() < 0) {
+                //     //    velX = (x < doug.getX()) ? 1 : -1;
+                //     //}
 
-                }
+                // }
+                // else {
+                //     stuck =false;
+                // }
+                // else {
+                    
+                        // boolean movingX = true;
+
+                    if (x != doug.getX()) {
+                    // if (movingX) {
+                        if (x < doug.getX()) {
+                            hitboxX.setBounds(x+((int)hitboxX.getBounds().getWidth()/2),y,(int)hitboxX.getBounds().getWidth(),(int)hitboxX.getBounds().getHeight());
+
+                            if (temp.getBounds().intersects(hitboxX)) {
+                                velX =0;
+                                break;
+                            }
+                            else velX=1;
+
+                        }
+                        else {
+            
+                            hitboxX.setBounds(x-((int)hitboxX.getBounds().getWidth()/2),y,(int)hitboxX.getBounds().getWidth(),(int)hitboxX.getBounds().getHeight());
+
+                            if (temp.getBounds().intersects(hitboxX)) {
+                                velX =0;
+                                break;
+                            }
+                            else velX=-1;
+                        }
+                        facingRight = (x < doug.getX()) ? true : false;
+                        velY = 0; // Only move horizontally
+            
+                    } 
+                    else if (y != doug.getY()) {
+                        velX = 0;
+                        if (y < doug.getY()) {
+                            hitboxY.setBounds(x,y+((int)hitboxY.getBounds().getHeight()/2),(int)hitboxX.getBounds().getWidth(),(int)hitboxX.getBounds().getHeight());
+
+                            if (temp.getBounds().intersects(hitboxY)) {
+                                velY =0;
+                                break;
+                            }
+                            else velY=1;
+
+                        }
+                        else {
+            
+                            hitboxY.setBounds(x,y-((int)hitboxY.getBounds().getHeight()/2),(int)hitboxX.getBounds().getWidth(),(int)hitboxX.getBounds().getHeight());
+
+                            if (temp.getBounds().intersects(hitboxY)) {
+                                velY =0;
+                                break;
+                            }
+                            else velY=-1;
+                        }
+                    }
+
+                // }
             }
             
+        }
+        
+            // Simple movement logic: move horizontally or vertically toward Doug
+            // if (x != doug.getX()) {
+            //     velX = (x < doug.getX()) ? 1 : -1;
+            //     facingRight = (x < doug.getX()) ? true : false;
+            //     velY = 0; // Only move horizontally
+            // } else if (y != doug.getY()) {
+            //     velX = 0;
+            //     velY = (y < doug.getY()) ? 1 : -1; // Only move vertically
+            // }
         }
 
     
