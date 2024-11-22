@@ -15,6 +15,7 @@ import java.awt.Graphics;
 public class Exit extends GameObject {
 
     private Image sprite;
+    boolean a = true;
 
     /**
      * Constructs an Exit object with the specified coordinates.
@@ -48,7 +49,11 @@ public class Exit extends GameObject {
      * Currently, the Exit does not have any behavior to update each tick.
      */
     public void tick() {
-        
+   
+        if (Score.boneScore >= Score.boneTotal && a) {
+            SoundEffect.play("/reward.wav");
+            a = false;
+        }
         //System.out.println(Score.boneScore + " " + Score.boneTotal);
     }
 
@@ -62,7 +67,10 @@ public class Exit extends GameObject {
         // renderHitBox(g,OBJECT_SIZE[0],OBJECT_SIZE[1]);
             if (Score.boneScore >= Score.boneTotal) {
                 g.drawImage(sprite, x, y, null);
-                SoundEffect.play("/reward.wav");
+                
+                
+                
+
         }
     }
 
