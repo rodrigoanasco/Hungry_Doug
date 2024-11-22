@@ -2,132 +2,117 @@ package com.phase2;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * The KeyInput class handles keyboard input and updates the game objects accordingly.
+ * Handles keyboard input for the game. Listens for key presses and key releases
+ * to control the game objects and game state (e.g., pausing the game).
  */
-public class KeyInput extends KeyAdapter{
+public class KeyInput extends KeyAdapter {
 
-    private Handler handler;
-    private Game game;
-    private boolean up = false, down = false, left = false, right = false;
+    private final Handler handler;
+    private final Game game;
+
+    // Maps to track key states
+    private final Map<Integer, Boolean> keyStates = new HashMap<>();
+
+    // Movement speed for Doug
+    private static final int MOVE_SPEED = 5;
+
+    // Tracks the last pressed movement key to prioritize direction
+    private int lastMovementKey = -1;
 
     /**
-     * Constructor for KeyInput.
-     * 
-     * @param handler the Handler object responsible for managing game objects
+     * Constructs the KeyInput object with the handler and game instance.
+     *
+     * @param handler The handler managing game objects.
+     * @param game    The main game instance.
      */
-    public KeyInput(Handler handler, Game game){
+    public KeyInput(Handler handler, Game game) {
         this.handler = handler;
         this.game = game;
     }
 
-    /**
-     * Handles key press events and updates the game objects' positions.
-     * 
-     * @param e the KeyEvent triggered when a key is pressed
-     */
     @Override
-    public void keyPressed(KeyEvent e){
-
+    public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
+        keyStates.put(key, true); // Mark the key as pressed
 
-        if(key == KeyEvent.VK_ESCAPE){
+        // Handle global keys (e.g., pause)
+        if (key == KeyEvent.VK_ESCAPE) {
             game.togglePause();
             return;
         }
 
-        if(game.isPaused()){
-            return;
-        }
-
-        // TODO loops through all objects in game to find doug. there must be a bette  way to do this since he's the only movable object
-        for (int i = 0; i < handler.objects.size(); i++) {
-            GameObject tempObject = handler.objects.get(i);
-
+        // Handle object-specific keys (e.g., movement)
+        for (GameObject tempObject : handler.objects) {
             if (tempObject.getId() == ID.DOUG) {
-                // Reset both velocities to prevent diagonal movement
-                tempObject.setVelX(0);
-                tempObject.setVelY(0);
-
-                // Handle directional input, only allowing one axis of movement at a time
-                if (key == KeyEvent.VK_W || key == KeyEvent.VK_UP) {
-                    up = true;
-                    down = false; // Ensure down is not active
-                    tempObject.setVelY(-5); // Move up
-                } 
-                else if (key == KeyEvent.VK_S || key == KeyEvent.VK_DOWN) {
-                    down = true;
-                    up = false; // Ensure up is not active
-                    tempObject.setVelY(5); // Move down
-                } 
-                else if (key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT) {
-                    left = true;
-                    right = false; // Ensure right is not active
-                    tempObject.setVelX(-5); // Move left
-                } 
-                else if (key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) {
-                    right = true;
-                    left = false; // Ensure left is not active
-                    tempObject.setVelX(5); // Move right
-                }
+                handleMovementKeys(key, tempObject);
             }
         }
-
-        // close game on esc
-        if(key == KeyEvent.VK_ESCAPE) game.togglePause();
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
+        keyStates.put(key, false); // Mark the key as released
 
-        if(game.isPaused()){
-            return;
-        }
-
-        for (int i = 0; i < handler.objects.size(); i++) {
-            GameObject tempObject = handler.objects.get(i);
-
+        // Handle stopping movement for Doug
+        for (GameObject tempObject : handler.objects) {
             if (tempObject.getId() == ID.DOUG) {
-                // Handle key release and stop movement appropriately
-                if (key == KeyEvent.VK_W || key == KeyEvent.VK_UP) {
-                    up = false;
-                    if (down) {
-                        tempObject.setVelY(5); // Continue moving down if down is still pressed
-                    } 
-                    else {
-                        tempObject.setVelY(0); // Stop vertical movement
-                    }
-                }
-                if (key == KeyEvent.VK_S || key == KeyEvent.VK_DOWN) {
-                    down = false;
-                    if (up) {
-                        tempObject.setVelY(-5); // Continue moving up if up is still pressed
-                    } 
-                    else {
-                        tempObject.setVelY(0); // Stop vertical movement
-                    }
-                }
-                if (key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT) {
-                    left = false;
-                    if (right) {
-                        tempObject.setVelX(5); // Continue moving right if right is still pressed
-                    } 
-                    else {
-                        tempObject.setVelX(0); // Stop horizontal movement
-                    }
-                }
-                if (key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) {
-                    right = false;
-                    if (left) {
-                        tempObject.setVelX(-5); // Continue moving left if left is still pressed
-                    } 
-                    else {
-                        tempObject.setVelX(0); // Stop horizontal movement
-                    }
-                }
+                updateMovement(tempObject);
             }
         }
+    }
+
+    /**
+     * Handles movement keys for Doug.
+     *
+     * @param key        The key code of the pressed key.
+     * @param tempObject The Doug object to control.
+     */
+    private void handleMovementKeys(int key, GameObject tempObject) {
+        if (!game.isPaused()) { // Movement allowed only if the game is not paused
+            lastMovementKey = key; // Track the last movement key pressed
+            updateMovement(tempObject);
+        }
+    }
+
+    /**
+     * Updates Doug's velocity based on the current key states.
+     * Ensures only one axis of movement is active at a time.
+     *
+     * @param tempObject The Doug object to control.
+     */
+    private void updateMovement(GameObject tempObject) {
+        // Check current key states to determine direction
+        if (isKeyPressed(KeyEvent.VK_W) && lastMovementKey == KeyEvent.VK_W) {
+            tempObject.setVelY(-MOVE_SPEED); // Move up
+            tempObject.setVelX(0);
+        } else if (isKeyPressed(KeyEvent.VK_S) && lastMovementKey == KeyEvent.VK_S) {
+            tempObject.setVelY(MOVE_SPEED); // Move down
+            tempObject.setVelX(0);
+        } else if (isKeyPressed(KeyEvent.VK_A) && lastMovementKey == KeyEvent.VK_A) {
+            tempObject.setVelX(-MOVE_SPEED); // Move left
+            tempObject.setVelY(0);
+        } else if (isKeyPressed(KeyEvent.VK_D) && lastMovementKey == KeyEvent.VK_D) {
+            tempObject.setVelX(MOVE_SPEED); // Move right
+            tempObject.setVelY(0);
+        } else {
+            // Stop Doug if no movement keys are pressed
+            tempObject.setVelX(0);
+            tempObject.setVelY(0);
+        }
+    }
+
+    /**
+     * Checks if a specific key is currently pressed.
+     *
+     * @param keyCode The key code to check.
+     * @return True if the key is pressed, false otherwise.
+     */
+    public boolean isKeyPressed(int keyCode) {
+        return keyStates.getOrDefault(keyCode, false);
     }
 }
