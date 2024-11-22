@@ -21,9 +21,9 @@ public class Onion extends Punishment {
     }
 
     /**
-     * Gets the bounding rectangle of Doug for collision detection.
+     * Gets the bounding rectangle of the onion for collision detection.
      * 
-     * @return A Rectangle representing Doug's bounds.
+     * @return A Rectangle representing the onion's bounds.
      */
     @Override
     public Rectangle getBounds() {
@@ -31,14 +31,9 @@ public class Onion extends Punishment {
     }
 
     /**
-     * What the object should do on each tick
-     */
-    @Override
-    public void tick() {
-
-    }
-    /**
-     * How the object should look like
+     * Renders the visual representation of the object on the screen.
+     * 
+     * @param g the {@link Graphics} object used to draw the sprite
      */
     @Override
     public void render(Graphics g) {

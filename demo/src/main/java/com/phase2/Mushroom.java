@@ -32,20 +32,23 @@ public class Mushroom extends Reward {
     }
     
     /**
-     * Gets the bounding rectangle of Doug for collision detection.
+     * Gets the bounding rectangle of the mushroom for collision detection.
      * 
-     * @return A Rectangle representing Doug's bounds.
+     * @return a {@link Rectangle} representing the mushroom's bounds.
      */
     @Override
     public Rectangle getBounds() {
         return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
     }
 
-    @Override
-    public void tick() {
-        //to be implemented: checks if colliding with doug
-    }
-
+    /**
+     * Renders the visual representation of the mushroom on the screen.
+     * 
+     * If the object has not been collected, this method draws the corresponding sprite
+     * at the object's current position on the screen.
+     *
+     * @param g the {@link Graphics} object used to draw the sprite
+     */
     @Override
     public void render(Graphics g) {
         if (!collected) {

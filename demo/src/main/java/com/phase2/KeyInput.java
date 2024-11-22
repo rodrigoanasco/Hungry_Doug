@@ -41,11 +41,7 @@ public class KeyInput extends KeyAdapter{
             return;
         }
 
-        // for testing only
-        // System.out.println(key);
-        //
-
-        // loops through all objects in game to find doug. there must be a bette  way to do this since he's the only movable object
+        // TODO loops through all objects in game to find doug. there must be a bette  way to do this since he's the only movable object
         for (int i = 0; i < handler.objects.size(); i++) {
             GameObject tempObject = handler.objects.get(i);
 

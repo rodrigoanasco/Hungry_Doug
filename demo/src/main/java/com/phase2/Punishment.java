@@ -1,9 +1,7 @@
 package com.phase2;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import java.awt.Graphics;
 
 /**
  * The Punishment class represents a type of enemy that applies a specific punishment to the player.
@@ -65,6 +63,19 @@ public abstract class Punishment extends GameObject{
     public int getPenaltyPoints() {
         return penaltyPoints;
     }
+
+    /**
+     * Gets the bounding rectangle of the reward for collision detection.
+     */
+    public abstract Rectangle getBounds();
+
+    /**
+     * Renders the visual representation of the object on the screen.
+     * 
+     * @param g the {@link Graphics} object used to draw the sprite
+     */
+    public abstract void render(Graphics g);
+
 
 }
 

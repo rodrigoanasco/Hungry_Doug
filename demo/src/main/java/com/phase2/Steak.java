@@ -45,7 +45,7 @@ public class Steak extends Reward {
     /**
      * Gets the bounding rectangle of the Steak for collision detection.
      * 
-     * @return A Rectangle representing the bounds of the Steak.
+     * @return an {@link Rectangle} representing the bounds of the Steak.
      */
     @Override
     public Rectangle getBounds() {
@@ -55,7 +55,7 @@ public class Steak extends Reward {
     /**
      * gets the alive status of the Steak, determining if it is active and collectible.
      * 
-     * 
+     * @param b
      */
     public void setAlive(Boolean b) {
         this.isAlive = b;
@@ -72,12 +72,11 @@ public class Steak extends Reward {
 
     /**
      * Updates the state of the Steak.
+     * 
      * The Steak becomes collectible after its spawn time and disappears after its death time.
      */
     @Override
     public void tick() {
-        //to be implemented: checks if colliding with doug
-        //System.out.println(this.lifetime);
         if (this.lifetime < this.spawntime*60 || this.lifetime > this.deathtime*60) {
             this.collected = true; // Steak is not collectible outside of spawn-death window
             lifetime++;

@@ -7,15 +7,13 @@ import java.io.IOException;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
-// import java.util.LinkedList;
-// import java.lang.Math;
 
 /**
-* Class for the moving enemy type Rat
-* @param x the x position the objects appears in
-* @param y the y position the objects appears in
-* @param id the type of object the object should be treated as
-*/
+ * Class for the moving enemy type Rat
+ * @param x the x position the objects appears in
+ * @param y the y position the objects appears in
+ * @param id the type of object the object should be treated as
+ */
 public class Rat extends MovingEnemy {
 
     Handler handler;
@@ -63,18 +61,18 @@ public class Rat extends MovingEnemy {
     }
 
     /**
-    * Gets the bounding rectangle of Doug for collision detection.
-    * 
-    * @return A Rectangle representing Doug's bounds.
-    */
+     * Gets the bounding rectangle of the rat for collision detection.
+     * 
+     * @return a {@link Rectangle} representing Doug's bounds
+     */
     @Override
     public Rectangle getBounds() {
         return new Rectangle(x,y,32,32);
     }
 
     /**
-    * What the object should do on each tick
-    */
+     * What the object should do on each tick
+     */
     @Override
     public void tick() {
         Doug doug = Doug.getInstance();
@@ -145,9 +143,11 @@ public class Rat extends MovingEnemy {
         return true;
     }
 
-    /**
-    * Visually renders the object
-    */
+   /**
+     * Renders the visual representation of the object on the screen.
+     * 
+     * @param g the {@link Graphics} object used to draw the sprite
+     */
     @Override
     public void render(Graphics g) {
 

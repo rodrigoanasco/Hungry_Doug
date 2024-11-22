@@ -21,6 +21,11 @@ public class Bush extends Obstacle {
         }
     }
 
+    /**
+     * Renders the visual representation of the bush on the screen.
+     *
+     * @param g the {@link Graphics} object used to draw the sprite
+     */
     @Override
     public void render(Graphics g) {
         if (bushImage != null) {
@@ -31,14 +36,11 @@ public class Bush extends Obstacle {
     /**
      * Gets the bounding rectangle of the bush for collision detection.
      * 
-     * @return A Rectangle representing Doug's bounds.
+     * @return a {@link Rectangle} representing the bush's bounds.
      */
     @Override
     public Rectangle getBounds() {
         return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
     }
-
-    @Override
-    public void tick() {}
 
 }

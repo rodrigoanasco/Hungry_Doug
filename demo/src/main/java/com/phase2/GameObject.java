@@ -29,14 +29,17 @@ public abstract class GameObject {
     }
     
     /**
-     * Abstract method that defines the object's behavior on each tick of the game loop.
+     * Method that defines the object's behavior on each tick of the game loop.
      */
-    public abstract void tick();
+    public void tick(){};
     
     /**
-     * Abstract method to render the game object.
+     * Renders the visual representation of the object on the screen.
      * 
-     * @param g the Graphics object used for rendering
+     * If the object has not been collected, this method draws the corresponding sprite
+     * at the object's current position on the screen.
+     *
+     * @param g the {@link Graphics} object used to draw the sprite
      */
     public abstract void render(Graphics g);
 
