@@ -422,6 +422,8 @@ public class Game extends Canvas implements Runnable {
 
         Health.HEALTH = 200;
         Score.SCORE = 0;
+        Score.boneScore = 0;
+        Score.boneTotal = 0;
 
         handler.clearObjects();
         
