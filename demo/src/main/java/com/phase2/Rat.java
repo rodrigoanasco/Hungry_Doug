@@ -31,6 +31,14 @@ public class Rat extends MovingEnemy {
     //test
     private boolean isStuck = false;
     //
+    // Variables to track the stuck state and Doug's last position
+    private boolean stuck = false;
+    private int lastDougX = -1;
+    private int lastDougY = -1;
+    private int targetUnstuckX = -1; // Target position to move horizontally
+    private int targetUnstuckY = -1; // Target position to move vertically
+
+    //
 
     private static final double SCALE_FACTOR = 1.25;
 
@@ -206,6 +214,7 @@ public class Rat extends MovingEnemy {
 
 
 
+
     public void tick() {
         // Access the singleton instance of Doug
         Doug doug = Doug.getInstance();
@@ -238,14 +247,15 @@ public class Rat extends MovingEnemy {
         if (y < 0 || y >= Game.HEIGHT - 100) velY = 0; // Stop movement if out of bounds
         if (x < 0 || x >= Game.WIDTH - 100) velX = 0;
     }
-    
-    /**
-     * Attempts to move the rat in the given direction if no obstacle blocks the way.
-     *
-     * @param dirX The horizontal movement direction (-1, 0, 1).
-     * @param dirY The vertical movement direction (-1, 0, 1).
-     * @return true if the movement is valid and sets velocity, false otherwise.
-     */
+
+
+    // /**
+    //  * Attempts to move the rat in the given direction if no obstacle blocks the way.
+    //  *
+    //  * @param dirX The horizontal movement direction (-1, 0, 1).
+    //  * @param dirY The vertical movement direction (-1, 0, 1).
+    //  * @return true if the movement is valid and sets velocity, false otherwise.
+    //  */
     private boolean tryMove(int dirX, int dirY) {
         if (dirX == 0 && dirY == 0) return false; // No movement
     
@@ -270,7 +280,6 @@ public class Rat extends MovingEnemy {
         velY = dirY;
         return true;
     }
-
 
  
     /**
