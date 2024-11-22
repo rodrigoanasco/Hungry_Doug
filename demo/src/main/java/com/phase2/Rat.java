@@ -273,6 +273,10 @@ public class Rat extends MovingEnemy {
         // If no collision, set velocity and return true
         velX = dirX;
         velY = dirY;
+
+        if (dirX != 0) {
+            facingRight = dirX > 0; // Update facingRight based on horizontal movement
+        }
         return true;
     }
 
