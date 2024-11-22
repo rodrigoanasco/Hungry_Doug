@@ -25,6 +25,7 @@ public class Onion extends Punishment {
      * 
      * @return A Rectangle representing Doug's bounds.
      */
+    @Override
     public Rectangle getBounds() {
         return new Rectangle(x,y,32,32);
     }
@@ -32,12 +33,14 @@ public class Onion extends Punishment {
     /**
      * What the object should do on each tick
      */
+    @Override
     public void tick() {
 
     }
     /**
      * How the object should look like
      */
+    @Override
     public void render(Graphics g) {
         //render graphics
         if (!collected) {

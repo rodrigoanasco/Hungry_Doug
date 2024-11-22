@@ -8,7 +8,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Whiskey extends Punishment{
-    // TODO RottenFood not being used yet
 
     public Whiskey(int x, int y){
         super(x, y, PunishmentType.WHISKEY, 25);
@@ -25,14 +24,15 @@ public class Whiskey extends Punishment{
      * 
      * @return A Rectangle representing Doug's bounds.
      */
+    @Override
     public Rectangle getBounds() {
         return new Rectangle(x,y,32,32);
     }
 
-    public void tick() {
+    @Override
+    public void tick() {}
 
-    }
-
+    @Override
     public void render(Graphics g) {
         if (!collected) {
             g.drawImage(image, x, y, null);

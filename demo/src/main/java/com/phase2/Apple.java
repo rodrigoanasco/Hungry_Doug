@@ -26,20 +26,19 @@ public class Apple extends Reward {
      * 
      * @return A Rectangle representing Doug's bounds.
      */
+    @Override
     public Rectangle getBounds() {
         return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
 
     }
-
-    public void tick() {
-
-    }
-
+    @Override
     public void render(Graphics g) {
-        // renderHitBox(g,OBJECT_SIZE[0],OBJECT_SIZE[1]);
         if (!collected) {
             g.drawImage(appleSprite, x, y, null);
         }
     }
+
+    @Override
+    public void tick() {}
 
 }

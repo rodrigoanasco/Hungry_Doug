@@ -28,12 +28,5 @@ public abstract class Obstacle extends GameObject {
     public ObstacleType getType() {
         return type;
     }
-
-    /**
-     * Abstract method to check if the obstacle blocks the movement of the player.
-     * 
-     * @param doug the player character
-     * @return true if the movement is blocked, false otherwise
-     */
-    public abstract boolean blockMovement(Doug doug);
+    
 }

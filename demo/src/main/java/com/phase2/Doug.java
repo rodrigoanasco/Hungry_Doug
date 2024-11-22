@@ -6,8 +6,6 @@ import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.LinkedList;
-
 import javax.imageio.ImageIO;
 
 /**
@@ -118,6 +116,7 @@ public class Doug extends GameObject{
      * 
      * @return A Rectangle representing Doug's bounds.
      */
+    @Override
     public Rectangle getBounds() {
         int offset = 5;
         return new Rectangle(x + offset,y + offset,48 - (2* offset),48 - (2*offset));
@@ -164,8 +163,6 @@ public class Doug extends GameObject{
         y = Game.clamp(y, 0, Game.HEIGHT - 30);
     }
 
-
-
     /**
      * Handles collision detection for Doug. 
      * Checks for interactions with other game objects and updates health, score, or game state accordingly.
@@ -176,10 +173,8 @@ public class Doug extends GameObject{
     
         // Check for collisions in the X direction
         Rectangle predictedBoundsX = new Rectangle(predictedX, y, getBounds().width, getBounds().height);
-        synchronized (handler.objects) {
         
-        // TODO potentially unnecessary overhead to create new linkedlist every tick
-        // for (GameObject temp : new LinkedList<>(handler.objects)) {
+        synchronized (handler.objects) {
         for (GameObject temp : handler.objects) {
             if (temp.getBounds().intersects(predictedBoundsX)) {
                 switch (temp.getId()) {
@@ -193,13 +188,9 @@ public class Doug extends GameObject{
                         if (temp instanceof Punishment) {
                             if (!((Punishment)temp).isCollected()) {
                                 int penaltyPoints = ((Punishment) temp).getPenaltyPoints();
-                            
-
-                            ((Punishment)temp).setCollected(true);
-                            Health.HEALTH -= penaltyPoints;
-                            SoundEffect.play("/whimper.wav");
-                                //sound effect here
-
+                                ((Punishment)temp).setCollected(true);
+                                Health.HEALTH -= penaltyPoints;
+                                SoundEffect.play("/whimper.wav");
                             }
                         }
                         break;
@@ -211,9 +202,8 @@ public class Doug extends GameObject{
                             if (!reward.isCollected()) {
                                 int rewardAmount = reward.getRewardAmount();
                                 Score.SCORE += rewardAmount;
-                                reward.setCollected(true); // Mark as collected
+                                reward.setCollected(true);
 
-                                // Play munch sound
                                 SoundEffect.play("/munch.wav");
 
                                 if (reward.getType() == RewardType.BONE) Score.boneScore++;
@@ -232,28 +222,24 @@ public class Doug extends GameObject{
                             }
                         }
                         break;
-                    // case OBSTACLE:
-                    //     // Collision behavior for obstacles
-                    //     break;
-    
+   
                     case OBSTACLE:
                         // Collision behavior for obstacles
                         if (temp instanceof Obstacle) {
                             canMoveX = false; // Prevent movement in x direction if collision occurs
-                        
-                        // Push Doug out of the obstacle
-                        if (velX > 0) { // Moving right
-                            x = temp.getBounds().x - getBounds().width;
-                        } else if (velX < 0) { // Moving left
-                            x = temp.getBounds().x + temp.getBounds().width;
-                        }
-                        
+                            // Push Doug out of the obstacle
+                            if (velX > 0) { // Moving right
+                                x = temp.getBounds().x - getBounds().width;
+                            } else if (velX < 0) { // Moving left
+                                x = temp.getBounds().x + temp.getBounds().width;
+                            }
                         }
                         break;
     
                     default:
-                        // Default behavior for other object types
+
                         break;
+
                 }
             }
         }
@@ -273,17 +259,12 @@ public class Doug extends GameObject{
                         if (temp instanceof Punishment) {
                             if (!((Punishment)temp).isCollected()) {
                                 int penaltyPoints = ((Punishment) temp).getPenaltyPoints();
-                            
-
-                            ((Punishment)temp).setCollected(true);
-                            Health.HEALTH -= penaltyPoints;
-                            
-                                //sound effect here
+                                ((Punishment)temp).setCollected(true);
+                                Health.HEALTH -= penaltyPoints;
                                 SoundEffect.play("/whimper.wav");
                             }
                         }
                         
-
                         break;
     
                     case REWARD:
@@ -302,6 +283,7 @@ public class Doug extends GameObject{
                                 if (reward.getType() == RewardType.STEAK) ((Steak)reward).setAlive(false);
                             }
                         }
+
                         break;
     
                     case OBSTACLE:
@@ -309,18 +291,19 @@ public class Doug extends GameObject{
                         if (temp instanceof Obstacle) {
                             canMoveY = false; // Prevent movement in y direction if collision occurs
                         
-                        // Push Doug out of the obstacle
-                        if (velY > 0) { // Moving down
-                            y = temp.getBounds().y - getBounds().height;
-                        } else if (velY < 0) { // Moving up
-                            y = temp.getBounds().y + temp.getBounds().height;
-                        }
+                            // Push Doug out of the obstacle
+                            if (velY > 0) { // Moving down
+                                y = temp.getBounds().y - getBounds().height;
+                            } else if (velY < 0) { // Moving up
+                                y = temp.getBounds().y + temp.getBounds().height;
+                            }
                         
                         }
+
                         break;
     
                     default:
-                        // Default behavior for other object types
+
                         break;
                 }
             }
@@ -341,8 +324,6 @@ public class Doug extends GameObject{
         }
     }
     
-
-
     /**
      * Renders Doug on the screen as a green rectangle at his current position.
      * This is primarily used for testing.

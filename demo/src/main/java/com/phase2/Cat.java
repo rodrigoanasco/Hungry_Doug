@@ -10,7 +10,7 @@ import java.awt.Rectangle;
  * @param id the type of object the object should be treated as
 */
 public class Cat extends MovingEnemy {
-    //TODO Cat hasn't been utilized yet
+    //TODO not implemented, remove
 
     public Cat(int x, int y) {
         super(x,y, EnemyType.CAT, Health.HEALTH);

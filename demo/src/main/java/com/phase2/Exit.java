@@ -4,7 +4,6 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-
 import java.awt.Graphics;
 
 /**
@@ -39,9 +38,9 @@ public class Exit extends GameObject {
      * 
      * @return A Rectangle representing the bounds of the Exit.
      */
+    @Override
     public Rectangle getBounds() {
         return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
-
     }
 
     /**
@@ -63,6 +62,7 @@ public class Exit extends GameObject {
      * 
      * @param g The Graphics object used to draw the Exit.
      */
+    @Override
     public void render(Graphics g) {
         // renderHitBox(g,OBJECT_SIZE[0],OBJECT_SIZE[1]);
             if (Score.boneScore >= Score.boneTotal) {

@@ -47,6 +47,7 @@ public class Steak extends Reward {
      * 
      * @return A Rectangle representing the bounds of the Steak.
      */
+    @Override
     public Rectangle getBounds() {
         return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
     }
@@ -64,6 +65,7 @@ public class Steak extends Reward {
      * Updates the state of the Steak.
      * The Steak becomes collectible after its spawn time and disappears after its death time.
      */
+    @Override
     public void tick() {
         //to be implemented: checks if colliding with doug
         //System.out.println(this.lifetime);
@@ -88,8 +90,8 @@ public class Steak extends Reward {
      * 
      * @param g The Graphics object used to draw the Steak.
      */
+    @Override
     public void render(Graphics g) {
-        // renderHitBox(g,OBJECT_SIZE[0],OBJECT_SIZE[1]);
         if (!this.collected) {
             g.drawImage(steakSprite, x, y, null);
             g.setColor(Color.BLACK);

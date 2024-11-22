@@ -24,6 +24,7 @@ public abstract class BonusReward extends GameObject{
         this.type = type;
         this.rewardAmount = rewardAmount;
     }
+
     /**
      * Gets the type of the reward.
      * 
@@ -49,11 +50,6 @@ public abstract class BonusReward extends GameObject{
     public void setCollected(boolean collected) {
         this.collected = collected;
     }
-
-    // public Rectangle getBounds() {
-    //     return new Rectangle(x,y,30,30);
-
-    // }
 
 }
 
