@@ -8,7 +8,6 @@ com\phase2\Bush.class
 com\phase2\Punishment.class
 com\phase2\EnemyType.class
 com\phase2\PunishmentType.class
-com\phase2\BonusReward.class
 com\phase2\Obstacle.class
 com\phase2\RewardType.class
 com\phase2\GameObject.class
@@ -25,7 +24,6 @@ com\phase2\Apple.class
 com\phase2\ObstacleType.class
 com\phase2\MovingEnemy.class
 com\phase2\Chocolate.class
-com\phase2\Cat.class
 com\phase2\Health.class
 com\phase2\SoundEffect.class
 com\phase2\BackgroundMusic.class

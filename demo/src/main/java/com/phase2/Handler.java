@@ -10,7 +10,7 @@ import java.util.LinkedList;
  */
 public class Handler {
 
-    private Boolean debug = false;
+    private int tickCount = 0;
     private Game game; //A reference to the Game Instance
 
     // list of all objects in game (Doug, enemies, food, etc)
@@ -33,10 +33,20 @@ public class Handler {
      * This is called for every game tick.
      */
     public synchronized void tick() {
+        tickCount++;
         for (int i = 0; i < objects.size(); i++) {
             GameObject tempObject = objects.get(i);
             tempObject.tick();
         }
+    }
+
+    /**
+    * Returns the number of ticks processed by the game.
+    *
+    * @return The total tick count.
+    */
+    public synchronized int getTickCount() {
+        return tickCount;
     }
 
     /**

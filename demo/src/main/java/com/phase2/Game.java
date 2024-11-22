@@ -282,19 +282,22 @@ public class Game extends Canvas implements Runnable {
      * Stops the game thread safely.
      */
     public synchronized void stop() {
-        try {
-            // Stop the background music if it's playing
-            if (backgroundMusic != null) {
-                backgroundMusic.stop();
-            }
+        if (!running) return; // Prevent redundant calls
     
-            running = false;
-            // Join the game thread to ensure it exits cleanly
-            thread.join();
-        } catch (Exception e) {
+        running = false; // Ensure the game loop exits
+        try {
+            if (backgroundMusic != null) {
+                backgroundMusic.stop(); // Stop background music
+            }
+            if (thread != null) {
+                thread.join(2000); // Wait for the thread to terminate
+            }
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        // System.out.println("Game stopped.");
     }
+    
     
 
     /**
@@ -314,18 +317,21 @@ public class Game extends Canvas implements Runnable {
             delta += (now - lastTime) / ns;
             lastTime = now;
             while (delta >= 1) {
-                if (!paused && !gameOver) tick();
+                if (!paused && !gameOver) {
+                    tick();
+                }
                 delta--;    
             }
             if (running) {
                 render();
+                // tick();
             }
             // frames++;
             if (System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
             }
         }
-        stop();
+        // stop();
     }
 
     /**
@@ -339,6 +345,25 @@ public class Game extends Canvas implements Runnable {
             checkGameOver();
         }
     }
+
+    /**
+    * Checks whether the game is currently running.
+    *
+    * @return {@code true} if the game is running, {@code false} otherwise.
+    */
+    public boolean isRunning() {
+        return running;
+    }
+
+    /**
+    * Returns the handler associated with the game.
+    *
+    * @return The {@link Handler} instance managing game objects.
+    */
+    public Handler getHandler() {
+        return handler; // Ensure this matches the variable in your Game class
+    }
+
 
     /**
      * Renders the game graphics.
