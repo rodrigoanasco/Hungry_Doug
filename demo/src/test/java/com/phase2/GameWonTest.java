@@ -1,4 +1,4 @@
-/* package com.phase2;
+package com.phase2;
 
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
@@ -28,4 +28,3 @@ public class GameWonTest {
         assertTrue(game.isGameWon());
     }
 }
-*/
