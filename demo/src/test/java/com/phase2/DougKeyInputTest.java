@@ -97,28 +97,35 @@ public class DougKeyInputTest {
     }
 
     @Test
-    public void testPauseToggle() {
-        assertFalse(game.isPaused());
+public void testPauseToggle() {
+    // Ensure the game starts unpaused
+    assertFalse(game.isPaused());
 
-        KeyEvent pauseKey = new KeyEvent(new Canvas(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_P, 'P');
-        keyInput.keyPressed(pauseKey);
-        assertTrue(game.isPaused());
+    // Simulate pressing the Escape key to toggle pause
+    KeyEvent escapeKey = new KeyEvent(new Canvas(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_ESCAPE, (char) KeyEvent.VK_ESCAPE);
+    keyInput.keyPressed(escapeKey);
+    assertTrue(game.isPaused());
 
-        keyInput.keyPressed(pauseKey);
-        assertFalse(game.isPaused());
-    }
+    // Simulate pressing the Escape key again to unpause
+    keyInput.keyPressed(escapeKey);
+    assertFalse(game.isPaused());
+}
 
-    @Test
-    public void testPausedStatePreventsMovement() {
-        KeyEvent pauseKey = new KeyEvent(new Canvas(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_P, 'P');
-        keyInput.keyPressed(pauseKey);
-        assertTrue(game.isPaused());
+@Test
+public void testPausedStatePreventsMovement() {
+    // Pause the game
+    KeyEvent escapeKey = new KeyEvent(new Canvas(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_ESCAPE, (char) KeyEvent.VK_ESCAPE);
+    keyInput.keyPressed(escapeKey);
+    assertTrue(game.isPaused());
 
-        KeyEvent upKey = new KeyEvent(new Canvas(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_W, 'W');
-        keyInput.keyPressed(upKey);
-        doug.tick();
+    // Attempt movement while paused
+    KeyEvent upKey = new KeyEvent(new Canvas(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_W, 'W');
+    keyInput.keyPressed(upKey);
+    doug.tick();
 
-        assertEquals(0, doug.getVelX());
-        assertEquals(0, doug.getVelY());
-    }
+    // Velocities should remain zero while paused
+    assertEquals(0, doug.getVelX());
+    assertEquals(0, doug.getVelY());
+}
+
 }
