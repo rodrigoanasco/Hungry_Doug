@@ -8,6 +8,8 @@ import java.util.LinkedList;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
+import java.util.LinkedList;
+import java.lang.Math;
 
 /**
  * Class for the moving enemy type Rat
@@ -22,23 +24,13 @@ public class Rat extends MovingEnemy {
     private BufferedImage[] idleSprites;
     private BufferedImage[] walkSprites;
     private int currentFrame = 0;
-    private int frameDelay = 5; // Controls animation speed
+    private int frameDelay = 25; // Controls animation speed
     private int frameCount = 0;
 
     private boolean moving = false;
+    private boolean pathfinding = false;
     private boolean facingRight = true;
-
-    //test
-    private boolean isStuck = false;
-    //
-    // Variables to track the stuck state and Doug's last position
-    private boolean stuck = false;
-    private int lastDougX = -1;
-    private int lastDougY = -1;
-    private int targetUnstuckX = -1; // Target position to move horizontally
-    private int targetUnstuckY = -1; // Target position to move vertically
-
-    //
+    //testing Rectangle assumedBushHitbox = new Rectangle(500, 10, 32, 500);
 
     private static final double SCALE_FACTOR = 1.25;
 
@@ -64,6 +56,8 @@ public class Rat extends MovingEnemy {
             for (int i = 0; i < 4; i++) {
                 walkSprites[i] = walkSheet.getSubimage(i * 32, 0, 32, 32);
             }
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -238,6 +232,7 @@ public class Rat extends MovingEnemy {
                 }
             }
         }
+
     
         // Update position based on velocity
         x += velX;
@@ -289,6 +284,9 @@ public class Rat extends MovingEnemy {
 
         Graphics2D g2d = (Graphics2D) g;
 
+
+        //testing g.drawRect(500, 10, (int)assumedBushHitbox.getWidth(), (int)assumedBushHitbox.getHeight());
+        
         // Rat is moving or idle
         BufferedImage spriteToDraw = moving ? walkSprites[currentFrame] : idleSprites[currentFrame];
 

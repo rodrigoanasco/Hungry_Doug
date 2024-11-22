@@ -92,6 +92,14 @@ public class Doug extends GameObject{
     }
 
     /**
+     * Set instance (Just for testing)
+     * Resets the singleton instance
+     */
+    public static void setInstance(){
+        instance = null;
+    }
+
+    /**
      * Returns the singleton instance of Doug. 
      * If Doug has not been initialized, an exception is thrown.
      * 
