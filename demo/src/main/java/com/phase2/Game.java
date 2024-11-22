@@ -90,7 +90,7 @@ public class Game extends Canvas implements Runnable {
         
         
         backgroundMusic = new BackgroundMusic(); // Initialize the backgroundMusic object first
-        backgroundMusic.play("/backgroundmusic.wav");
+        backgroundMusic.play("/backgroundmusic.wav", -15.0f);
 
         handler = new Handler(this);
         mainMenu = new MainMenu(this); // Initialize Main Menu
