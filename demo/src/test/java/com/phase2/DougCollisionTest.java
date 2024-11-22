@@ -23,7 +23,7 @@ public class DougCollisionTest {
 
     @Test
     public void testCollisionWithEnemy() {
-        Rat rat = new Rat(100, 100); // Position rat at the same location as Doug
+        Rat rat = new Rat(100, 100, handler); // Position rat at the same location as Doug
         handler.addObject(rat);
     
         doug.tick(); // This should trigger a collision
