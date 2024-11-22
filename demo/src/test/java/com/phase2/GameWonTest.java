@@ -1,4 +1,4 @@
-/* package com.phase2;
+package com.phase2;
 
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
@@ -13,19 +13,19 @@ public class GameWonTest {
     @Before
     public void setUp() {
         game = new Game();
-        handler = new Handler(game);
+        handler = game.getHandler();
+        Doug.setInstance();
         doug = Doug.getInstance(100, 100, ID.DOUG, handler);
         handler.addObject(doug);
         exit = new Exit(100, 100);
         handler.addObject(exit);
-        Score.boneScore = Score.boneTotal; // Assume all bones collected
+        Score.boneScore = Score.boneTotal = 1; // Assume all bones collected
     }
 
     @Test
     public void testGameWon() {
         doug.tick(); // Should detect collision with exit
 
-        assertTrue(game.isGameWon());
+        assertTrue("Game should be won after reaching exit", game.isGameWon());
     }
 }
-*/
