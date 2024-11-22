@@ -53,12 +53,21 @@ public class Steak extends Reward {
     }
 
     /**
+     * gets the alive status of the Steak, determining if it is active and collectible.
+     * 
+     * 
+     */
+    public void setAlive(Boolean b) {
+        this.isAlive = b;
+    }
+
+    /**
      * Sets the alive status of the Steak, determining if it is active and collectible.
      * 
      * @param b True if the Steak is alive and collectible, false otherwise.
      */
-    public void setAlive(Boolean b) {
-        this.isAlive = b;
+    public boolean getAlive() {
+        return this.isAlive;
     }
 
     /**
