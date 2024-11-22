@@ -332,8 +332,7 @@ public class Doug extends GameObject{
     }
     
     /**
-     * Renders Doug on the screen as a green rectangle at his current position.
-     * This is primarily used for testing.
+     * Renders Doug on the screen at his current position.
      *
      * @param g The Graphics object used to render Doug.
      */

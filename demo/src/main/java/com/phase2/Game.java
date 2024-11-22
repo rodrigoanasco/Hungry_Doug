@@ -30,8 +30,6 @@ public class Game extends Canvas implements Runnable {
     private boolean gameWon = false; // Tracker to check if the game is won
     private boolean gameOver = false; //Game over tracker
 
-    // // TODO random for testing only
-    // private Random r;
     private Handler handler;
 
     private Doug doug;

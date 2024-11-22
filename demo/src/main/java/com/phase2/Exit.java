@@ -45,7 +45,6 @@ public class Exit extends GameObject {
 
     /**
      * Updates the state of the Exit.
-     * Currently, the Exit does not have any behavior to update each tick.
      */
     public void tick() {
    
@@ -53,7 +52,6 @@ public class Exit extends GameObject {
             SoundEffect.play("/reward.wav");
             a = false;
         }
-        //System.out.println(Score.boneScore + " " + Score.boneTotal);
     }
 
     /**
@@ -72,5 +70,4 @@ public class Exit extends GameObject {
 
         }
     }
-
 }

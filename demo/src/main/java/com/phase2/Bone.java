@@ -21,20 +21,24 @@ public class Bone extends Reward {
         }
     }
     
-    /**
+   /**
      * Gets the bounding rectangle of the bone for collision detection.
-     * 
-     * @return A Rectangle representing Doug's bounds.
+     *
+     * @return a {@link Rectangle} representing the bounds of the object.
      */
     @Override
     public Rectangle getBounds() {
         return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
     }
 
-    @Override
-    public void tick() {
-    }
-
+    /**
+     * Renders the visual representation of the bone on the screen.
+     * 
+     * If the object has not been collected, this method draws the corresponding sprite
+     * at the object's current position on the screen.
+     *
+     * @param g the {@link Graphics} object used to draw the sprite
+     */
     @Override
     public void render(Graphics g) {
         if (!collected) {

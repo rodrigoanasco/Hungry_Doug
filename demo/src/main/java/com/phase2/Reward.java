@@ -1,5 +1,6 @@
 package com.phase2;
 
+import java.awt.Graphics;
 import java.awt.Rectangle;
 
 /**
@@ -35,7 +36,7 @@ public abstract class Reward extends GameObject{
     }
 
     /**
-     * Gets the reward awarded by the reward.
+     * Gets the amount awarded by the reward.
      * 
      * @return the number of rewardAmount
      */
@@ -62,7 +63,17 @@ public abstract class Reward extends GameObject{
     }
 
 
+    /**
+     * Gets the bounding rectangle of the reward for collision detection.
+     */
     public abstract Rectangle getBounds();
+
+    /**
+     * Renders the visual representation of the object on the screen.
+     * 
+     * @param g the {@link Graphics} object used to draw the sprite
+     */
+    public abstract void render(Graphics g);
 
 }
 

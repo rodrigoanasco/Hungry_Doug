@@ -1,5 +1,8 @@
 package com.phase2;
 
+import java.awt.Graphics;
+import java.awt.Rectangle;
+
 /**
  * The MovingEnemy class represents enemies that move and apply penalties to the player.
  * It is an abstract class that requires subclasses to define the specific penalty behavior.
@@ -43,9 +46,24 @@ public abstract class MovingEnemy extends GameObject{
         return penaltyPoints;
     }
 
+    /**
+     * Defines behavior on each tick of the game loop
+     */
     public void tick() {
         x = Game.clamp(x,0,Game.WIDTH - 30);
         y = Game.clamp(y,0,Game.HEIGHT - 30);
     }
+    
+    /**
+     * Gets the bounding rectangle of the reward for collision detection.
+     */
+    public abstract Rectangle getBounds();
+
+    /**
+     * Renders the visual representation of the object on the screen.
+     * 
+     * @param g the {@link Graphics} object used to draw the sprite
+     */
+    public abstract void render(Graphics g);
 
 }

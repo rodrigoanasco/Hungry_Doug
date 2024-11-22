@@ -20,18 +20,20 @@ public class Whiskey extends Punishment{
     }
 
     /**
-     * Gets the bounding rectangle of Doug for collision detection.
+     * Gets the bounding rectangle of the steak for collision detection.
      * 
-     * @return A Rectangle representing Doug's bounds.
+     * @return A Rectangle representing the steak's bounds.
      */
     @Override
     public Rectangle getBounds() {
         return new Rectangle(x,y,32,32);
     }
 
-    @Override
-    public void tick() {}
-
+    /**
+     * Renders the visual representation of the object on the screen.
+     * 
+     * @param g the {@link Graphics} object used to draw the sprite
+     */
     @Override
     public void render(Graphics g) {
         if (!collected) {
