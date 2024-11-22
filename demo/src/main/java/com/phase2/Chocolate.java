@@ -15,7 +15,6 @@ import javax.imageio.ImageIO;
 */
 public class Chocolate extends Punishment {
 
-
     public Chocolate(int x, int y){
     super(x,y, PunishmentType.CHOCOLATE, 50);
             try {
@@ -24,7 +23,6 @@ public class Chocolate extends Punishment {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
  
     /**
@@ -32,6 +30,7 @@ public class Chocolate extends Punishment {
      * 
      * @return A Rectangle representing Doug's bounds.
      */
+    @Override
     public Rectangle getBounds() {
         // 32 gets replaced with whatever the size of chocolate is
         return new Rectangle(x,y,32,32);
@@ -40,17 +39,18 @@ public class Chocolate extends Punishment {
     /**
      * What the object should do on each tick
      */
+    @Override
     public void tick() {
 
     }
     /**
      * How the object should look like
      */
+    @Override
     public void render(Graphics g) {
         if (!collected) {
             g.drawImage(image, x, y, null);
         }
-
     }
 
 }

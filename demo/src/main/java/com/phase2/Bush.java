@@ -23,11 +23,6 @@ public class Bush extends Obstacle {
     }
 
     @Override
-    public void tick() {
-        // Bushes are static, so no updates are needed
-    }
-
-    @Override
     public void render(Graphics g) {
         if (bushImage != null) {
             g.drawImage(bushImage, x, y, WIDTH, HEIGHT, null);
@@ -40,8 +35,6 @@ public class Bush extends Obstacle {
     }
 
     @Override
-    public boolean blockMovement(Doug doug) {
-        // Prevent Doug from moving through the bush
-        return this.getBounds().intersects(doug.getBounds());
-    }
+    public void tick() {}
+
 }

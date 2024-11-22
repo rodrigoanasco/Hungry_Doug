@@ -1,5 +1,6 @@
 package com.phase2;
 
+import java.awt.Rectangle;
 
 /**
  * The Reward class represents a type of object that applies a specific reward to the player.
@@ -60,10 +61,8 @@ public abstract class Reward extends GameObject{
         this.collected = collected;
     }
 
-    // public Rectangle getBounds() {
-    //     return new Rectangle(x,y,30,30);
 
-    // }
+    public abstract Rectangle getBounds();
 
 }
 

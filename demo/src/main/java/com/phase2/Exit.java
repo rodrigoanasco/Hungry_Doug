@@ -4,7 +4,6 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-
 import java.awt.Graphics;
 
 /**
@@ -38,19 +37,17 @@ public class Exit extends GameObject {
      * 
      * @return A Rectangle representing the bounds of the Exit.
      */
+    @Override
     public Rectangle getBounds() {
         return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
-
     }
 
     /**
      * Updates the state of the Exit.
      * Currently, the Exit does not have any behavior to update each tick.
      */
-    public void tick() {
-        
-        //System.out.println(Score.boneScore + " " + Score.boneTotal);
-    }
+    @Override
+    public void tick() {}
 
     /**
      * Renders the Exit on the screen.
@@ -58,11 +55,11 @@ public class Exit extends GameObject {
      * 
      * @param g The Graphics object used to draw the Exit.
      */
+    @Override
     public void render(Graphics g) {
-        // renderHitBox(g,OBJECT_SIZE[0],OBJECT_SIZE[1]);
-            if (Score.boneScore >= Score.boneTotal) {
-                g.drawImage(sprite, x, y, null);
-                SoundEffect.play("/reward.wav");
+        if (Score.boneScore >= Score.boneTotal) {
+            g.drawImage(sprite, x, y, null);
+            SoundEffect.play("/reward.wav");
         }
     }
 

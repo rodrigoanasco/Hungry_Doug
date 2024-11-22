@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-
 import javax.imageio.ImageIO;
 
 /**
@@ -31,8 +30,8 @@ public class Game extends Canvas implements Runnable {
     private boolean gameWon = false; // Tracker to check if the game is won
     private boolean gameOver = false; //Game over tracker
 
-    // TODO random for testing only
-    private Random r;
+    // // TODO random for testing only
+    // private Random r;
     private Handler handler;
 
     private Doug doug;
@@ -91,14 +90,14 @@ public class Game extends Canvas implements Runnable {
      */
     public Game() {
         
-        // Initialize the backgroundMusic object first
-        backgroundMusic = new BackgroundMusic();
+        
+        backgroundMusic = new BackgroundMusic(); // Initialize the backgroundMusic object first
         backgroundMusic.play("/backgroundmusic.wav");
 
         handler = new Handler(this);
-        mainMenu = new MainMenu(this); //Initialize Main Menu
+        mainMenu = new MainMenu(this); // Initialize Main Menu
         winningScreen = new WinningScreen(this); // Initialize the winning screen
-        gameOverScreen = new GameOverScreen(this);
+        gameOverScreen = new GameOverScreen(this); // Initialize the game over screen
 
         this.addKeyListener(new KeyInput(handler, this)); // Recieves keyboard input
 
@@ -116,128 +115,126 @@ public class Game extends Canvas implements Runnable {
         health = new Health(); 
         score = new Score();
 
-        // Create or get the single instance of Doug
-        doug = Doug.getInstance(200, 200, ID.DOUG, handler);
-        // Add Doug to the handler
-        handler.addObject(doug);
+        initializeGameObjects();
+
+        //TODO used initializeGameObjects instead of below code 
+
+        // doug = Doug.getInstance(200, 200, ID.DOUG, handler);  // Create or get the single instance of Doug
+        // handler.addObject(doug);
+
+        // int bushWidth = 30;
+        // int bushHeight = 30;
+        
+        // // Adding bushes in each corner
+        // Bush bushTopLeft = new Bush(0, 0);
+        // handler.addObject(bushTopLeft);
+        // addToGrid(bushTopLeft);
+        
+        // Bush bushTopRight = new Bush(Game.WIDTH - bushWidth - 10, 0);
+        // handler.addObject(bushTopRight);
+        // addToGrid(bushTopRight);
+        
+        // Bush bushBottomLeft = new Bush(0, Game.HEIGHT - bushHeight - 35);
+        // handler.addObject(bushBottomLeft);
+        // addToGrid(bushBottomLeft);
+        
+        // Bush bushBottomRight = new Bush(Game.WIDTH - bushWidth - 15, Game.HEIGHT - bushHeight - 35);
+        // handler.addObject(bushBottomRight);
+        // addToGrid(bushBottomRight);
+        
+        // // Adding bushes along the top border, excluding the corners
+        // for (int x = bushWidth; x <= Game.WIDTH - bushWidth; x += bushWidth) {
+        //     Bush bush = new Bush(x, 0);
+        //     handler.addObject(bush);
+        //     addToGrid(bush);
+        // }
+        
+        // // Adding bushes along the bottom border, excluding the corners
+        // for (int x = bushWidth; x <= Game.WIDTH - bushWidth - 15; x += bushWidth) {
+        //     Bush bush = new Bush(x, Game.HEIGHT - bushHeight - 35);
+        //     handler.addObject(bush);
+        //     addToGrid(bush);
+        // }
+        
+        // // Adding bushes along the left border, excluding the corners
+        // for (int y = bushHeight; y <= Game.HEIGHT - bushHeight; y += bushHeight) {
+        //     Bush bush = new Bush(0, y);
+        //     handler.addObject(bush);
+        //     addToGrid(bush);
+        // }
+        
+        // // Adding bushes along the right border, excluding the corners
+        // for (int y = bushHeight; y <= Game.HEIGHT - bushHeight - 35; y += bushHeight) {
+        //     Bush bush = new Bush(Game.WIDTH - bushWidth - 15, y);
+        //     handler.addObject(bush);
+        //     addToGrid(bush);
+        // }
+        
+        // // Adding maze bushes from maze coordinates
+        // int[][] mazeBushCoordinates = {
+        //     {90, HEIGHT - bushHeight - 35}, {90, HEIGHT - bushHeight * 2 - 35}, {90, HEIGHT - bushHeight * 3 - 35}, 
+        //     {90, HEIGHT - bushHeight * 4 - 35}, {90, HEIGHT - bushHeight * 5 - 35}, {120, HEIGHT - bushHeight * 5 - 35},
+        //     {150, HEIGHT - bushHeight * 5 - 35}, {180, HEIGHT - bushHeight * 5 - 35}, {210, HEIGHT - bushHeight * 5 - 35},
+        //     {240, HEIGHT - bushHeight * 5 - 35}, {270, HEIGHT - bushHeight * 5 - 35}, {300, HEIGHT - bushHeight * 5 - 35},
+        //     {90, HEIGHT - bushHeight * 9 - 35}, {90, HEIGHT - bushHeight * 10 - 35}, {90, HEIGHT - bushHeight * 11 - 35},
+
+        //     // little box on right
+        //     {90, HEIGHT - bushHeight * 13 - 35}, {120, HEIGHT - bushHeight * 13 - 35}, {150, HEIGHT - bushHeight * 13 - 35},
+        //     {180, HEIGHT - bushHeight * 13 - 35}, {120, HEIGHT - bushHeight * 9 - 35}, {150, HEIGHT - bushHeight * 9 - 35},
+        //     {180, HEIGHT - bushHeight * 9 - 35}, {90, HEIGHT - bushHeight * 12 - 35},
+
+        //     {210, HEIGHT - bushHeight * 9 - 35}, {240, HEIGHT - bushHeight * 9 - 35}, {270, HEIGHT - bushHeight * 9 - 35},
+        //     {300, HEIGHT - bushHeight * 9 - 35},{330, HEIGHT - bushHeight * 9 - 35}, {360, HEIGHT - bushHeight * 9 - 35},
+        //     {390, HEIGHT - bushHeight * 9 - 35}, {420, HEIGHT - bushHeight * 9 - 35}, {510, HEIGHT - bushHeight * 9 - 35},
+        //     {540, HEIGHT - bushHeight * 9 - 35}, {570, HEIGHT - bushHeight * 9 - 35}, {600, HEIGHT - bushHeight * 9 - 35},
+        //     {630, HEIGHT - bushHeight * 9 - 35}, {660, HEIGHT - bushHeight * 9 - 35}, {690, HEIGHT - bushHeight * 9 - 35},
+        //     {690, HEIGHT - bushHeight * 8 - 35}, {690, HEIGHT - bushHeight * 7 - 35}, {690, HEIGHT - bushHeight * 6 - 35},
+        //     {690, HEIGHT - bushHeight * 5 - 35}, {720, HEIGHT - bushHeight * 9 - 35}, {750, HEIGHT - bushHeight * 9 - 35},
+        //     {780, HEIGHT - bushHeight * 9 - 35}, {810, HEIGHT - bushHeight * 9 - 35}, {840, HEIGHT - bushHeight * 9 - 35},
+        //     {870, HEIGHT - bushHeight * 9 - 35}, {870, HEIGHT - bushHeight * 10 - 35},{870, HEIGHT - bushHeight * 11 - 35},
+        //     {870, HEIGHT - bushHeight * 12 - 35}, {870, HEIGHT - bushHeight * 13 - 35}, {870, HEIGHT - bushHeight * 14 - 35},
+        //     {870, HEIGHT - bushHeight * 15 - 35}, {870, HEIGHT - bushHeight * 16 - 35}, {870, HEIGHT - bushHeight * 17 - 35},
+        //     {870, HEIGHT - bushHeight * 18 - 35}, {870, HEIGHT - bushHeight * 19 - 35}, {840, HEIGHT - bushHeight * 19 - 35},
+        //     {810, HEIGHT - bushHeight * 19 - 35}, {780, HEIGHT - bushHeight * 19 - 35}, {750, HEIGHT - bushHeight * 19 - 35},
+        //     {720, HEIGHT - bushHeight * 19 - 35}, {690, HEIGHT - bushHeight * 19 - 35},
+        //     {990, HEIGHT - bushHeight * 19 - 35}, {1020, HEIGHT - bushHeight * 19 - 35}, {1050, HEIGHT - bushHeight * 19 - 35},
+        //     {1080, HEIGHT - bushHeight * 19 - 35}, {1110, HEIGHT - bushHeight * 19 - 35}, {1140, HEIGHT - bushHeight * 19 - 35},
+        //     {990, HEIGHT - bushHeight * 18 - 35}, {990, HEIGHT - bushHeight * 17 - 35}, {990, HEIGHT - bushHeight * 16 - 35},
+        //     {990, HEIGHT - bushHeight * 15 - 35}, {1140, HEIGHT - bushHeight * 18 - 35}, {1140, HEIGHT - bushHeight * 17 - 35},
+        //     {1140, HEIGHT - bushHeight * 16 - 35}, {1140, HEIGHT - bushHeight * 15 - 35}, {1140, HEIGHT - bushHeight * 11 - 35},
+        //     {1140, HEIGHT - bushHeight * 10 - 35}, {1140, HEIGHT - bushHeight * 9 - 35}, {1140, HEIGHT - bushHeight * 8 - 35},
+        //     {1140, HEIGHT - bushHeight * 7 - 35}, {1140, HEIGHT - bushHeight * 6 - 35}, {990, HEIGHT - bushHeight * 11 - 35},
+        //     {990, HEIGHT - bushHeight * 10 - 35}, {990, HEIGHT - bushHeight * 9 - 35}, {990, HEIGHT - bushHeight * 8 - 35},
+        //     {990, HEIGHT - bushHeight * 7 - 35}, {990, HEIGHT - bushHeight * 6 - 35}, {1020, HEIGHT - bushHeight * 6 - 35},
+        //     {1050, HEIGHT - bushHeight * 6 - 35}, {1080, HEIGHT - bushHeight * 6 - 35}, {1110, HEIGHT - bushHeight * 6 - 35},
+        //     {1170, HEIGHT - bushHeight * 6 - 35}, {1200, HEIGHT - bushHeight * 6 - 35}, {1230, HEIGHT - bushHeight * 6 - 35},
+
+        //     {210, HEIGHT - bushHeight * 13 - 35}, {240, HEIGHT - bushHeight * 13 - 35}, {270, HEIGHT - bushHeight * 13 - 35},
+        //     {270, HEIGHT - bushHeight * 14 - 35}, {270, HEIGHT - bushHeight * 14 - 35}, {270, HEIGHT - bushHeight * 15 - 35},
+        //     {270, HEIGHT - bushHeight * 16 - 35}, {270, HEIGHT - bushHeight * 17 - 35}, {270, HEIGHT - bushHeight * 18 - 35},
+        //     {270, HEIGHT - bushHeight * 19 - 35}, {300, HEIGHT - bushHeight * 19 - 35}, {330, HEIGHT - bushHeight * 19 - 35},
+        //     {360, HEIGHT - bushHeight * 19 - 35}, {390, HEIGHT - bushHeight * 19 - 35}, {420, HEIGHT - bushHeight * 19 - 35},
+        //     {450, HEIGHT - bushHeight * 19 - 35}, {480, HEIGHT - bushHeight * 19 - 35}, {510, HEIGHT - bushHeight * 19 - 35},
+        //     {600, HEIGHT - bushHeight * 19 - 35}, {630, HEIGHT - bushHeight * 19 - 35}, {660, HEIGHT - bushHeight * 19 - 35}
+        // };
+        
+        // for (int[] coord : mazeBushCoordinates) {
+        //     Bush bush = new Bush(coord[0], coord[1]);
+        //     handler.addObject(bush);
+        //     addToGrid(bush);
+        // }
 
 
+        // generateRandomEnemies(1, handler,100);
 
-        // Adding bushes as obstacles
-        int bushWidth = 30;
-        int bushHeight = 30;
-        
-        // Adding bushes in each corner
-        Bush bushTopLeft = new Bush(0, 0);
-        handler.addObject(bushTopLeft);
-        addToGrid(bushTopLeft);
-        
-        Bush bushTopRight = new Bush(Game.WIDTH - bushWidth - 10, 0);
-        handler.addObject(bushTopRight);
-        addToGrid(bushTopRight);
-        
-        Bush bushBottomLeft = new Bush(0, Game.HEIGHT - bushHeight - 35);
-        handler.addObject(bushBottomLeft);
-        addToGrid(bushBottomLeft);
-        
-        Bush bushBottomRight = new Bush(Game.WIDTH - bushWidth - 15, Game.HEIGHT - bushHeight - 35);
-        handler.addObject(bushBottomRight);
-        addToGrid(bushBottomRight);
-        
-        // Adding bushes along the top border, excluding the corners
-        for (int x = bushWidth; x <= Game.WIDTH - bushWidth; x += bushWidth) {
-            Bush bush = new Bush(x, 0);
-            handler.addObject(bush);
-            addToGrid(bush);
-        }
-        
-        // Adding bushes along the bottom border, excluding the corners
-        for (int x = bushWidth; x <= Game.WIDTH - bushWidth - 15; x += bushWidth) {
-            Bush bush = new Bush(x, Game.HEIGHT - bushHeight - 35);
-            handler.addObject(bush);
-            addToGrid(bush);
-        }
-        
-        // Adding bushes along the left border, excluding the corners
-        for (int y = bushHeight; y <= Game.HEIGHT - bushHeight; y += bushHeight) {
-            Bush bush = new Bush(0, y);
-            handler.addObject(bush);
-            addToGrid(bush);
-        }
-        
-        // Adding bushes along the right border, excluding the corners
-        for (int y = bushHeight; y <= Game.HEIGHT - bushHeight - 35; y += bushHeight) {
-            Bush bush = new Bush(Game.WIDTH - bushWidth - 15, y);
-            handler.addObject(bush);
-            addToGrid(bush);
-        }
-        
-        // Adding maze bushes from maze coordinates
-        int[][] mazeBushCoordinates = {
-            {90, HEIGHT - bushHeight - 35}, {90, HEIGHT - bushHeight * 2 - 35}, {90, HEIGHT - bushHeight * 3 - 35}, 
-            {90, HEIGHT - bushHeight * 4 - 35}, {90, HEIGHT - bushHeight * 5 - 35}, {120, HEIGHT - bushHeight * 5 - 35},
-            {150, HEIGHT - bushHeight * 5 - 35}, {180, HEIGHT - bushHeight * 5 - 35}, {210, HEIGHT - bushHeight * 5 - 35},
-            {240, HEIGHT - bushHeight * 5 - 35}, {270, HEIGHT - bushHeight * 5 - 35}, {300, HEIGHT - bushHeight * 5 - 35},
-            {90, HEIGHT - bushHeight * 9 - 35}, {90, HEIGHT - bushHeight * 10 - 35}, {90, HEIGHT - bushHeight * 11 - 35},
-
-            // little box on right
-            {90, HEIGHT - bushHeight * 13 - 35}, {120, HEIGHT - bushHeight * 13 - 35}, {150, HEIGHT - bushHeight * 13 - 35},
-            {180, HEIGHT - bushHeight * 13 - 35}, {120, HEIGHT - bushHeight * 9 - 35}, {150, HEIGHT - bushHeight * 9 - 35},
-            {180, HEIGHT - bushHeight * 9 - 35}, {90, HEIGHT - bushHeight * 12 - 35},
-
-            {210, HEIGHT - bushHeight * 9 - 35}, {240, HEIGHT - bushHeight * 9 - 35}, {270, HEIGHT - bushHeight * 9 - 35},
-            {300, HEIGHT - bushHeight * 9 - 35},{330, HEIGHT - bushHeight * 9 - 35}, {360, HEIGHT - bushHeight * 9 - 35},
-            {390, HEIGHT - bushHeight * 9 - 35}, {420, HEIGHT - bushHeight * 9 - 35}, {510, HEIGHT - bushHeight * 9 - 35},
-            {540, HEIGHT - bushHeight * 9 - 35}, {570, HEIGHT - bushHeight * 9 - 35}, {600, HEIGHT - bushHeight * 9 - 35},
-            {630, HEIGHT - bushHeight * 9 - 35}, {660, HEIGHT - bushHeight * 9 - 35}, {690, HEIGHT - bushHeight * 9 - 35},
-            {690, HEIGHT - bushHeight * 8 - 35}, {690, HEIGHT - bushHeight * 7 - 35}, {690, HEIGHT - bushHeight * 6 - 35},
-            {690, HEIGHT - bushHeight * 5 - 35}, {720, HEIGHT - bushHeight * 9 - 35}, {750, HEIGHT - bushHeight * 9 - 35},
-            {780, HEIGHT - bushHeight * 9 - 35}, {810, HEIGHT - bushHeight * 9 - 35}, {840, HEIGHT - bushHeight * 9 - 35},
-            {870, HEIGHT - bushHeight * 9 - 35}, {870, HEIGHT - bushHeight * 10 - 35},{870, HEIGHT - bushHeight * 11 - 35},
-            {870, HEIGHT - bushHeight * 12 - 35}, {870, HEIGHT - bushHeight * 13 - 35}, {870, HEIGHT - bushHeight * 14 - 35},
-            {870, HEIGHT - bushHeight * 15 - 35}, {870, HEIGHT - bushHeight * 16 - 35}, {870, HEIGHT - bushHeight * 17 - 35},
-            {870, HEIGHT - bushHeight * 18 - 35}, {870, HEIGHT - bushHeight * 19 - 35}, {840, HEIGHT - bushHeight * 19 - 35},
-            {810, HEIGHT - bushHeight * 19 - 35}, {780, HEIGHT - bushHeight * 19 - 35}, {750, HEIGHT - bushHeight * 19 - 35},
-            {720, HEIGHT - bushHeight * 19 - 35}, {690, HEIGHT - bushHeight * 19 - 35},
-            {990, HEIGHT - bushHeight * 19 - 35}, {1020, HEIGHT - bushHeight * 19 - 35}, {1050, HEIGHT - bushHeight * 19 - 35},
-            {1080, HEIGHT - bushHeight * 19 - 35}, {1110, HEIGHT - bushHeight * 19 - 35}, {1140, HEIGHT - bushHeight * 19 - 35},
-            {990, HEIGHT - bushHeight * 18 - 35}, {990, HEIGHT - bushHeight * 17 - 35}, {990, HEIGHT - bushHeight * 16 - 35},
-            {990, HEIGHT - bushHeight * 15 - 35}, {1140, HEIGHT - bushHeight * 18 - 35}, {1140, HEIGHT - bushHeight * 17 - 35},
-            {1140, HEIGHT - bushHeight * 16 - 35}, {1140, HEIGHT - bushHeight * 15 - 35}, {1140, HEIGHT - bushHeight * 11 - 35},
-            {1140, HEIGHT - bushHeight * 10 - 35}, {1140, HEIGHT - bushHeight * 9 - 35}, {1140, HEIGHT - bushHeight * 8 - 35},
-            {1140, HEIGHT - bushHeight * 7 - 35}, {1140, HEIGHT - bushHeight * 6 - 35}, {990, HEIGHT - bushHeight * 11 - 35},
-            {990, HEIGHT - bushHeight * 10 - 35}, {990, HEIGHT - bushHeight * 9 - 35}, {990, HEIGHT - bushHeight * 8 - 35},
-            {990, HEIGHT - bushHeight * 7 - 35}, {990, HEIGHT - bushHeight * 6 - 35}, {1020, HEIGHT - bushHeight * 6 - 35},
-            {1050, HEIGHT - bushHeight * 6 - 35}, {1080, HEIGHT - bushHeight * 6 - 35}, {1110, HEIGHT - bushHeight * 6 - 35},
-            {1170, HEIGHT - bushHeight * 6 - 35}, {1200, HEIGHT - bushHeight * 6 - 35}, {1230, HEIGHT - bushHeight * 6 - 35},
-
-
-
-            {210, HEIGHT - bushHeight * 13 - 35}, {240, HEIGHT - bushHeight * 13 - 35}, {270, HEIGHT - bushHeight * 13 - 35},
-            {270, HEIGHT - bushHeight * 14 - 35}, {270, HEIGHT - bushHeight * 14 - 35}, {270, HEIGHT - bushHeight * 15 - 35},
-            {270, HEIGHT - bushHeight * 16 - 35}, {270, HEIGHT - bushHeight * 17 - 35}, {270, HEIGHT - bushHeight * 18 - 35},
-            {270, HEIGHT - bushHeight * 19 - 35}, {300, HEIGHT - bushHeight * 19 - 35}, {330, HEIGHT - bushHeight * 19 - 35},
-            {360, HEIGHT - bushHeight * 19 - 35}, {390, HEIGHT - bushHeight * 19 - 35}, {420, HEIGHT - bushHeight * 19 - 35},
-            {450, HEIGHT - bushHeight * 19 - 35}, {480, HEIGHT - bushHeight * 19 - 35}, {510, HEIGHT - bushHeight * 19 - 35},
-            {600, HEIGHT - bushHeight * 19 - 35}, {630, HEIGHT - bushHeight * 19 - 35}, {660, HEIGHT - bushHeight * 19 - 35}
-        };
-        
-        for (int[] coord : mazeBushCoordinates) {
-            Bush bush = new Bush(coord[0], coord[1]);
-            handler.addObject(bush);
-            addToGrid(bush);
-        }
-
-        generateRandomEnemies(1, handler,100);
-         
-        generateRandomObjects(1, Bone.class, handler, 5);
-        generateRandomObjects(5, Apple.class, handler,5);
-        generateRandomObjects(5, Steak.class, handler, 5);
-        generateRandomObjects(5, Mushroom.class, handler,5);
-        generateRandomObjects(5, Onion.class, handler,5);
-        generateRandomObjects(5, Chocolate.class, handler,5);
-        generateRandomObjects(5, Whiskey.class, handler,5);
-        handler.addObject(new Exit(BLOCK_SIZE[0], 5*BLOCK_SIZE[1]));
+        // generateRandomObjects(1, Bone.class, handler, 5);
+        // generateRandomObjects(5, Apple.class, handler,5);
+        // generateRandomObjects(5, Steak.class, handler, 5);
+        // generateRandomObjects(5, Mushroom.class, handler,5);
+        // generateRandomObjects(5, Onion.class, handler,5);
+        // generateRandomObjects(5, Chocolate.class, handler,5);
+        // generateRandomObjects(5, Whiskey.class, handler,5);
+        // handler.addObject(new Exit(BLOCK_SIZE[0], 5*BLOCK_SIZE[1]));
 
     }
 
@@ -302,8 +299,6 @@ public class Game extends Canvas implements Runnable {
         }
     }
 
-    
-
     /**
     * Validates whether a given position is suitable for object placement.
     *
@@ -363,7 +358,6 @@ public class Game extends Canvas implements Runnable {
         paused = !paused;
     }
 
-
     /**
      * Checks if the game is in pause or not (Used for main menu)
      */
@@ -395,17 +389,6 @@ public class Game extends Canvas implements Runnable {
     public boolean isGameWon(){
         return gameWon;
     }
-
-    // private void initializeGameObjects(){
-    //     //handler.clearObjects();
-    //     handler.addObject(new Doug(200, 200, ID.DOUG, handler));
-    //     handler.addObject(new Apple(BLOCK_SIZE[0], BLOCK_SIZE[1]));
-    //     handler.addObject(new Bone(BLOCK_SIZE[0], 2*BLOCK_SIZE[1]));
-    //     handler.addObject(new Steak(BLOCK_SIZE[0], 3*BLOCK_SIZE[1]));
-    //     handler.addObject(new Mushroom(BLOCK_SIZE[0], 4*BLOCK_SIZE[1]));
-    //     handler.addObject(new Exit(BLOCK_SIZE[0], 5*BLOCK_SIZE[1]));
-        
-    // }
 
     /**
      * Starts the game in a new thread.
@@ -461,8 +444,6 @@ public class Game extends Canvas implements Runnable {
             // frames++;
             if (System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
-                // System.out.println("FPS: " + frames);
-                // frames = 0;
             }
         }
         stop();
@@ -473,12 +454,11 @@ public class Game extends Canvas implements Runnable {
      */
     private void tick(){
         if(!gameOver){
-        handler.tick();
-        health.tick();
-        score.tick();
-        checkGameOver();
+            handler.tick();
+            health.tick();
+            score.tick();
+            checkGameOver();
         }
-
     }
 
     /**
@@ -500,92 +480,12 @@ public class Game extends Canvas implements Runnable {
             // Draw the background such that it covers the entire canvas
             g.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
         } 
-        else {
-            // Testing purposes
-            // INCASE BACKGROUND DOES NOT LOAD
+        else { 
+            // In case the backgroud image doesn't load
             g.setColor(Color.GREEN);
             g.fillRect(0, 0, WIDTH, HEIGHT);
         }
-        /* 
-        // Adding bushes as obstacles
-        int bushWidth = 30;
-        int bushHeight = 30;
-        
-        // Adding bushes in each corner
-        Bush bushTopLeft = new Bush(0, 0);
-        handler.addObject(bushTopLeft);
-        addToGrid(bushTopLeft);
-        
-        Bush bushTopRight = new Bush(Game.WIDTH - bushWidth - 10, 0);
-        handler.addObject(bushTopRight);
-        addToGrid(bushTopRight);
-        
-        Bush bushBottomLeft = new Bush(0, Game.HEIGHT - bushHeight - 35);
-        handler.addObject(bushBottomLeft);
-        addToGrid(bushBottomLeft);
-        
-        Bush bushBottomRight = new Bush(Game.WIDTH - bushWidth - 15, Game.HEIGHT - bushHeight - 35);
-        handler.addObject(bushBottomRight);
-        addToGrid(bushBottomRight);
-        
-        // Adding bushes along the top border, excluding the corners
-        for (int x = bushWidth; x <= Game.WIDTH - bushWidth; x += bushWidth) {
-            Bush bush = new Bush(x, 0);
-            handler.addObject(bush);
-            addToGrid(bush);
-        }
-        
-        // Adding bushes along the bottom border, excluding the corners
-        for (int x = bushWidth; x <= Game.WIDTH - bushWidth - 15; x += bushWidth) {
-            Bush bush = new Bush(x, Game.HEIGHT - bushHeight - 35);
-            handler.addObject(bush);
-            addToGrid(bush);
-        }
-        
-        // Adding bushes along the left border, excluding the corners
-        for (int y = bushHeight; y <= Game.HEIGHT - bushHeight; y += bushHeight) {
-            Bush bush = new Bush(0, y);
-            handler.addObject(bush);
-            addToGrid(bush);
-        }
-        
-        // Adding bushes along the right border, excluding the corners
-        for (int y = bushHeight; y <= Game.HEIGHT - bushHeight - 35; y += bushHeight) {
-            Bush bush = new Bush(Game.WIDTH - bushWidth - 15, y);
-            handler.addObject(bush);
-            addToGrid(bush);
-        }
-        
-        // Adding maze bushes from maze coordinates
-
-        // int[][] mazeBushCoordinates = {
-        //     {90, HEIGHT - bushHeight - 35}, {90, HEIGHT - bushHeight * 2 - 35}, {90, HEIGHT - bushHeight * 3 - 35}, 
-        //     {90, HEIGHT - bushHeight * 4 - 35}, {90, HEIGHT - bushHeight * 5 - 35}, {120, HEIGHT - bushHeight * 5 - 35},
-        //     {150, HEIGHT - bushHeight * 5 - 35}, {180, HEIGHT - bushHeight * 5 - 35}, {210, HEIGHT - bushHeight * 5 - 35},
-        //     {240, HEIGHT - bushHeight * 5 - 35},{270, HEIGHT - bushHeight * 5 - 35},{300, HEIGHT - bushHeight * 5 - 35},
-        //     {90, HEIGHT - bushHeight * 9 - 35},{90, HEIGHT - bushHeight * 10 - 35},{90, HEIGHT - bushHeight * 11 - 35},
-        //     {90, HEIGHT - bushHeight * 12 - 35}, {120, HEIGHT - bushHeight * 12 - 35}, {150, HEIGHT - bushHeight * 12 - 35},
-        //     {180, HEIGHT - bushHeight * 12 - 35}, {120, HEIGHT - bushHeight * 9 - 35}, {150, HEIGHT - bushHeight * 9 - 35},
-        //     {180, HEIGHT - bushHeight * 9 - 35}
-        // };
-        int[][] mazeBushCoordinates = {
-            {90, HEIGHT - bushHeight - 35}, {90, HEIGHT - bushHeight * 2 - 35}, {90, HEIGHT - bushHeight * 3 - 35}, 
-            {90, HEIGHT - bushHeight * 4 - 35}, {90, HEIGHT - bushHeight * 5 - 35}, {120, HEIGHT - bushHeight * 5 - 35},
-            {150, HEIGHT - bushHeight * 5 - 35}, {180, HEIGHT - bushHeight * 5 - 35}, {210, HEIGHT - bushHeight * 5 - 35},
-            {240, HEIGHT - bushHeight * 5 - 35}, {270, HEIGHT - bushHeight * 5 - 35}, {300, HEIGHT - bushHeight * 5 - 35},
-            {90, HEIGHT - bushHeight * 9 - 35}, {90, HEIGHT - bushHeight * 10 - 35}, {90, HEIGHT - bushHeight * 11 - 35},
-            {90, HEIGHT - bushHeight * 12 - 35}, {120, HEIGHT - bushHeight * 12 - 35}, {150, HEIGHT - bushHeight * 12 - 35},
-            {180, HEIGHT - bushHeight * 12 - 35}, {120, HEIGHT - bushHeight * 9 - 35}, {150, HEIGHT - bushHeight * 9 - 35},
-            {180, HEIGHT - bushHeight * 9 - 35}
-        };
-        
-        for (int[] coord : mazeBushCoordinates) {
-            Bush bush = new Bush(coord[0], coord[1]);
-            handler.addObject(bush);
-            addToGrid(bush);
-        }
-
-         */
+  
         if((paused == true) && (gameOver == false)){
             mainMenu.render(g); //Render the main menu if paused
         } 
@@ -639,8 +539,8 @@ public class Game extends Canvas implements Runnable {
         paused = false;
         gameWon = false;
 
-        health.HEALTH = 200;
-        score.SCORE = 0;
+        Health.HEALTH = 200;
+        Score.SCORE = 0;
 
         handler.clearObjects();
         
@@ -651,13 +551,16 @@ public class Game extends Canvas implements Runnable {
         // Recreate the player (Doug)
         doug = Doug.getInstance(200, 200, ID.DOUG, handler);
         handler.addObject(doug);
-    
+
         // Generate random enemies and items
-        generateRandomObjects(10, Rat.class, handler, 100);
-        generateRandomObjects(10, Bone.class, handler, 5);
-        generateRandomObjects(5, Apple.class, handler, 5);
+        generateRandomEnemies(1, handler,100);
+        generateRandomObjects(1, Bone.class, handler, 5);
+        generateRandomObjects(5, Apple.class, handler,5);
         generateRandomObjects(5, Steak.class, handler, 5);
-        generateRandomObjects(5, Mushroom.class, handler, 5);
+        generateRandomObjects(5, Mushroom.class, handler,5);
+        generateRandomObjects(5, Onion.class, handler,5);
+        generateRandomObjects(5, Chocolate.class, handler,5);
+        generateRandomObjects(5, Whiskey.class, handler,5);
     
         // Add the exit point
         handler.addObject(new Exit(BLOCK_SIZE[0], 5 * BLOCK_SIZE[1]));
@@ -772,8 +675,6 @@ public class Game extends Canvas implements Runnable {
             addToGrid(bush);
         }
     }
-    
-    
 
     /**
      * Checks if the game is over based on the player's health.
@@ -785,14 +686,14 @@ public class Game extends Canvas implements Runnable {
             gameOver = true;
             paused = !paused;
             return true;
-            // test
-            // System.out.println("game over");
         }
         else{
             gameOver = false;
-            return false;}
+            return false;
+        }
     }
 
+    //TODO are we using this?
     public static void main(String[] args) {
         Game game = new Game();
     }

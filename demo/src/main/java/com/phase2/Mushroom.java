@@ -36,16 +36,18 @@ public class Mushroom extends Reward {
      * 
      * @return A Rectangle representing Doug's bounds.
      */
+    @Override
     public Rectangle getBounds() {
         return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
     }
 
+    @Override
     public void tick() {
         //to be implemented: checks if colliding with doug
     }
 
+    @Override
     public void render(Graphics g) {
-        // renderHitBox(g,OBJECT_SIZE[0],OBJECT_SIZE[1]);
         if (!collected) {
             g.drawImage(mushroomSprite, x-8, y-8, null);
         }

@@ -12,8 +12,7 @@ import java.awt.event.KeyListener;
  */
 public class GameOverScreen implements KeyListener {
 
-    private Game game; // Reference to the main game
-
+    private Game game;
 
     /**
      * Constructs a GameOverScreen that is associated with the main game.
