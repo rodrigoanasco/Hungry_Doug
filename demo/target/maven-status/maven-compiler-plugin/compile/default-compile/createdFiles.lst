@@ -29,7 +29,6 @@ com\phase2\Cat.class
 com\phase2\Health.class
 com\phase2\SoundEffect.class
 com\phase2\BackgroundMusic.class
-com\phase2\DebugBuild.class
 com\phase2\Mushroom.class
 com\phase2\Doug$1.class
 com\phase2\MainMenu.class
