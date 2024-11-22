@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+
 import javax.imageio.ImageIO;
 
 /**
@@ -541,6 +542,7 @@ public class Game extends Canvas implements Runnable {
 
         Health.HEALTH = 200;
         Score.SCORE = 0;
+        Score.boneScore = 0;
 
         handler.clearObjects();
         
@@ -552,6 +554,12 @@ public class Game extends Canvas implements Runnable {
         doug = Doug.getInstance(200, 200, ID.DOUG, handler);
         handler.addObject(doug);
 
+        // Add bushes and maze structures
+        addBushes();
+
+        // Add the exit point
+        handler.addObject(new Exit(BLOCK_SIZE[0], 5 * BLOCK_SIZE[1]));
+
         // Generate random enemies and items
         generateRandomEnemies(1, handler,100);
         generateRandomObjects(1, Bone.class, handler, 5);
@@ -561,12 +569,7 @@ public class Game extends Canvas implements Runnable {
         generateRandomObjects(5, Onion.class, handler,5);
         generateRandomObjects(5, Chocolate.class, handler,5);
         generateRandomObjects(5, Whiskey.class, handler,5);
-    
-        // Add the exit point
-        handler.addObject(new Exit(BLOCK_SIZE[0], 5 * BLOCK_SIZE[1]));
-    
-        // Add bushes and maze structures
-        addBushes();
+
     }
 
     private void addBushes() {
