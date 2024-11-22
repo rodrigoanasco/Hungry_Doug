@@ -64,7 +64,6 @@ public class Exit extends GameObject {
      */
     @Override
     public void render(Graphics g) {
-        // renderHitBox(g,OBJECT_SIZE[0],OBJECT_SIZE[1]);
             if (Score.boneScore >= Score.boneTotal) {
                 g.drawImage(sprite, x, y, null);
                 

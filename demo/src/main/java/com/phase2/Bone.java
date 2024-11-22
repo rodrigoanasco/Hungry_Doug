@@ -22,7 +22,7 @@ public class Bone extends Reward {
     }
     
     /**
-     * Gets the bounding rectangle of Doug for collision detection.
+     * Gets the bounding rectangle of the bone for collision detection.
      * 
      * @return A Rectangle representing Doug's bounds.
      */

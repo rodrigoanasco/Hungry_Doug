@@ -14,7 +14,6 @@ public class Bush extends Obstacle {
 
     public Bush(int x, int y) {
         super(x, y, ObstacleType.BUSH);
-        hitBox = new Rectangle(x, y, WIDTH, HEIGHT);
         try {
             bushImage = ImageIO.read(getClass().getResource("/bush.png"));
         } catch (IOException e) {
@@ -29,9 +28,14 @@ public class Bush extends Obstacle {
         }
     }
 
+    /**
+     * Gets the bounding rectangle of the bush for collision detection.
+     * 
+     * @return A Rectangle representing Doug's bounds.
+     */
     @Override
     public Rectangle getBounds() {
-        return hitBox;
+        return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
     }
 
     @Override

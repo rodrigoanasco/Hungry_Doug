@@ -56,7 +56,6 @@ public class Handler {
     public void render(Graphics g){
         for(int i = 0; i < objects.size(); i++){
             GameObject tempObject = objects.get(i); 
-            if (debug) tempObject.renderHitBox(g);
             tempObject.render(g);
         }
     }
@@ -75,6 +74,7 @@ public class Handler {
         }
     }
 
+    //TODO maybe unnecessary
     /**
      * Removes a game object from the game.
      * 
@@ -82,30 +82,15 @@ public class Handler {
      */
     public synchronized void removeObject(GameObject object) {
         this.objects.remove(object);
-
-        //TODO test
         if (object.getId() == ID.OBSTACLE) {
             this.obstacles.remove(object);
         }
-    }
-
-    /**
-     * Enables or disables debug mode.
-     * When debug mode is enabled, hitboxes of game objects are rendered.
-     * 
-     * @param d True to enable debug mode, false to disable.
-     */
-    public void setDebug(Boolean d) {
-        this.debug = d;
     }
 
     public synchronized void clearObjects() {
         objects.clear();
     }    
 
-
-
-    //TODO test
     /**
      * Returns the list of obstacles.
      *

@@ -110,6 +110,13 @@ public class Doug extends GameObject{
         }
         return instance;
     }
+
+    // TODO test
+    public void resetPosition() {
+        this.x = 200;
+        this.y = 200;
+    }
+    //
     
     /**
      * Gets the bounding rectangle of Doug for collision detection.

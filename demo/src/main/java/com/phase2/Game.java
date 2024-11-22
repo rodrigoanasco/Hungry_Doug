@@ -403,14 +403,14 @@ public class Game extends Canvas implements Runnable {
             return var;
     }
 
-    /**
-     * Enables or disables debug mode for the game.
-     * 
-     * @param debug True to enable debug mode, false to disable it.
-     */
-    public void debugMode(Boolean debug) {
-        handler.setDebug(debug);
-    }
+    // /**
+    //  * Enables or disables debug mode for the game.
+    //  * 
+    //  * @param debug True to enable debug mode, false to disable it.
+    //  */
+    // public void debugMode(Boolean debug) {
+    //     handler.setDebug(debug);
+    // }
 
     /**
      * Resets the game to its initial state, including health, score, and game objects.
@@ -431,6 +431,7 @@ public class Game extends Canvas implements Runnable {
     private void initializeGameObjects() {
         // Recreate the player (Doug)
         doug = Doug.getInstance(200, 200, ID.DOUG, handler);
+        doug.resetPosition();
         handler.addObject(doug);
 
         // Add bushes and maze structures
