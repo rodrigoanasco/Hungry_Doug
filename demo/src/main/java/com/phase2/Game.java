@@ -332,7 +332,7 @@ public class Game extends Canvas implements Runnable {
                 timer += 1000;
             }
         }
-        // stop();
+
     }
 
     /**
@@ -362,7 +362,7 @@ public class Game extends Canvas implements Runnable {
     * @return The {@link Handler} instance managing game objects.
     */
     public Handler getHandler() {
-        return handler; // Ensure this matches the variable in your Game class
+        return handler;
     }
 
 
@@ -427,15 +427,6 @@ public class Game extends Canvas implements Runnable {
             return var;
     }
 
-    // /**
-    //  * Enables or disables debug mode for the game.
-    //  * 
-    //  * @param debug True to enable debug mode, false to disable it.
-    //  */
-    // public void debugMode(Boolean debug) {
-    //     handler.setDebug(debug);
-    // }
-
     /**
      * Resets the game to its initial state, including health, score, and game objects.
      */
@@ -450,6 +441,7 @@ public class Game extends Canvas implements Runnable {
         Score.boneTotal = 0;
 
         handler.clearObjects();
+        handler.clearObstacles();
         
         initializeGameObjects();
     } 
@@ -472,7 +464,7 @@ public class Game extends Canvas implements Runnable {
         generateRandomObjects(4, Chocolate.class, handler,5);
         generateRandomObjects(4, Whiskey.class, handler,5);
 
-        generateRandomEnemies(3, handler,100);
+        generateRandomEnemies(4, handler,100);
     
         // Add the exit point
         handler.addObject(new Exit(BLOCK_SIZE[0], 5 * BLOCK_SIZE[1]));
@@ -606,7 +598,6 @@ public class Game extends Canvas implements Runnable {
         }
     }
 
-    //TODO are we using this?
     public static void main(String[] args) {
         Game game = new Game();
     }

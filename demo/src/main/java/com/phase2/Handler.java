@@ -1,7 +1,6 @@
 package com.phase2;
 
 import java.awt.Graphics;
-import java.util.Collections;
 import java.util.LinkedList;
 
 /**
@@ -22,8 +21,6 @@ public class Handler {
     
     /**
      * Constructs a Handler with a reference to the main game instance.
-     * 
-     * @param game The main game instance.
      */
     public Handler(Game game){
         this.game = game;
@@ -78,36 +75,25 @@ public class Handler {
     public synchronized void addObject(GameObject object) {
         this.objects.add(object);
 
-        //TODO test
         if (object.getId() == ID.OBSTACLE) {
             this.obstacles.add(object);
         }
     }
 
-    //TODO maybe unnecessary
     /**
-     * Removes a game object from the game.
-     * 
-     * @param object the GameObject to be removed
+     * Clears all game objects from the list of objects.
+     * This will remove all objects currently tracked by the handler.
      */
-    public synchronized void removeObject(GameObject object) {
-        this.objects.remove(object);
-        if (object.getId() == ID.OBSTACLE) {
-            this.obstacles.remove(object);
-        }
-    }
-
     public synchronized void clearObjects() {
         objects.clear();
     }    
 
     /**
-     * Returns the list of obstacles.
-     *
-     * @return The list of obstacle objects.
+     * Clears all obstacles from the list of obstacles.
+     * This will remove all obstacles currently tracked by the handler.
      */
-    public LinkedList<GameObject> getObstacles() {
-        return obstacles;
+    public synchronized void clearObstacles() {
+        obstacles.clear();
     }
 
     

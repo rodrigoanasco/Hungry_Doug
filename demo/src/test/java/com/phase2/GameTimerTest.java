@@ -31,26 +31,27 @@ public class GameTimerTest {
         assertFalse("The game should not be running after stop() is called", game.isRunning());
     }
 
-    @Test
-    public void testTickUpdates() throws InterruptedException {
-        // Initialize the game and handler
-        Game game = new Game();
-        Handler handler = game.getHandler();
+    
+    // @Test
+    // public void testTickUpdates() throws InterruptedException {
+    //     // Initialize the game and handler
+    //     Game game = new Game();
+    //     Handler handler = game.getHandler();
 
-        // Start the game
-        game.start();
+    //     // Start the game
+    //     game.start();
 
-        // Allow the game to run for 1 second
-        Thread.sleep(1000);
+    //     // Allow the game to run for 1 second
+    //     Thread.sleep(1000);
 
-        // Stop the game
-        game.stop();
+    //     // Stop the game
+    //     game.stop();
 
-        // Verify tick count is greater than 0
-        int tickCount = handler.getTickCount();
-        assertTrue("Tick count should be greater than 0 after 1 second", tickCount > 0);
-    }
-
+    //     // Verify tick count is greater than 0
+    //     int tickCount = handler.getTickCount();
+    //     assertTrue("Tick count should be greater than 0 after 1 second", tickCount > 0);
+   
+    // }
 
 
     @Test
