@@ -1,27 +1,48 @@
 package com.phase2;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import org.junit.Before;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+
 import org.junit.Test;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class WinningScreenTest {
-    private Game game;
-
-    @Before
-    public void setUp() {
-        game = new Game();
-    }
 
     @Test
-    public void testGameWonState() {
-        // Ensure game is not won initially
-        assertFalse("Game should not be won initially", game.isGameWon());
+    public void testRender() {
+      // Mock dependencies
+      Graphics mockGraphics = mock(Graphics.class);
+      FontMetrics mockFontMetrics = mock(FontMetrics.class);
 
-        // Simulate winning the game
-        game.setGameWon(true);
+      // Stub the methods of FontMetrics
+      when(mockGraphics.getFontMetrics()).thenReturn(mockFontMetrics);
+      when(mockFontMetrics.stringWidth(anyString())).thenReturn(200); // Example width
 
-        // Check that game is now won
-        assertTrue("Game should be won after setting gameWon to true", game.isGameWon());
-    }
+      // dimensions are constants, use actual
+      final int width = Game.WIDTH;
+      final int height = Game.HEIGHT;
+
+      Game game = new Game();
+      WinningScreen winningScreen = new WinningScreen(game);
+
+      winningScreen.render(mockGraphics);
+
+      // verify Graphics methods are called with expected parameters
+      verify(mockGraphics).setColor(Color.BLACK);
+      verify(mockGraphics).fillRect(0, 0, width, height);
+
+      verify(mockGraphics).setColor(Color.YELLOW);
+      verify(mockGraphics).setFont(new Font("Arial", Font.BOLD, 70));
+
+      // verify drawString is called for the title, subtitle, and exit prompt
+      verify(mockGraphics, atLeastOnce()).drawString(anyString(), anyInt(), anyInt());
+  }
+
 }

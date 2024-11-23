@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 -------------------------------------------------------------------------------
 Test set: com.phase2.DougKeyInputTest
 -------------------------------------------------------------------------------
 Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.102 s -- in com.phase2.DougKeyInputTest
+=======
+-------------------------------------------------------------------------------
+Test set: com.phase2.DougKeyInputTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.48 s -- in com.phase2.DougKeyInputTest
+>>>>>>> 9a30e507f973ac2c1483b76ae0e798392093f192

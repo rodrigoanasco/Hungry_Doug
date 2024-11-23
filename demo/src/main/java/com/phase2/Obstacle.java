@@ -23,14 +23,14 @@ public abstract class Obstacle extends GameObject {
         this.type = type;
     }
 
-    /**
-     * Gets the type of the obstacle.
-     * 
-     * @return the ObstacleType
-     */
-    public ObstacleType getType() {
-        return type;
-    }
+    // /**
+    //  * Gets the type of the obstacle.
+    //  * 
+    //  * @return the ObstacleType
+    //  */
+    // public ObstacleType getType() {
+    //     return type;
+    // }
     
     /**
      * Gets the bounding rectangle of the reward for collision detection.

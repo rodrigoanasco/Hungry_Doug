@@ -1,8 +1,13 @@
+com\phase2\WinningScreenTest.class
 com\phase2\DougSingletonTest.class
 com\phase2\DougTest.class
+com\phase2\ExitTest.class
 com\phase2\GameWonTest.class
+com\phase2\BushTest.class
 com\phase2\SoundEffectTest.class
+com\phase2\MainMenuTest.class
 com\phase2\SteakTest.class
+com\phase2\GamePauseTest.class
 com\phase2\DougKeyInputTest.class
 com\phase2\DougCollisionTest.class
 com\phase2\GameOverTest.class

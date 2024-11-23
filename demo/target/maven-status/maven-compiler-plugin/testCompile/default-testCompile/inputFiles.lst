@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\test\java\com\phase2\DougSingletonTest.java
 C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\test\java\com\phase2\DougTest.java
 C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\test\java\com\phase2\GameTimerTest.java
@@ -11,3 +12,20 @@ C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CM
 C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\test\java\com\phase2\DougCollisionTest.java
 C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\test\java\com\phase2\GamePauseTest.java
 C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\test\java\com\phase2\SoundEffectTest.java
+=======
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\test\java\com\phase2\DougKeyInputTest.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\test\java\com\phase2\SteakTest.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\test\java\com\phase2\WinningScreenTest.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\test\java\com\phase2\ExitTest.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\test\java\com\phase2\BushTest.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\test\java\com\phase2\DougSingletonTest.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\test\java\com\phase2\HealthScoreTest.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\test\java\com\phase2\SoundEffectTest.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\test\java\com\phase2\GameOverTest.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\test\java\com\phase2\MainMenuTest.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\test\java\com\phase2\DougTest.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\test\java\com\phase2\GameWonTest.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\test\java\com\phase2\GameTimerTest.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\test\java\com\phase2\GamePauseTest.java
+C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT 276 Project\CMPT276F24_group14\demo\src\test\java\com\phase2\DougCollisionTest.java
+>>>>>>> 9a30e507f973ac2c1483b76ae0e798392093f192

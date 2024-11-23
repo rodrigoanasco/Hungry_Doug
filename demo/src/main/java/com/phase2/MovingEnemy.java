@@ -28,14 +28,14 @@ public abstract class MovingEnemy extends GameObject{
         this.penaltyPoints = penaltyPoints;
     }
 
-    /**
-     * Gets the type of the enemy.
-     * 
-     * @return the EnemyType of the enemy
-     */
-    public EnemyType getType() {
-        return type;
-    }
+    // /**
+    //  * Gets the type of the enemy.
+    //  * 
+    //  * @return the EnemyType of the enemy
+    //  */
+    // public EnemyType getType() {
+    //     return type;
+    // }
 
     /**
      * Gets the penalty points applied by the enemy.
@@ -46,13 +46,13 @@ public abstract class MovingEnemy extends GameObject{
         return penaltyPoints;
     }
 
-    /**
-     * Defines behavior on each tick of the game loop
-     */
-    public void tick() {
-        x = Game.clamp(x,0,Game.WIDTH - 30);
-        y = Game.clamp(y,0,Game.HEIGHT - 30);
-    }
+    // /**
+    //  * Defines behavior on each tick of the game loop
+    //  */
+    // public void tick() {
+    //     x = Game.clamp(x,0,Game.WIDTH - 30);
+    //     y = Game.clamp(y,0,Game.HEIGHT - 30);
+    // }
     
     /**
      * Gets the bounding rectangle of the reward for collision detection.
