@@ -10,12 +10,24 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Unit tests for the {@link KeyInput} class and its interaction with the {@link Doug} class.
+ * 
+ * The tests utilize mocked key events to simulate keyboard input and verify
+ * Doug's response through changes in velocity and game state.
+ */
 public class DougKeyInputTest {
+
     private Doug doug;
     private Handler handler;
     private KeyInput keyInput;
     private Game game;
 
+
+    /**
+     * Sets up the test environment by initializing a {@link Game}, {@link Handler}, and
+     * {@link Doug} instance, as well as the {@link KeyInput} handler.
+     */
     @Before
     public void setUp() {
         game = new Game();
@@ -35,6 +47,9 @@ public class DougKeyInputTest {
         assertTrue(handler.objects.contains(doug));
     }
 
+    /**
+     * Tests Doug's upward movement when the 'W' key is pressed.
+     */
     @Test
     public void testMoveUp() {
         KeyEvent upKey = new KeyEvent(new Canvas(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_W, 'W');
@@ -55,6 +70,9 @@ public class DougKeyInputTest {
         assertEquals(0, doug.getVelX());
     }
 
+    /**
+     * Tests Doug's downward movement when the '5' key is pressed.
+     */
     @Test
     public void testMoveDown() {
         KeyEvent downKey = new KeyEvent(new Canvas(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_S, 'S');
@@ -70,6 +88,9 @@ public class DougKeyInputTest {
         assertEquals(0, doug.getVelX());
     }
 
+    /**
+     * Tests Doug's left movement when the 'A' key is pressed.
+     */
     @Test
     public void testMoveLeft() {
         KeyEvent leftKey = new KeyEvent(new Canvas(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_A, 'A');
@@ -85,6 +106,9 @@ public class DougKeyInputTest {
         assertEquals(0, doug.getVelY());
     }
 
+    /**
+     * Tests Doug's right movement when the 'D' key is pressed.
+     */
     @Test
     public void testMoveRight() {
         KeyEvent rightKey = new KeyEvent(new Canvas(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_D, 'D');
@@ -100,36 +124,42 @@ public class DougKeyInputTest {
         assertEquals(0, doug.getVelY());
     }
 
+    /**
+     * Tests the pause functionality when the Escape key is pressed.
+     */
     @Test
-public void testPauseToggle() {
-    // Ensure the game starts unpaused
-    assertFalse(game.isPaused());
+    public void testPauseToggle() {
+        // Ensure the game starts unpaused
+        assertFalse(game.isPaused());
 
-    // Simulate pressing the Escape key to toggle pause
-    KeyEvent escapeKey = new KeyEvent(new Canvas(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_ESCAPE, (char) KeyEvent.VK_ESCAPE);
-    keyInput.keyPressed(escapeKey);
-    assertTrue(game.isPaused());
+        // Simulate pressing the Escape key to toggle pause
+        KeyEvent escapeKey = new KeyEvent(new Canvas(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_ESCAPE, (char) KeyEvent.VK_ESCAPE);
+        keyInput.keyPressed(escapeKey);
+        assertTrue(game.isPaused());
 
-    // Simulate pressing the Escape key again to unpause
-    keyInput.keyPressed(escapeKey);
-    assertFalse(game.isPaused());
-}
+        // Simulate pressing the Escape key again to unpause
+        keyInput.keyPressed(escapeKey);
+        assertFalse(game.isPaused());
+    }
 
-@Test
-public void testPausedStatePreventsMovement() {
-    // Pause the game
-    KeyEvent escapeKey = new KeyEvent(new Canvas(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_ESCAPE, (char) KeyEvent.VK_ESCAPE);
-    keyInput.keyPressed(escapeKey);
-    assertTrue(game.isPaused());
+    /**
+     * Tests that Doug cannot move when the game is paused.
+     */
+    @Test
+    public void testPausedStatePreventsMovement() {
+        // Pause the game
+        KeyEvent escapeKey = new KeyEvent(new Canvas(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_ESCAPE, (char) KeyEvent.VK_ESCAPE);
+        keyInput.keyPressed(escapeKey);
+        assertTrue(game.isPaused());
 
-    // Attempt movement while paused
-    KeyEvent upKey = new KeyEvent(new Canvas(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_W, 'W');
-    keyInput.keyPressed(upKey);
-    doug.tick();
+        // Attempt movement while paused
+        KeyEvent upKey = new KeyEvent(new Canvas(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_W, 'W');
+        keyInput.keyPressed(upKey);
+        doug.tick();
 
-    // Velocities should remain zero while paused
-    assertEquals(0, doug.getVelX());
-    assertEquals(0, doug.getVelY());
-}
+        // Velocities should remain zero while paused
+        assertEquals(0, doug.getVelX());
+        assertEquals(0, doug.getVelY());
+    }
 
 }

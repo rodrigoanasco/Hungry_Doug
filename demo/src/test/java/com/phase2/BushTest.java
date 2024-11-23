@@ -11,8 +11,16 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
+
+/**
+ * Unit tests for the {@link Bush} class
+ */
 public class BushTest {
 
+    /**
+     * Tests the constructor of the {@code Bush} class with a valid resource.
+     * Verifies that the bush object is initialized successfully.
+     */
     @Test
     public void testConstructorValidResource() {
         // Test constructor with a valid resource
@@ -20,6 +28,10 @@ public class BushTest {
         assertNotNull("Bush image should be loaded successfully", bush);
     }
 
+    /**
+     * Tests the {@code render} method of the {@code Bush} class.
+     * Verifies that rendering works correctly when a valid image is loaded.
+     */
     @Test
     public void testRenderWithValidImage() {
         Bush bush = new Bush(100, 100);
@@ -34,6 +46,10 @@ public class BushTest {
         verify(mockGraphics).drawImage(any(), eq(100), eq(100), eq(30), eq(30), eq(null));
     }
 
+    /**
+     * Tests the {@code render} method when the image resource is null.
+     * Verifies that no rendering operations are performed when the image is null.
+     */
     @Test
     public void testRenderWithNullImage() {
         Bush bush = new Bush(100, 100);
@@ -57,6 +73,10 @@ public class BushTest {
         verify(mockGraphics, never()).drawImage(any(), anyInt(), anyInt(), anyInt(), anyInt(), any());
     }
 
+    /**
+     * Tests the {@code getBounds} method of the {@code Bush} class.
+     * Verifies that the bounding box dimensions are as expected (32x32).
+     */
     @Test
     public void testGetBounds() {
         Bush bush = new Bush(100, 100);

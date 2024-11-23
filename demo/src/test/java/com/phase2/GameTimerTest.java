@@ -3,8 +3,14 @@ package com.phase2;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * Unit tests for the timer and runtime functionality of the {@link Game} class.
+ */
 public class GameTimerTest {
 
+    /**
+     * Tests that the game properly starts when the {@code start()} method is called.
+     */
     @Test
     public void testTimerStarts() {
         // Initialize the game
@@ -18,6 +24,9 @@ public class GameTimerTest {
         game.stop();
     }
 
+    /**
+     * Tests that the game properly stops when the {@code stop()} method is called.
+     */
     @Test
     public void testTimerStops() {
         // Initialize the game
@@ -53,7 +62,11 @@ public class GameTimerTest {
    
     // }
 
-
+    /**
+     * Tests that the game stops running after a fixed duration.
+     * 
+     * @throws InterruptedException if the thread sleep is interrupted.
+     */
     @Test
     public void testFixedDuration() throws InterruptedException {
         // Initialize the game

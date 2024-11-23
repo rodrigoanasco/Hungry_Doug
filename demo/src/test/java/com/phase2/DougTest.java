@@ -4,6 +4,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Unit tests for the core functionality of the {@link Doug} class.
+ */
 public class DougTest {
     private Doug doug;
     private Handler handler;
@@ -14,6 +17,10 @@ public class DougTest {
         doug = Doug.getInstance(100, 100, ID.DOUG, handler);
     }
 
+    /**
+     * Sets up the test environment by initializing a {@link Handler} and
+     * creating a singleton instance of {@link Doug}.
+     */
     @Test
     public void testMovement() {
         doug.setVelX(5);
@@ -27,6 +34,9 @@ public class DougTest {
         assertEquals(initialY + 3, doug.getY());
     }
 
+    /**
+     * Tests that Doug's position updates correctly based on its velocity.
+     */
     @Test
     public void testBoundaryClamping() {
         doug.setX(Game.WIDTH + 100);

@@ -7,6 +7,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Unit tests for the pause functionality of the {@link Game} class.
+ */
 public class GamePauseTest {
     private Game game;
 
@@ -15,6 +18,10 @@ public class GamePauseTest {
         game = new Game();
     }
 
+    /**
+     * Tests the {@code togglePause()} method to ensure that it correctly switches
+     * the game's state between paused and unpaused.
+     */
     @Test
     public void testTogglePause() {
         assertTrue(game.isPaused());
