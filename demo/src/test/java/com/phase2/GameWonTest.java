@@ -21,15 +21,13 @@ public class GameWonTest {
         handler.addObject(doug);
         exit = new Exit(100, 100);
         handler.addObject(exit);
-        Score.boneScore = Score.boneTotal = 1; // Assume all bones collected
-        Score.boneScore = Score.boneTotal = 1; // Assume all bones collected
+        Score.boneScore = Score.boneTotal = 10; // Assume all bones collected
     }
 
     @Test
     public void testGameWon() {
         doug.tick(); // Should detect collision with exit
 
-        assertTrue("Game should be won after reaching exit", game.isGameWon());
         assertTrue("Game should be won after reaching exit", game.isGameWon());
     }
 }
