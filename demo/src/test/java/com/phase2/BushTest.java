@@ -21,18 +21,6 @@ public class BushTest {
     }
 
     @Test
-    public void testConstructorHandlesIOException() {
-        // Temporarily simulate an invalid resource by overriding the behavior of the constructor
-        Bush bush = new Bush(100, 100); // Simulate a missing resource
-        assertNotNull("Bush should still be created even if the resource is missing", bush);
-
-        // Redirect System.err to capture error messages (if applicable)
-        String expectedError = "bush.png";
-        assertTrue("Error message for missing resource should be printed",
-                true); // Adjust this to check logs if needed.
-    }
-
-    @Test
     public void testRenderWithValidImage() {
         Bush bush = new Bush(100, 100);
 
@@ -46,12 +34,11 @@ public class BushTest {
         verify(mockGraphics).drawImage(any(), eq(100), eq(100), eq(30), eq(30), eq(null));
     }
 
-
     @Test
     public void testRenderWithNullImage() {
         Bush bush = new Bush(100, 100);
 
-        // Simulate a null bushImage
+        // Use reflection to set `bushImage` to null
         try {
             java.lang.reflect.Field imageField = Bush.class.getDeclaredField("bushImage");
             imageField.setAccessible(true);
@@ -66,7 +53,7 @@ public class BushTest {
         // Call render and verify no exceptions
         bush.render(mockGraphics);
 
-        // Verify no interaction with Graphics when bushImage is null
+        // Verify that no interaction with the Graphics object occurs when `bushImage` is null
         verify(mockGraphics, never()).drawImage(any(), anyInt(), anyInt(), anyInt(), anyInt(), any());
     }
 
