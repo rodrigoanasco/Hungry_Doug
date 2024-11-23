@@ -26,6 +26,20 @@ public class MainMenu implements KeyListener {
         game.addKeyListener(this);
     }
 
+     // Getter and Setter for selectedButton
+     public int getSelectedButton() {
+        return selectedButton;
+    }
+
+    public void setSelectedButton(int selectedButton) {
+        this.selectedButton = selectedButton % 3;
+    }
+
+    // Getter for inInstructions
+    public boolean isInInstructions() {
+        return inInstructions;
+    }
+
     /**
      * Renders the main menu or instructions screen based on the current state.
      *
