@@ -86,25 +86,27 @@ public class KeyInput extends KeyAdapter {
      * @param tempObject The Doug object to control.
      */
     private void updateMovement(GameObject tempObject) {
-        // Check current key states to determine direction
-        if (isKeyPressed(KeyEvent.VK_W) && lastMovementKey == KeyEvent.VK_W) {
+        // Combine logic for WASD and arrow keys
+        if (isKeyPressed(KeyEvent.VK_W) || isKeyPressed(KeyEvent.VK_UP)) {
             tempObject.setVelY(-MOVE_SPEED); // Move up
             tempObject.setVelX(0);
-        } else if (isKeyPressed(KeyEvent.VK_S) && lastMovementKey == KeyEvent.VK_S) {
+        } else if (isKeyPressed(KeyEvent.VK_S) || isKeyPressed(KeyEvent.VK_DOWN)) {
             tempObject.setVelY(MOVE_SPEED); // Move down
             tempObject.setVelX(0);
-        } else if (isKeyPressed(KeyEvent.VK_A) && lastMovementKey == KeyEvent.VK_A) {
+        } else if (isKeyPressed(KeyEvent.VK_A) || isKeyPressed(KeyEvent.VK_LEFT)) {
             tempObject.setVelX(-MOVE_SPEED); // Move left
             tempObject.setVelY(0);
-        } else if (isKeyPressed(KeyEvent.VK_D) && lastMovementKey == KeyEvent.VK_D) {
+        } else if (isKeyPressed(KeyEvent.VK_D) || isKeyPressed(KeyEvent.VK_RIGHT)) {
             tempObject.setVelX(MOVE_SPEED); // Move right
             tempObject.setVelY(0);
         } else {
-            // Stop Doug if no movement keys are pressed
+            // Stop movement if no relevant key is pressed
             tempObject.setVelX(0);
             tempObject.setVelY(0);
         }
     }
+    
+    
 
     /**
      * Checks if a specific key is currently pressed.
