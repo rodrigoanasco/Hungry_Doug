@@ -30,8 +30,8 @@ public class WinningScreen {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
     
-        g.setColor(Color.YELLOW);
         g.setFont(new Font("Arial", Font.BOLD, 70));
+        g.setColor(Color.YELLOW);
         String title = "LEVEL 1 COMPLETE";
         String subtitle = "New levels coming soon...";
         String exitPrompt = "Press 'ESC' to exit.";
