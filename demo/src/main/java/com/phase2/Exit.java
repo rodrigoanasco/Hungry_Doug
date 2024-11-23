@@ -14,7 +14,7 @@ import java.awt.Graphics;
 public class Exit extends GameObject {
 
     private Image sprite;
-    boolean a = true;
+    private boolean hidden = true;
 
     /**
      * Constructs an Exit object with the specified coordinates.
@@ -44,13 +44,20 @@ public class Exit extends GameObject {
     }
 
     /**
+     * returns hidden boolen
+     */
+    public boolean getHiddenStatus() {
+        return hidden;
+    }
+
+    /**
      * Updates the state of the Exit.
      */
     public void tick() {
    
-        if (Score.boneScore >= Score.boneTotal && a) {
+        if (Score.boneScore >= Score.boneTotal && hidden) {
             SoundEffect.play("/reward.wav");
-            a = false;
+            hidden = false;
         }
     }
 
