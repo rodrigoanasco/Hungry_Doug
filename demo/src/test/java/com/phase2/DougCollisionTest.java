@@ -36,4 +36,14 @@ public class DougCollisionTest {
 
         assertTrue("Score should increase after collecting reward", Score.SCORE > 0);
     }
+
+    @Test
+    public void testCollisionWithPunishment() {
+        Onion onion = new Onion(100, 100);
+        handler.addObject(onion);
+
+        doug.tick();
+
+        assertTrue("Health should decrease after collecting punishment", Health.HEALTH < 200);
+    }
 }
