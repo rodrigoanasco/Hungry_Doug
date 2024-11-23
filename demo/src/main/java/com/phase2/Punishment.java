@@ -28,14 +28,14 @@ public abstract class Punishment extends GameObject{
         this.penaltyPoints = penaltyPoints;
     }
 
-    /**
-     * Gets the type of the punishment.
-     * 
-     * @return the PunishmentType
-     */
-    public PunishmentType getType() {
-        return type;
-    }
+    // /**
+    //  * Gets the type of the punishment.
+    //  * 
+    //  * @return the PunishmentType
+    //  */
+    // public PunishmentType getType() {
+    //     return type;
+    // }
 
     /**
      * Determines if the punishments has already been collected.
