@@ -464,18 +464,18 @@ public class Game extends Canvas implements Runnable {
         addBushes();
 
         // Generate random enemies and items
-        generateRandomEnemies(1, handler,100);
-        generateRandomObjects(1, Bone.class, handler, 5);
+        generateRandomObjects(10, Bone.class, handler, 5);
         generateRandomObjects(5, Apple.class, handler,5);
         generateRandomObjects(5, Steak.class, handler, 5);
         generateRandomObjects(5, Mushroom.class, handler,5);
         generateRandomObjects(5, Onion.class, handler,5);
-        generateRandomObjects(5, Chocolate.class, handler,5);
-        generateRandomObjects(5, Whiskey.class, handler,5);
+        generateRandomObjects(4, Chocolate.class, handler,5);
+        generateRandomObjects(4, Whiskey.class, handler,5);
+
+        generateRandomEnemies(3, handler,100);
     
         // Add the exit point
         handler.addObject(new Exit(BLOCK_SIZE[0], 5 * BLOCK_SIZE[1]));
-    
     
     }
 
@@ -484,18 +484,18 @@ public class Game extends Canvas implements Runnable {
         int bushWidth = 30;
         int bushHeight = 30;
         
-        // Adding bushes in each corner
+        // // Adding bushes in each corner
         Bush bushTopLeft = new Bush(0, 0);
         handler.addObject(bushTopLeft);
         addToGrid(bushTopLeft);
         
-        Bush bushTopRight = new Bush(Game.WIDTH - bushWidth - 10, 0);
-        handler.addObject(bushTopRight);
-        addToGrid(bushTopRight);
+        // Bush bushTopRight = new Bush(Game.WIDTH - bushWidth - 10, 0);
+        // handler.addObject(bushTopRight);
+        // addToGrid(bushTopRight);
         
-        Bush bushBottomLeft = new Bush(0, Game.HEIGHT - bushHeight - 35);
-        handler.addObject(bushBottomLeft);
-        addToGrid(bushBottomLeft);
+        // Bush bushBottomLeft = new Bush(0, Game.HEIGHT - bushHeight - 35);
+        // handler.addObject(bushBottomLeft);
+        // addToGrid(bushBottomLeft);
         
         Bush bushBottomRight = new Bush(Game.WIDTH - bushWidth - 15, Game.HEIGHT - bushHeight - 35);
         handler.addObject(bushBottomRight);
@@ -510,7 +510,7 @@ public class Game extends Canvas implements Runnable {
         
         // Adding bushes along the bottom border, excluding the corners
         for (int x = bushWidth; x <= Game.WIDTH - bushWidth - 15; x += bushWidth) {
-            Bush bush = new Bush(x, Game.HEIGHT - bushHeight - 35);
+            Bush bush = new Bush(x, Game.HEIGHT - bushHeight - 27);
             handler.addObject(bush);
             addToGrid(bush);
         }
@@ -531,51 +531,54 @@ public class Game extends Canvas implements Runnable {
         
         // Adding maze bushes from maze coordinates
         int[][] mazeBushCoordinates = {
-            {90, HEIGHT - bushHeight - 35}, {90, HEIGHT - bushHeight * 2 - 35}, {90, HEIGHT - bushHeight * 3 - 35}, 
+
+
+            //bottom left
+            // {90, HEIGHT - bushHeight - 35}, {90, HEIGHT - bushHeight * 2 - 35}, {90, HEIGHT - bushHeight * 3 - 35}, 
             {90, HEIGHT - bushHeight * 4 - 35}, {90, HEIGHT - bushHeight * 5 - 35}, {120, HEIGHT - bushHeight * 5 - 35},
             {150, HEIGHT - bushHeight * 5 - 35}, {180, HEIGHT - bushHeight * 5 - 35}, {210, HEIGHT - bushHeight * 5 - 35},
             {240, HEIGHT - bushHeight * 5 - 35}, {270, HEIGHT - bushHeight * 5 - 35}, {300, HEIGHT - bushHeight * 5 - 35},
             {90, HEIGHT - bushHeight * 9 - 35}, {90, HEIGHT - bushHeight * 10 - 35}, {90, HEIGHT - bushHeight * 11 - 35},
 
             // little box on right
-            {90, HEIGHT - bushHeight * 13 - 35}, {120, HEIGHT - bushHeight * 13 - 35}, {150, HEIGHT - bushHeight * 13 - 35},
-            {180, HEIGHT - bushHeight * 13 - 35}, {120, HEIGHT - bushHeight * 9 - 35}, {150, HEIGHT - bushHeight * 9 - 35},
-            {180, HEIGHT - bushHeight * 9 - 35}, {90, HEIGHT - bushHeight * 12 - 35},
+            // {90, HEIGHT - bushHeight * 13 - 35}, {120, HEIGHT - bushHeight * 13 - 35}, {150, HEIGHT - bushHeight * 13 - 35},
+            // {180, HEIGHT - bushHeight * 13 - 35}, {120, HEIGHT - bushHeight * 9 - 35}, {150, HEIGHT - bushHeight * 9 - 35},
+            // {180, HEIGHT - bushHeight * 9 - 35}, {90, HEIGHT - bushHeight * 12 - 35},
 
             {210, HEIGHT - bushHeight * 9 - 35}, {240, HEIGHT - bushHeight * 9 - 35}, {270, HEIGHT - bushHeight * 9 - 35},
             {300, HEIGHT - bushHeight * 9 - 35},{330, HEIGHT - bushHeight * 9 - 35}, {360, HEIGHT - bushHeight * 9 - 35},
             {390, HEIGHT - bushHeight * 9 - 35}, {420, HEIGHT - bushHeight * 9 - 35}, {510, HEIGHT - bushHeight * 9 - 35},
             {540, HEIGHT - bushHeight * 9 - 35}, {570, HEIGHT - bushHeight * 9 - 35}, {600, HEIGHT - bushHeight * 9 - 35},
             {630, HEIGHT - bushHeight * 9 - 35}, {660, HEIGHT - bushHeight * 9 - 35}, {690, HEIGHT - bushHeight * 9 - 35},
-            {690, HEIGHT - bushHeight * 8 - 35}, {690, HEIGHT - bushHeight * 7 - 35}, {690, HEIGHT - bushHeight * 6 - 35},
-            {690, HEIGHT - bushHeight * 5 - 35}, {720, HEIGHT - bushHeight * 9 - 35}, {750, HEIGHT - bushHeight * 9 - 35},
-            {780, HEIGHT - bushHeight * 9 - 35}, {810, HEIGHT - bushHeight * 9 - 35}, {840, HEIGHT - bushHeight * 9 - 35},
-            {870, HEIGHT - bushHeight * 9 - 35}, {870, HEIGHT - bushHeight * 10 - 35},{870, HEIGHT - bushHeight * 11 - 35},
+            // {690, HEIGHT - bushHeight * 8 - 35}, {690, HEIGHT - bushHeight * 7 - 35}, {690, HEIGHT - bushHeight * 6 - 35},
+            // {690, HEIGHT - bushHeight * 5 - 35}, {720, HEIGHT - bushHeight * 9 - 35}, {750, HEIGHT - bushHeight * 9 - 35},
+            // {780, HEIGHT - bushHeight * 9 - 35}, {810, HEIGHT - bushHeight * 9 - 35}, {840, HEIGHT - bushHeight * 9 - 35},
+            // {870, HEIGHT - bushHeight * 9 - 35}, {870, HEIGHT - bushHeight * 10 - 35},{870, HEIGHT - bushHeight * 11 - 35},
             {870, HEIGHT - bushHeight * 12 - 35}, {870, HEIGHT - bushHeight * 13 - 35}, {870, HEIGHT - bushHeight * 14 - 35},
             {870, HEIGHT - bushHeight * 15 - 35}, {870, HEIGHT - bushHeight * 16 - 35}, {870, HEIGHT - bushHeight * 17 - 35},
-            {870, HEIGHT - bushHeight * 18 - 35}, {870, HEIGHT - bushHeight * 19 - 35}, {840, HEIGHT - bushHeight * 19 - 35},
-            {810, HEIGHT - bushHeight * 19 - 35}, {780, HEIGHT - bushHeight * 19 - 35}, {750, HEIGHT - bushHeight * 19 - 35},
+            // {870, HEIGHT - bushHeight * 18 - 35}, {870, HEIGHT - bushHeight * 19 - 35}, {840, HEIGHT - bushHeight * 19 - 35},
+            // {810, HEIGHT - bushHeight * 19 - 35}, {780, HEIGHT - bushHeight * 19 - 35}, {750, HEIGHT - bushHeight * 19 - 35},
             {720, HEIGHT - bushHeight * 19 - 35}, {690, HEIGHT - bushHeight * 19 - 35},
             {990, HEIGHT - bushHeight * 19 - 35}, {1020, HEIGHT - bushHeight * 19 - 35}, {1050, HEIGHT - bushHeight * 19 - 35},
             {1080, HEIGHT - bushHeight * 19 - 35}, {1110, HEIGHT - bushHeight * 19 - 35}, {1140, HEIGHT - bushHeight * 19 - 35},
             {990, HEIGHT - bushHeight * 18 - 35}, {990, HEIGHT - bushHeight * 17 - 35}, {990, HEIGHT - bushHeight * 16 - 35},
             {990, HEIGHT - bushHeight * 15 - 35}, {1140, HEIGHT - bushHeight * 18 - 35}, {1140, HEIGHT - bushHeight * 17 - 35},
-            {1140, HEIGHT - bushHeight * 16 - 35}, {1140, HEIGHT - bushHeight * 15 - 35}, {1140, HEIGHT - bushHeight * 11 - 35},
-            {1140, HEIGHT - bushHeight * 10 - 35}, {1140, HEIGHT - bushHeight * 9 - 35}, {1140, HEIGHT - bushHeight * 8 - 35},
-            {1140, HEIGHT - bushHeight * 7 - 35}, {1140, HEIGHT - bushHeight * 6 - 35}, {990, HEIGHT - bushHeight * 11 - 35},
+            // {1140, HEIGHT - bushHeight * 16 - 35}, {1140, HEIGHT - bushHeight * 15 - 35}, {1140, HEIGHT - bushHeight * 11 - 35},
+            // {1140, HEIGHT - bushHeight * 10 - 35}, {1140, HEIGHT - bushHeight * 9 - 35}, {1140, HEIGHT - bushHeight * 8 - 35},
+            // {1140, HEIGHT - bushHeight * 7 - 35}, {1140, HEIGHT - bushHeight * 6 - 35}, {990, HEIGHT - bushHeight * 11 - 35},
             {990, HEIGHT - bushHeight * 10 - 35}, {990, HEIGHT - bushHeight * 9 - 35}, {990, HEIGHT - bushHeight * 8 - 35},
             {990, HEIGHT - bushHeight * 7 - 35}, {990, HEIGHT - bushHeight * 6 - 35}, {1020, HEIGHT - bushHeight * 6 - 35},
             {1050, HEIGHT - bushHeight * 6 - 35}, {1080, HEIGHT - bushHeight * 6 - 35}, {1110, HEIGHT - bushHeight * 6 - 35},
-            {1170, HEIGHT - bushHeight * 6 - 35}, {1200, HEIGHT - bushHeight * 6 - 35}, {1230, HEIGHT - bushHeight * 6 - 35},
+            // {1170, HEIGHT - bushHeight * 6 - 35}, {1200, HEIGHT - bushHeight * 6 - 35}, {1230, HEIGHT - bushHeight * 6 - 35},
 
 
 
-            {210, HEIGHT - bushHeight * 13 - 35}, {240, HEIGHT - bushHeight * 13 - 35}, {270, HEIGHT - bushHeight * 13 - 35},
+            // {210, HEIGHT - bushHeight * 13 - 35}, {240, HEIGHT - bushHeight * 13 - 35}, {270, HEIGHT - bushHeight * 13 - 35},
             {270, HEIGHT - bushHeight * 14 - 35}, {270, HEIGHT - bushHeight * 14 - 35}, {270, HEIGHT - bushHeight * 15 - 35},
             {270, HEIGHT - bushHeight * 16 - 35}, {270, HEIGHT - bushHeight * 17 - 35}, {270, HEIGHT - bushHeight * 18 - 35},
             {270, HEIGHT - bushHeight * 19 - 35}, {300, HEIGHT - bushHeight * 19 - 35}, {330, HEIGHT - bushHeight * 19 - 35},
             {360, HEIGHT - bushHeight * 19 - 35}, {390, HEIGHT - bushHeight * 19 - 35}, {420, HEIGHT - bushHeight * 19 - 35},
-            {450, HEIGHT - bushHeight * 19 - 35}, {480, HEIGHT - bushHeight * 19 - 35}, {510, HEIGHT - bushHeight * 19 - 35},
+            // {450, HEIGHT - bushHeight * 19 - 35}, {480, HEIGHT - bushHeight * 19 - 35}, {510, HEIGHT - bushHeight * 19 - 35},
             {600, HEIGHT - bushHeight * 19 - 35}, {630, HEIGHT - bushHeight * 19 - 35}, {660, HEIGHT - bushHeight * 19 - 35}
         };
         
