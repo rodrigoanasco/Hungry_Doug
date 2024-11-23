@@ -33,12 +33,4 @@ public class Score {
         g.drawString("SCORE: " + SCORE, 25, 75); // Adjust the position
     }
 
-    /**
-     * Gets the player's current total score.
-     * 
-     * @return The current score.
-     */
-    public static int getScore() {
-        return SCORE;
-    }
 }
