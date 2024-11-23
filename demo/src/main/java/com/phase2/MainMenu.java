@@ -40,6 +40,11 @@ public class MainMenu implements KeyListener {
         return inInstructions;
     }
 
+    //Setter for inInstructions (For testing purposes)
+    public void setInInstructions(boolean inInstructions) {
+        this.inInstructions = inInstructions;
+    }
+
     /**
      * Renders the main menu or instructions screen based on the current state.
      *

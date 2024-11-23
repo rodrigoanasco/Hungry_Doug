@@ -1,5 +1,8 @@
 package com.phase2;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
 import static org.junit.Assert.assertEquals;
@@ -7,6 +10,12 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class MainMenuTest {
     private Game game;
@@ -108,6 +117,23 @@ public class MainMenuTest {
         assertFalse(mainMenu.isInInstructions());
     }
 
+    @Test
+    public void testRenderInstructions() {
+        // Set inInstructions to true
+        mainMenu.setInInstructions(true);
+        assertTrue(mainMenu.isInInstructions());
 
+        // Create a mock Graphics object
+        Graphics g = mock(Graphics.class);
 
+        // Call render method
+        mainMenu.render(g);
+
+        // Verify that certain Graphics methods are called
+        verify(g, atLeastOnce()).setColor(any(Color.class));
+        verify(g, atLeastOnce()).fillRect(anyInt(), anyInt(), anyInt(), anyInt());
+        verify(g, atLeastOnce()).setFont(any(Font.class));
+        verify(g, atLeastOnce()).drawString(anyString(), anyInt(), anyInt());
+    }
 }
+
