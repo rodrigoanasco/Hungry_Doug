@@ -28,6 +28,7 @@ public class Doug extends GameObject{
     private boolean moving = false;
     private boolean facingRight = true; // Default to facing right
 
+    private Exit exit;
     private double speed = 1.5;
 
     private static final double SCALE_FACTOR = 1.2; // Scale Doug to be bigger/smaller
@@ -129,6 +130,10 @@ public class Doug extends GameObject{
         return new Rectangle(x + offset,y + offset,48 - (2* offset),48 - (2*offset));
     }
 
+    public void setExit(Exit exit) {
+        this.exit = exit;
+    }
+
     /**
      * Updates Doug's state for each tick of the game loop.
      */
@@ -221,10 +226,16 @@ public class Doug extends GameObject{
                     
                     case EXIT:
                         if (temp instanceof Exit) {
-                            if (Score.boneScore >= Score.boneTotal) {
-                                Game gameinstance = handler.getGameInstance();
-                                if(gameinstance != null){
-                                    gameinstance.setGameWon(true);
+                            if (Score.boneScore >= Score.boneTotal &&!exit.isActivated()) {
+                                exit.activateExit();
+                                Game gameInstance = handler.getGameInstance();
+                                if (gameInstance != null) {
+                                    if (gameInstance.getCurrentLevel() < gameInstance.getMaxLevels()) {
+                                        gameInstance.getHandler().clearObjects(); // Clear objects from the current level
+                                        gameInstance.initializeGameObjects(); // Load the next level
+                                    } else {
+                                        gameInstance.setGameWon(true); // Only mark the game as won if on the last level
+                                    }
                                 }
                             }
                         }

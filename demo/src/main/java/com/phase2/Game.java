@@ -43,6 +43,8 @@ public class Game extends Canvas implements Runnable {
 
     private int currentLevel = 1;
     private final int maxLevels = 2;
+    private int tickCounter;
+    private Exit currentExit;
 
 
     // BufferedImage for the background
@@ -347,16 +349,31 @@ public class Game extends Canvas implements Runnable {
             handler.tick();
             health.tick();
             score.tick();
+            tickCounter++;
     
-            if (Score.boneScore >= Score.boneTotal) {
-                if (currentLevel < maxLevels) {
-                    currentLevel++;
-                    initializeGameObjects(); // Load the next level
-                } else {
-                    gameWon = true; // All levels completed
+            // System.out.println("Bone total: " + Score.boneTotal);
+
+            if (tickCounter == 100) {
+                Score.boneTotal -= 1;
+            }
+
+            // Check if all bones are collected and the exit is activated
+            synchronized (handler.objects) {
+            for (GameObject object : handler.objects) {
+                if (object instanceof Exit exit) {
+                    if (Score.boneScore >= Score.boneTotal && exit.isActivated()) {
+                        if (currentLevel < maxLevels) {
+                            currentLevel++;
+                            initializeGameObjects(); // Load the next level
+                        } else {
+                            gameWon = true; // All levels completed
+                        }
+                    }
+                    break; // Exit loop early since there's only one Exit object
                 }
             }
-    
+
+            }
             checkGameOver();
         }
     }
@@ -462,11 +479,12 @@ public class Game extends Canvas implements Runnable {
         initializeGameObjects();
     } 
 
-    private void initializeGameObjects() {
+    public void initializeGameObjects() {
 
         // clear previous objects
         handler.clearObjects();
         handler.clearObstacles();
+        currentExit = null;
 
         switch (currentLevel) {
             case 1:
@@ -476,7 +494,6 @@ public class Game extends Canvas implements Runnable {
                 loadLevel2();
                 break;
         }
-    
     }
 
     private void loadLevel1(){
@@ -498,9 +515,12 @@ public class Game extends Canvas implements Runnable {
         generateRandomObjects(2, Whiskey.class, handler,5);
 
         generateRandomEnemies(2, handler,100);
-    
+
         // Add the exit point
-        handler.addObject(new Exit(BLOCK_SIZE[0], 5 * BLOCK_SIZE[1]));
+        currentExit = new Exit(BLOCK_SIZE[0], 5 * BLOCK_SIZE[1]);
+        handler.addObject(currentExit);
+    
+        doug.setExit(currentExit); // Pass the exit to Doug
     }
 
     private void addBushes1() {
@@ -635,7 +655,10 @@ public class Game extends Canvas implements Runnable {
         generateRandomEnemies(4, handler,100);
     
         // Add the exit point
-        handler.addObject(new Exit(BLOCK_SIZE[0], 5 * BLOCK_SIZE[1]));
+        currentExit = new Exit(BLOCK_SIZE[0], 5 * BLOCK_SIZE[1]);
+        handler.addObject(currentExit);
+    
+        doug.setExit(currentExit); // Pass the exit to Doug
     }
 
     private void addBushes2() {
@@ -764,6 +787,25 @@ public class Game extends Canvas implements Runnable {
             return false;
         }
     }
+
+    /**
+    * Returns the current level of the game.
+    * 
+    * @return The current level.
+    */
+    public int getCurrentLevel() {
+        return currentLevel;
+    }
+
+    /**
+    * Returns the maximum number of levels in the game.
+    * 
+    * @return The maximum number of levels.
+    */
+    public int getMaxLevels() {
+        return maxLevels;
+    }
+
 
     public static void main(String[] args) {
         Game game = new Game();

@@ -15,6 +15,7 @@ public class Exit extends GameObject {
 
     private Image sprite;
     private boolean hidden = true;
+    private boolean activated = false;
 
     /**
      * Constructs an Exit object with the specified coordinates.
@@ -59,6 +60,17 @@ public class Exit extends GameObject {
             SoundEffect.play("/reward.wav");
             hidden = false;
         }
+    }
+
+    // Call this method when Doug collides with the exit
+    public void activateExit() {
+        if (!hidden && !activated) {
+        activated = true;
+        }
+    }
+
+    public boolean isActivated() {
+        return activated;
     }
 
     /**
