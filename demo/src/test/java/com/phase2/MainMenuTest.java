@@ -17,16 +17,26 @@ import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+/**
+ * Unit tests for the {@link MainMenu} class.
+ */
 public class MainMenuTest {
     private Game game;
     private MainMenu mainMenu;
 
+    /**
+     * Sets up the test environment by initializing a {@link Game} instance
+     * and associating it with a {@link MainMenu}.
+     */
     @Before
     public void setUp() {
         game = new Game();
         mainMenu = new MainMenu(game);
     }
 
+    /**
+     * Tests navigation through the menu options using the DOWN and S keys.
+     */
     @Test
     public void testNavigationDown() {
         // Initial selectedButton should be 0 (START)
@@ -51,6 +61,9 @@ public class MainMenuTest {
         assertEquals(0, mainMenu.getSelectedButton());
     }
 
+    /**
+     * Tests navigation through the menu options using the UP and W keys.
+     */
     @Test
     public void testNavigationUp() {
         // Set selectedButton to 2 (EXIT)
@@ -75,6 +88,9 @@ public class MainMenuTest {
         assertEquals(2, mainMenu.getSelectedButton());
     }
 
+    /**
+     * Tests starting the game by selecting the START button and pressing ENTER.
+     */
     @Test
     public void testStartGame() {
         // Ensure game is paused initially
@@ -90,6 +106,10 @@ public class MainMenuTest {
         assertFalse(game.isPaused());
     }
 
+    /**
+     * Tests entering the instructions menu by selecting the RULES button
+     * and pressing ENTER.
+     */
     @Test
     public void testOpenInstructions() {
         // Move selection to "RULES"
@@ -103,6 +123,9 @@ public class MainMenuTest {
         assertTrue(mainMenu.isInInstructions());
     }
 
+    /**
+     * Tests returning to the main menu from the instructions screen.
+     */
     @Test
     public void testReturnFromInstructions() {
         // Open instructions
@@ -117,6 +140,12 @@ public class MainMenuTest {
         assertFalse(mainMenu.isInInstructions());
     }
 
+    /**
+     * Tests rendering of the instructions screen.
+     * 
+     * Verifies that expected rendering methods are invoked,
+     * such as drawing text and setting colors.
+     */
     @Test
     public void testRenderInstructions() {
         // Set inInstructions to true

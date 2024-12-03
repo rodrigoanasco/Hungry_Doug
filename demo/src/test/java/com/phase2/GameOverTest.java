@@ -5,15 +5,26 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Unit tests for the game-over condition in the {@link Game} class.
+ */
 public class GameOverTest {
     private Game game;
 
+    /**
+     * Sets up the test environment by initializing a {@link Game} instance and
+     * resetting {@link Health#HEALTH} to a default value.
+     */
     @Before
     public void setUp() {
         game = new Game();
         Health.HEALTH = 200;
     }
 
+    /**
+     * Tests that the {@code checkGameOver()} method correctly identifies
+     * the game-over condition when {@link Health#HEALTH} is zero or negative.
+     */
     @Test
     public void testGameOver() {
         Health.HEALTH = 0;
@@ -23,6 +34,10 @@ public class GameOverTest {
         assertTrue(game.checkGameOver());
     }
 
+    /**
+     * Tests that the {@code checkGameOver()} method correctly identifies
+     * that the game is not over when {@link Health#HEALTH} is greater than zero.
+     */
     @Test
     public void testGameNotOver() {
         Health.HEALTH = 50;

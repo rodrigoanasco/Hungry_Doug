@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 -------------------------------------------------------------------------------
 Test set: com.phase2.DougSingletonTest
 -------------------------------------------------------------------------------
 Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.155 s -- in com.phase2.DougSingletonTest
+=======
+-------------------------------------------------------------------------------
+Test set: com.phase2.DougSingletonTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.352 s -- in com.phase2.DougSingletonTest
+>>>>>>> 1aa8ef94847adfa22014204d67bfb0ae064b3100

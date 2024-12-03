@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.phase2.BushTest
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
 Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.908 s -- in com.phase2.BushTest
+=======
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.483 s -- in com.phase2.BushTest
+>>>>>>> 1aa8ef94847adfa22014204d67bfb0ae064b3100
