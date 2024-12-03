@@ -31,7 +31,7 @@ public class Exit extends GameObject {
         } catch (IOException e) {
             e.printStackTrace();
         }*/
-        //REFACTORED RODRIGO
+        //REFACTORED
         sprite = ImageLoader.loadImage("/Exit.png", OBJECT_SIZE[0], OBJECT_SIZE[1]);
 
     }

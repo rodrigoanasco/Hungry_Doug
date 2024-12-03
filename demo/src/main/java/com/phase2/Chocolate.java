@@ -21,7 +21,7 @@ public class Chocolate extends Punishment {
         } catch (IOException e) {
             e.printStackTrace();
         } */
-       //REFACTORED RODRIGO
+       //REFACTORED
        image = ImageLoader.loadImage("/Brownie.png", OBJECT_SIZE[0], OBJECT_SIZE[1]);
 
     }

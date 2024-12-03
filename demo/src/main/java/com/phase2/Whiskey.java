@@ -16,7 +16,7 @@ public class Whiskey extends Punishment{
             e.printStackTrace();
         }
         */
-        //REFACTORED RODRIGO
+        //REFACTORED
         image = ImageLoader.loadImage("/Whiskey.png", OBJECT_SIZE[0], OBJECT_SIZE[1]);
 
     }

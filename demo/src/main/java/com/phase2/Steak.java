@@ -39,7 +39,7 @@ public class Steak extends Reward {
         } catch (IOException e) {
             e.printStackTrace();
         } */
-       //REFACTORED RODRIGO
+       //REFACTORED
        steakSprite = ImageLoader.loadImage("/Steak.png", OBJECT_SIZE[0], OBJECT_SIZE[1]);
 
     }

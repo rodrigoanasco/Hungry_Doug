@@ -19,7 +19,7 @@ public class Apple extends Reward {
             e.printStackTrace();
         } */
 
-        //REFACTORED, RODRIGO
+        //REFACTORED
         appleSprite = ImageLoader.loadImage("/Apple.png", OBJECT_SIZE[0], OBJECT_SIZE[1]);
     }
     

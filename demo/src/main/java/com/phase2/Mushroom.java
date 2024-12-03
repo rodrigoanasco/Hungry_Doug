@@ -29,7 +29,7 @@ public class Mushroom extends Reward {
             e.printStackTrace();
         }
         */
-        //REFACTORED RODRIGO
+        //REFACTORED
         mushroomSprite = ImageLoader.loadImage("/Mushroom.png", OBJECT_SIZE[0] + 16, OBJECT_SIZE[1] + 16);
     }
     
