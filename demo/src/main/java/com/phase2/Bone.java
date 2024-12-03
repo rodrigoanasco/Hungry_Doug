@@ -1,10 +1,8 @@
 package com.phase2;
 
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import java.awt.Graphics;
 
 public class Bone extends Reward {
 
@@ -13,12 +11,17 @@ public class Bone extends Reward {
     public Bone(int x, int y) {
         super(x,y, RewardType.BONE, 15);
         Score.boneTotal++;
+        /*
+        PREVIOUS
         try {
             boneSprite = ImageIO.read(getClass().getResource("/Bone.png"));
             boneSprite = boneSprite.getScaledInstance(OBJECT_SIZE[0], OBJECT_SIZE[1], Image.SCALE_DEFAULT);
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        } */
+       //REFACTORED
+       boneSprite = ImageLoader.loadImage("/Bone.png", OBJECT_SIZE[0], OBJECT_SIZE[1]);
+
     }
     
    /**

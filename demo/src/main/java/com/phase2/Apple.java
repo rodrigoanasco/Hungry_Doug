@@ -1,10 +1,8 @@
 package com.phase2;
 
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import java.awt.Graphics;
 
 
 public class Apple extends Reward {
@@ -13,12 +11,16 @@ public class Apple extends Reward {
 
     public Apple(int x, int y) {
         super(x,y, RewardType.APPLE, 10);
+        /* PREVIOUS
         try {
             appleSprite = ImageIO.read(getClass().getResource("/Apple.png"));
             appleSprite = appleSprite.getScaledInstance(OBJECT_SIZE[0], OBJECT_SIZE[1], Image.SCALE_DEFAULT);
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        } */
+
+        //REFACTORED, RODRIGO
+        appleSprite = ImageLoader.loadImage("/Apple.png", OBJECT_SIZE[0], OBJECT_SIZE[1]);
     }
     
    /**

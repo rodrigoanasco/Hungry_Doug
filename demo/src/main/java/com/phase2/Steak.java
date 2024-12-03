@@ -1,12 +1,10 @@
 package com.phase2;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import java.awt.Graphics;
 import java.util.Random;
-import java.awt.Color;
 
 /**
  * Represents a Steak reward in the game.
@@ -34,12 +32,16 @@ public class Steak extends Reward {
         this.lifetime = 0;
         this.spawntime = r.nextInt(5)+1;
         this.deathtime = r.nextInt(25+spawntime)+10+spawntime;
+        /* BEFORE
         try {
             steakSprite = ImageIO.read(getClass().getResource("/Steak.png"));
             steakSprite = steakSprite.getScaledInstance(OBJECT_SIZE[0], OBJECT_SIZE[1], Image.SCALE_DEFAULT);
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        } */
+       //REFACTORED RODRIGO
+       steakSprite = ImageLoader.loadImage("/Steak.png", OBJECT_SIZE[0], OBJECT_SIZE[1]);
+
     }
     
     /**

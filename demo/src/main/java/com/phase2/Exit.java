@@ -1,10 +1,8 @@
 package com.phase2;
 
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import java.awt.Graphics;
 
 /**
  * Represents the Exit object in the game.
@@ -25,12 +23,17 @@ public class Exit extends GameObject {
      */
     public Exit(int x, int y) {
         super(x,y, ID.EXIT);
+        /*
+        BEFORE
         try {
             sprite = ImageIO.read(getClass().getResource("/Exit.png"));
             sprite = sprite.getScaledInstance(OBJECT_SIZE[0], OBJECT_SIZE[1], Image.SCALE_DEFAULT);
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
+        //REFACTORED RODRIGO
+        sprite = ImageLoader.loadImage("/Exit.png", OBJECT_SIZE[0], OBJECT_SIZE[1]);
+
     }
     
     /**

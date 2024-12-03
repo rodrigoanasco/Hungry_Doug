@@ -1,11 +1,4 @@
-<<<<<<< HEAD
 -------------------------------------------------------------------------------
 Test set: com.phase2.HealthScoreTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in com.phase2.HealthScoreTest
-=======
--------------------------------------------------------------------------------
-Test set: com.phase2.HealthScoreTest
--------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.phase2.HealthScoreTest
->>>>>>> 9a30e507f973ac2c1483b76ae0e798392093f192
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in com.phase2.HealthScoreTest
