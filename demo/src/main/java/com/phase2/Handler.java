@@ -42,9 +42,10 @@ public class Handler {
     *
     * @return The total tick count.
     */
+    /* Removed in refactoring, never used
     public synchronized int getTickCount() {
         return tickCount;
-    }
+    } */
 
     /**
      * Returns the main game instance associated with this handler.
@@ -83,10 +84,11 @@ public class Handler {
     /**
      * Clears all game objects from the list of objects.
      * This will remove all objects currently tracked by the handler.
-     */
-    public synchronized void clearObjects() {
+    */
+
+     public synchronized void clearObjects() {
         objects.clear();
-    }    
+    }
 
     /**
      * Clears all obstacles from the list of obstacles.

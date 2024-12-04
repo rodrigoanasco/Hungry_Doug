@@ -1,11 +1,4 @@
-<<<<<<< HEAD
 -------------------------------------------------------------------------------
 Test set: com.phase2.MainMenuTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.33 s -- in com.phase2.MainMenuTest
-=======
--------------------------------------------------------------------------------
-Test set: com.phase2.MainMenuTest
--------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 15.02 s -- in com.phase2.MainMenuTest
->>>>>>> 1aa8ef94847adfa22014204d67bfb0ae064b3100
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.056 s -- in com.phase2.MainMenuTest
