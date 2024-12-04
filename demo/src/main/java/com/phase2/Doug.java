@@ -175,159 +175,143 @@ public class Doug extends GameObject{
      * Checks for interactions with other game objects and updates health, score, or game state accordingly.
      */
     private void collision(int predictedX, int predictedY) {
+        boolean canMoveX = checkCollisionX(predictedX);
+        boolean canMoveY = checkCollisionY(predictedY);
+    
+        // Update position if no collision blocks movement
+        if (canMoveX) {
+            x += velX / speed;
+        } else {
+            velX = 0;
+        }
+    
+        if (canMoveY) {
+            y += velY / speed;
+        } else {
+            velY = 0;
+        }
+    }
+    
+    private boolean checkCollisionX(int predictedX) {
         boolean canMoveX = true;
-        boolean canMoveY = true;
-    
-        // Check for collisions in the X direction
         Rectangle predictedBoundsX = new Rectangle(predictedX, y, getBounds().width, getBounds().height);
-        
-        synchronized (handler.objects) {
-        for (GameObject temp : handler.objects) {
-            if (temp.getBounds().intersects(predictedBoundsX)) {
-                switch (temp.getId()) {
-                    case ENEMY:
-                        // Collision behavior for enemy
-                        if (temp instanceof MovingEnemy) {
-                            int penaltyPoints = ((MovingEnemy) temp).getPenaltyPoints();
-                            Health.HEALTH -= penaltyPoints;
-                            SoundEffect.play("/squeak.wav");
-                        }
-                        if (temp instanceof Punishment) {
-                            if (!((Punishment)temp).isCollected()) {
-                                int penaltyPoints = ((Punishment) temp).getPenaltyPoints();
-                                ((Punishment)temp).setCollected(true);
-                                Health.HEALTH -= penaltyPoints;
-                                SoundEffect.play("/whimper.wav");
-                            }
-                        }
-                        break;
     
-                    case REWARD:
-                        // Collision behavior for reward
-                        if (temp instanceof Reward) {
-                            Reward reward = (Reward) temp;
-                            if (!reward.isCollected()) {
-                                int rewardAmount = reward.getRewardAmount();
-                                Score.SCORE += rewardAmount;
-                                reward.setCollected(true);
-
-                                SoundEffect.play("/munch.wav");
-
-                                if (reward.getType() == RewardType.BONE) Score.boneScore++;
-                                if (reward.getType() == RewardType.STEAK) ((Steak)reward).setAlive(false);
-                            }
-                        }
-                        break;
-                    
-                    case EXIT:
-                        if (temp instanceof Exit) {
-                            if (Score.boneScore >= Score.boneTotal) {
-                                Game gameinstance = handler.getGameInstance();
-                                if(gameinstance != null){
-                                    gameinstance.setGameWon(true);
-                                }
-                            }
-                        }
-                        break;
-   
-                    case OBSTACLE:
-                        // Collision behavior for obstacles
-                        if (temp instanceof Obstacle) {
-                            canMoveX = false; // Prevent movement in x direction if collision occurs
-                            // Push Doug out of the obstacle
-                            if (velX > 0) { // Moving right
-                                x = temp.getBounds().x - getBounds().width;
-                            } else if (velX < 0) { // Moving left
-                                x = temp.getBounds().x + temp.getBounds().width;
-                            }
-                        }
-                        break;
+        synchronized (handler.objects) { // Ensure thread-safe access
+            for (GameObject temp : handler.objects) {
+                if (temp.getBounds().intersects(predictedBoundsX)) {
+                    canMoveX = handleCollision(temp, true) && canMoveX;
+                }
+            }
+        }
     
-                    default:
-
-                        break;
-
+        return canMoveX;
+    }
+    
+    private boolean checkCollisionY(int predictedY) {
+        boolean canMoveY = true;
+        Rectangle predictedBoundsY = new Rectangle(x, predictedY, getBounds().width, getBounds().height);
+    
+        synchronized (handler.objects) { // Ensure thread-safe access
+            for (GameObject temp : handler.objects) {
+                if (temp.getBounds().intersects(predictedBoundsY)) {
+                    canMoveY = handleCollision(temp, false) && canMoveY;
+                }
+            }
+        }
+    
+        return canMoveY;
+    }
+    
+    private boolean handleCollision(GameObject temp, boolean isXAxis) {
+        switch (temp.getId()) {
+            case ENEMY:
+                if (temp instanceof Punishment) {
+                    handlePunishmentCollision((Punishment) temp);
+                } else {
+                    handleEnemyCollision(temp);
+                }
+                break;
+    
+            case REWARD:
+                if (temp instanceof Reward) {
+                    handleRewardCollision(temp);
+                }
+                break;
+    
+            case EXIT:
+                if (temp instanceof Exit) {
+                    handleExitCollision((Exit) temp);
+                }
+                break;
+    
+            case OBSTACLE:
+                return handleObstacle(temp, isXAxis);
+    
+            default:
+                // Handle other cases if necessary
+                break;
+        }
+        return true;
+    }
+    
+    private void handlePunishmentCollision(Punishment punishment) {
+        if (!punishment.isCollected()) {
+            punishment.setCollected(true);
+            Health.HEALTH -= punishment.getPenaltyPoints();
+            SoundEffect.play("/whimper.wav");
+        }
+    }
+    
+    private void handleExitCollision(Exit exit) {
+        if (Score.boneScore >= Score.boneTotal) { // Check if all bones are collected
+            Game gameInstance = handler.getGameInstance(); // Access the Game instance
+            if (gameInstance != null) {
+                gameInstance.setGameWon(true); // Mark the game as won
+            }
+        }
+    }
+    
+    private void handleEnemyCollision(GameObject temp) {
+        if (temp instanceof MovingEnemy) {
+            int penaltyPoints = ((MovingEnemy) temp).getPenaltyPoints();
+            Health.HEALTH -= penaltyPoints; // Deduct health points
+            SoundEffect.play("/squeak.wav"); // Play sound
+        }
+    }
+    
+    private void handleRewardCollision(GameObject temp) {
+        if (temp instanceof Reward) {
+            Reward reward = (Reward) temp;
+            if (!reward.isCollected()) {
+                reward.setCollected(true);
+                Score.SCORE += reward.getRewardAmount();
+                SoundEffect.play("/munch.wav");
+                if (reward.getType() == RewardType.BONE) {
+                    Score.boneScore++;
+                } else if (reward.getType() == RewardType.STEAK) {
+                    ((Steak) reward).setAlive(false);
                 }
             }
         }
     }
-        // Check for collisions in the Y direction
-        Rectangle predictedBoundsY = new Rectangle(x, predictedY, getBounds().width, getBounds().height);
-        for (GameObject temp : handler.objects) {
-            if (temp.getBounds().intersects(predictedBoundsY)) {
-                switch (temp.getId()) {
-                    case ENEMY:
-                        // Collision behavior for enemy
-                        if (temp instanceof MovingEnemy) {
-                            int penaltyPoints = ((MovingEnemy) temp).getPenaltyPoints();
-                            Health.HEALTH -= penaltyPoints;
-                            SoundEffect.play("/squeak.wav");
-                        }
-                        if (temp instanceof Punishment) {
-                            if (!((Punishment)temp).isCollected()) {
-                                int penaltyPoints = ((Punishment) temp).getPenaltyPoints();
-                                ((Punishment)temp).setCollected(true);
-                                Health.HEALTH -= penaltyPoints;
-                                SoundEffect.play("/whimper.wav");
-                            }
-                        }
-                        
-                        break;
     
-                    case REWARD:
-                        // Collision behavior for reward
-                        if (temp instanceof Reward) {
-                            Reward reward = (Reward) temp;
-                            if (!reward.isCollected()) {
-                                int rewardAmount = reward.getRewardAmount();
-                                Score.SCORE += rewardAmount;
-                                
-                                // Play munch sound
-                                SoundEffect.play("/munch.wav");
-                                
-                                reward.setCollected(true); // Mark as collected
-                                if (reward.getType() == RewardType.BONE) Score.boneScore++;
-                                if (reward.getType() == RewardType.STEAK) ((Steak)reward).setAlive(false);
-                            }
-                        }
-
-                        break;
+    private boolean handleObstacle(GameObject temp, boolean isXAxis) {
+        Rectangle obstacleBounds = temp.getBounds();
     
-                    case OBSTACLE:
-                        // Collision behavior for obstacles
-                        if (temp instanceof Obstacle) {
-                            canMoveY = false; // Prevent movement in y direction if collision occurs
-                        
-                            // Push Doug out of the obstacle
-                            if (velY > 0) { // Moving down
-                                y = temp.getBounds().y - getBounds().height;
-                            } else if (velY < 0) { // Moving up
-                                y = temp.getBounds().y + temp.getBounds().height;
-                            }
-                        
-                        }
-
-                        break;
-    
-                    default:
-
-                        break;
-                }
+        if (isXAxis) {
+            if (velX > 0) { // Moving right
+                x = obstacleBounds.x - getBounds().width;
+            } else if (velX < 0) { // Moving left
+                x = obstacleBounds.x + obstacleBounds.width;
             }
-        }
-    
-        // Update position if no collision is predicted in the x direction
-        if (canMoveX) {
-            x += velX / speed; // Only update x if no collision in the x direction
+            return false;
         } else {
-            velX = 0; // Stop horizontal movement
-        }
-    
-        // Update position if no collision is predicted in the y direction
-        if (canMoveY) {
-            y += velY / speed; // Only update y if no collision in the y direction
-        } else {
-            velY = 0; // Stop vertical movement
+            if (velY > 0) { // Moving down
+                y = obstacleBounds.y - getBounds().height;
+            } else if (velY < 0) { // Moving up
+                y = obstacleBounds.y + obstacleBounds.height;
+            }
+            return false;
         }
     }
     
