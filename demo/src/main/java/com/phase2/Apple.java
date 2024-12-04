@@ -11,6 +11,8 @@ public class Apple extends Reward {
 
     public Apple(int x, int y) {
         super(x,y, RewardType.APPLE, 10);
+        this.WIDTH = 32;
+        this.HEIGHT = 32;
         /* PREVIOUS
         try {
             appleSprite = ImageIO.read(getClass().getResource("/Apple.png"));
@@ -20,19 +22,9 @@ public class Apple extends Reward {
         } */
 
         //REFACTORED
-        appleSprite = ImageLoader.loadImage("/Apple.png", OBJECT_SIZE[0], OBJECT_SIZE[1]);
+        appleSprite = ImageLoader.loadImage("/Apple.png", WIDTH, HEIGHT);
     }
     
-   /**
-     * Gets the bounding rectangle of the apple for collision detection.
-     *
-     * @return A {@link Rectangle} representing the bounds of the object.
-     */
-    @Override
-    public Rectangle getBounds() {
-        return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
-
-    }
 
     /**
      * Renders the visual representation of the apple on the screen.

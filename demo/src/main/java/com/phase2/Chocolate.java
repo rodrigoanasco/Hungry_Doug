@@ -13,6 +13,8 @@ public class Chocolate extends Punishment {
 
     public Chocolate(int x, int y){
         super(x,y, PunishmentType.CHOCOLATE, 50);
+        this.WIDTH = 32;
+        this.HEIGHT = 32;
         /*
         PREVIOUS
             try {
@@ -22,21 +24,10 @@ public class Chocolate extends Punishment {
             e.printStackTrace();
         } */
        //REFACTORED
-       image = ImageLoader.loadImage("/Brownie.png", OBJECT_SIZE[0], OBJECT_SIZE[1]);
+       image = ImageLoader.loadImage("/Brownie.png", WIDTH, HEIGHT);
 
     }
  
-    /**
-     * Gets the bounding rectangle of the object for collision detection.
-     * 
-     * @return A Rectangle representing the object's bounds.
-     */
-    @Override
-    public Rectangle getBounds() {
-        // 32 gets replaced with whatever the size of chocolate is
-        return new Rectangle(x,y,32,32);
-    }
-
     /**
      * Renders the visual representation of the object on the screen.
      * 

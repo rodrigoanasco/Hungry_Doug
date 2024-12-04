@@ -9,11 +9,16 @@ import java.io.IOException;
 public class Bush extends Obstacle {
 
     private BufferedImage bushImage;
-    private static final int WIDTH = 30;
-    private static final int HEIGHT = 30;
+    
+    // private static final int WIDTH = 30;
+    // private static final int HEIGHT = 30;
+
+    
 
     public Bush(int x, int y) {
         super(x, y, ObstacleType.BUSH);
+        this.WIDTH = 30;
+        this.HEIGHT = 30;
         try {
             bushImage = ImageIO.read(getClass().getResource("/bush.png"));
         } catch (IOException e) {
@@ -33,14 +38,5 @@ public class Bush extends Obstacle {
         }
     }
 
-    /**
-     * Gets the bounding rectangle of the bush for collision detection.
-     * 
-     * @return a {@link Rectangle} representing the bush's bounds.
-     */
-    @Override
-    public Rectangle getBounds() {
-        return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
-    }
 
 }

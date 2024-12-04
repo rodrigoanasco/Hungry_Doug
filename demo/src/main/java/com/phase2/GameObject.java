@@ -13,7 +13,7 @@ public abstract class GameObject {
     protected int x, y; // sets initial spawn x, y coordinates
     protected ID id;
     protected int velX, velY; // controls speed in x, y direction
-    protected int OBJECT_SIZE[] = {32,32}; //size of image
+    protected int WIDTH, HEIGHT; //size of image
 
     /**
      * Constructor for creating a game object.
@@ -48,7 +48,11 @@ public abstract class GameObject {
      *
      * @return A {@link Rectangle} representing the bounds of the object.
      */
-    public abstract Rectangle getBounds();
+    public Rectangle getBounds() {
+        return new Rectangle(x,y, WIDTH,HEIGHT);
+    }
+
+
 
     /**
      * Sets the x-coordinate of the object.
@@ -139,4 +143,6 @@ public abstract class GameObject {
     public int getVelY(){
         return velY;
     }
+
+    
 }

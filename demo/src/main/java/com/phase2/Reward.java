@@ -63,17 +63,7 @@ public abstract class Reward extends GameObject{
     }
 
 
-    /**
-     * Gets the bounding rectangle of the reward for collision detection.
-     */
-    public abstract Rectangle getBounds();
 
-    /**
-     * Renders the visual representation of the object on the screen.
-     * 
-     * @param g the {@link Graphics} object used to draw the sprite
-     */
-    public abstract void render(Graphics g);
 
 }
 

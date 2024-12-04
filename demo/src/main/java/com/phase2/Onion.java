@@ -12,23 +12,16 @@ public class Onion extends Punishment {
     
     public Onion(int x, int y) {
         super(x,y, PunishmentType.ONION, 20);
+        this.WIDTH = 32;
+        this.HEIGHT = 32;
         try {
             image = ImageIO.read(getClass().getResource("/Onion.png"));;
-            image = image.getScaledInstance(OBJECT_SIZE[0], OBJECT_SIZE[1], Image.SCALE_DEFAULT);
+            image = image.getScaledInstance(WIDTH, HEIGHT, Image.SCALE_DEFAULT);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    /**
-     * Gets the bounding rectangle of the onion for collision detection.
-     * 
-     * @return A Rectangle representing the onion's bounds.
-     */
-    @Override
-    public Rectangle getBounds() {
-        return new Rectangle(x,y,32,32);
-    }
 
     /**
      * Renders the visual representation of the object on the screen.

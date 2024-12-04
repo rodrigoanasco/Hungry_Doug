@@ -64,10 +64,6 @@ public abstract class Punishment extends GameObject{
         return penaltyPoints;
     }
 
-    /**
-     * Gets the bounding rectangle of the reward for collision detection.
-     */
-    public abstract Rectangle getBounds();
 
     /**
      * Renders the visual representation of the object on the screen.

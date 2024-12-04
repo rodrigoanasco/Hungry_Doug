@@ -23,6 +23,8 @@ public class Exit extends GameObject {
      */
     public Exit(int x, int y) {
         super(x,y, ID.EXIT);
+        this.WIDTH = 32;
+        this.HEIGHT = 32;
         /*
         BEFORE
         try {
@@ -32,19 +34,11 @@ public class Exit extends GameObject {
             e.printStackTrace();
         }*/
         //REFACTORED
-        sprite = ImageLoader.loadImage("/Exit.png", OBJECT_SIZE[0], OBJECT_SIZE[1]);
+        sprite = ImageLoader.loadImage("/Exit.png", WIDTH, HEIGHT);
 
     }
     
-    /**
-     * Gets the bounding rectangle of the Exit for collision detection.
-     * 
-     * @return A Rectangle representing the bounds of the Exit.
-     */
-    @Override
-    public Rectangle getBounds() {
-        return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
-    }
+
 
     /**
      * returns hidden boolen
