@@ -21,11 +21,11 @@ public class GameWonTest {
     @Before
     public void setUp() {
         game = new Game();
-        handler = game.getHandler();
+        handler = Handler.getHandlerInstance();
         Doug.setInstance();
-        handler = game.getHandler();
+        handler = Handler.getHandlerInstance();
         Doug.setInstance();
-        doug = Doug.getInstance(100, 100, ID.DOUG, handler);
+        doug = Doug.getInstance(100, 100, ID.DOUG);
         handler.addObject(doug);
         exit = new Exit(100, 100);
         handler.addObject(exit);

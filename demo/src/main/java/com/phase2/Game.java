@@ -190,7 +190,7 @@ public class Game extends Canvas implements Runnable {
             } while (!validPosition);
 
             // Create a new Rat and add it to the handler
-            Rat rat = new Rat(randomX, randomY, handler);
+            Rat rat = new Rat(randomX, randomY);
             handler.addObject(rat);
         }
     }
@@ -372,14 +372,14 @@ public class Game extends Canvas implements Runnable {
         return running;
     }
 
-    /**
-    * Returns the handler associated with the game.
-    *
-    * @return The {@link Handler} instance managing game objects.
-    */
-    public Handler getHandler() {
-        return handler;
-    }
+    // /**
+    // * Returns the handler associated with the game.
+    // *
+    // * @return The {@link Handler} instance managing game objects.
+    // */
+    // public Handler getHandler() {
+    //     return handler;
+    // }
 
 
     /**
@@ -464,7 +464,7 @@ public class Game extends Canvas implements Runnable {
 
     private void initializeGameObjects() {
         // Recreate the player (Doug)
-        doug = Doug.getInstance(200, 200, ID.DOUG, handler);
+        doug = Doug.getInstance(200, 200, ID.DOUG);
         doug.resetPosition();
         handler.addObject(doug);
 

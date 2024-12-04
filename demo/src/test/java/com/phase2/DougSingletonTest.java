@@ -9,12 +9,12 @@ import org.junit.Test;
 public class DougSingletonTest {
 
     /**
-     * Tests that the {@link Doug#getInstance(int, int, ID, Handler)} method
+     * Tests that the {@link Doug#getInstance(int, int, ID)} method
      * returns the same instance of {@link Doug} when called multiple times.
      */
     @Test
     public void testSingletonInstance() {
-        Doug doug1 = Doug.getInstance(100, 100, ID.DOUG, Handler.getHandlerInstance());
+        Doug doug1 = Doug.getInstance(100, 100, ID.DOUG);
         Doug doug2 = Doug.getInstance();
 
         assertSame(doug1, doug2);

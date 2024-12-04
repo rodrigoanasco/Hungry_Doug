@@ -28,9 +28,9 @@ public class Rat extends MovingEnemy {
 
     private static final double SCALE_FACTOR = 1.25;
 
-    public Rat(int x, int y, Handler handler) {
+    public Rat(int x, int y) {
         super(x,y,EnemyType.RAT, Health.HEALTH);
-        this.handler = handler;
+        this.handler = Handler.getHandlerInstance();
         this.WIDTH = 32;
         this.HEIGHT = 32;
         

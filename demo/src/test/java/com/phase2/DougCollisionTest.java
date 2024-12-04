@@ -24,7 +24,7 @@ public class DougCollisionTest {
     public void setUp() {
         handler = Handler.getHandlerInstance();
         Doug.setInstance(); // Reset Doug instance
-        doug = Doug.getInstance(100, 100, ID.DOUG, handler);
+        doug = Doug.getInstance(100, 100, ID.DOUG);
         Health.HEALTH = 200;
         Score.SCORE = 0;
     }
@@ -34,7 +34,7 @@ public class DougCollisionTest {
      */
     @Test
     public void testCollisionWithEnemy() {
-        Rat rat = new Rat(100, 100, handler); // Position rat at the same location as Doug
+        Rat rat = new Rat(100, 100); // Position rat at the same location as Doug
         handler.addObject(rat);
 
         doug.tick(); // This should trigger a collision

@@ -40,7 +40,7 @@ public class Doug extends GameObject{
      * @param y  The initial y-coordinate of Doug's position.
      * @param id The ID that identifies this GameObject as Doug.
      */
-    public Doug(int x, int y, ID id, Handler handler){
+    public Doug(int x, int y, ID id){
         super(x,y,id);
         this.handler = Handler.getHandlerInstance();
 
@@ -80,12 +80,11 @@ public class Doug extends GameObject{
      * @param x The initial x-coordinate of Doug's position.
      * @param y The initial y-coordinate of Doug's position.
      * @param id The ID that identifies this GameObject as Doug.
-     * @param handler The handler that manages game objects.
      * @return The singleton instance of Doug.
      */
-     public static Doug getInstance(int x, int y, ID id, Handler handler) {
+     public static Doug getInstance(int x, int y, ID id) {
         if (instance == null) {
-            instance = new Doug(x, y, id, handler);
+            instance = new Doug(x, y, id);
         }
         return instance;
     }
@@ -107,7 +106,7 @@ public class Doug extends GameObject{
      */
     public static Doug getInstance() {
         if (instance == null) {
-            throw new IllegalStateException("Doug has not been initialized. Call getInstance(x, y, id, handler) first.");
+            throw new IllegalStateException("Doug has not been initialized. Call getInstance(x, y, id) first.");
         }
         return instance;
     }
