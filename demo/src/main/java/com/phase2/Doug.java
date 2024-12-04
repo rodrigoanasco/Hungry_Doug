@@ -221,7 +221,7 @@ public class Doug extends GameObject{
                     
                     case EXIT:
                         if (temp instanceof Exit) {
-                            if (Score.boneScore >= Score.boneTotal) {
+                            if (!((Exit)temp).getHiddenStatus()) {
                                 Game gameinstance = handler.getGameInstance();
                                 if(gameinstance != null){
                                     gameinstance.setGameWon(true);
