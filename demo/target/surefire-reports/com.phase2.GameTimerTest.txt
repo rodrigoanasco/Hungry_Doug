@@ -2,6 +2,7 @@
 Test set: com.phase2.GameTimerTest
 -------------------------------------------------------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.334 s -- in com.phase2.GameTimerTest
 =======
 <<<<<<< HEAD
@@ -43,3 +44,6 @@ java.lang.AssertionError: Tick count should be greater than 0 after 1 second
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
 >>>>>>> 8e9e2bb4acdf0eb43af5c725583a2f0aaf3ddbd0
+=======
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 19.25 s -- in com.phase2.GameTimerTest
+>>>>>>> unnecessary_functions
