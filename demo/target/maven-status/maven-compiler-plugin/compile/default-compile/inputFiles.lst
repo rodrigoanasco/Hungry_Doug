@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14-1\demo\src\main\java\com\phase2\Apple.java
 C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14-1\demo\src\main\java\com\phase2\BackgroundMusic.java
 C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14-1\demo\src\main\java\com\phase2\Game.java
@@ -30,3 +31,38 @@ C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Doc
 C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14-1\demo\src\main\java\com\phase2\Rat.java
 C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14-1\demo\src\main\java\com\phase2\GameOverScreen.java
 C:\Users\joshk\OneDrive - School District 43 (Coquitlam)\Desktop\School Work\Documents\CMPT276F24_group14-1\demo\src\main\java\com\phase2\Punishment.java
+=======
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Rat.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Handler.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\MovingEnemy.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\GameObject.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Onion.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Obstacle.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\PunishmentType.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\KeyInput.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Game.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Bush.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Exit.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\ObstacleType.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\WinningScreen.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Punishment.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Reward.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Mushroom.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Score.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\BackgroundMusic.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Apple.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Bone.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Health.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Doug.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\MainMenu.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Window.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Chocolate.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\ImageLoader.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\ID.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Steak.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\EnemyType.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\SoundEffect.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\RewardType.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\Whiskey.java
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java\com\phase2\GameOverScreen.java
+>>>>>>> 8e9e2bb4acdf0eb43af5c725583a2f0aaf3ddbd0

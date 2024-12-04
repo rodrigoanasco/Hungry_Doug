@@ -134,41 +134,66 @@ public class Doug extends GameObject{
      */
     @Override
     public void tick() {
-        boolean wasMoving = moving;
+        int[] predictedPosition = predictNewPosition();
+        handleCollision(predictedPosition[0], predictedPosition[1]);
+        updateAnimationState();
+        clampPosition();
+    }
 
-        // Predict new positions based on velocity
+    private int[] predictNewPosition() {
         int predictedX = x + (int) (velX / speed);
         int predictedY = y + (int) (velY / speed);
+        return new int[] { predictedX, predictedY };
+    }
 
-        // Handle collision before updating position
-        collision(predictedX, predictedY);
+    private void handleCollision(int predictedX, int predictedY) {
+        boolean canMoveX = checkCollisionX(predictedX);
+        boolean canMoveY = checkCollisionY(predictedY);
+
+        if (canMoveX) {
+            x += velX / speed;
+        } else {
+            velX = 0;
+        }
+
+        if (canMoveY) {
+            y += velY / speed;
+        } else {
+            velY = 0;
+        }
+    }
+
+    private void updateAnimationState() {
+        boolean wasMoving = moving;
 
         // Determine if Doug is moving
         moving = (velX != 0 || velY != 0);
 
         // Update facing direction based on velocity
         if (velX > 0) {
-           facingRight = true;
+            facingRight = true;
         } else if (velX < 0) {
-           facingRight = false;
+            facingRight = false;
         }
 
-        // Reset frame if movement state changes
+        // Reset animation frame if movement state changes
         if (moving != wasMoving) {
-           currentFrame = 0;
+            currentFrame = 0;
         }
 
         // Update animation frame
         frameCount++;
         if (frameCount >= frameDelay) {
-          frameCount = 0;
-         currentFrame = (currentFrame + 1) % (moving ? walkSprites.length : idleSprites.length);
+            frameCount = 0;
+            currentFrame = (currentFrame + 1) % (moving ? walkSprites.length : idleSprites.length);
         }
+    }
 
-        // Clamp Doug's position to keep him within the screen bounds
+    private void clampPosition() {
         x = Game.clamp(x, 0, Game.WIDTH - 75);
         y = Game.clamp(y, 0, Game.HEIGHT - 30);
     }
+
 
     /**
      * Handles collision detection for Doug. 

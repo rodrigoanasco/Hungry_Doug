@@ -1,4 +1,18 @@
+<<<<<<< HEAD
 -------------------------------------------------------------------------------
 Test set: com.phase2.GameWonTest
 -------------------------------------------------------------------------------
 Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.050 s -- in com.phase2.GameWonTest
+=======
+<<<<<<< HEAD
+-------------------------------------------------------------------------------
+Test set: com.phase2.GameWonTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.894 s -- in com.phase2.GameWonTest
+=======
+-------------------------------------------------------------------------------
+Test set: com.phase2.GameWonTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.428 s -- in com.phase2.GameWonTest
+>>>>>>> 1aa8ef94847adfa22014204d67bfb0ae064b3100
+>>>>>>> 8e9e2bb4acdf0eb43af5c725583a2f0aaf3ddbd0

@@ -1,4 +1,18 @@
+<<<<<<< HEAD
 -------------------------------------------------------------------------------
 Test set: com.phase2.DougCollisionTest
 -------------------------------------------------------------------------------
 Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.678 s -- in com.phase2.DougCollisionTest
+=======
+<<<<<<< HEAD
+-------------------------------------------------------------------------------
+Test set: com.phase2.DougCollisionTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.206 s -- in com.phase2.DougCollisionTest
+=======
+-------------------------------------------------------------------------------
+Test set: com.phase2.DougCollisionTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.548 s -- in com.phase2.DougCollisionTest
+>>>>>>> 1aa8ef94847adfa22014204d67bfb0ae064b3100
+>>>>>>> 8e9e2bb4acdf0eb43af5c725583a2f0aaf3ddbd0

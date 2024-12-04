@@ -1,10 +1,8 @@
 package com.phase2;
 
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import java.awt.Graphics;
 
 /**
  * Represents a Mushroom reward in the game.
@@ -23,12 +21,16 @@ public class Mushroom extends Reward {
      */
     public Mushroom(int x, int y) {
         super(x,y, RewardType.MUSHROOM, 10);
+        /* BEFORE
         try {
             mushroomSprite = ImageIO.read(getClass().getResource("/Mushroom.png"));;
             mushroomSprite = mushroomSprite.getScaledInstance(OBJECT_SIZE[0]+16, OBJECT_SIZE[1]+16, Image.SCALE_DEFAULT);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        */
+        //REFACTORED
+        mushroomSprite = ImageLoader.loadImage("/Mushroom.png", OBJECT_SIZE[0] + 16, OBJECT_SIZE[1] + 16);
     }
     
     /**
