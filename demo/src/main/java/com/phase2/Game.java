@@ -20,10 +20,10 @@ import javax.imageio.ImageIO;
  */
 public class Game extends Canvas implements Runnable {
 
-    public static final int WIDTH = 1300, HEIGHT = 750; // sets window size
-    public static final int BLOCK_SIZE[] = {50,50};
-
-    public static final int GRID_SIZE = 1000;
+    public static final int WIDTH = GameConfig.WINDOW_WIDTH;
+    public static final int HEIGHT = GameConfig.WINDOW_HEIGHT;
+    public static final int[] BLOCK_SIZE = GameConfig.BLOCK_SIZE;
+    public static final int GRID_SIZE = GameConfig.GRID_SIZE;
 
     private Thread thread; 
     private boolean running = false;
@@ -91,7 +91,7 @@ public class Game extends Canvas implements Runnable {
         
         
         backgroundMusic = new BackgroundMusic(); // Initialize the backgroundMusic object first
-        backgroundMusic.play("/backgroundmusic.wav", -15.0f);
+        backgroundMusic.play(GameConfig.BACKGROUND_MUSIC_PATH, -15.0f);
 
         handler = new Handler(this);
         mainMenu = new MainMenu(this); // Initialize Main Menu
@@ -102,8 +102,8 @@ public class Game extends Canvas implements Runnable {
 
         // Load the background image
         try {
-            background = ImageIO.read(getClass().getResource("/grassback.png"));
-            bushImage = ImageIO.read(getClass().getResource("/bush.png"));
+            background = ImageIO.read(getClass().getResource(GameConfig.BACKGROUND_IMAGE_PATH));
+            bushImage = ImageIO.read(getClass().getResource(GameConfig.BUSH_IMAGE_PATH));
         } 
         catch (IOException e) { 
             e.printStackTrace();
