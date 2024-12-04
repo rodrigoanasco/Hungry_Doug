@@ -67,72 +67,10 @@ public class Rat extends MovingEnemy {
      */
     @Override
     public void tick() {
-        Doug doug = Doug.getInstance();
-    
-        if (doug != null) {
-            // Target position (Doug's position)
-            int targetX = doug.getX();
-            int targetY = doug.getY();
-    
-            // Determine preferred direction
-            int preferredVelX = (x < targetX) ? 1 : (x > targetX) ? -1 : 0; // Move horizontally
-            int preferredVelY = (y < targetY) ? 1 : (y > targetY) ? -1 : 0; // Move vertically
-    
-            // Try moving along horizontal axis first
-            if (!tryMove(preferredVelX, 0)) {
-                // If horizontal is blocked, try moving vertically
-                if (!tryMove(0, preferredVelY)) {
-                    // If both are blocked, stop moving
-                    velX = 0;
-                    velY = 0;
-                }
-            }
-        }
-
-        // Update position based on velocity
-        x += velX;
-        y += velY;
-    
-        // Flip direction upon hitting the game boundary
-        if (y < 0 || y >= Game.HEIGHT - 100) velY = 0; // Stop movement if out of bounds
-        if (x < 0 || x >= Game.WIDTH - 100) velX = 0;
+        move();
     }
-    /**
-     * Attempts to move the rat in the given direction if no obstacle blocks the way.
-     *
-     * @param dirX The horizontal movement direction (-1, 0, 1).
-     * @param dirY The vertical movement direction (-1, 0, 1).
-     * @return true if the movement is valid and sets velocity, false otherwise.
-     */
-    protected boolean tryMove(int dirX, int dirY) {
-        if (dirX == 0 && dirY == 0) return false; // No movement
     
-        // Predicted position
-        int predictedX = x + dirX;
-        int predictedY = y + dirY;
     
-        // Predicted bounds
-        Rectangle predictedBounds = new Rectangle(predictedX, predictedY, WIDTH, HEIGHT);
-    
-        // Check for collisions with obstacles
-        synchronized (handler.obstacles) {
-            for (GameObject temp : handler.obstacles) {
-                if (temp.getBounds().intersects(predictedBounds)) {
-                    return false; // Obstacle detected
-                }
-            }
-        }
-    
-        // If no collision, set velocity and return true
-        velX = dirX;
-        velY = dirY;
-
-        if (dirX != 0) {
-            facingRight = dirX > 0; // Update facingRight based on horizontal movement
-        }
-        return true;
-    }
-
 
     
 
