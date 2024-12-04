@@ -15,6 +15,7 @@ import org.junit.Test;
 public class DougCollisionTest {
     private Doug doug;
     private Handler handler;
+    private Game game;
 
     /**
      * Sets up the test environment by initializing a new {@link Handler} and
@@ -22,7 +23,8 @@ public class DougCollisionTest {
      */
     @Before
     public void setUp() {
-        handler = Handler.getHandlerInstance();
+        game = new Game();
+        handler = Handler.getHandlerInstance(game);
         Doug.setInstance(); // Reset Doug instance
         doug = Doug.getInstance(100, 100, ID.DOUG);
         Health.HEALTH = 200;

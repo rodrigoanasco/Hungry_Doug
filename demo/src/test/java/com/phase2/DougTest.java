@@ -10,10 +10,13 @@ import org.junit.Test;
 public class DougTest {
     private Doug doug;
     private Handler handler;
+    private Game game;
+
 
     @Before
     public void setUp() {
-        handler = Handler.getHandlerInstance();
+        game = new Game();
+        handler = Handler.getHandlerInstance(game);
         doug = Doug.getInstance(100, 100, ID.DOUG);
     }
 

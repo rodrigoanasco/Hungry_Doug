@@ -109,7 +109,7 @@ public class Game extends Canvas implements Runnable {
         backgroundMusic = new BackgroundMusic(); // Initialize the backgroundMusic object first
         backgroundMusic.play("/backgroundmusic.wav", -15.0f);
 
-        handler = Handler.getHandlerInstance();
+        handler = Handler.getHandlerInstance(this);
         mainMenu = new MainMenu(this); // Initialize Main Menu
         winningScreen = new WinningScreen(this); // Initialize the winning screen
         gameOverScreen = new GameOverScreen(this); // Initialize the game over screen
@@ -361,7 +361,6 @@ public class Game extends Canvas implements Runnable {
             handler.tick();
             health.tick();
             score.tick();
-            gameWon = Score.touchingExit;
             checkGameOver();
         }
     }

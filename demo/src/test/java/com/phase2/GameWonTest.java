@@ -21,7 +21,7 @@ public class GameWonTest {
     @Before
     public void setUp() {
         game = new Game();
-        handler = Handler.getHandlerInstance();
+        handler = Handler.getHandlerInstance(game);
         Doug.setInstance();
         //handler = Handler.getHandlerInstance();
         Doug.setInstance();

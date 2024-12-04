@@ -31,7 +31,7 @@ public class DougKeyInputTest {
     @Before
     public void setUp() {
         game = new Game();
-        handler = Handler.getHandlerInstance();
+        handler = Handler.getHandlerInstance(game);
         doug = Doug.getInstance(100, 100, ID.DOUG);
         keyInput = new KeyInput(game);
         handler.addObject(doug);

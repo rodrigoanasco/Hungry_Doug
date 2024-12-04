@@ -20,17 +20,17 @@ public class Handler {
     LinkedList<GameObject> obstacles = new LinkedList<GameObject>();
 
     
-    // /**
-    //  * Constructs a Handler with a reference to the main game instance.
-    //  */
-    // public Handler(Game game){
-    //     this.game = game;
-    // }
+    /**
+     * Constructs a Handler with a reference to the main game instance.
+     */
+    public Handler(Game game){
+        this.game = game;
+    }
 
     /**
      * Constructs a Handler
      */
-    public Handler() {}
+    // public Handler() {}
 
 
     /**
@@ -54,25 +54,38 @@ public class Handler {
         return tickCount;
     }
 
-    // /**
-    //  * Returns the main game instance associated with this handler.
-    //  * 
-    //  * @return The main Game instance.
-    //  */
-    // public Game getGameInstance(){
-    //     return game;
-    // }
+    /**
+     * Returns the main game instance associated with this handler.
+     * 
+     * @return The main Game instance.
+     */
+    public Game getGameInstance(){
+        return game;
+    }
 
     /**
      * Returns the main Handler instance associated with this handler.
      * 
      * @return The main Handler instance.
      */
-    public static synchronized Handler getHandlerInstance(){
+    public static synchronized Handler getHandlerInstance(Game game){
         if (handler == null) {
-            handler = new Handler();
+            handler = new Handler(game);
         }
+        return handler;
+    }
 
+    /**
+     * Returns the singleton instance of Handler. 
+     * If Doug has not been initialized, an exception is thrown.
+     * 
+     * @return The singleton instance of Handler.
+     * @throws IllegalStateException If Handler has not been initialized.
+     */
+    public static Handler getHandlerInstance() {
+        if (handler == null) {
+            throw new IllegalStateException("Handler has not been initialized. Call getHandlerInstance(Game) first.");
+        }
         return handler;
     }    
 
