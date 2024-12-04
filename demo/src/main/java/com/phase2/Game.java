@@ -20,19 +20,10 @@ import javax.imageio.ImageIO;
  */
 public class Game extends Canvas implements Runnable {
 
-<<<<<<< HEAD
-    // private static Game game = null;
-
-    public static final int WIDTH = 1300, HEIGHT = 750; // sets window size
-    public static final int BLOCK_SIZE[] = {50,50};
-
-    public static final int GRID_SIZE = 1000;
-=======
     public static final int WIDTH = GameConfig.WINDOW_WIDTH;
     public static final int HEIGHT = GameConfig.WINDOW_HEIGHT;
     public static final int[] BLOCK_SIZE = GameConfig.BLOCK_SIZE;
     public static final int GRID_SIZE = GameConfig.GRID_SIZE;
->>>>>>> main
 
     private Thread thread; 
     private boolean running = false;
