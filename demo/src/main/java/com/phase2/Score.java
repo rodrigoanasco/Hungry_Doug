@@ -13,6 +13,7 @@ public class Score {
     public static int boneScore = 0;
     public static int SCORE = 0;
     public static int boneTotal = 0;
+    public static boolean touchingExit = false;
 
     /**
      * Updates the score to ensure it stays within the valid range.

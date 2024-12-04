@@ -23,7 +23,7 @@ public class GameWonTest {
         game = new Game();
         handler = Handler.getHandlerInstance();
         Doug.setInstance();
-        handler = Handler.getHandlerInstance();
+        //handler = Handler.getHandlerInstance();
         Doug.setInstance();
         doug = Doug.getInstance(100, 100, ID.DOUG);
         handler.addObject(doug);

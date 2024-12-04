@@ -29,8 +29,8 @@ public class KeyInput extends KeyAdapter {
      * @param handler The handler managing game objects.
      * @param game    The main game instance.
      */
-    public KeyInput(Handler handler, Game game) {
-        this.handler = handler;
+    public KeyInput(Game game) {
+        this.handler = Handler.getHandlerInstance();
         this.game = game;
     }
 

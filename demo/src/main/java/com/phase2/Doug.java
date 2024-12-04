@@ -289,9 +289,9 @@ public class Doug extends GameObject{
     
     private void handleExitCollision(Exit exit) {
         if (!exit.getHiddenStatus()) { // Check if all bones are collected
-            Game gameInstance = Game.getGameInstance(); // Access the Game instance
-            if (gameInstance != null) {
-                gameInstance.setGameWon(true); // Mark the game as won
+            //Game gameInstance = handler.getGameInstance(); // Access the Game instance
+            if (!Score.touchingExit) {
+                Score.touchingExit = true;//gameInstance.setGameWon(true); // Mark the game as won
             }
         }
     }

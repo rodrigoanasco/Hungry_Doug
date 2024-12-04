@@ -20,7 +20,7 @@ import javax.imageio.ImageIO;
  */
 public class Game extends Canvas implements Runnable {
 
-    private static Game game = null;
+    // private static Game game = null;
 
     public static final int WIDTH = 1300, HEIGHT = 750; // sets window size
     public static final int BLOCK_SIZE[] = {50,50};
@@ -87,18 +87,18 @@ public class Game extends Canvas implements Runnable {
         }
     }
 
-    /** 
-     * return singleton instance of Game
-     * allows for game instance to be used globally
-     * @return The main Game instance.
-     */
-    public static synchronized Game getGameInstance(){
-        if (game == null) {
-            game = new Game();
-        }
+    // /** 
+    //  * return singleton instance of Game
+    //  * allows for game instance to be used globally
+    //  * @return The main Game instance.
+    //  */
+    // public static synchronized Game getGameInstance(){
+    //     if (game == null) {
+    //         game = new Game();
+    //     }
 
-        return game;
-    }   
+    //     return game;
+    // }   
     /**
      * Constructor for the Game class.
      * Initializes the handler and sets up the game window.
@@ -114,7 +114,7 @@ public class Game extends Canvas implements Runnable {
         winningScreen = new WinningScreen(this); // Initialize the winning screen
         gameOverScreen = new GameOverScreen(this); // Initialize the game over screen
 
-        this.addKeyListener(new KeyInput(handler, this)); // Recieves keyboard input
+        this.addKeyListener(new KeyInput(this)); // Recieves keyboard input
 
         // Load the background image
         try {
@@ -335,7 +335,9 @@ public class Game extends Canvas implements Runnable {
             lastTime = now;
             while (delta >= 1) {
                 if (!paused && !gameOver) {
+
                     tick();
+                    
                 }
                 delta--;    
             }
@@ -359,6 +361,7 @@ public class Game extends Canvas implements Runnable {
             handler.tick();
             health.tick();
             score.tick();
+            gameWon = Score.touchingExit;
             checkGameOver();
         }
     }

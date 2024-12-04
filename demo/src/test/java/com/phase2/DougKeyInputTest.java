@@ -33,7 +33,7 @@ public class DougKeyInputTest {
         game = new Game();
         handler = Handler.getHandlerInstance();
         doug = Doug.getInstance(100, 100, ID.DOUG);
-        keyInput = new KeyInput(handler, game);
+        keyInput = new KeyInput(game);
         handler.addObject(doug);
 
         // Unpause the game to allow movement
