@@ -42,7 +42,8 @@ public class Doug extends GameObject{
      */
     public Doug(int x, int y, ID id, Handler handler){
         super(x,y,id);
-        this.handler = handler;
+        this.handler = Handler.getHandlerInstance();
+
 
         try {
             // Gets sprite images from resources folder
@@ -288,8 +289,8 @@ public class Doug extends GameObject{
     }
     
     private void handleExitCollision(Exit exit) {
-        if (Score.boneScore >= Score.boneTotal) { // Check if all bones are collected
-            Game gameInstance = handler.getGameInstance(); // Access the Game instance
+        if (!exit.getHiddenStatus()) { // Check if all bones are collected
+            Game gameInstance = Game.getGameInstance(); // Access the Game instance
             if (gameInstance != null) {
                 gameInstance.setGameWon(true); // Mark the game as won
             }

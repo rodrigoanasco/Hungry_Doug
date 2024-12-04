@@ -22,7 +22,7 @@ public class DougCollisionTest {
      */
     @Before
     public void setUp() {
-        handler = new Handler(new Game());
+        handler = Handler.getHandlerInstance();
         Doug.setInstance(); // Reset Doug instance
         doug = Doug.getInstance(100, 100, ID.DOUG, handler);
         Health.HEALTH = 200;

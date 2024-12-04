@@ -14,7 +14,7 @@ public class DougSingletonTest {
      */
     @Test
     public void testSingletonInstance() {
-        Doug doug1 = Doug.getInstance(100, 100, ID.DOUG, new Handler(new Game()));
+        Doug doug1 = Doug.getInstance(100, 100, ID.DOUG, Handler.getHandlerInstance());
         Doug doug2 = Doug.getInstance();
 
         assertSame(doug1, doug2);

@@ -13,7 +13,7 @@ public class DougTest {
 
     @Before
     public void setUp() {
-        handler = new Handler(new Game());
+        handler = Handler.getHandlerInstance();
         doug = Doug.getInstance(100, 100, ID.DOUG, handler);
     }
 

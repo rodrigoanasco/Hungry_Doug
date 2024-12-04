@@ -11,6 +11,7 @@ public class Handler {
 
     private int tickCount = 0;
     private Game game; //A reference to the Game Instance
+    private static Handler handler = null;
 
     // list of all objects in game (Doug, enemies, food, etc)
     LinkedList<GameObject> objects = new LinkedList<GameObject >();
@@ -19,12 +20,19 @@ public class Handler {
     LinkedList<GameObject> obstacles = new LinkedList<GameObject>();
 
     
+    // /**
+    //  * Constructs a Handler with a reference to the main game instance.
+    //  */
+    // public Handler(Game game){
+    //     this.game = game;
+    // }
+
     /**
-     * Constructs a Handler with a reference to the main game instance.
+     * Constructs a Handler
      */
-    public Handler(Game game){
-        this.game = game;
-    }
+    public Handler() {}
+
+
     /**
      * Updates all game objects in the game.
      * This is called for every game tick.
@@ -46,14 +54,27 @@ public class Handler {
         return tickCount;
     }
 
+    // /**
+    //  * Returns the main game instance associated with this handler.
+    //  * 
+    //  * @return The main Game instance.
+    //  */
+    // public Game getGameInstance(){
+    //     return game;
+    // }
+
     /**
-     * Returns the main game instance associated with this handler.
+     * Returns the main Handler instance associated with this handler.
      * 
-     * @return The main Game instance.
+     * @return The main Handler instance.
      */
-    public Game getGameInstance(){
-        return game;
-    }
+    public static synchronized Handler getHandlerInstance(){
+        if (handler == null) {
+            handler = new Handler();
+        }
+
+        return handler;
+    }    
 
     /**
      * Renders all game objects.
