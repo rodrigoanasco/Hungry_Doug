@@ -1,7 +1,11 @@
-package com.phase2;
+package com.phase2.GameObjects;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+
+import com.phase2.ImageLoader;
+import com.phase2.Punishments.Punishment;
+import com.phase2.Punishments.PunishmentType;
 
 /**
  * Class for the non-moving enemy type Chocolate

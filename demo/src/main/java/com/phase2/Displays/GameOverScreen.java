@@ -1,10 +1,12 @@
-package com.phase2;
+package com.phase2.Displays;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import com.phase2.Game;
 
 /**
  * The GameOverScreen class displays a "GAME OVER" message and listens for "Enter"

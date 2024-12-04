@@ -1,8 +1,10 @@
-package com.phase2;
+package com.phase2.Displays;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+
+import com.phase2.Game;
 
 /**
  * The WinningScreen class displays a congratulatory message when the player completes the game phase.

@@ -1,21 +1,15 @@
 -------------------------------------------------------------------------------
 Test set: com.phase2.GameTimerTest
 -------------------------------------------------------------------------------
-<<<<<<< HEAD
-<<<<<<< HEAD
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.334 s -- in com.phase2.GameTimerTest
-=======
-<<<<<<< HEAD
-Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 11.70 s <<< FAILURE! -- in com.phase2.GameTimerTest
-com.phase2.GameTimerTest.testTickUpdates -- Time elapsed: 3.430 s <<< FAILURE!
-=======
-Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 12.13 s <<< FAILURE! -- in com.phase2.GameTimerTest
-com.phase2.GameTimerTest.testTickUpdates -- Time elapsed: 3.811 s <<< FAILURE!
->>>>>>> 1aa8ef94847adfa22014204d67bfb0ae064b3100
-java.lang.AssertionError: Tick count should be greater than 0 after 1 second
-	at org.junit.Assert.fail(Assert.java:89)
-	at org.junit.Assert.assertTrue(Assert.java:42)
-	at com.phase2.GameTimerTest.testTickUpdates(GameTimerTest.java:51)
+Tests run: 3, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 43.54 s <<< FAILURE! -- in com.phase2.GameTimerTest
+com.phase2.GameTimerTest.testTimerStarts -- Time elapsed: 37.54 s <<< ERROR!
+java.lang.NullPointerException: Cannot read field "next" because "this.next" is null
+	at java.base/java.util.LinkedList$ListItr.next(LinkedList.java:905)
+	at com.phase2.Game.isValidPosition(Game.java:236)
+	at com.phase2.Game.generateRandomObjects(Game.java:172)
+	at com.phase2.Game.initializeGameObjects(Game.java:495)
+	at com.phase2.Game.<init>(Game.java:150)
+	at com.phase2.GameTimerTest.testTimerStarts(GameTimerTest.java:17)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
@@ -43,7 +37,3 @@ java.lang.AssertionError: Tick count should be greater than 0 after 1 second
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
->>>>>>> 8e9e2bb4acdf0eb43af5c725583a2f0aaf3ddbd0
-=======
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 19.25 s -- in com.phase2.GameTimerTest
->>>>>>> unnecessary_functions

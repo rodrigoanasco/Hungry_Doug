@@ -1,4 +1,4 @@
-package com.phase2;
+package com.phase2.Trackers;
 
 /**
  * The ID enum defines the different types of game objects.

@@ -4,6 +4,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.phase2.Trackers.ID;
+import com.phase2.Trackers.Score;
+
 /**
  * Unit tests for the win condition of the {@link Game} class.
  */

@@ -1,8 +1,10 @@
-package com.phase2;
+package com.phase2.Displays;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
 import javax.swing.JFrame;
+
+import com.phase2.Game;
 
 /**
  * The Window class is responsible for creating the main game window.

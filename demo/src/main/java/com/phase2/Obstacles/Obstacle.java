@@ -1,6 +1,9 @@
-package com.phase2;
+package com.phase2.Obstacles;
 
 import java.awt.Graphics;
+
+import com.phase2.GameObjects.GameObject;
+import com.phase2.Trackers.ID;
 
 /**
  * The Obstacle class represents an obstacle in the game that blocks movement.

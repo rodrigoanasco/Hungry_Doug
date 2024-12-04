@@ -4,6 +4,10 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 
+import com.phase2.GameObjects.GameObject;
+import com.phase2.Trackers.ID;
+import com.phase2.Trackers.Score;
+
 /**
  * Represents the Exit object in the game.
  * The Exit becomes active when the player collects all required bones.

@@ -1,4 +1,4 @@
-package com.phase2;
+package com.phase2.Enemies;
 
 /**
  * The EnemyType enum defines different types of enemies in the game.

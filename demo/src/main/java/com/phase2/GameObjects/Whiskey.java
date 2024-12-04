@@ -1,6 +1,10 @@
-package com.phase2;
+package com.phase2.GameObjects;
 
 import java.awt.Graphics;
+
+import com.phase2.ImageLoader;
+import com.phase2.Punishments.Punishment;
+import com.phase2.Punishments.PunishmentType;
 
 
 public class Whiskey extends Punishment{

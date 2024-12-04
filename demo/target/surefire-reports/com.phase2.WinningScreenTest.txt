@@ -1,25 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 -------------------------------------------------------------------------------
 Test set: com.phase2.WinningScreenTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.766 s -- in com.phase2.WinningScreenTest
-=======
-<<<<<<< HEAD
--------------------------------------------------------------------------------
-Test set: com.phase2.WinningScreenTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 s -- in com.phase2.WinningScreenTest
-=======
--------------------------------------------------------------------------------
-Test set: com.phase2.WinningScreenTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.935 s -- in com.phase2.WinningScreenTest
->>>>>>> 1aa8ef94847adfa22014204d67bfb0ae064b3100
->>>>>>> 8e9e2bb4acdf0eb43af5c725583a2f0aaf3ddbd0
-=======
--------------------------------------------------------------------------------
-Test set: com.phase2.WinningScreenTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s -- in com.phase2.WinningScreenTest
->>>>>>> unnecessary_functions
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.116 s -- in com.phase2.WinningScreenTest

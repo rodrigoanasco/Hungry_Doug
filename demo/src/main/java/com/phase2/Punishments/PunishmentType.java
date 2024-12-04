@@ -1,4 +1,4 @@
-package com.phase2;
+package com.phase2.Punishments;
 
 /**
  * The PunishmentType enum defines different types of punishments that can be applied to the player.

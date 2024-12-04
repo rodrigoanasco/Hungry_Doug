@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.phase2.Trackers.Health;
+
 /**
  * Unit tests for the game-over condition in the {@link Game} class.
  */

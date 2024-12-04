@@ -43,7 +43,7 @@ public class BushTest {
         bush.render(mockGraphics);
 
         // Verify interactions with the mock, like drawing the image
-        verify(mockGraphics).drawImage(any(), eq(100), eq(100), eq(30), eq(30), eq(null));
+        verify(mockGraphics).drawImage(any(), eq(100), eq(100), eq(32), eq(32), eq(null));
     }
 
     /**

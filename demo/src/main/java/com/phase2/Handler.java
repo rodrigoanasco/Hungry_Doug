@@ -3,6 +3,9 @@ package com.phase2;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
+import com.phase2.GameObjects.GameObject;
+import com.phase2.Trackers.ID;
+
 /**
  * The Handler class is responsible for managing all game objects in the game.
  * It updates and renders each object in the game loop.

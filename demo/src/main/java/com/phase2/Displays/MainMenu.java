@@ -1,4 +1,4 @@
-package com.phase2;
+package com.phase2.Displays;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -7,6 +7,9 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import com.phase2.Game;
+import com.phase2.SoundEffect;
 
 /**
  * The MainMenu class displays the game's main menu and handles input to start the game or view instructions.

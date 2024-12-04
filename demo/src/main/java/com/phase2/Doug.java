@@ -8,6 +8,15 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+import com.phase2.GameObjects.GameObject;
+import com.phase2.GameObjects.Steak;
+import com.phase2.Punishments.Punishment;
+import com.phase2.Rewards.Reward;
+import com.phase2.Rewards.RewardType;
+import com.phase2.Trackers.Health;
+import com.phase2.Trackers.ID;
+import com.phase2.Trackers.Score;
+
 /**
  * Represents the main character, Doug, in the game.
  * Doug has health, a score, and can be rendered and updated 

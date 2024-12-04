@@ -14,6 +14,25 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
+import com.phase2.Displays.GameOverScreen;
+import com.phase2.Displays.MainMenu;
+import com.phase2.Displays.Window;
+import com.phase2.Displays.WinningScreen;
+import com.phase2.Enemies.Rat;
+import com.phase2.GameObjects.Apple;
+import com.phase2.GameObjects.Bone;
+import com.phase2.GameObjects.Chocolate;
+import com.phase2.GameObjects.GameObject;
+import com.phase2.GameObjects.Mushroom;
+import com.phase2.GameObjects.Onion;
+import com.phase2.GameObjects.Steak;
+import com.phase2.GameObjects.Whiskey;
+import com.phase2.GameProperties.GameConfig;
+import com.phase2.GameProperties.GenerationConfig;
+import com.phase2.Trackers.Health;
+import com.phase2.Trackers.ID;
+import com.phase2.Trackers.Score;
+
 /**
  * The Game class manages the main game loop and window.
  * It initializes the game components, handles input, and manages the game's continuous execution.

@@ -5,6 +5,9 @@ import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.phase2.GameObjects.GameObject;
+import com.phase2.Trackers.ID;
+
 /**
  * Handles keyboard input for the game. Listens for key presses and key releases
  * to control the game objects and game state (e.g., pausing the game).

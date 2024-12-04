@@ -1,8 +1,13 @@
-package com.phase2;
+package com.phase2.Enemies;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+
+import com.phase2.Handler;
+import com.phase2.MovingEnemy;
+import com.phase2.Trackers.Health;
+
 import java.io.IOException;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;

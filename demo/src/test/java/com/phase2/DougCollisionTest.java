@@ -4,6 +4,13 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.phase2.Enemies.Rat;
+import com.phase2.GameObjects.Bone;
+import com.phase2.GameObjects.Onion;
+import com.phase2.Trackers.Health;
+import com.phase2.Trackers.ID;
+import com.phase2.Trackers.Score;
+
 
 /**
  * Unit tests for the collision handling functionality of the {@link Doug} class.

@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.phase2.Trackers.Health;
+import com.phase2.Trackers.Score;
+
 /**
  * Unit tests for the {@link Health} and {@link Score} classes.
  */

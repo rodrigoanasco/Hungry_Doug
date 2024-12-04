@@ -6,6 +6,9 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 
 import org.junit.Test;
+
+import com.phase2.Displays.WinningScreen;
+
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.atLeastOnce;

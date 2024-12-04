@@ -3,6 +3,10 @@ package com.phase2;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+import com.phase2.Enemies.EnemyType;
+import com.phase2.GameObjects.GameObject;
+import com.phase2.Trackers.ID;
+
 /**
  * The MovingEnemy class represents enemies that move and apply penalties to the player.
  * It is an abstract class that requires subclasses to define the specific penalty behavior.

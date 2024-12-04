@@ -5,6 +5,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.phase2.GameObjects.Bone;
+import com.phase2.Trackers.Score;
+
 public class ExitTest {
     Exit exit;
     Score score;

@@ -3,6 +3,8 @@ package com.phase2;
 import static org.junit.Assert.assertSame;
 import org.junit.Test;
 
+import com.phase2.Trackers.ID;
+
 /**
  * Unit tests for the singleton implementation of the {@link Doug} class.
  */

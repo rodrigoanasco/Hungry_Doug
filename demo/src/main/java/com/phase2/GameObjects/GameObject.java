@@ -1,7 +1,9 @@
-package com.phase2;
+package com.phase2.GameObjects;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+
+import com.phase2.Trackers.ID;
 
 /**
  * The GameObject class is an abstract class representing all objects in the game.

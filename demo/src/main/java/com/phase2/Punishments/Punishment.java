@@ -1,7 +1,10 @@
-package com.phase2;
+package com.phase2.Punishments;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+
+import com.phase2.GameObjects.GameObject;
+import com.phase2.Trackers.ID;
 
 /**
  * The Punishment class represents a type of enemy that applies a specific punishment to the player.

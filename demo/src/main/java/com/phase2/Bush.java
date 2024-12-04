@@ -7,6 +7,9 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import com.phase2.Obstacles.Obstacle;
+import com.phase2.Obstacles.ObstacleType;
+
 public class Bush extends Obstacle {
 
     private BufferedImage bushImage;
@@ -18,8 +21,8 @@ public class Bush extends Obstacle {
 
     public Bush(int x, int y) {
         super(x, y, ObstacleType.BUSH);
-        this.WIDTH = 30;
-        this.HEIGHT = 30;
+        this.WIDTH = 32;
+        this.HEIGHT = 32;
         try {
             bushImage = ImageIO.read(getClass().getResource("/bush.png"));
         } catch (IOException e) {
