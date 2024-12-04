@@ -3,7 +3,6 @@ package com.phase2;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.util.Random;
 
 /**
@@ -29,6 +28,8 @@ public class Steak extends Reward {
     public Steak(int x, int y) {
         super(x,y, RewardType.STEAK, 20);
         r = new Random();
+        this.WIDTH = 32;
+        this.HEIGHT = 32;
         this.lifetime = 0;
         this.spawntime = r.nextInt(5)+1;
         this.deathtime = r.nextInt(25+spawntime)+10+spawntime;
@@ -40,19 +41,10 @@ public class Steak extends Reward {
             e.printStackTrace();
         } */
        //REFACTORED
-       steakSprite = ImageLoader.loadImage("/Steak.png", OBJECT_SIZE[0], OBJECT_SIZE[1]);
+       steakSprite = ImageLoader.loadImage("/Steak.png", WIDTH, HEIGHT);
 
     }
     
-    /**
-     * Gets the bounding rectangle of the Steak for collision detection.
-     * 
-     * @return an {@link Rectangle} representing the bounds of the Steak.
-     */
-    @Override
-    public Rectangle getBounds() {
-        return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
-    }
 
     /**
      * gets the alive status of the Steak, determining if it is active and collectible.

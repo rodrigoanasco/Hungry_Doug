@@ -1,7 +1,6 @@
 package com.phase2;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
 
 /**
  * The Obstacle class represents an obstacle in the game that blocks movement.
@@ -32,15 +31,4 @@ public abstract class Obstacle extends GameObject {
     //     return type;
     // }
     
-    /**
-     * Gets the bounding rectangle of the reward for collision detection.
-     */
-    public abstract Rectangle getBounds();
-
-    /**
-     * Renders the visual representation of the object on the screen.
-     * 
-     * @param g the {@link Graphics} object used to draw the sprite
-     */
-    public abstract void render(Graphics g);
 }

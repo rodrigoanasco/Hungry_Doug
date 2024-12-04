@@ -21,6 +21,8 @@ public class Mushroom extends Reward {
      */
     public Mushroom(int x, int y) {
         super(x,y, RewardType.MUSHROOM, 10);
+        this.WIDTH = 48;
+        this.HEIGHT = 48;
         /* BEFORE
         try {
             mushroomSprite = ImageIO.read(getClass().getResource("/Mushroom.png"));;
@@ -30,18 +32,10 @@ public class Mushroom extends Reward {
         }
         */
         //REFACTORED
-        mushroomSprite = ImageLoader.loadImage("/Mushroom.png", OBJECT_SIZE[0] + 16, OBJECT_SIZE[1] + 16);
+        mushroomSprite = ImageLoader.loadImage("/Mushroom.png", WIDTH, HEIGHT);
     }
     
-    /**
-     * Gets the bounding rectangle of the mushroom for collision detection.
-     * 
-     * @return a {@link Rectangle} representing the mushroom's bounds.
-     */
-    @Override
-    public Rectangle getBounds() {
-        return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
-    }
+
 
     /**
      * Renders the visual representation of the mushroom on the screen.
@@ -54,7 +48,7 @@ public class Mushroom extends Reward {
     @Override
     public void render(Graphics g) {
         if (!collected) {
-            g.drawImage(mushroomSprite, x-8, y-8, null);
+            g.drawImage(mushroomSprite, x, y, null);
         }
     }
 }

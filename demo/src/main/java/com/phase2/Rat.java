@@ -24,14 +24,15 @@ public class Rat extends MovingEnemy {
     private int frameDelay = 25; // Controls animation speed
     private int frameCount = 0;
 
-    private boolean moving = false;
-    private boolean facingRight = true;
+
 
     private static final double SCALE_FACTOR = 1.25;
 
     public Rat(int x, int y, Handler handler) {
         super(x,y,EnemyType.RAT, Health.HEALTH);
         this.handler = handler;
+        this.WIDTH = 32;
+        this.HEIGHT = 32;
         
         try {
             // Load the idle and walk sprite sheets
@@ -41,13 +42,13 @@ public class Rat extends MovingEnemy {
             // Extract frames for idle animation (assuming 4 frames, each 32x32)
             idleSprites = new BufferedImage[4];
             for (int i = 0; i < 4; i++) {
-                idleSprites[i] = idleSheet.getSubimage(i * 32, 0, 32, 32);
+                idleSprites[i] = idleSheet.getSubimage(i * 32, 0, WIDTH, HEIGHT);
             }
 
             // Extract frames for walking animation (assuming 4 frames, each 32x32)
             walkSprites = new BufferedImage[4];
             for (int i = 0; i < 4; i++) {
-                walkSprites[i] = walkSheet.getSubimage(i * 32, 0, 32, 32);
+                walkSprites[i] = walkSheet.getSubimage(i * 32, 0, WIDTH, HEIGHT);
             }
 
 
@@ -60,15 +61,6 @@ public class Rat extends MovingEnemy {
         velY = 1;
     }
 
-    /**
-     * Gets the bounding rectangle of the rat for collision detection.
-     * 
-     * @return a {@link Rectangle} representing Doug's bounds
-     */
-    @Override
-    public Rectangle getBounds() {
-        return new Rectangle(x,y,32,32);
-    }
 
     /**
      * What the object should do on each tick
@@ -105,8 +97,6 @@ public class Rat extends MovingEnemy {
         if (y < 0 || y >= Game.HEIGHT - 100) velY = 0; // Stop movement if out of bounds
         if (x < 0 || x >= Game.WIDTH - 100) velX = 0;
     }
-
-
     /**
      * Attempts to move the rat in the given direction if no obstacle blocks the way.
      *
@@ -114,7 +104,7 @@ public class Rat extends MovingEnemy {
      * @param dirY The vertical movement direction (-1, 0, 1).
      * @return true if the movement is valid and sets velocity, false otherwise.
      */
-    private boolean tryMove(int dirX, int dirY) {
+    protected boolean tryMove(int dirX, int dirY) {
         if (dirX == 0 && dirY == 0) return false; // No movement
     
         // Predicted position
@@ -122,7 +112,7 @@ public class Rat extends MovingEnemy {
         int predictedY = y + dirY;
     
         // Predicted bounds
-        Rectangle predictedBounds = new Rectangle(predictedX, predictedY, 32, 32);
+        Rectangle predictedBounds = new Rectangle(predictedX, predictedY, WIDTH, HEIGHT);
     
         // Check for collisions with obstacles
         synchronized (handler.obstacles) {
@@ -142,6 +132,9 @@ public class Rat extends MovingEnemy {
         }
         return true;
     }
+
+
+    
 
    /**
      * Renders the visual representation of the object on the screen.

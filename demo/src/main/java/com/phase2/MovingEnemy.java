@@ -13,6 +13,8 @@ public abstract class MovingEnemy extends GameObject{
 
     protected int penaltyPoints;
     protected EnemyType type;
+    protected boolean moving = false;
+    protected boolean facingRight = true;
 
     /**
      * Constructor for a MovingEnemy.
@@ -54,16 +56,8 @@ public abstract class MovingEnemy extends GameObject{
     //     y = Game.clamp(y,0,Game.HEIGHT - 30);
     // }
     
-    /**
-     * Gets the bounding rectangle of the reward for collision detection.
-     */
-    public abstract Rectangle getBounds();
 
-    /**
-     * Renders the visual representation of the object on the screen.
-     * 
-     * @param g the {@link Graphics} object used to draw the sprite
-     */
-    public abstract void render(Graphics g);
+    
+    
 
 }

@@ -11,6 +11,8 @@ public class Bone extends Reward {
     public Bone(int x, int y) {
         super(x,y, RewardType.BONE, 15);
         Score.boneTotal++;
+        this.WIDTH = 32;
+        this.HEIGHT = 32;
         /*
         PREVIOUS
         try {
@@ -20,19 +22,10 @@ public class Bone extends Reward {
             e.printStackTrace();
         } */
        //REFACTORED
-       boneSprite = ImageLoader.loadImage("/Bone.png", OBJECT_SIZE[0], OBJECT_SIZE[1]);
+       boneSprite = ImageLoader.loadImage("/Bone.png", WIDTH, HEIGHT);
 
     }
     
-   /**
-     * Gets the bounding rectangle of the bone for collision detection.
-     *
-     * @return a {@link Rectangle} representing the bounds of the object.
-     */
-    @Override
-    public Rectangle getBounds() {
-        return new Rectangle(x,y,OBJECT_SIZE[0],OBJECT_SIZE[1]);
-    }
 
     /**
      * Renders the visual representation of the bone on the screen.
