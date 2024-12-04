@@ -58,7 +58,8 @@ public class Rat extends MovingEnemy {
 
 
         } catch (IOException e) {
-            e.printStackTrace();
+            // Error occurred while loading Rat sprite images
+            System.err.println("Failed to load Rat sprites: " + e.getMessage());
         }
 
         // Initially, the rat is not moving

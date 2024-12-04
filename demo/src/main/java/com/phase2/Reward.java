@@ -1,9 +1,10 @@
-package com.phase2.Rewards;
+package com.phase2;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import com.phase2.GameObjects.GameObject;
+import com.phase2.Rewards.RewardType;
 import com.phase2.Trackers.ID;
 
 /**

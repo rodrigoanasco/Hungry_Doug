@@ -11,7 +11,6 @@ import javax.imageio.ImageIO;
 import com.phase2.GameObjects.GameObject;
 import com.phase2.GameObjects.Steak;
 import com.phase2.Punishments.Punishment;
-import com.phase2.Rewards.Reward;
 import com.phase2.Rewards.RewardType;
 import com.phase2.Trackers.Health;
 import com.phase2.Trackers.ID;
@@ -70,11 +69,10 @@ public class Doug extends GameObject{
             for (int i = 0; i < 6; i++) {
                 walkSprites[i] = walkSheet.getSubimage(i * 48, 0, 48, 48);
             }
-        } 
-        // If not print an error
-        catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            System.err.println("Failed to load Doug's sprites: " + e.getMessage());
         }
+
     
         // Used for testing only
         velX = 0;

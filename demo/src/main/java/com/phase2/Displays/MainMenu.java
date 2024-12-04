@@ -73,7 +73,6 @@ public class MainMenu implements KeyListener {
         g.setFont(new Font("Arial", Font.BOLD, 50));
         g.setColor(Color.WHITE);
 
-
         // Use FontMetrics to calculate the width of the title
         FontMetrics metrics = g.getFontMetrics();
         int titleWidth = metrics.stringWidth("HUNGRY DOUG");

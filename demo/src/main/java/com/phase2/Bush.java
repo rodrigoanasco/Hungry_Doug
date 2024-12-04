@@ -26,7 +26,7 @@ public class Bush extends Obstacle {
         try {
             bushImage = ImageIO.read(getClass().getResource("/bush.png"));
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Failed to load bush image: " + e.getMessage());
         }
     }
 

@@ -6,7 +6,7 @@ import java.awt.Image;
 import java.util.Random;
 
 import com.phase2.ImageLoader;
-import com.phase2.Rewards.Reward;
+import com.phase2.Reward;
 import com.phase2.Rewards.RewardType;
 
 /**

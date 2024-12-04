@@ -5,7 +5,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 
 import com.phase2.ImageLoader;
-import com.phase2.Rewards.Reward;
+import com.phase2.Reward;
 import com.phase2.Rewards.RewardType;
 
 

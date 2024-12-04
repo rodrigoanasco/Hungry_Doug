@@ -23,8 +23,12 @@ public class SoundEffect {
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
+        } catch (UnsupportedAudioFileException e) {
+            System.err.println("Unsupported audio file: " + filePath + ". " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("I/O error while playing sound effect: " + filePath + ". " + e.getMessage());
+        } catch (LineUnavailableException e) {
+            System.err.println("Audio line unavailable for sound effect: " + filePath + ". " + e.getMessage());
         }
     }
 }

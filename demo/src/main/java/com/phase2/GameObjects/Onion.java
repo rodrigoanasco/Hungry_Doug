@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import com.phase2.ImageLoader;
 import com.phase2.Punishments.Punishment;
 import com.phase2.Punishments.PunishmentType;
 
@@ -17,12 +18,15 @@ public class Onion extends Punishment {
         super(x,y, PunishmentType.ONION, 20);
         this.WIDTH = 32;
         this.HEIGHT = 32;
-        try {
+        
+        /*try {
             image = ImageIO.read(getClass().getResource("/Onion.png"));;
             image = image.getScaledInstance(WIDTH, HEIGHT, Image.SCALE_DEFAULT);
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        } */
+
+        image = ImageLoader.loadImage("/Onion.png", WIDTH, HEIGHT);
     }
 
 

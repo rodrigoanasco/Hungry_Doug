@@ -31,8 +31,14 @@ public class BackgroundMusic {
             // Start the clip and loop indefinitely
             clip.loop(Clip.LOOP_CONTINUOUSLY);
             clip.start();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException | NullPointerException e) {
-            e.printStackTrace();
+        } catch (UnsupportedAudioFileException e) {
+            System.err.println("Unsupported audio file: " + filePath + ". " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("I/O error while playing background music: " + filePath + ". " + e.getMessage());
+        } catch (LineUnavailableException e) {
+            System.err.println("Audio line unavailable for background music: " + filePath + ". " + e.getMessage());
+        } catch (NullPointerException e) {
+            System.err.println("Background music file not found: " + filePath + ". " + e.getMessage());
         }
     }
 
