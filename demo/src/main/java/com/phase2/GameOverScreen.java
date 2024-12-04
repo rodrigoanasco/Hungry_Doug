@@ -52,9 +52,12 @@ public class GameOverScreen implements KeyListener {
         }
     }
 
+    /*
+    This is unused (TAKEN OUT IN REFACTORING)
     public void removeListener(){
         game.removeKeyListener(this);
     }
+        */
     @Override
     public void keyReleased(KeyEvent e) {}
 

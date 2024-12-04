@@ -7,6 +7,8 @@ import org.junit.Test;
  * Unit tests for the singleton implementation of the {@link Doug} class.
  */
 public class DougSingletonTest {
+    Handler handler;
+    Game game;
 
     /**
      * Tests that the {@link Doug#getInstance(int, int, ID)} method
@@ -14,6 +16,8 @@ public class DougSingletonTest {
      */
     @Test
     public void testSingletonInstance() {
+        game = new Game();
+        handler = Handler.getHandlerInstance(game);
         Doug doug1 = Doug.getInstance(100, 100, ID.DOUG);
         Doug doug2 = Doug.getInstance();
 

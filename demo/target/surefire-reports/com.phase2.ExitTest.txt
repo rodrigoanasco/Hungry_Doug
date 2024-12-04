@@ -2,6 +2,7 @@
 Test set: com.phase2.ExitTest
 -------------------------------------------------------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.097 s -- in com.phase2.ExitTest
 =======
 <<<<<<< HEAD
@@ -10,3 +11,6 @@ Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.625 s -- in co
 Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.056 s -- in com.phase2.ExitTest
 >>>>>>> 1aa8ef94847adfa22014204d67bfb0ae064b3100
 >>>>>>> 8e9e2bb4acdf0eb43af5c725583a2f0aaf3ddbd0
+=======
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.301 s -- in com.phase2.ExitTest
+>>>>>>> unnecessary_functions

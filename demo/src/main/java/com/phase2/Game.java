@@ -20,12 +20,19 @@ import javax.imageio.ImageIO;
  */
 public class Game extends Canvas implements Runnable {
 
+<<<<<<< HEAD
     // private static Game game = null;
 
     public static final int WIDTH = 1300, HEIGHT = 750; // sets window size
     public static final int BLOCK_SIZE[] = {50,50};
 
     public static final int GRID_SIZE = 1000;
+=======
+    public static final int WIDTH = GameConfig.WINDOW_WIDTH;
+    public static final int HEIGHT = GameConfig.WINDOW_HEIGHT;
+    public static final int[] BLOCK_SIZE = GameConfig.BLOCK_SIZE;
+    public static final int GRID_SIZE = GameConfig.GRID_SIZE;
+>>>>>>> main
 
     private Thread thread; 
     private boolean running = false;
@@ -107,7 +114,7 @@ public class Game extends Canvas implements Runnable {
         
         
         backgroundMusic = new BackgroundMusic(); // Initialize the backgroundMusic object first
-        backgroundMusic.play("/backgroundmusic.wav", -15.0f);
+        backgroundMusic.play(GameConfig.BACKGROUND_MUSIC_PATH, -15.0f);
 
         handler = Handler.getHandlerInstance(this);
         mainMenu = new MainMenu(this); // Initialize Main Menu
@@ -118,8 +125,8 @@ public class Game extends Canvas implements Runnable {
 
         // Load the background image
         try {
-            background = ImageIO.read(getClass().getResource("/grassback.png"));
-            bushImage = ImageIO.read(getClass().getResource("/bush.png"));
+            background = ImageIO.read(getClass().getResource(GameConfig.BACKGROUND_IMAGE_PATH));
+            bushImage = ImageIO.read(getClass().getResource(GameConfig.BUSH_IMAGE_PATH));
         } 
         catch (IOException e) { 
             e.printStackTrace();
@@ -142,30 +149,30 @@ public class Game extends Canvas implements Runnable {
      * @param objectType The class type of the game objects to create.
      * @param handler The handler responsible for managing the game objects.
      */
-    public void generateRandomObjects(int count, Class<? extends GameObject> objectType, Handler handler, int minDistanceFromDoug) {
+    public void generateRandomObjects(GenerationConfig config) {
         Random r = new Random();
         Doug doug = Doug.getInstance();
-
-        for (int i = 0; i < count; i++) {
+    
+        for (int i = 0; i < config.getCount(); i++) {
             int randomX, randomY;
-
-            // Generate positions until they are valid (not overlapping other objects)
             boolean validPosition;
             do {
-                randomX = r.nextInt(Game.WIDTH - 200); // X coordinate within game width minus margin
-                randomY = r.nextInt(Game.HEIGHT - 150); // Y coordinate within game height minus margin
-
-                validPosition = isValidPosition(randomX, randomY, minDistanceFromDoug, doug, handler);
+                randomX = r.nextInt(Game.WIDTH - 200);
+                randomY = r.nextInt(Game.HEIGHT - 150);
+                validPosition = isValidPosition(randomX, randomY, config.getMinDistanceFromDoug(), doug, config.getHandler());
             } while (!validPosition);
-
+    
             try {
-                GameObject obj = objectType.getConstructor(int.class, int.class).newInstance(randomX, randomY);
-                handler.addObject(obj);
+                GameObject obj = config.getObjectType()
+                                       .getConstructor(int.class, int.class)
+                                       .newInstance(randomX, randomY);
+                config.getHandler().addObject(obj);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
+    
 
     /**
      * Generates a specified number of Rat enemies at random positions in the game.
@@ -474,13 +481,13 @@ public class Game extends Canvas implements Runnable {
         addBushes();
 
         // Generate random enemies and items
-        generateRandomObjects(10, Bone.class, handler, 5);
-        generateRandomObjects(5, Apple.class, handler,5);
-        generateRandomObjects(5, Steak.class, handler, 5);
-        generateRandomObjects(5, Mushroom.class, handler,5);
-        generateRandomObjects(5, Onion.class, handler,5);
-        generateRandomObjects(4, Chocolate.class, handler,5);
-        generateRandomObjects(4, Whiskey.class, handler,5);
+        generateRandomObjects(new GenerationConfig(10, Bone.class, handler, 5));
+        generateRandomObjects(new GenerationConfig(5, Apple.class, handler, 5));
+        generateRandomObjects(new GenerationConfig(5, Steak.class, handler, 5));
+        generateRandomObjects(new GenerationConfig(5, Mushroom.class, handler, 5));
+        generateRandomObjects(new GenerationConfig(5, Onion.class, handler, 5));
+        generateRandomObjects(new GenerationConfig(4, Chocolate.class, handler, 5));
+        generateRandomObjects(new GenerationConfig(4, Whiskey.class, handler, 5));
 
         generateRandomEnemies(4, handler,100);
     
