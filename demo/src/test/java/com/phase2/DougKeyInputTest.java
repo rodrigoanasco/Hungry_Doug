@@ -7,6 +7,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -162,6 +164,14 @@ public class DougKeyInputTest {
         // Velocities should remain zero while paused
         assertEquals(0, doug.getVelX());
         assertEquals(0, doug.getVelY());
+    }
+
+    /**
+     * resets objects after each test
+     */
+    @After
+    public void reset() {
+        Handler.setHandlerInstance();
     }
 
 }

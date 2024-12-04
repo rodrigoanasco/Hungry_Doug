@@ -1,6 +1,8 @@
 package com.phase2;
 
 import static org.junit.Assert.assertTrue;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -44,5 +46,13 @@ public class GameWonTest {
         doug.tick(); // Should detect collision with exit
 
         assertTrue("Game should be won after reaching exit", game.isGameWon());
+    }
+
+    /**
+     * resets objects after each test
+     */
+    @After
+    public void reset() {
+        Handler.setHandlerInstance();
     }
 }

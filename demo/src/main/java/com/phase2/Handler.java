@@ -91,7 +91,16 @@ public class Handler {
             throw new IllegalStateException("Handler has not been initialized. Call getHandlerInstance(Game) first.");
         }
         return handler;
-    }    
+    }
+    
+    /**
+     * Set instance (Just for testing)
+     * Resets the singleton instance
+     */
+    public static void setHandlerInstance(){
+        handler = null;
+    }
+
 
     /**
      * Renders all game objects.

@@ -2,6 +2,7 @@ package com.phase2;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.After;
 
 /**
  * Unit tests for the timer and runtime functionality of the {@link Game} class.
@@ -81,5 +82,13 @@ public class GameTimerTest {
 
         // Check that the game is not running anymore
         assertFalse("The game should have stopped after 1 second", game.isRunning());
+    }
+
+    /**
+     * resets objects after each test
+     */
+    @After
+    public void reset() {
+        Handler.setHandlerInstance();
     }
 }

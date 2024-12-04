@@ -1,6 +1,8 @@
 package com.phase2;
 
 import static org.junit.Assert.*;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -50,5 +52,13 @@ public class DougTest {
 
         assertTrue(doug.getX() <= Game.WIDTH - 75);
         assertTrue(doug.getY() <= Game.HEIGHT - 30);
+    }
+
+    /**
+     * resets objects after each test
+     */
+    @After
+    public void reset() {
+        Handler.setHandlerInstance();
     }
 }

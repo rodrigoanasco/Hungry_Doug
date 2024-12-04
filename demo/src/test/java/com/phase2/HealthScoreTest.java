@@ -1,6 +1,8 @@
 package com.phase2;
 
 import static org.junit.Assert.assertEquals;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -43,5 +45,13 @@ public class HealthScoreTest {
         Score.SCORE += 10;
         score.tick();
         assertEquals(10, Score.SCORE);
+    }
+
+    /**
+     * resets objects after each test
+     */
+    @After
+    public void reset() {
+        Handler.setHandlerInstance();
     }
 }

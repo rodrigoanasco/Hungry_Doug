@@ -8,6 +8,8 @@ import java.awt.event.KeyEvent;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -166,6 +168,15 @@ public class MainMenuTest {
         verify(g, atLeastOnce()).fillRect(anyInt(), anyInt(), anyInt(), anyInt());
         verify(g, atLeastOnce()).setFont(any(Font.class));
         verify(g, atLeastOnce()).drawString(anyString(), anyInt(), anyInt());
+    }
+
+
+    /**
+     * resets objects after each test
+     */
+    @After
+    public void reset() {
+        Handler.setHandlerInstance();
     }
 }
 

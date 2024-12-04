@@ -1,6 +1,8 @@
 package com.phase2;
 
 import static org.junit.Assert.assertSame;
+
+import org.junit.After;
 import org.junit.Test;
 
 import com.phase2.Trackers.ID;
@@ -37,5 +39,13 @@ public class DougSingletonTest {
     public void testSingletonWithoutInitialization() {
         Doug.setInstance(); // Reset the singleton instance
         Doug.getInstance(); // Should throw IllegalStateException
+    }
+
+    /**
+     * resets objects after each test
+     */
+    @After
+    public void reset() {
+        Handler.setHandlerInstance();
     }
 }

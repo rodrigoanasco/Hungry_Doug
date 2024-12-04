@@ -2,6 +2,8 @@ package com.phase2;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -44,5 +46,13 @@ public class GameOverTest {
     public void testGameNotOver() {
         Health.HEALTH = 50;
         assertFalse(game.checkGameOver());
+    }
+
+    /**
+     * resets objects after each test
+     */
+    @After
+    public void reset() {
+        Handler.setHandlerInstance();
     }
 }

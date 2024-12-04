@@ -10,6 +10,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
+import org.junit.After;
 
 
 /**
@@ -85,5 +86,13 @@ public class BushTest {
         // Expecting 32x32, as defined in OBJECT_SIZE
         assertEquals("Bounding rectangle width should be correct", 32, bounds.width);
         assertEquals("Bounding rectangle height should be correct", 32, bounds.height);
+    }
+
+    /**
+     * resets objects after each test
+     */
+    @After
+    public void reset() {
+        Handler.setHandlerInstance();
     }
 }

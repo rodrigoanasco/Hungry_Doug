@@ -1,5 +1,6 @@
 package com.phase2;
 
+import org.junit.After;
 import org.junit.Test;
 
 /**
@@ -56,6 +57,12 @@ public class SoundEffectTest {
         System.out.println("Handled UnsupportedAudioFileException gracefully.");
     }
 
-
+    /**
+     * resets objects after each test
+     */
+    @After
+    public void reset() {
+        Handler.setHandlerInstance();
+    }
 
 }

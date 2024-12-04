@@ -4,6 +4,8 @@ package com.phase2;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,5 +31,13 @@ public class GamePauseTest {
         assertFalse(game.isPaused());
         game.togglePause();
         assertTrue(game.isPaused());
+    }
+
+    /**
+     * resets objects after each test
+     */
+    @After
+    public void reset() {
+        Handler.setHandlerInstance();
     }
 }

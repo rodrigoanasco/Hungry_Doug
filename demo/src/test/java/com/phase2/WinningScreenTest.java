@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 
+import org.junit.After;
 import org.junit.Test;
 
 import com.phase2.Displays.WinningScreen;
@@ -61,5 +62,13 @@ public class WinningScreenTest {
     // verify drawString is called for the title, subtitle, and exit prompt
     verify(mockGraphics, atLeastOnce()).drawString(anyString(), anyInt(), anyInt());
   }
+
+  /**
+     * resets objects after each test
+     */
+    @After
+    public void reset() {
+        Handler.setHandlerInstance();
+    }
 
 }

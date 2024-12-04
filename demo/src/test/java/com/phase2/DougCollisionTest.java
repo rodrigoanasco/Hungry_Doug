@@ -1,6 +1,8 @@
 package com.phase2;
 
 import static org.junit.Assert.assertTrue;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -75,5 +77,13 @@ public class DougCollisionTest {
         doug.tick();
 
         assertTrue("Health should decrease after collecting punishment", Health.HEALTH < 200);
+    }
+
+        /**
+     * resets objects after each test
+     */
+    @After
+    public void reset() {
+        Handler.setHandlerInstance();
     }
 }
