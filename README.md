@@ -64,3 +64,23 @@ The game's functions are also documented in javadocs. To run the javadoc:
    open index.html  # for macOS
    start index.html # for Windows
    xdg-open index.html # for Linux
+
+
+## **Running the JAR FILE**
+0. Make sure you are in the demo directory:
+   ```bash
+   cd demo
+   
+1. Execute the following Maven Command:
+   ```bash
+   mvn package
+   
+2. Enter to the following directory:
+   ```bash
+   cd target
+
+3. By default, the file that we generated is caled 'game-1.0-SNAPSHOT.jar':
+   ```bash
+   java -jar game-1.0-SNAPSHOT.jar
+
+The game should execute without any problem
