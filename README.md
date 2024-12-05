@@ -42,3 +42,25 @@ The game includes automated tests written with JUnit and Mockito. To run the tes
    mvn test
    
 2. Check the test reports in the terminal to ensure all the test pass
+
+
+## **Running the Javadocs**
+The game's functions are also documented in javadocs. To run the javadoc:
+
+0. Make sure you are in the demo directory:
+   ```bash
+   cd demo
+   
+1. Execute the following Maven Command:
+   ```bash
+   mvn javadoc:javadoc
+   
+2. Enter to the following directory:
+   ```bash
+   cd target/site/apidocs
+
+3. According to your operating system, enter the following command:
+   ```bash
+   open index.html  # for macOS
+   start index.html # for Windows
+   xdg-open index.html # for Linux
