@@ -1,0 +1,51 @@
+@options
+@packages
+-encoding
+'UTF-8'
+-protected
+--release
+17
+-sourcepath
+'C:/Users/Rodrigo/Desktop/SIMON FRASER UNIVERSITY/Academics/2024/Term 5 - Fall/CMPT276 - Software Development/Project/CMPT276F24_group14/demo/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2024. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/Rodrigo/Desktop/SIMON FRASER UNIVERSITY/Academics/2024/Term 5 - Fall/CMPT276 - Software Development/Project/CMPT276F24_group14/demo/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'game 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'game 1.0-SNAPSHOT API'
+com.phase2
+com.phase2.Displays
+com.phase2.Enemies
+com.phase2.GameObjects
+com.phase2.GameProperties
+com.phase2.Obstacles
+com.phase2.Punishments
+com.phase2.Rewards
+com.phase2.Trackers
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\src\main\java = 1731547429089
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\target\site\apidocs\allclasses-index.html = 1733426816694
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\target\site\apidocs\allpackages-index.html = 1733426816702
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\target\site\apidocs\constant-values.html = 1733426816329
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\target\site\apidocs\element-list = 1733426816159
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\target\site\apidocs\help-doc.html = 1733426816777
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\target\site\apidocs\index-all.html = 1733426816764
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\target\site\apidocs\index.html = 1733426816658
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\target\site\apidocs\javadoc.bat = 1733426775076
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\target\site\apidocs\member-search-index.js = 1733426816713
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\target\site\apidocs\module-search-index.js = 1733426816705
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\target\site\apidocs\overview-summary.html = 1733426816771
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\target\site\apidocs\overview-tree.html = 1733426816651
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\target\site\apidocs\package-search-index.js = 1733426816707
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\target\site\apidocs\search.html = 1733426816768
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\target\site\apidocs\serialized-form.html = 1733426816364
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\target\site\apidocs\tag-search-index.js = 1733426816717
+C:\Users\Rodrigo\Desktop\SIMON FRASER UNIVERSITY\Academics\2024\Term 5 - Fall\CMPT276 - Software Development\Project\CMPT276F24_group14\demo\target\site\apidocs\type-search-index.js = 1733426816709

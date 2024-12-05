@@ -139,13 +139,19 @@ public class Game extends Canvas implements Runnable {
 
     }
 
+
+    //@param objectType The class type of the game objects to create.
+    //@param handler The handler responsible for managing the game objects.
+    //@param count The number of objects to generate.
+    //Remove from here bc of javadoc
+    //|
+    //|
+    //v
     /**
      * Generates a specified number of random game objects of a given type and adds them to the handler.
      * The objects are placed at random positions within the game window.
+     * @param config configuration of game objects
      * 
-     * @param count The number of objects to generate.
-     * @param objectType The class type of the game objects to create.
-     * @param handler The handler responsible for managing the game objects.
      */
     public void generateRandomObjects(GenerationConfig config) {
         Random r = new Random();
@@ -379,10 +385,11 @@ public class Game extends Canvas implements Runnable {
     }
 
 
+    //@param g the Graphics object used for drawing the game components
     /**
      * Renders the game graphics.
      * 
-     * @param g the Graphics object used for drawing the game components
+     * 
      */
     private void render(){
         BufferStrategy  bs = this.getBufferStrategy();

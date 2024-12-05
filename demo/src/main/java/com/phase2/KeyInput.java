@@ -26,10 +26,11 @@ public class KeyInput extends KeyAdapter {
     // Tracks the last pressed movement key to prioritize direction
     private int lastMovementKey = -1;
 
+
+
+    //@param handler The handler managing game objects.
     /**
      * Constructs the KeyInput object with the handler and game instance.
-     *
-     * @param handler The handler managing game objects.
      * @param game    The main game instance.
      */
     public KeyInput(Game game) {

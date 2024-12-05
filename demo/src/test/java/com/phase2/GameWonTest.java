@@ -1,8 +1,7 @@
 package com.phase2;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.After;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,7 +28,7 @@ public class GameWonTest {
         handler = Handler.getHandlerInstance(game);
         Doug.setInstance();
         //handler = Handler.getHandlerInstance();
-        Doug.setInstance();
+        //Doug.setInstance();
         doug = Doug.getInstance(100, 100, ID.DOUG);
         handler.addObject(doug);
         exit = new Exit(100, 100);

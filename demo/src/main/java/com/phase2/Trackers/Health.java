@@ -7,10 +7,9 @@ import com.phase2.Game;
 
 /**
  * The {@code Health} class manages the player's health in the game.
- * <p>
  * This class provides methods to update the player's health and render a health bar on the screen.
  * The health value is clamped between 0 and 200, representing the player's current status.
- * </p>
+ * 
  */
 public class Health {
 
@@ -29,14 +28,14 @@ public class Health {
 
     /**
      * Renders the health bar on the screen.
-     * <p>
+     * 
      * The health bar consists of:
      * <ul>
      *   <li>A gray background bar.</li>
      *   <li>A green bar indicating the player's current health.</li>
      *   <li>A gray border outlining the health bar.</li>
      * </ul>
-     * </p>
+     * 
      * 
      * @param g The {@link Graphics} object used for rendering the health bar.
      */

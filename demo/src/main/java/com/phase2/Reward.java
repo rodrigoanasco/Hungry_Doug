@@ -1,8 +1,5 @@
 package com.phase2;
 
-import java.awt.Graphics;
-import java.awt.Rectangle;
-
 import com.phase2.GameObjects.GameObject;
 import com.phase2.Rewards.RewardType;
 import com.phase2.Trackers.ID;
@@ -23,7 +20,7 @@ public abstract class Reward extends GameObject{
      * @param x the x-coordinate of the reward
      * @param y the y-coordinate of the reward
      * @param type the type of reward (RewardType)
-     * @param rewardPoints the reward awarded to the player
+     * @param rewardAmount the reward awarded to the player
      */
     public Reward(int x, int y, RewardType type,int rewardAmount) {
         super(x, y, ID.REWARD);
