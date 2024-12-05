@@ -104,18 +104,6 @@ public class Game extends Canvas implements Runnable {
         }
     }
 
-    // /** 
-    //  * return singleton instance of Game
-    //  * allows for game instance to be used globally
-    //  * @return The main Game instance.
-    //  */
-    // public static synchronized Game getGameInstance(){
-    //     if (game == null) {
-    //         game = new Game();
-    //     }
-
-    //     return game;
-    // }   
     /**
      * Constructor for the Game class.
      * Initializes the handler and sets up the game window.
@@ -329,7 +317,6 @@ public class Game extends Canvas implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        // System.out.println("Game stopped.");
     }
     
     
@@ -390,15 +377,6 @@ public class Game extends Canvas implements Runnable {
     public boolean isRunning() {
         return running;
     }
-
-    // /**
-    // * Returns the handler associated with the game.
-    // *
-    // * @return The {@link Handler} instance managing game objects.
-    // */
-    // public Handler getHandler() {
-    //     return handler;
-    // }
 
 
     /**
@@ -511,18 +489,10 @@ public class Game extends Canvas implements Runnable {
         int bushWidth = 30;
         int bushHeight = 30;
         
-        // // Adding bushes in each corner
+        // Adding bushes in each corner
         Bush bushTopLeft = new Bush(0, 0);
         handler.addObject(bushTopLeft);
         addToGrid(bushTopLeft);
-        
-        // Bush bushTopRight = new Bush(Game.WIDTH - bushWidth - 10, 0);
-        // handler.addObject(bushTopRight);
-        // addToGrid(bushTopRight);
-        
-        // Bush bushBottomLeft = new Bush(0, Game.HEIGHT - bushHeight - 35);
-        // handler.addObject(bushBottomLeft);
-        // addToGrid(bushBottomLeft);
         
         Bush bushBottomRight = new Bush(Game.WIDTH - bushWidth - 15, Game.HEIGHT - bushHeight - 35);
         handler.addObject(bushBottomRight);

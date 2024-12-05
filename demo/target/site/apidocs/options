@@ -1,0 +1,22 @@
+-encoding
+'UTF-8'
+-protected
+--release
+17
+-sourcepath
+'C:/Users/Rodrigo/Desktop/SIMON FRASER UNIVERSITY/Academics/2024/Term 5 - Fall/CMPT276 - Software Development/Project/CMPT276F24_group14/demo/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2024. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/Rodrigo/Desktop/SIMON FRASER UNIVERSITY/Academics/2024/Term 5 - Fall/CMPT276 - Software Development/Project/CMPT276F24_group14/demo/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'game 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'game 1.0-SNAPSHOT API'

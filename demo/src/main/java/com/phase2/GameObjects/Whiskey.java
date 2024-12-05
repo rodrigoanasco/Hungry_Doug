@@ -6,30 +6,42 @@ import com.phase2.ImageLoader;
 import com.phase2.Punishments.Punishment;
 import com.phase2.Punishments.PunishmentType;
 
+/**
+ * The {@code Whiskey} class represents a punishment object in the game.
+ * <p>
+ * Whiskey is a harmful object that the player should avoid collecting. 
+ * It imposes a penalty on the player's health or score when collected.
+ * This class handles the rendering and properties of the whiskey punishment.
+ * </p>
+ * 
+ * @see Punishment
+ */
+public class Whiskey extends Punishment {
 
-public class Whiskey extends Punishment{
-
-    public Whiskey(int x, int y){
+    /**
+     * Constructs a {@code Whiskey} object at the specified position.
+     * <p>
+     * The whiskey is initialized with its type, penalty value, and sprite image.
+     * </p>
+     * 
+     * @param x the x-coordinate where the whiskey will appear
+     * @param y the y-coordinate where the whiskey will appear
+     */
+    public Whiskey(int x, int y) {
         super(x, y, PunishmentType.WHISKEY, 25);
         this.WIDTH = 32;
         this.HEIGHT = 32;
-        
-        /* BEFORE
-        try {
-            image = ImageIO.read(getClass().getResource("/Whiskey.png"));;
-            image = image.getScaledInstance(OBJECT_SIZE[0], OBJECT_SIZE[1], Image.SCALE_DEFAULT);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        */
-        //REFACTORED
-        image = ImageLoader.loadImage("/Whiskey.png", WIDTH, HEIGHT);
 
+        // Load the whiskey sprite and scale it to the appropriate size
+        image = ImageLoader.loadImage("/Whiskey.png", WIDTH, HEIGHT);
     }
 
-
     /**
-     * Renders the visual representation of the object on the screen.
+     * Renders the visual representation of the whiskey on the screen.
+     * <p>
+     * If the whiskey has not been collected, this method draws the whiskey sprite
+     * at its current position on the screen.
+     * </p>
      * 
      * @param g the {@link Graphics} object used to draw the sprite
      */

@@ -6,33 +6,46 @@ import java.awt.Graphics;
 import com.phase2.Game;
 
 /**
- * The Health class manages the player's health in the game.
- * It includes methods to update and render the health bar.
+ * The {@code Health} class manages the player's health in the game.
+ * <p>
+ * This class provides methods to update the player's health and render a health bar on the screen.
+ * The health value is clamped between 0 and 200, representing the player's current status.
+ * </p>
  */
 public class Health {
 
-    public static int HEALTH = 200; // The current health value, initially set to 200.
+    /**
+     * The current health value of the player, initially set to 200.
+     */
+    public static int HEALTH = 200;
 
     /**
-     * Updates the health value to ensure it stays within the valid range.
-     * This method is called on each game tick.
+     * Updates the health value to ensure it stays within the valid range (0 to 200).
+     * This method is called on each game tick to adjust the health based on game events.
      */
     public void tick() {
         HEALTH = Game.clamp(HEALTH, 0, 200);
-    } 
+    }
 
     /**
      * Renders the health bar on the screen.
+     * <p>
+     * The health bar consists of:
+     * <ul>
+     *   <li>A gray background bar.</li>
+     *   <li>A green bar indicating the player's current health.</li>
+     *   <li>A gray border outlining the health bar.</li>
+     * </ul>
+     * </p>
      * 
-     * @param g The Graphics object used for rendering the health bar.
+     * @param g The {@link Graphics} object used for rendering the health bar.
      */
     public void render(Graphics g) {
         g.setColor(Color.GRAY);
-        g.fillRect(15, 15, 200, 32);
+        g.fillRect(15, 15, 200, 32); // Background bar
         g.setColor(Color.GREEN);
-        g.fillRect(15, 15, HEALTH, 32);
+        g.fillRect(15, 15, HEALTH, 32); // Health indicator
         g.setColor(Color.GRAY);
-        g.drawRect(15, 15, 200, 32);
+        g.drawRect(15, 15, 200, 32); // Border
     }
-    
 }

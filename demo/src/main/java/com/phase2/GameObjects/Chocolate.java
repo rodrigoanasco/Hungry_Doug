@@ -1,39 +1,47 @@
 package com.phase2.GameObjects;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
 
 import com.phase2.ImageLoader;
 import com.phase2.Punishments.Punishment;
 import com.phase2.Punishments.PunishmentType;
 
 /**
- * Class for the non-moving enemy type Chocolate
- * @param x the x position the objects appears in
- * @param y the y position the objects appears in
- * @param id the type of object the object should be treated as
-*/
+ * The {@code Chocolate} class represents a non-moving punishment in the game.
+ * <p>
+ * Chocolate serves as a harmful object that the player should avoid collecting.
+ * It decreases the player's health or score when collected. This class handles
+ * the rendering and properties of the chocolate punishment.
+ * </p>
+ * 
+ * @see Punishment
+ */
 public class Chocolate extends Punishment {
 
-    public Chocolate(int x, int y){
-        super(x,y, PunishmentType.CHOCOLATE, 50);
+    /**
+     * Constructs a {@code Chocolate} object at the specified position.
+     * <p>
+     * The chocolate is initialized with its type, penalty value, and sprite image.
+     * </p>
+     * 
+     * @param x the x-coordinate where the chocolate will appear
+     * @param y the y-coordinate where the chocolate will appear
+     */
+    public Chocolate(int x, int y) {
+        super(x, y, PunishmentType.CHOCOLATE, 50);
         this.WIDTH = 32;
         this.HEIGHT = 32;
-        /*
-        PREVIOUS
-            try {
-            image = ImageIO.read(getClass().getResource("/Brownie.png"));;
-            image = image.getScaledInstance(OBJECT_SIZE[0], OBJECT_SIZE[1], Image.SCALE_DEFAULT);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } */
-       //REFACTORED
-       image = ImageLoader.loadImage("/Brownie.png", WIDTH, HEIGHT);
 
+        // Load the chocolate sprite and scale it to the appropriate size
+        image = ImageLoader.loadImage("/Brownie.png", WIDTH, HEIGHT);
     }
- 
+
     /**
-     * Renders the visual representation of the object on the screen.
+     * Renders the visual representation of the chocolate on the screen.
+     * <p>
+     * If the chocolate has not been collected, this method draws the chocolate sprite
+     * at its current position on the screen.
+     * </p>
      * 
      * @param g the {@link Graphics} object used to draw the sprite
      */
@@ -43,5 +51,4 @@ public class Chocolate extends Punishment {
             g.drawImage(image, x, y, null);
         }
     }
-
 }

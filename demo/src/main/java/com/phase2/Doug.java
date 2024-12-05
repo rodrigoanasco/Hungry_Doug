@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
 
 import com.phase2.GameObjects.GameObject;
@@ -18,27 +19,27 @@ import com.phase2.Trackers.Score;
 
 /**
  * Represents the main character, Doug, in the game.
- * Doug has health, a score, and can be rendered and updated 
- * (ticked) within the game.
+ * <p>
+ * Doug interacts with other game objects, collects rewards, avoids punishments, 
+ * and manages movement, collision detection, health, and score.
+ * </p>
  */
-public class Doug extends GameObject{
-
-    Handler handler;
+public class Doug extends GameObject {
 
     private static Doug instance;
+    private Handler handler;
 
     private BufferedImage[] idleSprites;
     private BufferedImage[] walkSprites;
-    private int currentFrame = 0;
-    private int frameDelay = 5; // Controls the animation speed
-    private int frameCount = 0;
+    private int currentFrame = 0; // Tracks the current animation frame
+    private int frameDelay = 5;  // Controls the animation speed
+    private int frameCount = 0;  // Counter for frame updates
 
-    private boolean moving = false;
-    private boolean facingRight = true; // Default to facing right
+    private boolean moving = false;   // Tracks if Doug is currently moving
+    private boolean facingRight = true; // Tracks the facing direction
 
-    private double speed = 1.5;
-
-    private static final double SCALE_FACTOR = 1.2; // Scale Doug to be bigger/smaller
+    private double speed = 1.5; // Movement speed modifier
+    private static final double SCALE_FACTOR = 1.2; // Scale Doug's size
 
     /**
      * Initializes Doug's position, ID, health, and score.

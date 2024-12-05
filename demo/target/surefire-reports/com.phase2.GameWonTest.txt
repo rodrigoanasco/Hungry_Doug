@@ -1,12 +1,12 @@
 -------------------------------------------------------------------------------
 Test set: com.phase2.GameWonTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.450 s <<< FAILURE! -- in com.phase2.GameWonTest
-com.phase2.GameWonTest.testGameWon -- Time elapsed: 1.446 s <<< FAILURE!
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.810 s <<< FAILURE! -- in com.phase2.GameWonTest
+com.phase2.GameWonTest.testGameWon -- Time elapsed: 1.794 s <<< FAILURE!
 java.lang.AssertionError: Game should be won after reaching exit
 	at org.junit.Assert.fail(Assert.java:89)
 	at org.junit.Assert.assertTrue(Assert.java:42)
-	at com.phase2.GameWonTest.testGameWon(GameWonTest.java:46)
+	at com.phase2.GameWonTest.testGameWon(GameWonTest.java:48)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
@@ -14,6 +14,7 @@ java.lang.AssertionError: Game should be won after reaching exit
 	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
 	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
 	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
 	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
 	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
 	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)

@@ -6,145 +6,176 @@ import java.awt.Rectangle;
 import com.phase2.Trackers.ID;
 
 /**
- * The GameObject class is an abstract class representing all objects in the game.
- * It defines common properties like position (x, y) and velocity (velX, velY) for game objects.
- * Subclasses must define how the object behaves and renders.
+ * The {@code GameObject} class is an abstract base class representing all objects in the game.
+ * <p>
+ * It defines common properties such as position, velocity, and size for game objects.
+ * Subclasses are required to implement specific behavior and rendering logic.
+ * </p>
  */
 public abstract class GameObject {
 
-    protected int x, y; // sets initial spawn x, y coordinates
-    protected ID id;
-    protected int velX, velY; // controls speed in x, y direction
-    protected int WIDTH, HEIGHT; //size of image
+    /**
+     * The x-coordinate of the object's position.
+     */
+    protected int x;
 
     /**
-     * Constructor for creating a game object.
-     * 
-     * @param x the x-coordinate of the object
-     * @param y the y-coordinate of the object
-     * @param id the type of the object (ID)
+     * The y-coordinate of the object's position.
      */
-    public GameObject(int x, int y, ID id){
+    protected int y;
+
+    /**
+     * The identifier for the type of the object.
+     */
+    protected ID id;
+
+    /**
+     * The horizontal velocity of the object.
+     */
+    protected int velX;
+
+    /**
+     * The vertical velocity of the object.
+     */
+    protected int velY;
+
+    /**
+     * The width of the object (size of the image).
+     */
+    protected int WIDTH;
+
+    /**
+     * The height of the object (size of the image).
+     */
+    protected int HEIGHT;
+
+    /**
+     * Constructs a {@code GameObject} with the specified position and identifier.
+     * 
+     * @param x  the x-coordinate of the object's position
+     * @param y  the y-coordinate of the object's position
+     * @param id the type of the object, represented as an {@link ID}
+     */
+    public GameObject(int x, int y, ID id) {
         this.x = x;
         this.y = y;
         this.id = id;
     }
-    
+
     /**
-     * Method that defines the object's behavior on each tick of the game loop.
+     * Updates the state of the object.
+     * <p>
+     * This method is called on each tick of the game loop. Subclasses may override this
+     * method to define specific behaviors.
+     * </p>
      */
-    public void tick(){};
-    
+    public void tick() {}
+
     /**
      * Renders the visual representation of the object on the screen.
      * 
-     * If the object has not been collected, this method draws the corresponding sprite
-     * at the object's current position on the screen.
-     *
-     * @param g the {@link Graphics} object used to draw the sprite
+     * @param g the {@link Graphics} object used to draw the object
      */
     public abstract void render(Graphics g);
 
     /**
-     * Abstract method to get the bounding rectangle of the object for collision detection.
-     *
-     * @return A {@link Rectangle} representing the bounds of the object.
+     * Gets the bounding rectangle of the object for collision detection.
+     * 
+     * @return a {@link Rectangle} representing the bounds of the object
      */
     public Rectangle getBounds() {
-        return new Rectangle(x,y, WIDTH,HEIGHT);
+        return new Rectangle(x, y, WIDTH, HEIGHT);
     }
 
-
+    // Setters and Getters
 
     /**
      * Sets the x-coordinate of the object.
-     *
-     * @param x The new x-coordinate of the object.
+     * 
+     * @param x the new x-coordinate
      */
-    public void setX(int x){
+    public void setX(int x) {
         this.x = x;
     }
 
     /**
-     * Sets the y-coordinate of the object.
-     *
-     * @param y The new y-coordinate of the object.
-     */
-    public void setY(int y){
-        this.y = y;
-    }
-
-    /**
      * Gets the x-coordinate of the object.
-     *
-     * @return The current x-coordinate of the object.
+     * 
+     * @return the current x-coordinate
      */
-    public int getX(){
+    public int getX() {
         return x;
     }
 
     /**
-     * Gets the y-coordinate of the object.
-     *
-     * @return The current y-coordinate of the object.
+     * Sets the y-coordinate of the object.
+     * 
+     * @param y the new y-coordinate
      */
-    public int getY(){
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    /**
+     * Gets the y-coordinate of the object.
+     * 
+     * @return the current y-coordinate
+     */
+    public int getY() {
         return y;
     }
 
     /**
      * Sets the ID of the object.
-     *
-     * @param id The new {@link ID} of the object.
+     * 
+     * @param id the new {@link ID} of the object
      */
-    public void setID(ID id){
+    public void setID(ID id) {
         this.id = id;
     }
 
     /**
      * Gets the ID of the object.
-     *
-     * @return The {@link ID} of the object.
+     * 
+     * @return the {@link ID} of the object
      */
-    public ID getId(){
+    public ID getId() {
         return id;
     }
 
     /**
      * Sets the horizontal velocity of the object.
-     *
-     * @param velX The new horizontal velocity of the object.
+     * 
+     * @param velX the new horizontal velocity
      */
-    public void setVelX(int velX){
+    public void setVelX(int velX) {
         this.velX = velX;
     }
 
     /**
-     * Sets the vertical velocity of the object.
-     *
-     * @param velY The new vertical velocity of the object.
-     */
-    public void setVelY(int velY){
-        this.velY = velY;
-    }
-
-    /**
      * Gets the horizontal velocity of the object.
-     *
-     * @return The current horizontal velocity of the object.
+     * 
+     * @return the current horizontal velocity
      */
-    public int getVelX(){
+    public int getVelX() {
         return velX;
     }
 
     /**
-     * Gets the vertical velocity of the object.
-     *
-     * @return The current vertical velocity of the object.
+     * Sets the vertical velocity of the object.
+     * 
+     * @param velY the new vertical velocity
      */
-    public int getVelY(){
-        return velY;
+    public void setVelY(int velY) {
+        this.velY = velY;
     }
 
-    
+    /**
+     * Gets the vertical velocity of the object.
+     * 
+     * @return the current vertical velocity
+     */
+    public int getVelY() {
+        return velY;
+    }
 }

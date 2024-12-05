@@ -2,7 +2,6 @@ package com.phase2;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Rectangle;
 
 import com.phase2.GameObjects.GameObject;
 import com.phase2.Trackers.ID;
@@ -10,13 +9,12 @@ import com.phase2.Trackers.Score;
 
 /**
  * Represents the Exit object in the game.
- * The Exit becomes active when the player collects all required bones.
- * The Exit is rendered on the screen once the condition is met.
+ * The Exit becomes visible and interactive when the player collects all required bones.
  */
 public class Exit extends GameObject {
 
     private Image sprite;
-    private boolean hidden = true;
+    private boolean hidden = true; // Indicates whether the Exit is hidden or visible
 
     /**
      * Constructs an Exit object with the specified coordinates.
@@ -26,26 +24,18 @@ public class Exit extends GameObject {
      * @param y The y-coordinate of the Exit.
      */
     public Exit(int x, int y) {
-        super(x,y, ID.EXIT);
+        super(x, y, ID.EXIT);
         this.WIDTH = 32;
         this.HEIGHT = 32;
-        /*
-        BEFORE
-        try {
-            sprite = ImageIO.read(getClass().getResource("/Exit.png"));
-            sprite = sprite.getScaledInstance(OBJECT_SIZE[0], OBJECT_SIZE[1], Image.SCALE_DEFAULT);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-        //REFACTORED
+
+        // Load and scale the sprite using ImageLoader
         sprite = ImageLoader.loadImage("/Exit.png", WIDTH, HEIGHT);
-
     }
-    
-
 
     /**
-     * returns hidden boolen
+     * Returns whether the Exit is hidden.
+     * 
+     * @return {@code true} if the Exit is hidden; {@code false} otherwise.
      */
     public boolean getHiddenStatus() {
         return hidden;
@@ -53,29 +43,26 @@ public class Exit extends GameObject {
 
     /**
      * Updates the state of the Exit.
+     * Makes the Exit visible when the player collects all required bones.
      */
+    @Override
     public void tick() {
-   
         if (Score.boneScore >= Score.boneTotal && hidden) {
-            SoundEffect.play("/reward.wav");
-            hidden = false;
+            SoundEffect.play("/reward.wav"); // Play reward sound
+            hidden = false; // Make the Exit visible
         }
     }
 
     /**
      * Renders the Exit on the screen.
-     * The Exit is only drawn when the player has collected all required bones.
+     * The Exit is drawn only when it is no longer hidden.
      * 
      * @param g The Graphics object used to draw the Exit.
      */
     @Override
     public void render(Graphics g) {
-            if (Score.boneScore >= Score.boneTotal) {
-                g.drawImage(sprite, x, y, null);
-                
-                
-                
-
+        if (!hidden) {
+            g.drawImage(sprite, x, y, null);
         }
     }
 }

@@ -30,11 +30,6 @@ public class Handler {
         this.game = game;
     }
 
-    /**
-     * Constructs a Handler
-     */
-    // public Handler() {}
-
 
     /**
      * Updates all game objects in the game.

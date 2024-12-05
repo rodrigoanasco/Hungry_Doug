@@ -1,17 +1,32 @@
 package com.phase2;
 
-import javax.sound.sampled.*;
 import java.io.IOException;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+/**
+ * The {@code BackgroundMusic} class is responsible for playing and managing background music in the game.
+ * <p>
+ * This class supports playing .wav audio files in a continuous loop and allows adjusting the playback volume.
+ * </p>
+ */
 public class BackgroundMusic {
 
     private Clip clip;
 
     /**
      * Plays a given .wav audio file in an infinite loop.
+     * <p>
+     * This method loads the specified audio file, adjusts the playback volume, and starts looping the audio.
+     * </p>
      *
      * @param filePath The relative path to the .wav file in the resources directory.
-     * @param volume   The desired volume in decibels (negative values decrease volume).
+     * @param volume   The desired volume in decibels (negative values decrease volume, e.g., -10.0f).
      */
     public void play(String filePath, float volume) {
         try {
@@ -44,6 +59,9 @@ public class BackgroundMusic {
 
     /**
      * Stops the background music.
+     * <p>
+     * This method stops playback of the audio file and releases associated resources.
+     * </p>
      */
     public void stop() {
         if (clip != null && clip.isRunning()) {

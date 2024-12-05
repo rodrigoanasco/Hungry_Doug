@@ -2,51 +2,52 @@ package com.phase2.GameObjects;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Rectangle;
 
 import com.phase2.ImageLoader;
 import com.phase2.Reward;
 import com.phase2.Rewards.RewardType;
 
 /**
- * Represents a Mushroom reward in the game.
- * The Mushroom provides points when collected by the player.
+ * The {@code Mushroom} class represents a collectible reward in the game.
+ * <p>
+ * Mushrooms provide points to the player when collected. This class manages
+ * the rendering and properties of the mushroom reward.
+ * </p>
+ * 
+ * @see Reward
  */
 public class Mushroom extends Reward {
 
+    /**
+     * The sprite image representing the mushroom.
+     */
     private Image mushroomSprite;
 
     /**
-     * Constructs a Mushroom object at the specified coordinates.
-     * Initializes the mushroom sprite image.
+     * Constructs a {@code Mushroom} object at the specified position.
+     * <p>
+     * The mushroom is initialized with its type, reward value, and sprite image.
+     * </p>
      * 
-     * @param x The x-coordinate of the Mushroom.
-     * @param y The y-coordinate of the Mushroom.
+     * @param x the x-coordinate where the mushroom will appear
+     * @param y the y-coordinate where the mushroom will appear
      */
     public Mushroom(int x, int y) {
-        super(x,y, RewardType.MUSHROOM, 10);
+        super(x, y, RewardType.MUSHROOM, 10);
         this.WIDTH = 48;
         this.HEIGHT = 48;
-        /* BEFORE
-        try {
-            mushroomSprite = ImageIO.read(getClass().getResource("/Mushroom.png"));;
-            mushroomSprite = mushroomSprite.getScaledInstance(OBJECT_SIZE[0]+16, OBJECT_SIZE[1]+16, Image.SCALE_DEFAULT);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        */
-        //REFACTORED
+
+        // Load the mushroom sprite and scale it to the appropriate size
         mushroomSprite = ImageLoader.loadImage("/Mushroom.png", WIDTH, HEIGHT);
     }
-    
-
 
     /**
      * Renders the visual representation of the mushroom on the screen.
+     * <p>
+     * If the mushroom has not been collected, this method draws the mushroom sprite
+     * at its current position on the screen.
+     * </p>
      * 
-     * If the object has not been collected, this method draws the corresponding sprite
-     * at the object's current position on the screen.
-     *
      * @param g the {@link Graphics} object used to draw the sprite
      */
     @Override

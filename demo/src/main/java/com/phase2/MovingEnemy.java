@@ -1,6 +1,5 @@
 package com.phase2;
 
-import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import com.phase2.Enemies.EnemyType;
@@ -121,18 +120,6 @@ public abstract class MovingEnemy extends GameObject{
         // Flip direction upon hitting the game boundary
         if (y < 0 || y >= Game.HEIGHT - 100) velY = 0; // Stop movement if out of bounds
         if (x < 0 || x >= Game.WIDTH - 100) velX = 0;
-    }
-
-    // /**
-    //  * Defines behavior on each tick of the game loop
-    //  */
-    // public void tick() {
-    //     x = Game.clamp(x,0,Game.WIDTH - 30);
-    //     y = Game.clamp(y,0,Game.HEIGHT - 30);
-    // }
-    
-
-    
-    
+    }    
 
 }
