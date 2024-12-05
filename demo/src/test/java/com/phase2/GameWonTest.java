@@ -27,13 +27,12 @@ public class GameWonTest {
         game = new Game();
         handler = Handler.getHandlerInstance(game);
         Doug.setInstance();
-        //handler = Handler.getHandlerInstance();
-        //Doug.setInstance();
         doug = Doug.getInstance(100, 100, ID.DOUG);
         handler.addObject(doug);
         exit = new Exit(100, 100);
         handler.addObject(exit);
         Score.boneScore = Score.boneTotal = 10; // Assume all bones collected
+        exit.tick();
     }
 
     /**
